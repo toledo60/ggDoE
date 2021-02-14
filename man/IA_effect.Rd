@@ -16,5 +16,5 @@ data to calculate interaction effects, and interaction effects plot
 Obtain interaction effects plot between two factors in our design with ggplot
 }
 \examples{
-IA_effect(data = AEL_dat, factr1 = A, factr2 = B, response = ybar)
+IA_effect(data = epitaxial, factr1 = A, factr2 = B, response = ybar)
 }

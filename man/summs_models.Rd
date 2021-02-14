@@ -20,8 +20,8 @@ Compare factor effects from multiple models and visualize
 the difference in absolute value T statistics to check for model performances
 }
 \examples{
-m1 <- lm(ybar~(A+B+C)^2,data =AEL_dat)
-m2 <- lm(ybar~(A+B)^2,data =AEL_dat)
+m1 <- lm(ybar~(A+B+C)^2,data =epitaxial)
+m2 <- lm(ybar~(A+B)^2,data =epitaxial)
 
 models <- list(m1,m2)
 models.names <- c("Model1","Model2")

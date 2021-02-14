@@ -8,7 +8,7 @@
 #' @return A design matrix from initial second order model
 #' @export
 #'
-#' @examples model2 <- lm(ybar ~ (A+B)^2 + I(A^2)+I(B^2), data= AEL_dat)
+#' @examples model2 <- lm(ybar ~ (A+B)^2 + I(A^2)+I(B^2), data= epitaxial)
 #' second_order_mat(model2)
 #' second_order_mat(model2, terms = "linear")
 #' second_order_mat(model2, terms = "quadratic")
@@ -70,8 +70,8 @@ second_order_mat <- function(model,terms="full") {
 #' @return summary output between models, and ggplot to compare models consistency
 #' @export
 #'
-#' @examples m1 <- lm(ybar~(A+B+C)^2,data =AEL_dat)
-#' m2 <- lm(ybar~(A+B)^2,data =AEL_dat)
+#' @examples m1 <- lm(ybar~(A+B+C)^2,data =epitaxial)
+#' m2 <- lm(ybar~(A+B)^2,data =epitaxial)
 #'
 #' models <- list(m1,m2)
 #' models.names <- c("Model1","Model2")

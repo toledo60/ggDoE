@@ -8,8 +8,8 @@
 #'
 #' @return data to calculate main effect, and main effect plot
 #'
-#' @examples data = AEL_dat
-#' main_effect(data, factr = B, response = ybar)
+#' @examples
+#' main_effect(data=epitaxial, factr = B, response = ybar)
 #' @export
 main_effect <- function(data,factr,response){
   var1 = dplyr::enquo(factr)
@@ -46,7 +46,7 @@ main_effect <- function(data,factr,response){
 #' @param response
 #'
 #' @return data to calculate interaction effects, and interaction effects plot
-#' @examples IA_effect(data = AEL_dat, factr1 = A, factr2 = B, response = ybar)
+#' @examples IA_effect(data = epitaxial, factr1 = A, factr2 = B, response = ybar)
 #' @export
 IA_effect <- function(data,factr1,factr2,response){
   var1 = dplyr::enquo(factr1)
@@ -88,7 +88,7 @@ IA_effect <- function(data,factr1,factr2,response){
 #' A ggplot version of halfnormal plot for factorial effects is returned
 #' @export
 #'
-#' @examples m1 <- lm(lns2 ~ (A+B+C+D)^4,data=AEL_dat)
+#' @examples m1 <- lm(lns2 ~ (A+B+C+D)^4,data=epitaxial)
 #' halfnormal(m1)
 #' halfnormal(m1,alpha=0.1)
 #' halfnormal(m1,alpha=0.2,signif_label=TRUE)
@@ -147,7 +147,7 @@ halfnormal <- function(obj,alpha=0.05,signif_label=FALSE){
 #' values of ME, and SME.
 #' @export
 #'
-#' @examples m1 <- lm(ybar ~ (A+B+C+D)^2,data=AEL_dat)
+#' @examples m1 <- lm(ybar ~ (A+B+C+D)^2,data=epitaxial)
 #' Lenth_method(m1)
 #' Lenth_method(m1,alpha=0.01)
 Lenth_method <- function(mod,alpha=0.05){

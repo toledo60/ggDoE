@@ -16,6 +16,5 @@ data to calculate main effect, and main effect plot
 Obtain main effect plot for a factor in our design with ggplot
 }
 \examples{
-data = AEL_dat
-main_effect(data, factr = B, response = ybar)
+main_effect(data=epitaxial, factr = B, response = ybar)
 }

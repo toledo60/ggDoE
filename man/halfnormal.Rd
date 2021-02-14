@@ -22,7 +22,7 @@ A ggplot version of halfnormal plot for factorial effects is returned
 Half-Normal Effects Plots
 }
 \examples{
-m1 <- lm(lns2 ~ (A+B+C+D)^4,data=AEL_dat)
+m1 <- lm(lns2 ~ (A+B+C+D)^4,data=epitaxial)
 halfnormal(m1)
 halfnormal(m1,alpha=0.1)
 halfnormal(m1,alpha=0.2,signif_label=TRUE)

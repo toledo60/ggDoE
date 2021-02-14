@@ -19,7 +19,7 @@ Obtain second order design matrix from a specified model. Optionally, be
 able to extract specific terms from the matrix (i.e linear terms, quadratic terms, or bilinear terms)
 }
 \examples{
-model2 <- lm(ybar ~ (A+B)^2 + I(A^2)+I(B^2), data= AEL_dat)
+model2 <- lm(ybar ~ (A+B)^2 + I(A^2)+I(B^2), data= epitaxial)
 second_order_mat(model2)
 second_order_mat(model2, terms = "linear")
 second_order_mat(model2, terms = "quadratic")
