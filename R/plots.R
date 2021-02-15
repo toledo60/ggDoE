@@ -128,7 +128,7 @@ halfnormal <- function(obj,alpha=0.05,signif_label=FALSE){
                          y = half_normal_quantiles,
                          label=effects)) +
     geom_point(color = "#1b9e77", size = 2)+
-    geom_text(hjust = 0, nudge_x = 0.01)+
+    geom_text(hjust = 0,nudge_x = 0.01*max(dat$absolute_effects),check_overlap = TRUE)+
     theme_classic()+
     labs(x="absolute effects",y="half-normal quantiles")
 
