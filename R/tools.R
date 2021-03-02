@@ -111,8 +111,10 @@ summs_models <- function(models,model.names) {
     labs(color="",x="",y="|t-statistic|")+
     theme(legend.position = "top")
 
+  t_dat <- bind_cols("Factors"=attr(gg.dat,"dimnames")[[1]],
+            as_tibble(gg.dat))
 
-  return(list(table=summ,t_dat=gg.dat,plot=gg.plot))
+  return(list(table=summ,t_dat= t_dat,plot=gg.plot))
 }
 
 

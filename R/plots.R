@@ -132,7 +132,7 @@ halfnormal <- function(obj,alpha=0.05,signif_label=FALSE){
     theme_classic()+
     labs(x="absolute effects",y="half-normal quantiles")
 
-  return(list(dat=dat,plt=plot))
+  return(list(dat=dat,plot=plot))
 }
 
 
