@@ -10,10 +10,10 @@ summs_models(models, model.names)
 \arguments{
 \item{models}{a list of models to compare}
 
-\item{model.names}{a vector of names for the models in format of "model1"}
+\item{model.names}{a vector of names for the models in format of "model_name"}
 }
 \value{
-summary output between models, and ggplot to compare models consistency
+summary output between models, and ggplot to compare models' consistency
 }
 \description{
 Compare factor effects from multiple models and visualize

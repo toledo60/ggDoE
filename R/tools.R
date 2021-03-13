@@ -57,7 +57,7 @@ second_order_mat <- function(model,terms="full") {
 
 
 
-# OACD Table Cross Validation ---------------------------------------------
+# Table Cross Validation ---------------------------------------------
 
 
 
@@ -65,9 +65,9 @@ second_order_mat <- function(model,terms="full") {
 #' the difference in absolute value T statistics to check for model performances
 #'
 #' @param models a list of models to compare
-#' @param model.names a vector of names for the models in format of "model1"
+#' @param model.names a vector of names for the models in format of "model_name"
 #'
-#' @return summary output between models, and ggplot to compare models consistency
+#' @return summary output between models, and ggplot to compare models' consistency
 #' @export
 #'
 #' @examples m1 <- lm(ybar~(A+B+C)^2,data =epitaxial)

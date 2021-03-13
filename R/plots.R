@@ -170,7 +170,7 @@ Lenth_method <- function(mod,alpha=0.05){
   results <- tibble(alpha,PSE,ME,SME)
 
   dat <- tibble("coeff"= factor(names(coef(mod))[-1],levels = names(coef(mod))[-1]),
-                "estimates" = coef(mod)[-1]) %>%
+                "estimates" = 2*coef(mod)[-1]) %>%
     mutate(lower_ME = estimates-ME,
            upper_ME = estimates+ME,
            lower_SME = estimates-SME,
