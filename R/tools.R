@@ -78,7 +78,6 @@ second_order_mat <- function(model,terms="full") {
 #' summs_models(models,models.names)
 summs_models <- function(models,model.names) {
 
-
   coefficients = unlist(lapply(models,coefficients))
   coeff.names = unique(names(coefficients))[-1]
 
@@ -99,20 +98,22 @@ summs_models <- function(models,model.names) {
                                stars = c(`'`=0.1,`*` = 0.05, `**` = 0.01, `***` = 0.001),
                                digits = 4)
 
-  dat1 = melt(gg.dat)
+  dat_ungather = cbind("Factors"=attr(gg.dat,"dimnames")[[1]],
+                       as.data.frame(gg.dat))
+  dat1=gather(dat_ungather,Model1,Model2,-Factors)
   colnames(dat1) = c("Factors","Model","absolute_T_stat")
 
-  gg.plot = ggplot(dat1) +
+  gg.plot = ggplot(dat1,aes(x=Factors,y=absolute_T_stat,group=Factors)) +
     theme_minimal() +
-    geom_line(aes(x=Factors,y=absolute_T_stat,group=Factors),col="gray80",size=0.5)+
+    geom_line(col="gray80",size=0.5)+
     geom_point(aes(x = Factors, y = absolute_T_stat, color = Model),size=4)+
     coord_flip()+
-    scale_x_discrete(limits = rev(unique(sort(dat1$Factors))))+
+    scale_x_discrete(limits = rev(Factors))+
     labs(color="",x="",y="|t-statistic|")+
     theme(legend.position = "top")
 
   t_dat <- bind_cols("Factors"=attr(gg.dat,"dimnames")[[1]],
-            as_tibble(gg.dat))
+                     as_tibble(gg.dat))
 
   return(list(table=summ,t_dat= t_dat,plot=gg.plot))
 }
