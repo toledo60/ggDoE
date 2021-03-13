@@ -169,7 +169,7 @@ Lenth_method <- function(mod,alpha=0.05){
 
   results <- tibble(alpha,PSE,ME,SME)
 
-  dat <- tibble("coeff"= factor(names(coef(mod))[-1],levels = names(coef(mod))[-1]),
+  dat <- tibble("coeff"= factor(names(coef(mod))[-1],levels = rev(names(coef(mod))[-1])),
                 "estimates" = 2*coef(mod)[-1]) %>%
     mutate(lower_ME = estimates-ME,
            upper_ME = estimates+ME,
@@ -180,15 +180,16 @@ Lenth_method <- function(mod,alpha=0.05){
     geom_segment( aes(x=coeff, xend=coeff, y=0, yend=estimates), color="grey") +
     geom_point( color="#5fad9a", size=4) +
     theme_classic() +
-    geom_hline(yintercept=ME, linetype='dashed', col = 'red',size=1.05)+
-    annotate("text",x=-Inf,y=ME,hjust=-0.4,vjust=-0.5,label="ME",fontface="italic",size=3)+
-    geom_hline(yintercept=-ME, linetype='dashed', col = 'red',size=1.05)+
-    annotate("text",x=-Inf,y=-ME,hjust=-0.4,vjust=-0.5,label="ME",fontface="italic",size=3)+
-    geom_hline(yintercept=SME, linetype='dotdash', col = 'blue',size=1.05)+
-    annotate("text",x=-Inf,y=SME,hjust=-0.4,vjust=-0.5,label="SME",fontface="italic",size=3)+
-    geom_hline(yintercept=-SME, linetype='dotdash', col = 'blue',size=1.05)+
-    annotate("text",x=-Inf,y=-SME,hjust=-0.4,vjust=-0.5,label="SME",fontface="italic",size=3)+
+    geom_hline(yintercept=ME, linetype='dashed', col = 'red',size=1.04)+
+    annotate("text",x=-Inf,y=ME,hjust=-0.2,vjust=-0.5,label="ME",fontface="italic",size=2.8)+
+    geom_hline(yintercept=-ME, linetype='dashed', col = 'red',size=1.04)+
+    annotate("text",x=-Inf,y=-ME,hjust=-0.2,vjust=-0.5,label="ME",fontface="italic",size=2.8)+
+    geom_hline(yintercept=SME, linetype='dotdash', col = 'blue',size=1.04)+
+    annotate("text",x=-Inf,y=SME,hjust=-0.2,vjust=-0.5,label="SME",fontface="italic",size=2.8)+
+    geom_hline(yintercept=-SME, linetype='dotdash', col = 'blue',size=1.04)+
+    annotate("text",x=-Inf,y=-SME,hjust=-0.2,vjust=-0.5,label="SME",fontface="italic",size=2.8)+
     geom_hline(yintercept=0, linetype='dotted', col = 'black')+
+    coord_flip()+
     theme(
       panel.border = element_blank(),
       axis.ticks.x = element_blank()) +
