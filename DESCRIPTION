@@ -1,7 +1,7 @@
 Package: ggDoE
 Type: Package
 Title: Modernizing output in Designs of Experiments
-Version: 0.2.1
+Version: 0.2.2
 Author: Jose Toledo
 Maintainer: Jose Toledo <toledo60@protonmail.com>
 Description: Common plots/tools in Design of Experiments implemented with Tidyverse
@@ -16,5 +16,4 @@ RoxygenNote: 7.1.1
 Depends: 
     R (>= 2.10),
     dplyr (>= 1.0.2),
-    tidyr (>= 1.1.3),
     ggplot2 (>= 3.3.2)

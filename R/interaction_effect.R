@@ -12,7 +12,7 @@
 #' @return data to calculate interaction effects, and interaction effects plot
 #' @examples IA_effect(data = epitaxial, factr1 = A, factr2 = B, response = ybar)
 #' @export
-IA_effect <- function(data,factr1,factr2,response){
+interaction_effect <- function(data,factr1,factr2,response){
   var1 = dplyr::enquo(factr1)
   var2 = dplyr::enquo(factr2)
   response = enquo(response)

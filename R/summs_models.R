@@ -41,7 +41,7 @@ summs_models <- function(models,model.names) {
 
   dat_ungather = cbind("Factors"=attr(gg.dat,"dimnames")[[1]],
                        as.data.frame(gg.dat))
-  dat1=gather(dat_ungather,Model1,Model2,-Factors)
+  dat1= tidyr::gather(dat_ungather,Model1,Model2,-Factors)
   colnames(dat1) = c("Factors","Model","absolute_T_stat")
 
   gg.plot = ggplot(dat1,aes(x=Factors,y=absolute_T_stat,group=Factors)) +
