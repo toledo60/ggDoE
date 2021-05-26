@@ -7,7 +7,11 @@
 main_effect(data, factr, response)
 }
 \arguments{
-\item{response}{}
+\item{data}{Data/Design used to plot}
+
+\item{factr}{Factor}
+
+\item{response}{Response variable}
 }
 \value{
 data to calculate main effect, and main effect plot

@@ -7,6 +7,9 @@
 #'
 #' @return A dataframe with the absolute effects and half-normal qunatiles.
 #' A ggplot version of halfnormal plot for factorial effects is returned
+#' @importFrom ggplot2 ggplot aes geom_point geom_text theme_classic labs
+#' @importFrom stats qnorm
+#' @importFrom utils tail
 #' @export
 #'
 #' @examples m1 <- lm(lns2 ~ (A+B+C+D)^4,data=epitaxial)

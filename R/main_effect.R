@@ -2,12 +2,12 @@
 
 #' Obtain main effect plot for a factor in our design with ggplot
 #'
-#' @param data
-#' @param factr
-#' @param response
+#' @param data Data/Design used to plot
+#' @param factr Factor
+#' @param response Response variable
 #'
 #' @return data to calculate main effect, and main effect plot
-#'
+#' @importFrom ggplot2 theme_minimal
 #' @examples
 #' main_effect(data=epitaxial, factr = B, response = ybar)
 #' @export

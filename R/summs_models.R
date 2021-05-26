@@ -9,6 +9,7 @@
 #' @param model.names a vector of names for the models in format of "model_name"
 #'
 #' @return summary output between models, and ggplot to compare models' consistency
+#' @importFrom ggplot2 scale_x_discrete
 #' @export
 #'
 #' @examples m1 <- lm(ybar~(A+B+C)^2,data =epitaxial)
@@ -33,11 +34,6 @@ summs_models <- function(models,model.names) {
   colnames(gg.dat) = model.names
   Factors = factor(coeff.names,levels = coeff.names)
 
-  summ =  jtools::export_summs(models,
-                               error_format = '',
-                               coefs  = coeff.names,model.names =model.names,
-                               stars = c(`'`=0.1,`*` = 0.05, `**` = 0.01, `***` = 0.001),
-                               digits = 4)
 
   dat_ungather = cbind("Factors"=attr(gg.dat,"dimnames")[[1]],
                        as.data.frame(gg.dat))
@@ -56,5 +52,5 @@ summs_models <- function(models,model.names) {
   t_dat <- bind_cols("Factors"=attr(gg.dat,"dimnames")[[1]],
                      as_tibble(gg.dat))
 
-  return(list(table=summ,t_dat= t_dat,plot=gg.plot))
+  return(list(t_dat= t_dat,plot=gg.plot))
 }

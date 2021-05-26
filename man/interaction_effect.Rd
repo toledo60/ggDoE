@@ -7,7 +7,13 @@
 interaction_effect(data, factr1, factr2, response)
 }
 \arguments{
-\item{response}{}
+\item{data}{Data/Design used to plot}
+
+\item{factr1}{First factor}
+
+\item{factr2}{Second factor}
+
+\item{response}{Response variable}
 }
 \value{
 data to calculate interaction effects, and interaction effects plot
@@ -16,5 +22,5 @@ data to calculate interaction effects, and interaction effects plot
 Obtain interaction effects plot between two factors in our design with ggplot
 }
 \examples{
-IA_effect(data = epitaxial, factr1 = A, factr2 = B, response = ybar)
+interaction_effect(data = epitaxial, factr1 = A, factr2 = B, response = ybar)
 }
