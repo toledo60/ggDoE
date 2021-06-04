@@ -12,8 +12,8 @@
 #' @importFrom stats qchisq
 #' @importFrom tibble tibble
 #' @export
-#'
-#' @examples model <- lm(s2 ~ (A+B+C+D),data = epitaxial)
+#' @examples
+#' model <- lm(s2 ~ (A+B+C+D),data = epitaxial)
 #' boxcox_transform(model,lambda = seq(-2,3,0.2))
 #' boxcox_transform(model,lambda = seq(-2,3,0.2),showplot=FALSE)
 boxcox_transform <- function(model,lambda= seq(-2,2,1/10),

@@ -1,7 +1,7 @@
 Package: ggDoE
 Type: Package
 Title: Modernizing output in Designs of Experiments
-Version: 0.2.5
+Version: 0.2.6
 Author: Jose Toledo
 Maintainer: Jose Toledo <toledo60@protonmail.com>
 Description: Common plots/tools in Design of Experiments implemented with Tidyverse
@@ -9,7 +9,6 @@ License: What license is it under?
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    dplyr,
     ggplot2,
     tidyr,
     gridExtra,
