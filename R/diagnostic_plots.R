@@ -8,6 +8,7 @@
 #' @importFrom broom augment
 #' @importFrom ggplot2 geom_smooth stat_qq geom_abline ylim aes_string geom_text
 #' @importFrom gridExtra grid.arrange
+#' @importFrom stats quantile
 #' @export
 #'
 #' @examples epitaxial_ybar <- lm(ybar ~ A+B+C+D,data=epitaxial)

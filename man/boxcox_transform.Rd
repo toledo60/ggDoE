@@ -21,11 +21,10 @@ boxcox_transform(
 
 \item{lambdaSF}{Digits to round lambda values shown in plot}
 
-\item{showplot}{Default is TRUE, if false plot will not be shown and a tibble is returned with
-a 95% confidence interval for lambda and lambda value which maximizes log-likelihood}
+\item{showplot}{Default is TRUE, if false plot will not be shown and a tibble is returned with a 95\% confidence interval for lambda and lambda value which maximizes log-likelihood}
 }
 \value{
-Box-Cox transformation plot with 95% confidence interval of lambda values to consider
+Box-Cox transformation plot with 95\% confidence interval of lambda values to consider
 }
 \description{
 Box-Cox Transformations

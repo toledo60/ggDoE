@@ -7,6 +7,7 @@
 #' values of ME, and SME.
 #' @importFrom stats coef model.matrix median qt
 #' @importFrom ggplot2 geom_segment geom_hline coord_flip annotate xlab ylab element_blank
+#' @importFrom tibble tibble
 #' @export
 #' @examples m1 <- lm(ybar ~ (A+B+C+D)^2,data=epitaxial)
 #' Lenth_method(m1)
@@ -31,14 +32,14 @@ Lenth_method <- function(mod,alpha=0.05){
   results <- tibble(alpha,PSE,ME,SME)
 
   dat <- tibble("coeff"= factor(names(coef(mod))[-1],levels = rev(names(coef(mod))[-1])),
-                "estimates" = 2*coef(mod)[-1]) %>%
-    mutate(lower_ME = estimates-ME,
-           upper_ME = estimates+ME,
-           lower_SME = estimates-SME,
-           upper_SME = estimates+SME)
+                "estimates" = 2*coef(mod)[-1])
+  dat$lower_ME = dat$estimates-ME
+  dat$upper_ME = dat$estimates+ME
+  dat$lower_SME = dat$estimates - SME
+  dat$upper_SME = dat$estimates + SME
 
-  lenth_plot <-  ggplot(dat, aes(x=coeff, y=estimates)) +
-    geom_segment( aes(x=coeff, xend=coeff, y=0, yend=estimates), color="grey") +
+  lenth_plot <-  ggplot(dat, aes_string(x='coeff', y='estimates')) +
+    geom_segment( aes_string(x='coeff', xend='coeff', y=0, yend='estimates'), color="grey") +
     geom_point( color="#5fad9a", size=4) +
     geom_hline(yintercept=ME, linetype='dashed', col = 'red',size=1.04)+
     annotate("text",x=-Inf,y=ME,hjust=-0.2,vjust=-0.5,label="ME",fontface="italic",size=2.8)+
