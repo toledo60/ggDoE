@@ -5,12 +5,14 @@
 \title{Compare factor effects from multiple models and visualize
 the difference in absolute value T statistics to check for model performances}
 \usage{
-summs_models(models, model.names)
+summs_models(models, model.names, showplot = TRUE)
 }
 \arguments{
 \item{models}{a list of models to compare}
 
 \item{model.names}{a vector of names for the models in format of "model_name"}
+
+\item{showplot}{logical indicating to show the plot. If false, only the data used to construct the plot is returned. Default is TRUE}
 }
 \value{
 summary output between models, and ggplot to compare models' consistency
