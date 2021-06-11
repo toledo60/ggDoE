@@ -17,3 +17,21 @@ s2 = apply(data[,6:11], 1, var)
 lns2 = log(s2)
 
 epitaxial  = cbind.data.frame(design,ybar, s2, lns2)
+
+
+# Efficient Designs With Minimal Aliasing Example -------------------------
+
+
+aliased_design <- tribble(~A, ~B, ~C, ~D, ~E,
+                          -1, 1, -1, 1, 1,
+                          -1,1,1,1, -1,
+                          -1, -1, 1, -1, 1,
+                          1, 1, 1, 1, 1,
+                          1,1,1, -1, -1,
+                          1, -1, -1, 1, -1,
+                          -1, 1, -1, -1, 1,
+                          1, -1, 1, 1, 1,
+                          1, 1, -1, -1, -1,
+                          -1, -1, 1, -1, -1,
+                          1, -1, -1, -1, 1,
+                          -1, -1, -1, 1, -1)

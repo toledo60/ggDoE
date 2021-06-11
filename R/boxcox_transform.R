@@ -4,14 +4,15 @@
 #' @param lambda sequence of lambda values to consider for plot. Default is seq(-2,2,1/10)
 #' @param showlambda Default is TRUE, show lambda values in plot
 #' @param lambdaSF Digits to round lambda values shown in plot
-#' @param showplot Default is TRUE, if false plot will not be shown and a tibble is returned with
-#' a 95% confidence interval for lambda and lambda value which maximizes log-likelihood
-#' @return Box-Cox transformation plot with 95% confidence interval of lambda values to consider
+#' @param showplot Default is TRUE, if false plot will not be shown and a tibble is returned with a 95\% confidence interval for lambda and lambda value which maximizes log-likelihood
+#'
 #' @importFrom MASS boxcox
 #' @importFrom ggplot2 geom_segment geom_vline geom_hline element_blank geom_text
 #' @importFrom stats qchisq
 #' @importFrom tibble tibble
+#' @return Box-Cox transformation plot with 95\% confidence interval of lambda values to consider
 #' @export
+#'
 #' @examples
 #' model <- lm(s2 ~ (A+B+C+D),data = epitaxial)
 #' boxcox_transform(model,lambda = seq(-2,3,0.2))
