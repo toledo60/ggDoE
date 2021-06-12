@@ -1,7 +1,7 @@
 Package: ggDoE
 Type: Package
 Title: Modernizing visual outputs in Designs of Experiments
-Version: 0.3.1
+Version: 0.3.2
 Author: Jose Toledo Luna
 Maintainer: Jose Toledo <toledo60@protonmail.com>
 Description: Common plots in Design of Experiments implemented with ggplot2
