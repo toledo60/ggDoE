@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ggDoE</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.4</span>
       </span>
     </div>
 
@@ -59,12 +59,46 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="installation" class="section level1">
+<div id="ggdoe" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h1></div>
-<p>In order to install without any issues copy the following commands into your R console</p>
-<pre class="{r}"><code><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS="true")
+<a href="#ggdoe" class="anchor"></a><a href="https://toledo60.github.io/ggDoE/index.html">ggDoE</a>
+</h1></div>
+<div id="installation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h2>
+<p>You can get the development version from GitHub:</p>
+<pre class="{r}"><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("remotes") # if not installed yet
+
+Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS="true")
 remotes::install_github("toledo60/ggDoE")</a></code></pre>
+</div>
+<div id="contributing-to-the-package" class="section level2">
+<h2 class="hasAnchor">
+<a href="#contributing-to-the-package" class="anchor"></a>Contributing to the package</h2>
+<p>I welcome feedback, suggestions, issues, and contributions!</p>
+<div id="bug-reports" class="section level3">
+<h3 class="hasAnchor">
+<a href="#bug-reports" class="anchor"></a>Bug reports</h3>
+<p>When reporting an <a href="https://github.com/toledo60/ggDoE/issues">Issue</a>, please spend some time making it easy for me to follow and reproduce. I highly recommend using <a href="https://reprex.tidyverse.org/">reprex package</a></p>
+</div>
+<div id="package-development" class="section level3">
+<h3 class="hasAnchor">
+<a href="#package-development" class="anchor"></a>Package development</h3>
+<p>A good way to start is by contributing additional examples or improving the documentation. Additionally, you can submit a <a href="https://github.com/toledo60/ggDoE/pulls">Pull Request</a> to integrate your own function(s) in the <a href="https://github.com/toledo60/ggDoE/tree/debug">debug</a> branch.</p>
+<p>If you want to submit a new function please provide: the new function(s) with code and roxygen tags (with examples) as shown below</p>
+<pre class="{r}"><code>#' Add together two numbers
+#' 
+#' @param x A number.
+#' @param y A number.
+#' @return The sum of \code{x} and \code{y}.
+#' @examples
+#' add(1, 1)
+#' add(10, 1)
+add &lt;- function(x, y) {
+  x + y
+}</code></pre>
+</div>
+</div>
 </div>
   </div>
 
@@ -79,7 +113,7 @@ remotes::install_github("toledo60/ggDoE")</a></code></pre>
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Jose Toledo <br><small class="roles"> Maintainer </small>  </li>
+<li>Jose Toledo Luna <br><small class="roles"> Maintainer </small>  </li>
 </ul>
 </div>
 
@@ -88,7 +122,7 @@ remotes::install_github("toledo60/ggDoE")</a></code></pre>
 
 
       <footer><div class="copyright">
-  <p>Developed by Jose Toledo.</p>
+  <p>Developed by Jose Toledo Luna.</p>
 </div>
 
 <div class="pkgdown">
