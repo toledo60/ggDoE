@@ -1,4 +1,4 @@
-# [ggDoE](https://toledo60.github.io/ggDoE/index.html)
+# ggDoE
 
 ## Installation
 
@@ -6,8 +6,6 @@ You can get the development version from GitHub:
 
 ```{r}
 install.packages("remotes") # if not installed yet
-
-Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS="true")
 remotes::install_github("toledo60/ggDoE")
 ```
 
@@ -16,8 +14,7 @@ I welcome feedback, suggestions, issues, and contributions!
 
 ### Bug reports
 
-When reporting an [Issue](https://github.com/toledo60/ggDoE/issues), please spend some time making it easy for 
-me to follow and reproduce. I highly recommend using [reprex package](https://reprex.tidyverse.org/)
+When reporting an [Issue](https://github.com/toledo60/ggDoE/issues), please spend some time making it easy to follow and reproduce your issue. For this, I highly recommend using [reprex package](https://reprex.tidyverse.org/)
 
 ### Package development
 
