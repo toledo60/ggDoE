@@ -19,8 +19,7 @@ When reporting an [Issue](https://github.com/toledo60/ggDoE/issues), please spen
 ### Package development
 
 A good way to start is by contributing additional examples or improving the documentation.
-Additionally, you can submit a [Pull Request](https://github.com/toledo60/ggDoE/pulls) to integrate your own function(s) in the 
-[debug](https://github.com/toledo60/ggDoE/tree/debug) branch.
+Additionally, you can submit a [Pull Request](https://github.com/toledo60/ggDoE/pulls) to integrate your own function(s) in a new branch.
 
 If you want to submit a new function please provide: the new function(s) with code and roxygen tags (with examples) as shown below
 
