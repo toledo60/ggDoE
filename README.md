@@ -1,5 +1,9 @@
 # ggDoE
 
+
+[![R-CMD-check](https://github.com/toledo60/ggDoE/workflows/R-CMD-check/badge.svg)](https://github.com/toledo60/ggDoE/actions)
+
+
 ## Installation
 
 You can get the development version from GitHub:

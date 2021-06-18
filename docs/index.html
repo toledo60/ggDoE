@@ -61,15 +61,13 @@
   <div class="contents col-md-9">
 <div id="ggdoe" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#ggdoe" class="anchor"></a><a href="https://toledo60.github.io/ggDoE/index.html">ggDoE</a>
-</h1></div>
+<a href="#ggdoe" class="anchor"></a>ggDoE</h1></div>
+
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can get the development version from GitHub:</p>
 <pre class="{r}"><code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("remotes") # if not installed yet
-
-Sys.setenv(R_REMOTES_NO_ERRORS_FROM_WARNINGS="true")
 remotes::install_github("toledo60/ggDoE")</a></code></pre>
 </div>
 <div id="contributing-to-the-package" class="section level2">
@@ -79,12 +77,12 @@ remotes::install_github("toledo60/ggDoE")</a></code></pre>
 <div id="bug-reports" class="section level3">
 <h3 class="hasAnchor">
 <a href="#bug-reports" class="anchor"></a>Bug reports</h3>
-<p>When reporting an <a href="https://github.com/toledo60/ggDoE/issues">Issue</a>, please spend some time making it easy for me to follow and reproduce. I highly recommend using <a href="https://reprex.tidyverse.org/">reprex package</a></p>
+<p>When reporting an <a href="https://github.com/toledo60/ggDoE/issues">Issue</a>, please spend some time making it easy to follow and reproduce your issue. For this, I highly recommend using <a href="https://reprex.tidyverse.org/">reprex package</a></p>
 </div>
 <div id="package-development" class="section level3">
 <h3 class="hasAnchor">
 <a href="#package-development" class="anchor"></a>Package development</h3>
-<p>A good way to start is by contributing additional examples or improving the documentation. Additionally, you can submit a <a href="https://github.com/toledo60/ggDoE/pulls">Pull Request</a> to integrate your own function(s) in the <a href="https://github.com/toledo60/ggDoE/tree/debug">debug</a> branch.</p>
+<p>A good way to start is by contributing additional examples or improving the documentation. Additionally, you can submit a <a href="https://github.com/toledo60/ggDoE/pulls">Pull Request</a> to integrate your own function(s) in a new branch.</p>
 <p>If you want to submit a new function please provide: the new function(s) with code and roxygen tags (with examples) as shown below</p>
 <pre class="{r}"><code>#' Add together two numbers
 #' 
@@ -117,7 +115,13 @@ add &lt;- function(x, y) {
 </ul>
 </div>
 
-  </div>
+  <div class="dev-status">
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/toledo60/ggDoE/actions"><img src="https://github.com/toledo60/ggDoE/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+</ul>
+</div>
+</div>
 </div>
 
 
