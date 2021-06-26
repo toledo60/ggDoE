@@ -2,12 +2,17 @@ Package: ggDoE
 Type: Package
 Title: Modernizing visual outputs in Designs of Experiments
 Version: 0.3.4
-Author: Jose Toledo Luna
-Maintainer: Jose Toledo Luna <toledo60@protonmail.com>
+Authors@R: c(person(given = "Jose",family = "Toledo Luna",
+             role = c("aut", "cre"),
+             email = "toledo60@protonmail.com",
+             comment = c(ORCID = "0000-0001-8559-0027")))
+Maintainer: Jose Toledo Luna <toledo60@protonmail.com>            
 Description: Common plots in Design of Experiments implemented with ggplot2
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+URL: https://toledo60.github.io/ggDoE
+BugReports: https://github.com/toledo60/ggDoE/issues
 Imports: 
     ggplot2,
     tidyr,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/interaction_effect.R
 \name{interaction_effect}
 \alias{interaction_effect}
-\title{Obtain interaction effects plot between two factors in our design with ggplot}
+\title{Obtain interaction effects plot between two factors in a factorial design}
 \usage{
 interaction_effect(data, factr1, factr2, response)
 }
@@ -19,7 +19,7 @@ interaction_effect(data, factr1, factr2, response)
 data to calculate interaction effects, and interaction effects plot
 }
 \description{
-Obtain interaction effects plot between two factors in our design with ggplot
+Obtain interaction effects plot between two factors in a factorial design
 }
 \examples{
 interaction_effect(data = epitaxial, factr1 = A, factr2 = B, response = ybar)

@@ -47,7 +47,14 @@
   <a href="reference/index.html">Reference</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/toledo60/ggDoE/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -63,6 +70,21 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#ggdoe" class="anchor"></a>ggDoE</h1></div>
 
+<div id="overview" class="section level2">
+<h2 class="hasAnchor">
+<a href="#overview" class="anchor"></a>Overview</h2>
+<p>With ggDoE you’ll be able to generate common plots used in Design of Experiments with ggplot2.</p>
+<p>The following plots are currently available</p>
+<ul>
+<li><p><a href="https://toledo60.github.io/ggDoE/reference/alias_matrix.html">alias_matrix()</a>: Correlation matrix plot to visualize the Alias matrix</p></li>
+<li><p><a href="https://toledo60.github.io/ggDoE/reference/boxcox_transform.html">boxcox_transform()</a>: Boxcox transformation plot</p></li>
+<li><p><a href="https://toledo60.github.io/ggDoE/reference/diagnostic_plots.html">diagnostic_plots()</a>: Regression diagnostics plots</p></li>
+<li><p><a href="https://toledo60.github.io/ggDoE/reference/halfnormal.html">halfnormal()</a>: Half-Normal effects plot</p></li>
+<li><p><a href="https://toledo60.github.io/ggDoE/reference/interaction_effect.html">interaction_effect()</a>: Interaction effects plot between two factors in a factorial design</p></li>
+<li><p><a href="https://toledo60.github.io/ggDoE/reference/Lenth_method.html">Lenth_method()</a>: Visualize effect significance for experiments without variance estimates using Lenth’s method</p></li>
+<li><p><a href="https://toledo60.github.io/ggDoE/reference/main_effect.html">main_effect()</a>: Main effect plot for one factor in a factorial design</p></li>
+</ul>
+</div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -77,7 +99,7 @@ remotes::install_github("toledo60/ggDoE")</a></code></pre>
 <div id="bug-reports" class="section level3">
 <h3 class="hasAnchor">
 <a href="#bug-reports" class="anchor"></a>Bug reports</h3>
-<p>When reporting an <a href="https://github.com/toledo60/ggDoE/issues">Issue</a>, please spend some time making it easy to follow and reproduce your issue. For this, I highly recommend using <a href="https://reprex.tidyverse.org/">reprex package</a></p>
+<p>When reporting an <a href="https://github.com/toledo60/ggDoE/issues">Issue</a>, please spend some time making it easy to follow and reproduce your issue. For this, I highly recommend using <a href="https://reprex.tidyverse.org/">reprex package</a>. You can also start a new <a href="https://github.com/toledo60/ggDoE/discussions">Discussion</a> to resolve an issue or share new ideas.</p>
 </div>
 <div id="package-development" class="section level3">
 <h3 class="hasAnchor">
@@ -101,7 +123,16 @@ add &lt;- function(x, y) {
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <div class="license">
+    <div class="links">
+<h2>Links</h2>
+<ul class="list-unstyled">
+<li>Browse source code at <br><a href="https://github.com/toledo60/ggDoE/">https://​github.com/​toledo60/​ggDoE/​</a>
+</li>
+<li>Report a bug at <br><a href="https://github.com/toledo60/ggDoE/issues">https://​github.com/​toledo60/​ggDoE/​issues</a>
+</li>
+</ul>
+</div>
+<div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
@@ -111,7 +142,7 @@ add &lt;- function(x, y) {
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Jose Toledo Luna <br><small class="roles"> Maintainer </small>  </li>
+<li>Jose Toledo Luna <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-8559-0027" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
 
@@ -119,6 +150,7 @@ add &lt;- function(x, y) {
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://github.com/toledo60/ggDoE/actions"><img src="https://github.com/toledo60/ggDoE/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://toledo60.github.io/ggDoE/"><img src="https://img.shields.io/badge/Documentation-ggDoE-blue" alt="Documentation"></a></li>
 </ul>
 </div>
 </div>

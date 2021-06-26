@@ -2,7 +2,7 @@
 % Please edit documentation in R/main_effect.R
 \name{main_effect}
 \alias{main_effect}
-\title{Obtain main effect plot for a factor in our design with ggplot}
+\title{Obtain main effect plot for a factor in a factorial design}
 \usage{
 main_effect(data, factr, response)
 }
@@ -17,7 +17,7 @@ main_effect(data, factr, response)
 data to calculate main effect, and main effect plot
 }
 \description{
-Obtain main effect plot for a factor in our design with ggplot
+Obtain main effect plot for a factor in a factorial design
 }
 \examples{
 main_effect(data=epitaxial, factr = B, response = ybar)

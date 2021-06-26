@@ -1,4 +1,4 @@
-#' Regression Diagnostics in ggplot2
+#' Regression Diagnostic Plots with ggplot2
 #'
 #' @param model Model of class "lm" or "glm"
 #' @param se Display confidence interval around smooth? TRUE by default

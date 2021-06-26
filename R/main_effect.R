@@ -1,6 +1,6 @@
 # Main Effects ------------------------------------------------------------
 
-#' Obtain main effect plot for a factor in our design with ggplot
+#' Obtain main effect plot for a factor in a factorial design
 #'
 #' @param data Data/Design used to plot
 #' @param factr Factor

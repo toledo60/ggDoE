@@ -2,7 +2,7 @@
 % Please edit documentation in R/diagnostic_plots.R
 \name{diagnostic_plots}
 \alias{diagnostic_plots}
-\title{Regression Diagnostics in ggplot2}
+\title{Regression Diagnostic Plots with ggplot2}
 \usage{
 diagnostic_plots(model, se = TRUE, point_size = 3.5)
 }
@@ -17,7 +17,7 @@ diagnostic_plots(model, se = TRUE, point_size = 3.5)
 Regression Diagnostic plots
 }
 \description{
-Regression Diagnostics in ggplot2
+Regression Diagnostic Plots with ggplot2
 }
 \examples{
 epitaxial_ybar <- lm(ybar ~ A+B+C+D,data=epitaxial)

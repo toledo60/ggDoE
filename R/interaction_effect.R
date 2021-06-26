@@ -2,7 +2,7 @@
 
 
 
-#' Obtain interaction effects plot between two factors in our design with ggplot
+#' Obtain interaction effects plot between two factors in a factorial design
 #'
 #' @param data Data/Design used to plot
 #' @param factr1 First factor
