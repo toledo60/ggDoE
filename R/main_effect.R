@@ -6,7 +6,7 @@
 #' @param factr Factor variable (without quotes)
 #' @param response Response variable (without quotes)
 #' @param colour A character string specifying the color of line/points
-#' @param point_size Change size of point
+#' @param point_size Change size of points
 #' @param line_size Change thickness of line
 #' @param showplot  logical indicating to show main effect plot. If false, a tibble containing the data used to construct the plot is returned. Default is TRUE
 #' @return main effect plot, or data used to construct main effect plot
@@ -24,7 +24,7 @@ main_effect <- function(Design,factr,response,
   var <- dplyr::enquo(factr)
   rsp <- dplyr::enquo(response)
 
-  dat <- summarize(group_by(Design, !!var), mean_response=mean(!!rsp))
+  dat <- summarize(group_by(Design, factor(!!var)), mean_response=mean(!!rsp))
   names(dat) = c("var","mean_response")
 
   if(showplot){

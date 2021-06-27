@@ -23,7 +23,7 @@ main_effect(
 
 \item{colour}{A character string specifying the color of line/points}
 
-\item{point_size}{Change size of point}
+\item{point_size}{Change size of points}
 
 \item{line_size}{Change thickness of line}
 

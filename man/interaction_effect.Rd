@@ -4,16 +4,30 @@
 \alias{interaction_effect}
 \title{Obtain interaction effects plot between two factors in a factorial design}
 \usage{
-interaction_effect(data, factr1, factr2, response)
+interaction_effect(
+  Design,
+  factr1,
+  factr2,
+  response,
+  point_size = 1.5,
+  line_size = 1,
+  showplot = TRUE
+)
 }
 \arguments{
-\item{data}{Data/Design used to plot}
+\item{Design}{Data/Design used to plot}
 
 \item{factr1}{First factor}
 
 \item{factr2}{Second factor}
 
 \item{response}{Response variable}
+
+\item{point_size}{Change size of points}
+
+\item{line_size}{Change thickness of lines}
+
+\item{showplot}{logical indicating to show main effect plot. If false, a tibble containing the data used to construct the plot is returned. Default is TRUE}
 }
 \value{
 data to calculate interaction effects, and interaction effects plot
@@ -22,5 +36,5 @@ data to calculate interaction effects, and interaction effects plot
 Obtain interaction effects plot between two factors in a factorial design
 }
 \examples{
-interaction_effect(data = epitaxial, factr1 = A, factr2 = B, response = ybar)
+interaction_effect(Design = epitaxial, factr1 = A, factr2 = B, response = ybar)
 }
