@@ -4,21 +4,38 @@
 \alias{main_effect}
 \title{Obtain main effect plot for a factor in a factorial design}
 \usage{
-main_effect(data, factr, response)
+main_effect(
+  Design,
+  factr,
+  response,
+  colour = "#4292c6",
+  point_size = 1.5,
+  line_size = 1,
+  showplot = TRUE
+)
 }
 \arguments{
-\item{data}{Data/Design used to plot}
+\item{Design}{Data/Design used to plot}
 
-\item{factr}{Factor}
+\item{factr}{Factor variable (without quotes)}
 
-\item{response}{Response variable}
+\item{response}{Response variable (without quotes)}
+
+\item{colour}{A character string specifying the color of line/points}
+
+\item{point_size}{Change size of point}
+
+\item{line_size}{Change thickness of line}
+
+\item{showplot}{logical indicating to show main effect plot. If false, a tibble containing the data used to construct the plot is returned. Default is TRUE}
 }
 \value{
-data to calculate main effect, and main effect plot
+main effect plot, or data used to construct main effect plot
 }
 \description{
 Obtain main effect plot for a factor in a factorial design
 }
 \examples{
-main_effect(data=epitaxial, factr = B, response = ybar)
+main_effect(Design = epitaxial, factr = B, response = ybar)
+main_effect(Design = epitaxial, factr = B, response = s2, colour = "red", point_size = 4)
 }

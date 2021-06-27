@@ -2,31 +2,41 @@
 
 #' Obtain main effect plot for a factor in a factorial design
 #'
-#' @param data Data/Design used to plot
-#' @param factr Factor
-#' @param response Response variable
-#'
-#' @return data to calculate main effect, and main effect plot
-#' @importFrom ggplot2 theme_minimal
+#' @param Design Data/Design used to plot
+#' @param factr Factor variable (without quotes)
+#' @param response Response variable (without quotes)
+#' @param colour A character string specifying the color of line/points
+#' @param point_size Change size of point
+#' @param line_size Change thickness of line
+#' @param showplot  logical indicating to show main effect plot. If false, a tibble containing the data used to construct the plot is returned. Default is TRUE
+#' @return main effect plot, or data used to construct main effect plot
+#' @importFrom ggplot2 theme_bw as_label aes_string
+#' @importFrom dplyr enquo summarize group_by
 #' @examples
-#' main_effect(data=epitaxial, factr = B, response = ybar)
+#' main_effect(Design = epitaxial, factr = B, response = ybar)
+#' main_effect(Design = epitaxial, factr = B, response = s2, colour = "red", point_size = 4)
 #' @export
-main_effect <- function(data,factr,response){
-  var1 = dplyr::enquo(factr)
-  response = dplyr::enquo(response)
+main_effect <- function(Design,factr,response,
+                       colour ="#4292c6",
+                       point_size=1.5,line_size=1,
+                       showplot=TRUE){
 
-  dat <- data %>%
-    mutate(!!quo_name(var1) := factor(!!var1)) %>%
-    group_by(!!var1) %>%
-    summarise(y = mean(!!response),.groups = 'drop')
+  var <- dplyr::enquo(factr)
+  rsp <- dplyr::enquo(response)
 
-  plot <-  dat %>%
-    ggplot(aes_(x=var1,y=~y,group=1)) +
-    theme_minimal()+
-    ylab(bquote("Mean of "*.(response)))+
-    geom_line(aes(group=1),size=1,colour = "#4292c6")+
-    geom_point(size=1.5,colour = "#4292c6")
+  dat <- summarize(group_by(Design, !!var), mean_response=mean(!!rsp))
+  names(dat) = c("var","mean_response")
 
-
-  return(list(dat = dat,plot=plot))
+  if(showplot){
+    plot <- ggplot(dat,aes_string(x='var',y='mean_response',group=1)) +
+      geom_line(aes(group=1),size=line_size,colour = colour)+
+      geom_point(size=point_size,colour = colour)+
+      theme_bw()+
+      labs(y=paste0("Mean of ",as_label(rsp)),
+           x=as_label(var))
+    return(plot)
+  }else{
+    names(dat) = c(as_label(var),paste0("Mean_",as_label(rsp)))
+    return(dat)
+  }
 }

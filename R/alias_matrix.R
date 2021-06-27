@@ -12,7 +12,7 @@
 #' @param direction Sets the order of colors in the scale. If 1, the default, colors are ordered from darkest to lightest. If -1, the order of colors is reversed
 #' @importFrom viridisLite viridis magma inferno plasma cividis rocket mako turbo
 #' @importFrom reshape2 melt
-#' @importFrom ggplot2 scale_fill_gradient2 geom_tile element_blank aes_string
+#' @importFrom ggplot2 scale_fill_gradient2 geom_tile element_blank aes_string theme_minimal
 #' @importFrom stats model.matrix cor
 #' @return correlation matrix between main effects and interaction effects from the model.matrix. Alias matrix is also returned
 #' @export
