@@ -10,8 +10,8 @@
 #' @param line_size Change thickness of line
 #' @param showplot  logical indicating to show main effect plot. If false, a tibble containing the data used to construct the plot is returned. Default is TRUE
 #' @return main effect plot, or data used to construct main effect plot
-#' @importFrom ggplot2 theme_bw as_label aes_string
-#' @importFrom dplyr enquo summarize group_by
+#' @importFrom ggplot2 theme_bw aes_string
+#' @importFrom dplyr enquo summarize group_by as_label
 #' @examples
 #' main_effect(Design = epitaxial, factr = B, response = ybar)
 #' main_effect(Design = epitaxial, factr = B, response = s2, colour = "red", point_size = 4)
