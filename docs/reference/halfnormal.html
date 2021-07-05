@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggDoE</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.2</span>
       </span>
     </div>
 
@@ -143,69 +143,69 @@
 A ggplot version of halfnormal plot for factorial effects is returned</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>m1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>lns2</span> <span class='op'>~</span> <span class='op'>(</span><span class='va'>A</span><span class='op'>+</span><span class='va'>B</span><span class='op'>+</span><span class='va'>C</span><span class='op'>+</span><span class='va'>D</span><span class='op'>)</span><span class='op'>^</span><span class='fl'>4</span>,data<span class='op'>=</span><span class='va'>epitaxial</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='va'>m1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>lns2</span> <span class='op'>~</span> <span class='op'>(</span><span class='va'>A</span><span class='op'>+</span><span class='va'>B</span><span class='op'>+</span><span class='va'>C</span><span class='op'>+</span><span class='va'>D</span><span class='op'>)</span><span class='op'>^</span><span class='fl'>4</span>,data<span class='op'>=</span><span class='va'>original_epitaxial</span><span class='op'>)</span>
 <span class='fu'>halfnormal</span><span class='op'>(</span><span class='va'>m1</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $dat
 #&gt; <span style='color: #949494;'># A tibble: 15 x 3</span>
 #&gt;    effects absolute_effects half_normal_quantiles
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>                 <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> A:C:D           0.000<span style='text-decoration: underline;'>844</span>                0.041<span style='text-decoration: underline;'>8</span>
-#&gt; <span style='color: #BCBCBC;'> 2</span> B:C:D           0.003<span style='text-decoration: underline;'>27</span>                 0.126 
-#&gt; <span style='color: #BCBCBC;'> 3</span> B:D             0.010<span style='text-decoration: underline;'>7</span>                  0.210 
-#&gt; <span style='color: #BCBCBC;'> 4</span> A               0.015<span style='text-decoration: underline;'>9</span>                  0.297 
-#&gt; <span style='color: #BCBCBC;'> 5</span> A:C             0.025<span style='text-decoration: underline;'>8</span>                  0.385 
-#&gt; <span style='color: #BCBCBC;'> 6</span> A:D             0.029<span style='text-decoration: underline;'>8</span>                  0.477 
-#&gt; <span style='color: #BCBCBC;'> 7</span> A:B:C           0.031<span style='text-decoration: underline;'>8</span>                  0.573 
-#&gt; <span style='color: #BCBCBC;'> 8</span> A:B:D           0.041<span style='text-decoration: underline;'>6</span>                  0.674 
-#&gt; <span style='color: #BCBCBC;'> 9</span> A:B             0.045<span style='text-decoration: underline;'>3</span>                  0.784 
-#&gt; <span style='color: #BCBCBC;'>10</span> D               0.055<span style='text-decoration: underline;'>4</span>                  0.903 
-#&gt; <span style='color: #BCBCBC;'>11</span> B:C             0.080<span style='text-decoration: underline;'>5</span>                  1.04  
-#&gt; <span style='color: #BCBCBC;'>12</span> C:D             0.085<span style='text-decoration: underline;'>4</span>                  1.19  
-#&gt; <span style='color: #BCBCBC;'>13</span> A:B:C:D         0.104                   1.38  
-#&gt; <span style='color: #BCBCBC;'>14</span> C               0.112                   1.64  
-#&gt; <span style='color: #BCBCBC;'>15</span> B               0.117                   2.13  
+#&gt; <span style='color: #BCBCBC;'> 1</span> A:D              0.001<span style='text-decoration: underline;'>97</span>                0.041<span style='text-decoration: underline;'>8</span>
+#&gt; <span style='color: #BCBCBC;'> 2</span> C                0.076<span style='text-decoration: underline;'>8</span>                 0.126 
+#&gt; <span style='color: #BCBCBC;'> 3</span> B                0.078<span style='text-decoration: underline;'>3</span>                 0.210 
+#&gt; <span style='color: #BCBCBC;'> 4</span> A:B:D            0.085<span style='text-decoration: underline;'>8</span>                 0.297 
+#&gt; <span style='color: #BCBCBC;'> 5</span> A:B:C:D          0.109                  0.385 
+#&gt; <span style='color: #BCBCBC;'> 6</span> A:C              0.214                  0.477 
+#&gt; <span style='color: #BCBCBC;'> 7</span> B:D              0.305                  0.573 
+#&gt; <span style='color: #BCBCBC;'> 8</span> B:C:D            0.314                  0.674 
+#&gt; <span style='color: #BCBCBC;'> 9</span> B:C              0.331                  0.784 
+#&gt; <span style='color: #BCBCBC;'>10</span> A:B:C            0.335                  0.903 
+#&gt; <span style='color: #BCBCBC;'>11</span> A:B              0.428                  1.04  
+#&gt; <span style='color: #BCBCBC;'>12</span> A:C:D            0.494                  1.19  
+#&gt; <span style='color: #BCBCBC;'>13</span> C:D              0.582                  1.38  
+#&gt; <span style='color: #BCBCBC;'>14</span> D                0.632                  1.64  
+#&gt; <span style='color: #BCBCBC;'>15</span> A                3.83                   2.13  
 #&gt; 
 #&gt; $plot</div><div class='img'><img src='halfnormal-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'><span class='fu'>halfnormal</span><span class='op'>(</span><span class='va'>m1</span>,alpha<span class='op'>=</span><span class='fl'>0.1</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $dat
 #&gt; <span style='color: #949494;'># A tibble: 15 x 3</span>
 #&gt;    effects absolute_effects half_normal_quantiles
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>                 <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> A:C:D           0.000<span style='text-decoration: underline;'>844</span>                0.041<span style='text-decoration: underline;'>8</span>
-#&gt; <span style='color: #BCBCBC;'> 2</span> B:C:D           0.003<span style='text-decoration: underline;'>27</span>                 0.126 
-#&gt; <span style='color: #BCBCBC;'> 3</span> B:D             0.010<span style='text-decoration: underline;'>7</span>                  0.210 
-#&gt; <span style='color: #BCBCBC;'> 4</span> A               0.015<span style='text-decoration: underline;'>9</span>                  0.297 
-#&gt; <span style='color: #BCBCBC;'> 5</span> A:C             0.025<span style='text-decoration: underline;'>8</span>                  0.385 
-#&gt; <span style='color: #BCBCBC;'> 6</span> A:D             0.029<span style='text-decoration: underline;'>8</span>                  0.477 
-#&gt; <span style='color: #BCBCBC;'> 7</span> A:B:C           0.031<span style='text-decoration: underline;'>8</span>                  0.573 
-#&gt; <span style='color: #BCBCBC;'> 8</span> A:B:D           0.041<span style='text-decoration: underline;'>6</span>                  0.674 
-#&gt; <span style='color: #BCBCBC;'> 9</span> A:B             0.045<span style='text-decoration: underline;'>3</span>                  0.784 
-#&gt; <span style='color: #BCBCBC;'>10</span> D               0.055<span style='text-decoration: underline;'>4</span>                  0.903 
-#&gt; <span style='color: #BCBCBC;'>11</span> B:C             0.080<span style='text-decoration: underline;'>5</span>                  1.04  
-#&gt; <span style='color: #BCBCBC;'>12</span> C:D             0.085<span style='text-decoration: underline;'>4</span>                  1.19  
-#&gt; <span style='color: #BCBCBC;'>13</span> A:B:C:D         0.104                   1.38  
-#&gt; <span style='color: #BCBCBC;'>14</span> C               0.112                   1.64  
-#&gt; <span style='color: #BCBCBC;'>15</span> B               0.117                   2.13  
+#&gt; <span style='color: #BCBCBC;'> 1</span> A:D              0.001<span style='text-decoration: underline;'>97</span>                0.041<span style='text-decoration: underline;'>8</span>
+#&gt; <span style='color: #BCBCBC;'> 2</span> C                0.076<span style='text-decoration: underline;'>8</span>                 0.126 
+#&gt; <span style='color: #BCBCBC;'> 3</span> B                0.078<span style='text-decoration: underline;'>3</span>                 0.210 
+#&gt; <span style='color: #BCBCBC;'> 4</span> A:B:D            0.085<span style='text-decoration: underline;'>8</span>                 0.297 
+#&gt; <span style='color: #BCBCBC;'> 5</span> A:B:C:D          0.109                  0.385 
+#&gt; <span style='color: #BCBCBC;'> 6</span> A:C              0.214                  0.477 
+#&gt; <span style='color: #BCBCBC;'> 7</span> B:D              0.305                  0.573 
+#&gt; <span style='color: #BCBCBC;'> 8</span> B:C:D            0.314                  0.674 
+#&gt; <span style='color: #BCBCBC;'> 9</span> B:C              0.331                  0.784 
+#&gt; <span style='color: #BCBCBC;'>10</span> A:B:C            0.335                  0.903 
+#&gt; <span style='color: #BCBCBC;'>11</span> A:B              0.428                  1.04  
+#&gt; <span style='color: #BCBCBC;'>12</span> A:C:D            0.494                  1.19  
+#&gt; <span style='color: #BCBCBC;'>13</span> C:D              0.582                  1.38  
+#&gt; <span style='color: #BCBCBC;'>14</span> D                0.632                  1.64  
+#&gt; <span style='color: #BCBCBC;'>15</span> A                3.83                   2.13  
 #&gt; 
 #&gt; $plot</div><div class='img'><img src='halfnormal-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'><span class='fu'>halfnormal</span><span class='op'>(</span><span class='va'>m1</span>,alpha<span class='op'>=</span><span class='fl'>0.2</span>,signif_label<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $dat
 #&gt; <span style='color: #949494;'># A tibble: 15 x 3</span>
-#&gt;    effects   absolute_effects half_normal_quantiles
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>                 <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> <span style='color: #949494;'>"</span> <span style='color: #949494;'>"</span>               0.000<span style='text-decoration: underline;'>844</span>                0.041<span style='text-decoration: underline;'>8</span>
-#&gt; <span style='color: #BCBCBC;'> 2</span> <span style='color: #949494;'>"</span> <span style='color: #949494;'>"</span>               0.003<span style='text-decoration: underline;'>27</span>                 0.126 
-#&gt; <span style='color: #BCBCBC;'> 3</span> <span style='color: #949494;'>"</span> <span style='color: #949494;'>"</span>               0.010<span style='text-decoration: underline;'>7</span>                  0.210 
-#&gt; <span style='color: #BCBCBC;'> 4</span> <span style='color: #949494;'>"</span> <span style='color: #949494;'>"</span>               0.015<span style='text-decoration: underline;'>9</span>                  0.297 
-#&gt; <span style='color: #BCBCBC;'> 5</span> <span style='color: #949494;'>"</span> <span style='color: #949494;'>"</span>               0.025<span style='text-decoration: underline;'>8</span>                  0.385 
-#&gt; <span style='color: #BCBCBC;'> 6</span> <span style='color: #949494;'>"</span> <span style='color: #949494;'>"</span>               0.029<span style='text-decoration: underline;'>8</span>                  0.477 
-#&gt; <span style='color: #BCBCBC;'> 7</span> <span style='color: #949494;'>"</span> <span style='color: #949494;'>"</span>               0.031<span style='text-decoration: underline;'>8</span>                  0.573 
-#&gt; <span style='color: #BCBCBC;'> 8</span> <span style='color: #949494;'>"</span> <span style='color: #949494;'>"</span>               0.041<span style='text-decoration: underline;'>6</span>                  0.674 
-#&gt; <span style='color: #BCBCBC;'> 9</span> <span style='color: #949494;'>"</span> <span style='color: #949494;'>"</span>               0.045<span style='text-decoration: underline;'>3</span>                  0.784 
-#&gt; <span style='color: #BCBCBC;'>10</span> <span style='color: #949494;'>"</span> <span style='color: #949494;'>"</span>               0.055<span style='text-decoration: underline;'>4</span>                  0.903 
-#&gt; <span style='color: #BCBCBC;'>11</span> <span style='color: #949494;'>"</span> <span style='color: #949494;'>"</span>               0.080<span style='text-decoration: underline;'>5</span>                  1.04  
-#&gt; <span style='color: #BCBCBC;'>12</span> <span style='color: #949494;'>"</span> <span style='color: #949494;'>"</span>               0.085<span style='text-decoration: underline;'>4</span>                  1.19  
-#&gt; <span style='color: #BCBCBC;'>13</span> <span style='color: #949494;'>"</span>A:B:C:D<span style='color: #949494;'>"</span>         0.104                   1.38  
-#&gt; <span style='color: #BCBCBC;'>14</span> <span style='color: #949494;'>"</span>C<span style='color: #949494;'>"</span>               0.112                   1.64  
-#&gt; <span style='color: #BCBCBC;'>15</span> <span style='color: #949494;'>"</span>B<span style='color: #949494;'>"</span>               0.117                   2.13  
+#&gt;    effects absolute_effects half_normal_quantiles
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>              <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>                 <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
+#&gt; <span style='color: #BCBCBC;'> 1</span> <span style='color: #949494;'>"</span> <span style='color: #949494;'>"</span>              0.001<span style='text-decoration: underline;'>97</span>                0.041<span style='text-decoration: underline;'>8</span>
+#&gt; <span style='color: #BCBCBC;'> 2</span> <span style='color: #949494;'>"</span> <span style='color: #949494;'>"</span>              0.076<span style='text-decoration: underline;'>8</span>                 0.126 
+#&gt; <span style='color: #BCBCBC;'> 3</span> <span style='color: #949494;'>"</span> <span style='color: #949494;'>"</span>              0.078<span style='text-decoration: underline;'>3</span>                 0.210 
+#&gt; <span style='color: #BCBCBC;'> 4</span> <span style='color: #949494;'>"</span> <span style='color: #949494;'>"</span>              0.085<span style='text-decoration: underline;'>8</span>                 0.297 
+#&gt; <span style='color: #BCBCBC;'> 5</span> <span style='color: #949494;'>"</span> <span style='color: #949494;'>"</span>              0.109                  0.385 
+#&gt; <span style='color: #BCBCBC;'> 6</span> <span style='color: #949494;'>"</span> <span style='color: #949494;'>"</span>              0.214                  0.477 
+#&gt; <span style='color: #BCBCBC;'> 7</span> <span style='color: #949494;'>"</span> <span style='color: #949494;'>"</span>              0.305                  0.573 
+#&gt; <span style='color: #BCBCBC;'> 8</span> <span style='color: #949494;'>"</span> <span style='color: #949494;'>"</span>              0.314                  0.674 
+#&gt; <span style='color: #BCBCBC;'> 9</span> <span style='color: #949494;'>"</span> <span style='color: #949494;'>"</span>              0.331                  0.784 
+#&gt; <span style='color: #BCBCBC;'>10</span> <span style='color: #949494;'>"</span> <span style='color: #949494;'>"</span>              0.335                  0.903 
+#&gt; <span style='color: #BCBCBC;'>11</span> <span style='color: #949494;'>"</span> <span style='color: #949494;'>"</span>              0.428                  1.04  
+#&gt; <span style='color: #BCBCBC;'>12</span> <span style='color: #949494;'>"</span> <span style='color: #949494;'>"</span>              0.494                  1.19  
+#&gt; <span style='color: #BCBCBC;'>13</span> <span style='color: #949494;'>"</span> <span style='color: #949494;'>"</span>              0.582                  1.38  
+#&gt; <span style='color: #BCBCBC;'>14</span> <span style='color: #949494;'>"</span> <span style='color: #949494;'>"</span>              0.632                  1.64  
+#&gt; <span style='color: #BCBCBC;'>15</span> <span style='color: #949494;'>"</span>A<span style='color: #949494;'>"</span>              3.83                   2.13  
 #&gt; 
 #&gt; $plot</div><div class='img'><img src='halfnormal-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div></pre>
   </div>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • ggDoE</title>
+<title>NA • ggDoE</title>
 
 
 <!-- jquery -->
@@ -18,8 +18,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
 <!-- bootstrap-toc -->
-<link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script>
+<link rel="stylesheet" href="bootstrap-toc.css">
+<script src="bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
@@ -33,13 +33,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script>
+<link href="pkgdown.css" rel="stylesheet">
+<script src="pkgdown.js"></script>
 
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="NA" />
 
 
 
@@ -58,7 +58,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-title-body">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -70,7 +70,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">ggDoE</a>
+        <a class="navbar-link" href="index.html">ggDoE</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.2</span>
       </span>
     </div>
@@ -78,13 +78,13 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
+  <a href="index.html">
     <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="reference/index.html">Reference</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -107,99 +107,34 @@
 <div class="row">
   <div class="contents col-md-9">
     <div class="page-header">
-      <h1>Reference</h1>
+      <h1>NA</h1>
     </div>
 
-    <table class="ref-index">
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+<div id="bug-reports" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-reports" class="anchor"></a>Bug reports</h2>
+<p>When reporting an <a href="https://github.com/toledo60/ggDoE/issues">Issue</a>, please spend some time making it easy to follow and reproduce your issue. For this, I highly recommend using <a href="https://reprex.tidyverse.org/">reprex package</a>. You can also start a new <a href="https://github.com/toledo60/ggDoE/discussions">Discussion</a> to resolve an issue or share new ideas.</p>
+</div>
+<div id="package-development" class="section level2">
+<h2 class="hasAnchor">
+<a href="#package-development" class="anchor"></a>Package development</h2>
+<p>A good way to start is by contributing additional examples or improving the documentation. Additionally, you can submit a <a href="https://github.com/toledo60/ggDoE/pulls">Pull Request</a> to integrate your own function(s) in a new branch.</p>
+<p>If you want to submit a new function please provide: the new function(s) with code and roxygen tags (with examples) as shown below</p>
+<pre class="{r}"><code>#' Add together two numbers
+#' 
+#' @param x A number.
+#' @param y A number.
+#' @return The sum of \code{x} and \code{y}.
+#' @examples
+#' add(1, 1)
+#' add(10, 1)
+add &lt;- function(x, y) {
+  x + y
+}</code></pre>
+</div>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="adapted_epitaxial.html">adapted_epitaxial</a></code> </p>
-        </td>
-        <td><p>Adapted epitaxial layer experiment</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="aliased_design.html">aliased_design</a></code> </p>
-        </td>
-        <td><p>D-efficient minimal aliasing design for five factors in 12 runs</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="alias_matrix.html">alias_matrix()</a></code> </p>
-        </td>
-        <td><p>Color Map on Correlations</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="boxcox_transform.html">boxcox_transform()</a></code> </p>
-        </td>
-        <td><p>Box-Cox Transformations</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="diagnostic_plots.html">diagnostic_plots()</a></code> </p>
-        </td>
-        <td><p>Regression Diagnostic Plots with ggplot2</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="halfnormal.html">halfnormal()</a></code> </p>
-        </td>
-        <td><p>Half-Normal Effects Plots</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="interaction_effect.html">interaction_effect()</a></code> </p>
-        </td>
-        <td><p>Obtain interaction effects plot between two factors in a factorial design</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="Lenth_method.html">Lenth_method()</a></code> </p>
-        </td>
-        <td><p>Lenth’s method: testing effect significance for experiments without variance estimates</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="main_effect.html">main_effect()</a></code> </p>
-        </td>
-        <td><p>Obtain main effect plot for a factor in a factorial design</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="original_epitaxial.html">original_epitaxial</a></code> </p>
-        </td>
-        <td><p>Original epitaxial layer experiment</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="summs_models.html">summs_models()</a></code> </p>
-        </td>
-        <td><p>Compare factor effects from multiple models and visualize
-the difference in absolute value T statistics to check for model performances</p></td>
-      </tr>
-    </tbody>
-    </table>
+
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -207,7 +142,9 @@ the difference in absolute value T statistics to check for model performances</p
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
+
 </div>
+
 
 
       <footer>

@@ -13,8 +13,8 @@
 #' @importFrom ggplot2 theme_bw aes_string
 #' @importFrom dplyr enquo summarize group_by as_label
 #' @examples
-#' main_effect(Design = epitaxial, factr = B, response = ybar)
-#' main_effect(Design = epitaxial, factr = B, response = s2, colour = "red", point_size = 4)
+#' main_effect(Design = adapted_epitaxial, factr = B, response = ybar)
+#' main_effect(Design = adapted_epitaxial, factr = B, response = s2, colour = "red", point_size = 4)
 #' @export
 main_effect <- function(Design,factr,response,
                        colour ="#4292c6",

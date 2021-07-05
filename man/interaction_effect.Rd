@@ -36,5 +36,5 @@ data to calculate interaction effects, and interaction effects plot
 Obtain interaction effects plot between two factors in a factorial design
 }
 \examples{
-interaction_effect(Design = epitaxial, factr1 = A, factr2 = B, response = ybar)
+interaction_effect(Design = adapted_epitaxial, factr1 = A, factr2 = B, response = ybar)
 }

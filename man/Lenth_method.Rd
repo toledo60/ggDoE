@@ -19,7 +19,7 @@ values of ME, and SME.
 Lenth’s method: testing effect significance for experiments without variance estimates
 }
 \examples{
-m1 <- lm(ybar ~ (A+B+C+D)^2,data=epitaxial)
+m1 <- lm(ybar ~ (A+B+C+D)^2,data=adapted_epitaxial)
 Lenth_method(m1)
 Lenth_method(m1,alpha=0.01)
 }

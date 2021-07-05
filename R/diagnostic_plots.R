@@ -11,7 +11,7 @@
 #' @importFrom stats quantile
 #' @export
 #'
-#' @examples epitaxial_ybar <- lm(ybar ~ A+B+C+D,data=epitaxial)
+#' @examples epitaxial_ybar <- lm(ybar ~ A+B+C+D,data=original_epitaxial)
 #' diagnostic_plots(epitaxial_ybar)
 diagnostic_plots <- function(model,se=TRUE,point_size=3.5){
   if(is.null(match("lm",c("glm","lm")))){

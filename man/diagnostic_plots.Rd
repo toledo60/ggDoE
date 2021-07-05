@@ -20,6 +20,6 @@ Regression Diagnostic plots
 Regression Diagnostic Plots with ggplot2
 }
 \examples{
-epitaxial_ybar <- lm(ybar ~ A+B+C+D,data=epitaxial)
+epitaxial_ybar <- lm(ybar ~ A+B+C+D,data=original_epitaxial)
 diagnostic_plots(epitaxial_ybar)
 }

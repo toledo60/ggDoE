@@ -16,7 +16,29 @@ ybar = apply(data[,6:11], 1, mean)
 s2 = apply(data[,6:11], 1, var)
 lns2 = log(s2)
 
-epitaxial  = cbind.data.frame(design,ybar, s2, lns2)
+adapted_epitaxial  = cbind.data.frame(design,ybar, s2, lns2)
+
+adapted_epitaxial <- as_tibble(adapted_epitaxial)
+
+
+
+
+# Original epitaxial layer experiment  -----------------------------------------------------
+
+data <- read.table("https://www2.isye.gatech.edu/~jeffwu/wuhamadabook/data/originallayer.dat", h=F)
+#table 4.10
+
+
+design = sapply(data[,1:4], as.level2)
+colnames(design) = c("A", "B", "C", "D")
+
+ybar = apply(data[,5:10], 1, mean)
+s2 = apply(data[,5:10], 1, var)
+lns2 = log(s2)
+
+original_epitaxial <-  cbind.data.frame(design, ybar, s2, lns2)
+
+original_epitaxial <- as_tibble(original_epitaxial)
 
 
 # Efficient Designs With Minimal Aliasing Example -------------------------

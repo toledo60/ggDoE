@@ -10,7 +10,7 @@
 #' @param line_size Change thickness of lines
 #' @param showplot  logical indicating to show main effect plot. If false, a tibble containing the data used to construct the plot is returned. Default is TRUE
 #' @return data to calculate interaction effects, and interaction effects plot
-#' @examples interaction_effect(Design = epitaxial, factr1 = A, factr2 = B, response = ybar)
+#' @examples interaction_effect(Design = adapted_epitaxial, factr1 = A, factr2 = B, response = ybar)
 #' @importFrom ggplot2 ggplot aes_string geom_point geom_line theme_bw theme %+replace% element_rect
 #' @importFrom dplyr enquo summarize group_by as_label
 #' @export

@@ -9,7 +9,7 @@
 #' @importFrom ggplot2 geom_segment geom_hline coord_flip annotate xlab ylab element_blank
 #' @importFrom tibble tibble
 #' @export
-#' @examples m1 <- lm(ybar ~ (A+B+C+D)^2,data=epitaxial)
+#' @examples m1 <- lm(ybar ~ (A+B+C+D)^2,data=adapted_epitaxial)
 #' Lenth_method(m1)
 #' Lenth_method(m1,alpha=0.01)
 Lenth_method <- function(mod,alpha=0.05){

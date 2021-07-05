@@ -30,7 +30,7 @@ Box-Cox transformation plot with 95\% confidence interval of lambda values to co
 Box-Cox Transformations
 }
 \examples{
-model <- lm(s2 ~ (A+B+C+D),data = epitaxial)
+model <- lm(s2 ~ (A+B+C+D),data = adapted_epitaxial)
 boxcox_transform(model,lambda = seq(-2,3,0.2))
 boxcox_transform(model,lambda = seq(-2,3,0.2),showplot=FALSE)
 }

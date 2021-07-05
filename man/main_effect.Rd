@@ -36,6 +36,6 @@ main effect plot, or data used to construct main effect plot
 Obtain main effect plot for a factor in a factorial design
 }
 \examples{
-main_effect(Design = epitaxial, factr = B, response = ybar)
-main_effect(Design = epitaxial, factr = B, response = s2, colour = "red", point_size = 4)
+main_effect(Design = adapted_epitaxial, factr = B, response = ybar)
+main_effect(Design = adapted_epitaxial, factr = B, response = s2, colour = "red", point_size = 4)
 }
