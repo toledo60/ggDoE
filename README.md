@@ -10,20 +10,20 @@ With ggDoE you'll be able to generate common plots used in Design of Experiments
 
 The following plots are currently available
 
-- [alias_matrix()](https://toledo60.github.io/ggDoE/reference/alias_matrix.html): Correlation matrix plot to visualize the Alias matrix
+- [alias_matrix()](https://ggdoe.netlify.app/reference/alias_matrix.html): Correlation matrix plot to visualize the Alias matrix
 
-- [boxcox_transform()](https://toledo60.github.io/ggDoE/reference/boxcox_transform.html): Boxcox transformation plot
+- [boxcox_transform()](https://ggdoe.netlify.app/reference/boxcox_transform.html): Boxcox transformation plot
 
-- [diagnostic_plots()](https://toledo60.github.io/ggDoE/reference/diagnostic_plots.html): Regression diagnostics plots
+- [diagnostic_plots()](https://ggdoe.netlify.app/reference/diagnostic_plots.html): Regression diagnostics plots
 
-- [halfnormal()](https://toledo60.github.io/ggDoE/reference/halfnormal.html): Half-Normal effects plot
+- [halfnormal()](https://ggdoe.netlify.app/reference/halfnormal.html): Half-Normal effects plot
 
-- [interaction_effect()](https://toledo60.github.io/ggDoE/reference/interaction_effect.html): Interaction effects plot between two factors in a factorial design
+- [interaction_effect()](https://ggdoe.netlify.app/reference/interaction_effect.html): Interaction effects plot between two factors in a factorial design
 
-- [Lenth_method()](https://toledo60.github.io/ggDoE/reference/Lenth_method.html): Visualize effect significance for experiments without variance
+- [Lenth_method()](https://ggdoe.netlify.app/reference/Lenth_method.html): Visualize effect significance for experiments without variance
 estimates using Lenth's method
 
-- [main_effect()](https://toledo60.github.io/ggDoE/reference/main_effect.html): Main effect plot for one factor in a factorial design
+- [main_effect()](https://ggdoe.netlify.app/reference/main_effect.html): Main effect plot for one factor in a factorial design
 
 
 ## Installation
@@ -37,4 +37,4 @@ remotes::install_github("toledo60/ggDoE")
 
 ### Contributing to the package
 I welcome feedback, suggestions, issues, and contributions!
-Check out the `CONTRIBUTING` file for more details.
+Check out the [CONTRIBUTING](https://github.com/toledo60/ggDoE/blob/main/.github/CONTRIBUTING.md) file for more details.
