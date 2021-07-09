@@ -1,4 +1,3 @@
-
 #' Color Map on Correlations
 #'
 #' @param design Design of experiment (Without response)

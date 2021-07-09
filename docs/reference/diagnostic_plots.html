@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggDoE</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.3</span>
       </span>
     </div>
 
@@ -117,7 +117,7 @@
     <p>Regression Diagnostic Plots with ggplot2</p>
     </div>
 
-    <pre class="usage"><span class='fu'>diagnostic_plots</span><span class='op'>(</span><span class='va'>model</span>, se <span class='op'>=</span> <span class='cn'>TRUE</span>, point_size <span class='op'>=</span> <span class='fl'>3.5</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>diagnostic_plots</span><span class='op'>(</span><span class='va'>model</span>, SE <span class='op'>=</span> <span class='cn'>FALSE</span>, point_size <span class='op'>=</span> <span class='fl'>3</span>, line_color <span class='op'>=</span> <span class='st'>"indianred3"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -127,23 +127,27 @@
       <td><p>Model of class "lm" or "glm"</p></td>
     </tr>
     <tr>
-      <th>se</th>
-      <td><p>Display confidence interval around smooth? TRUE by default</p></td>
+      <th>SE</th>
+      <td><p>Display confidence interval around geom_smooth, FALSE by default</p></td>
     </tr>
     <tr>
       <th>point_size</th>
       <td><p>Change size of points in plots</p></td>
     </tr>
+    <tr>
+      <th>line_color</th>
+      <td><p>Change color of the geom_smooth line for the respective diagnostic plot</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Regression Diagnostic plots</p>
+    <p>Regression Diagnostic plots. In the case where all hat values are equal only residual vs.fitted, normal-QQ, and scale-location plots are returned</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>epitaxial_ybar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>ybar</span> <span class='op'>~</span> <span class='va'>A</span><span class='op'>+</span><span class='va'>B</span><span class='op'>+</span><span class='va'>C</span><span class='op'>+</span><span class='va'>D</span>,data<span class='op'>=</span><span class='va'>original_epitaxial</span><span class='op'>)</span>
 <span class='fu'>diagnostic_plots</span><span class='op'>(</span><span class='va'>epitaxial_ybar</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: pseudoinverse used at 0.3125</span></div><div class='output co'>#&gt; <span class='warning'>Warning: neighborhood radius 1.5632e-013</span></div><div class='output co'>#&gt; <span class='warning'>Warning: reciprocal condition number  0</span></div><div class='output co'>#&gt; <span class='warning'>Warning: There are other near singularities as well. 2.4436e-026</span></div><div class='output co'>#&gt; <span class='warning'>Warning: pseudoinverse used at 0.3125</span></div><div class='output co'>#&gt; <span class='warning'>Warning: neighborhood radius 1.5632e-013</span></div><div class='output co'>#&gt; <span class='warning'>Warning: reciprocal condition number  0</span></div><div class='output co'>#&gt; <span class='warning'>Warning: There are other near singularities as well. 2.4436e-026</span></div><div class='img'><img src='diagnostic_plots-1.png' alt='' width='700' height='433' /></div></pre>
+</div><div class='img'><img src='diagnostic_plots-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -4,17 +4,19 @@
 \alias{diagnostic_plots}
 \title{Regression Diagnostic Plots with ggplot2}
 \usage{
-diagnostic_plots(model, se = TRUE, point_size = 3.5)
+diagnostic_plots(model, SE = FALSE, point_size = 3, line_color = "indianred3")
 }
 \arguments{
 \item{model}{Model of class "lm" or "glm"}
 
-\item{se}{Display confidence interval around smooth? TRUE by default}
+\item{SE}{Display confidence interval around geom_smooth, FALSE by default}
 
 \item{point_size}{Change size of points in plots}
+
+\item{line_color}{Change color of the geom_smooth line for the respective diagnostic plot}
 }
 \value{
-Regression Diagnostic plots
+Regression Diagnostic plots. In the case where all hat values are equal only residual vs.fitted, normal-QQ, and scale-location plots are returned
 }
 \description{
 Regression Diagnostic Plots with ggplot2
