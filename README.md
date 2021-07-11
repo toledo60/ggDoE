@@ -25,6 +25,8 @@ estimates using Lenth's method
 
 - [main_effect()](https://ggdoe.netlify.app/reference/main_effect.html): Main effect plot for one factor in a factorial design
 
+- [contour_plots()](https://ggdoe.netlify.app/reference/contour_plots.html): Contour plots for response surface plot(s) of a fitted linear model
+
 
 ## Installation
 

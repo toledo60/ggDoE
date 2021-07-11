@@ -1,7 +1,7 @@
 Package: ggDoE
 Type: Package
 Title: Modernizing visual outputs in Designs of Experiments
-Version: 0.4.3
+Version: 0.4.4
 Authors@R: c(person(given = "Jose",family = "Toledo Luna",
              role = c("aut", "cre"),
              email = "toledo60@protonmail.com",
@@ -21,7 +21,9 @@ Imports:
     tibble,
     viridisLite,
     reshape2,
-    dplyr
+    dplyr,
+    purrr,
+    metR
 RoxygenNote: 7.1.1
 Depends: 
     R (>= 3.6.0)
