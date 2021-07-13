@@ -107,7 +107,7 @@ diagnostic_plots <- function(model,SE=FALSE,point_size=3,line_color = "indianred
 
     }
     else{
-      return(suppressMessages(gridExtra::grid.arrange(res_fitted,
+      return(suppressMessages(gridExtra::grid.arrange(res_fitted+labs(title = "Residual vs.\nFitted Value"),
                                                       qq_plot,stdres_fitted,ncol=3)))
     }
   }
