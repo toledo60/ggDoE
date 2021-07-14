@@ -1,8 +1,9 @@
+# CONTRIBUTING
+
 ## Bug reports
 
 When reporting an [Issue](https://github.com/toledo60/ggDoE/issues), please spend some time making it easy to follow and reproduce your issue. For this, I highly recommend using [reprex package](https://reprex.tidyverse.org/). You can also start a new 
 [Discussion](https://github.com/toledo60/ggDoE/discussions) to resolve an issue or share new ideas.
-
 
 ## Package development
 

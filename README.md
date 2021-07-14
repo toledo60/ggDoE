@@ -27,6 +27,7 @@ estimates using Lenth's method
 
 - [contour_plots()](https://ggdoe.netlify.app/reference/contour_plots.html): Contour plots for response surface plot(s) of a fitted linear model
 
+- [pareto_plot()](https://ggdoe.netlify.app/reference/pareto_plot.html): Pareto plot of effects
 
 ## Installation
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CONTRIBUTING • ggDoE</title>
+<title>Pareto Plot of Effects — pareto_plot • ggDoE</title>
 
 
 <!-- jquery -->
@@ -18,8 +18,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
 <!-- bootstrap-toc -->
-<link rel="stylesheet" href="bootstrap-toc.css">
-<script src="bootstrap-toc.js"></script>
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
@@ -33,13 +33,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script>
+<link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script>
 
 
 
 
-<meta property="og:title" content="CONTRIBUTING" />
+<meta property="og:title" content="Pareto Plot of Effects — pareto_plot" />
+<meta property="og:description" content="Pareto Plot of Effects" />
 
 
 
@@ -58,7 +59,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-title-body">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -70,7 +71,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">ggDoE</a>
+        <a class="navbar-link" href="../index.html">ggDoE</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.6</span>
       </span>
     </div>
@@ -78,13 +79,13 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">
+  <a href="../index.html">
     <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -105,47 +106,56 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>CONTRIBUTING</h1>
+    <h1>Pareto Plot of Effects</h1>
+    <small class="dont-index">Source: <a href='https://github.com/toledo60/ggDoE/blob/master/R/pareto_plot.R'><code>R/pareto_plot.R</code></a></small>
+    <div class="hidden name"><code>pareto_plot.Rd</code></div>
     </div>
 
-<div id="contributing" class="section level1">
+    <div class="ref-description">
+    <p>Pareto Plot of Effects</p>
+    </div>
 
-<div id="bug-reports" class="section level2">
-<h2 class="hasAnchor">
-<a href="#bug-reports" class="anchor"></a>Bug reports</h2>
-<p>When reporting an <a href="https://github.com/toledo60/ggDoE/issues">Issue</a>, please spend some time making it easy to follow and reproduce your issue. For this, I highly recommend using <a href="https://reprex.tidyverse.org/">reprex package</a>. You can also start a new <a href="https://github.com/toledo60/ggDoE/discussions">Discussion</a> to resolve an issue or share new ideas.</p>
-</div>
-<div id="package-development" class="section level2">
-<h2 class="hasAnchor">
-<a href="#package-development" class="anchor"></a>Package development</h2>
-<p>A good way to start is by contributing additional examples or improving the documentation. Additionally, you can submit a <a href="https://github.com/toledo60/ggDoE/pulls">Pull Request</a> to integrate your own function(s) in a new branch.</p>
-<p>If you want to submit a new function please provide: the new function(s) with code and roxygen tags (with examples) as shown below</p>
-<pre class="{r}"><code>#' Add together two numbers
-#' 
-#' @param x A number.
-#' @param y A number.
-#' @return The sum of \code{x} and \code{y}.
-#' @examples
-#' add(1, 1)
-#' add(10, 1)
-add &lt;- function(x, y) {
-  x + y
-}</code></pre>
-</div>
-</div>
+    <pre class="usage"><span class='fu'>pareto_plot</span><span class='op'>(</span><span class='va'>obj</span>, alpha <span class='op'>=</span> <span class='fl'>0.05</span>, showME <span class='op'>=</span> <span class='cn'>TRUE</span>, showplot <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>obj</th>
+      <td><p>object of class lm</p></td>
+    </tr>
+    <tr>
+      <th>alpha</th>
+      <td><p>significance level to compute margin of errors based on Lenth method. Default is alpha=0.05</p></td>
+    </tr>
+    <tr>
+      <th>showME</th>
+      <td><p>Default is TRUE, if false the cutoffs for margin of errors (ME) and simultaneous margin of error (SME) are not shown</p></td>
+    </tr>
+    <tr>
+      <th>showplot</th>
+      <td><p>Default is TRUE, if false plot will not be shown and a tibble is returned used to create the pareto plot</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A bar plot with ordered effects, margin of error (ME) and simultaneous margin of error (SME) cutoffs.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='va'>m1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>lns2</span> <span class='op'>~</span> <span class='op'>(</span><span class='va'>A</span><span class='op'>+</span><span class='va'>B</span><span class='op'>+</span><span class='va'>C</span><span class='op'>+</span><span class='va'>D</span><span class='op'>)</span><span class='op'>^</span><span class='fl'>4</span>,data<span class='op'>=</span><span class='va'>original_epitaxial</span><span class='op'>)</span>
+<span class='fu'>pareto_plot</span><span class='op'>(</span><span class='va'>m1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in pareto_plot(m1): could not find function "pareto_plot"</span></div><div class='input'><span class='fu'>pareto_plot</span><span class='op'>(</span><span class='va'>m1</span>,showME<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in pareto_plot(m1, showME = FALSE): could not find function "pareto_plot"</span></div></pre>
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
-
 </div>
-
 
 
       <footer>
