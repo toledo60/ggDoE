@@ -4,16 +4,24 @@
 \alias{pareto_plot}
 \title{Pareto Plot of Effects}
 \usage{
-pareto_plot(obj, alpha = 0.05, showME = TRUE, showplot = TRUE)
+pareto_plot(
+  obj,
+  alpha = 0.05,
+  method = "Lenth",
+  showME = TRUE,
+  showplot = TRUE
+)
 }
 \arguments{
 \item{obj}{object of class lm}
 
 \item{alpha}{significance level to compute margin of errors based on Lenth method. Default is alpha=0.05}
 
+\item{method}{Character value. Method to calculate PSE. Default is Lenth. Options include: Zahn, WZahn, Lenth, RMS, Dong, JuanPena, Daniel}
+
 \item{showME}{Default is TRUE, if false the cutoffs for margin of errors (ME) and simultaneous margin of error (SME) are not shown}
 
-\item{showplot}{Default is TRUE, if false plot will not be shown and a tibble is returned used to create the pareto plot}
+\item{showplot}{Default is TRUE, if false plot will not be shown and a tibble is returned with data used to create the pareto plot}
 }
 \value{
 A bar plot with ordered effects, margin of error (ME) and simultaneous margin of error (SME) cutoffs.
@@ -24,5 +32,6 @@ Pareto Plot of Effects
 \examples{
 m1 <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
 pareto_plot(m1)
+pareto_plot(m1,method='Zahn',alpha=0.1)
 pareto_plot(m1,showME=FALSE)
 }

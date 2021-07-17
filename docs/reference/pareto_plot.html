@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggDoE</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.8</span>
       </span>
     </div>
 
@@ -117,7 +117,13 @@
     <p>Pareto Plot of Effects</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pareto_plot</span><span class='op'>(</span><span class='va'>obj</span>, alpha <span class='op'>=</span> <span class='fl'>0.05</span>, showME <span class='op'>=</span> <span class='cn'>TRUE</span>, showplot <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>pareto_plot</span><span class='op'>(</span>
+  <span class='va'>obj</span>,
+  alpha <span class='op'>=</span> <span class='fl'>0.05</span>,
+  method <span class='op'>=</span> <span class='st'>"Lenth"</span>,
+  showME <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  showplot <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -131,12 +137,16 @@
       <td><p>significance level to compute margin of errors based on Lenth method. Default is alpha=0.05</p></td>
     </tr>
     <tr>
+      <th>method</th>
+      <td><p>Character value. Method to calculate PSE. Default is Lenth. Options include: Zahn, WZahn, Lenth, RMS, Dong, JuanPena, Daniel</p></td>
+    </tr>
+    <tr>
       <th>showME</th>
       <td><p>Default is TRUE, if false the cutoffs for margin of errors (ME) and simultaneous margin of error (SME) are not shown</p></td>
     </tr>
     <tr>
       <th>showplot</th>
-      <td><p>Default is TRUE, if false plot will not be shown and a tibble is returned used to create the pareto plot</p></td>
+      <td><p>Default is TRUE, if false plot will not be shown and a tibble is returned with data used to create the pareto plot</p></td>
     </tr>
     </table>
 
@@ -147,8 +157,9 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>m1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>lns2</span> <span class='op'>~</span> <span class='op'>(</span><span class='va'>A</span><span class='op'>+</span><span class='va'>B</span><span class='op'>+</span><span class='va'>C</span><span class='op'>+</span><span class='va'>D</span><span class='op'>)</span><span class='op'>^</span><span class='fl'>4</span>,data<span class='op'>=</span><span class='va'>original_epitaxial</span><span class='op'>)</span>
 <span class='fu'>pareto_plot</span><span class='op'>(</span><span class='va'>m1</span><span class='op'>)</span>
-</div><div class='img'><img src='pareto_plot-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>pareto_plot</span><span class='op'>(</span><span class='va'>m1</span>,showME<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='img'><img src='pareto_plot-2.png' alt='' width='700' height='433' /></div></pre>
+</div><div class='img'><img src='pareto_plot-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>pareto_plot</span><span class='op'>(</span><span class='va'>m1</span>,method<span class='op'>=</span><span class='st'>'Zahn'</span>,alpha<span class='op'>=</span><span class='fl'>0.1</span><span class='op'>)</span>
+</div><div class='img'><img src='pareto_plot-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>pareto_plot</span><span class='op'>(</span><span class='va'>m1</span>,showME<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
+</div><div class='img'><img src='pareto_plot-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
