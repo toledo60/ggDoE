@@ -4,19 +4,33 @@
 \alias{halfnormal}
 \title{Half-Normal Effects Plots}
 \usage{
-halfnormal(obj, alpha = 0.05, signif_label = FALSE)
+halfnormal(
+  obj,
+  method = "Lenth",
+  alpha = 0.05,
+  label_active = FALSE,
+  ref_line = FALSE,
+  showME = FALSE,
+  showplot = TRUE
+)
 }
 \arguments{
 \item{obj}{object of class lm}
 
-\item{alpha}{significance level for the Lenth method. Default is 0.05}
+\item{method}{Character value. Method to calculate PSE. Default is Lenth. Options include: Zahn, WZahn, Lenth, RMS, Dong, JuanPena, Daniel}
 
-\item{signif_label}{If TRUE, only the significant factors according to the Lenth method
-(significance level given by alpha) are labeled}
+\item{alpha}{specify the significance level. Default is alpha=0.05}
+
+\item{label_active}{If TRUE, active effects are labeled if the effects cross the computed margin of error (ME). See method argument for more details}
+
+\item{ref_line}{Dafault is TRUE, if FALSE the abline with slope (1/PSE) is not displayed. Reference line should follow along most points that are not considered outliers.}
+
+\item{showME}{Default is FALSE, if TRUE the cutoffs for margin of errors (ME) and simultaneous margin of error (SME) are shown}
+
+\item{showplot}{Default is TRUE, if FALSE plot will not be shown and a tibble is returned used to create the plot along with the calculated PSE,ME,SME}
 }
 \value{
-A dataframe with the absolute effects and half-normal qunatiles.
-A ggplot version of halfnormal plot for factorial effects is returned
+A tibble with the absolute effects and half-normal quantiles. A ggplot2 version of halfnormal plot for factorial effects is returned
 }
 \description{
 Half-Normal Effects Plots
@@ -24,6 +38,6 @@ Half-Normal Effects Plots
 \examples{
 m1 <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
 halfnormal(m1)
-halfnormal(m1,alpha=0.1)
-halfnormal(m1,alpha=0.2,signif_label=TRUE)
+halfnormal(m1,alpha=0.1,label_active=TRUE,showME=TRUE)
+halfnormal(m1,method='Zahn',alpha=0.1,ref_line=TRUE,label_active=TRUE,showME=TRUE)
 }

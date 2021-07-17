@@ -1,7 +1,7 @@
 Package: ggDoE
 Type: Package
-Title: Modernizing visual outputs in Designs of Experiments
-Version: 0.4.8
+Title: Modern graphs for Design of Experiments with ggplot2
+Version: 0.4.9
 Authors@R: c(person(given = "Jose",family = "Toledo Luna",
              role = c("aut", "cre"),
              email = "toledo60@protonmail.com",
