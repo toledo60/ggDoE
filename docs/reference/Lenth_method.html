@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Lenth’s method: testing effect significance for experiments without variance estimates — Lenth_method • ggDoE</title>
+<title>Lenth’s method: (DEPRECATED use pareto_plot() instead) — Lenth_method • ggDoE</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Lenth’s method: testing effect significance for experiments without variance estimates — Lenth_method" />
-<meta property="og:description" content="Lenth’s method: testing effect significance for experiments without variance estimates" />
+<meta property="og:title" content="Lenth’s method: (DEPRECATED use pareto_plot() instead) — Lenth_method" />
+<meta property="og:description" content="Lenth’s method: (DEPRECATED use pareto_plot() instead)" />
 
 
 
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggDoE</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.7</span>
       </span>
     </div>
 
@@ -108,16 +108,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Lenth’s method: testing effect significance for experiments without variance estimates</h1>
+    <h1>Lenth’s method: (DEPRECATED use pareto_plot() instead)</h1>
     <small class="dont-index">Source: <a href='https://github.com/toledo60/ggDoE/blob/master/R/Lenth_method.R'><code>R/Lenth_method.R</code></a></small>
     <div class="hidden name"><code>Lenth_method.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Lenth’s method: testing effect significance for experiments without variance estimates</p>
+    <p>Lenth’s method: (DEPRECATED use pareto_plot() instead)</p>
     </div>
 
-    <pre class="usage"><span class='fu'>Lenth_method</span><span class='op'>(</span><span class='va'>mod</span>, alpha <span class='op'>=</span> <span class='fl'>0.05</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>Lenth_method</span><span class='op'>(</span><span class='va'>mod</span>, alpha <span class='op'>=</span> <span class='fl'>0.05</span>, method <span class='op'>=</span> <span class='st'>"Lenth"</span>, showplot <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -130,58 +130,35 @@
       <th>alpha</th>
       <td><p>specify the significance level. Default is alpha=0.05</p></td>
     </tr>
+    <tr>
+      <th>method</th>
+      <td><p>Character value. Method to calculate PSE. Default is Lenth. Options include: Zahn, WZahn, Lenth, RMS, Dong, JuanPena, Daniel</p></td>
+    </tr>
+    <tr>
+      <th>showplot</th>
+      <td><p>Default is TRUE, if false plot will not be shown and a tibble is returned used to create the plot</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>PSE,ME,SME using Lenth's method. Also returns a plot visualizing any factor which is significant using the obtained
-values of ME, and SME.</p>
+    <p>PSE,ME,SME using Lenth's method. Also returns a plot visualizing any factor which is significant using the obtained values of ME, and SME.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>m1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>ybar</span> <span class='op'>~</span> <span class='op'>(</span><span class='va'>A</span><span class='op'>+</span><span class='va'>B</span><span class='op'>+</span><span class='va'>C</span><span class='op'>+</span><span class='va'>D</span><span class='op'>)</span><span class='op'>^</span><span class='fl'>2</span>,data<span class='op'>=</span><span class='va'>adapted_epitaxial</span><span class='op'>)</span>
-<span class='fu'>Lenth_method</span><span class='op'>(</span><span class='va'>m1</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span><span class='op'>(</span><span class='fu'>Lenth_method</span><span class='op'>(</span><span class='va'>m1</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $results
 #&gt; <span style='color: #949494;'># A tibble: 1 x 4</span>
 #&gt;   alpha   PSE    ME   SME
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span>  0.05 0.101 0.305 0.666
+#&gt; <span style='color: #BCBCBC;'>1</span>  0.05 0.101 0.221 0.465
 #&gt; 
-#&gt; $margins_dat
-#&gt; <span style='color: #949494;'># A tibble: 10 x 6</span>
-#&gt;    coeff estimates lower_ME upper_ME lower_SME upper_SME
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> A      -<span style='color: #BB0000;'>0.077</span><span style='color: #BB0000; text-decoration: underline;'>5</span>    -<span style='color: #BB0000;'>0.382</span>   0.227     -<span style='color: #BB0000;'>0.743</span>     0.588
-#&gt; <span style='color: #BCBCBC;'> 2</span> B       0.173     -<span style='color: #BB0000;'>0.132</span>   0.477     -<span style='color: #BB0000;'>0.493</span>     0.838
-#&gt; <span style='color: #BCBCBC;'> 3</span> C      -<span style='color: #BB0000;'>0.077</span><span style='color: #BB0000; text-decoration: underline;'>4</span>    -<span style='color: #BB0000;'>0.382</span>   0.227     -<span style='color: #BB0000;'>0.743</span>     0.588
-#&gt; <span style='color: #BCBCBC;'> 4</span> D       0.490      0.185   0.795     -<span style='color: #BB0000;'>0.176</span>     1.16 
-#&gt; <span style='color: #BCBCBC;'> 5</span> A:B     0.007<span style='text-decoration: underline;'>42</span>   -<span style='color: #BB0000;'>0.297</span>   0.312     -<span style='color: #BB0000;'>0.658</span>     0.673
-#&gt; <span style='color: #BCBCBC;'> 6</span> A:C    -<span style='color: #BB0000;'>0.092</span><span style='color: #BB0000; text-decoration: underline;'>5</span>    -<span style='color: #BB0000;'>0.397</span>   0.212     -<span style='color: #BB0000;'>0.758</span>     0.573
-#&gt; <span style='color: #BCBCBC;'> 7</span> A:D    -<span style='color: #BB0000;'>0.050</span><span style='color: #BB0000; text-decoration: underline;'>0</span>    -<span style='color: #BB0000;'>0.355</span>   0.255     -<span style='color: #BB0000;'>0.716</span>     0.616
-#&gt; <span style='color: #BCBCBC;'> 8</span> B:C     0.057<span style='text-decoration: underline;'>5</span>    -<span style='color: #BB0000;'>0.247</span>   0.362     -<span style='color: #BB0000;'>0.608</span>     0.723
-#&gt; <span style='color: #BCBCBC;'> 9</span> B:D    -<span style='color: #BB0000;'>0.030</span><span style='color: #BB0000; text-decoration: underline;'>1</span>    -<span style='color: #BB0000;'>0.335</span>   0.275     -<span style='color: #BB0000;'>0.696</span>     0.636
-#&gt; <span style='color: #BCBCBC;'>10</span> C:D    -<span style='color: #BB0000;'>0.345</span>     -<span style='color: #BB0000;'>0.650</span>  -<span style='color: #BB0000;'>0.040</span><span style='color: #BB0000; text-decoration: underline;'>4</span>    -<span style='color: #BB0000;'>1.01</span>      0.321
-#&gt; 
-#&gt; $plot</div><div class='img'><img src='Lenth_method-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'><span class='fu'>Lenth_method</span><span class='op'>(</span><span class='va'>m1</span>,alpha<span class='op'>=</span><span class='fl'>0.01</span><span class='op'>)</span>
+#&gt; $plot</div><div class='img'><img src='Lenth_method-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/warning.html'>suppressWarnings</a></span><span class='op'>(</span><span class='fu'>Lenth_method</span><span class='op'>(</span><span class='va'>m1</span>,alpha<span class='op'>=</span><span class='fl'>0.01</span>,method<span class='op'>=</span><span class='st'>'Zahn'</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $results
 #&gt; <span style='color: #949494;'># A tibble: 1 x 4</span>
 #&gt;   alpha   PSE    ME   SME
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span>  0.01 0.101 0.536  1.11
-#&gt; 
-#&gt; $margins_dat
-#&gt; <span style='color: #949494;'># A tibble: 10 x 6</span>
-#&gt;    coeff estimates lower_ME upper_ME lower_SME upper_SME
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>
-#&gt; <span style='color: #BCBCBC;'> 1</span> A      -<span style='color: #BB0000;'>0.077</span><span style='color: #BB0000; text-decoration: underline;'>5</span>   -<span style='color: #BB0000;'>0.614</span>     0.459    -<span style='color: #BB0000;'>1.18</span>      1.03 
-#&gt; <span style='color: #BCBCBC;'> 2</span> B       0.173    -<span style='color: #BB0000;'>0.364</span>     0.709    -<span style='color: #BB0000;'>0.933</span>     1.28 
-#&gt; <span style='color: #BCBCBC;'> 3</span> C      -<span style='color: #BB0000;'>0.077</span><span style='color: #BB0000; text-decoration: underline;'>4</span>   -<span style='color: #BB0000;'>0.614</span>     0.459    -<span style='color: #BB0000;'>1.18</span>      1.03 
-#&gt; <span style='color: #BCBCBC;'> 4</span> D       0.490    -<span style='color: #BB0000;'>0.046</span><span style='color: #BB0000; text-decoration: underline;'>2</span>    1.03     -<span style='color: #BB0000;'>0.616</span>     1.60 
-#&gt; <span style='color: #BCBCBC;'> 5</span> A:B     0.007<span style='text-decoration: underline;'>42</span>  -<span style='color: #BB0000;'>0.529</span>     0.544    -<span style='color: #BB0000;'>1.10</span>      1.11 
-#&gt; <span style='color: #BCBCBC;'> 6</span> A:C    -<span style='color: #BB0000;'>0.092</span><span style='color: #BB0000; text-decoration: underline;'>5</span>   -<span style='color: #BB0000;'>0.629</span>     0.444    -<span style='color: #BB0000;'>1.20</span>      1.01 
-#&gt; <span style='color: #BCBCBC;'> 7</span> A:D    -<span style='color: #BB0000;'>0.050</span><span style='color: #BB0000; text-decoration: underline;'>0</span>   -<span style='color: #BB0000;'>0.586</span>     0.486    -<span style='color: #BB0000;'>1.16</span>      1.06 
-#&gt; <span style='color: #BCBCBC;'> 8</span> B:C     0.057<span style='text-decoration: underline;'>5</span>   -<span style='color: #BB0000;'>0.479</span>     0.594    -<span style='color: #BB0000;'>1.05</span>      1.16 
-#&gt; <span style='color: #BCBCBC;'> 9</span> B:D    -<span style='color: #BB0000;'>0.030</span><span style='color: #BB0000; text-decoration: underline;'>1</span>   -<span style='color: #BB0000;'>0.566</span>     0.506    -<span style='color: #BB0000;'>1.14</span>      1.08 
-#&gt; <span style='color: #BCBCBC;'>10</span> C:D    -<span style='color: #BB0000;'>0.345</span>    -<span style='color: #BB0000;'>0.881</span>     0.191    -<span style='color: #BB0000;'>1.45</span>      0.761
+#&gt; <span style='color: #BCBCBC;'>1</span>  0.01 0.112 0.335 0.524
 #&gt; 
 #&gt; $plot</div><div class='img'><img src='Lenth_method-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div></pre>
   </div>

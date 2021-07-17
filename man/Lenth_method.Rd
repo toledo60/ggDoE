@@ -2,24 +2,27 @@
 % Please edit documentation in R/Lenth_method.R
 \name{Lenth_method}
 \alias{Lenth_method}
-\title{Lenth’s method: testing effect significance for experiments without variance estimates}
+\title{Lenth’s method: (DEPRECATED use pareto_plot() instead)}
 \usage{
-Lenth_method(mod, alpha = 0.05)
+Lenth_method(mod, alpha = 0.05, method = "Lenth", showplot = TRUE)
 }
 \arguments{
 \item{mod}{A linear model}
 
 \item{alpha}{specify the significance level. Default is alpha=0.05}
+
+\item{method}{Character value. Method to calculate PSE. Default is Lenth. Options include: Zahn, WZahn, Lenth, RMS, Dong, JuanPena, Daniel}
+
+\item{showplot}{Default is TRUE, if false plot will not be shown and a tibble is returned used to create the plot}
 }
 \value{
-PSE,ME,SME using Lenth's method. Also returns a plot visualizing any factor which is significant using the obtained
-values of ME, and SME.
+PSE,ME,SME using Lenth's method. Also returns a plot visualizing any factor which is significant using the obtained values of ME, and SME.
 }
 \description{
-Lenth’s method: testing effect significance for experiments without variance estimates
+Lenth’s method: (DEPRECATED use pareto_plot() instead)
 }
 \examples{
 m1 <- lm(ybar ~ (A+B+C+D)^2,data=adapted_epitaxial)
-Lenth_method(m1)
-Lenth_method(m1,alpha=0.01)
+suppressWarnings(Lenth_method(m1))
+suppressWarnings(Lenth_method(m1,alpha=0.01,method='Zahn'))
 }

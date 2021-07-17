@@ -21,13 +21,13 @@ The following plots are currently available
 - [interaction_effect()](https://ggdoe.netlify.app/reference/interaction_effect.html): Interaction effects plot between two factors in a factorial design
 
 - [Lenth_method()](https://ggdoe.netlify.app/reference/Lenth_method.html): Visualize effect significance for experiments without variance
-estimates using Lenth's method
+estimates using Lenth's method **(deprecated)**
 
 - [main_effect()](https://ggdoe.netlify.app/reference/main_effect.html): Main effect plot for one factor in a factorial design
 
 - [contour_plots()](https://ggdoe.netlify.app/reference/contour_plots.html): Contour plots for response surface plot(s) of a fitted linear model
 
-- [pareto_plot()](https://ggdoe.netlify.app/reference/pareto_plot.html): Pareto plot of effects
+- [pareto_plot()](https://ggdoe.netlify.app/reference/pareto_plot.html): Pareto plot of effects with cutoff values for the margin of error (ME) and simultaneous margin of error (SME)
 
 ## Installation
 
