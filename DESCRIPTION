@@ -1,7 +1,7 @@
 Package: ggDoE
 Type: Package
 Title: Modern graphs for Design of Experiments with ggplot2
-Version: 0.4.9
+Version: 0.5
 Authors@R: c(person(given = "Jose",family = "Toledo Luna",
              role = c("aut", "cre"),
              email = "toledo60@protonmail.com",
@@ -27,6 +27,6 @@ Imports:
     unrepx
 Suggests:
     rsm
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Depends: 
     R (>= 3.6.0)
