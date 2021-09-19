@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Obtain main effect plot for a factor in a factorial design — main_effect • ggDoE</title>
+<title>Half-Normal Effects Plots — half_normal • ggDoE</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Obtain main effect plot for a factor in a factorial design — main_effect" />
-<meta property="og:description" content="Obtain main effect plot for a factor in a factorial design" />
+<meta property="og:title" content="Half-Normal Effects Plots — half_normal" />
+<meta property="og:description" content="Half-Normal Effects Plots" />
 
 
 
@@ -108,22 +108,22 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Obtain main effect plot for a factor in a factorial design</h1>
-    <small class="dont-index">Source: <a href='https://github.com/toledo60/ggDoE/blob/master/R/main_effect.R'><code>R/main_effect.R</code></a></small>
-    <div class="hidden name"><code>main_effect.Rd</code></div>
+    <h1>Half-Normal Effects Plots</h1>
+    <small class="dont-index">Source: <a href='https://github.com/toledo60/ggDoE/blob/master/R/half_normal.R'><code>R/half_normal.R</code></a></small>
+    <div class="hidden name"><code>half_normal.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Obtain main effect plot for a factor in a factorial design</p>
+    <p>Half-Normal Effects Plots</p>
     </div>
 
-    <pre class="usage"><span class='fu'>main_effect</span><span class='op'>(</span>
-  <span class='va'>Design</span>,
-  <span class='va'>factr</span>,
-  <span class='va'>response</span>,
-  colour <span class='op'>=</span> <span class='st'>"#4292c6"</span>,
-  point_size <span class='op'>=</span> <span class='fl'>1.5</span>,
-  line_size <span class='op'>=</span> <span class='fl'>1</span>,
+    <pre class="usage"><span class='fu'>half_normal</span><span class='op'>(</span>
+  <span class='va'>obj</span>,
+  method <span class='op'>=</span> <span class='st'>"Lenth"</span>,
+  alpha <span class='op'>=</span> <span class='fl'>0.05</span>,
+  label_active <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  ref_line <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  showME <span class='op'>=</span> <span class='cn'>FALSE</span>,
   showplot <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
 
@@ -131,43 +131,45 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>Design</th>
-      <td><p>Data/Design used to plot</p></td>
+      <th>obj</th>
+      <td><p>object of class lm</p></td>
     </tr>
     <tr>
-      <th>factr</th>
-      <td><p>Factor variable (without quotes)</p></td>
+      <th>method</th>
+      <td><p>Character value. Method to calculate PSE. Default is Lenth. Options include: Zahn, WZahn, Lenth, RMS, Dong, JuanPena, Daniel</p></td>
     </tr>
     <tr>
-      <th>response</th>
-      <td><p>Response variable (without quotes)</p></td>
+      <th>alpha</th>
+      <td><p>specify the significance level. Default is alpha=0.05</p></td>
     </tr>
     <tr>
-      <th>colour</th>
-      <td><p>A character string specifying the color of line/points</p></td>
+      <th>label_active</th>
+      <td><p>If TRUE, active effects are labeled if the effects cross the computed margin of error (ME). See method argument for more details</p></td>
     </tr>
     <tr>
-      <th>point_size</th>
-      <td><p>Change size of points</p></td>
+      <th>ref_line</th>
+      <td><p>Dafault is TRUE, if FALSE the abline with slope (1/PSE) is not displayed. Reference line should follow along most points that are not considered outliers.</p></td>
     </tr>
     <tr>
-      <th>line_size</th>
-      <td><p>Change thickness of line</p></td>
+      <th>showME</th>
+      <td><p>Default is FALSE, if TRUE the cutoffs for margin of errors (ME) and simultaneous margin of error (SME) are shown</p></td>
     </tr>
     <tr>
       <th>showplot</th>
-      <td><p>logical indicating to show main effect plot. If false, a tibble containing the data used to construct the plot is returned. Default is TRUE</p></td>
+      <td><p>Default is TRUE, if FALSE plot will not be shown and a tibble is returned used to create the plot along with the calculated PSE,ME,SME</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>main effect plot, or data used to construct main effect plot</p>
+    <p>A tibble with the absolute effects and half-normal quantiles. A ggplot2 version of halfnormal plot for factorial effects is returned</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>main_effect</span><span class='op'>(</span>Design <span class='op'>=</span> <span class='va'>adapted_epitaxial</span>, factr <span class='op'>=</span> <span class='va'>B</span>, response <span class='op'>=</span> <span class='va'>ybar</span><span class='op'>)</span>
-</div><div class='img'><img src='main_effect-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>main_effect</span><span class='op'>(</span>Design <span class='op'>=</span> <span class='va'>adapted_epitaxial</span>, factr <span class='op'>=</span> <span class='va'>B</span>, response <span class='op'>=</span> <span class='va'>s2</span>, colour <span class='op'>=</span> <span class='st'>"red"</span>, point_size <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span>
-</div><div class='img'><img src='main_effect-2.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><div class='input'><span class='va'>m1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>lns2</span> <span class='op'>~</span> <span class='op'>(</span><span class='va'>A</span><span class='op'>+</span><span class='va'>B</span><span class='op'>+</span><span class='va'>C</span><span class='op'>+</span><span class='va'>D</span><span class='op'>)</span><span class='op'>^</span><span class='fl'>4</span>,data<span class='op'>=</span><span class='va'>original_epitaxial</span><span class='op'>)</span>
+<span class='fu'>half_normal</span><span class='op'>(</span><span class='va'>m1</span><span class='op'>)</span>
+</div><div class='img'><img src='half_normal-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>half_normal</span><span class='op'>(</span><span class='va'>m1</span>,alpha<span class='op'>=</span><span class='fl'>0.1</span>,label_active<span class='op'>=</span><span class='cn'>TRUE</span>,showME<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='img'><img src='half_normal-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>half_normal</span><span class='op'>(</span><span class='va'>m1</span>,method<span class='op'>=</span><span class='st'>'Zahn'</span>,alpha<span class='op'>=</span><span class='fl'>0.1</span>,ref_line<span class='op'>=</span><span class='cn'>TRUE</span>,label_active<span class='op'>=</span><span class='cn'>TRUE</span>,showME<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='img'><img src='half_normal-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

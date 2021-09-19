@@ -16,10 +16,10 @@
 #' @export
 #'
 #' @examples m1 <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
-#' halfnormal(m1)
-#' halfnormal(m1,alpha=0.1,label_active=TRUE,showME=TRUE)
-#' halfnormal(m1,method='Zahn',alpha=0.1,ref_line=TRUE,label_active=TRUE,showME=TRUE)
-halfnormal <- function(obj,method='Lenth',
+#' half_normal(m1)
+#' half_normal(m1,alpha=0.1,label_active=TRUE,showME=TRUE)
+#' half_normal(m1,method='Zahn',alpha=0.1,ref_line=TRUE,label_active=TRUE,showME=TRUE)
+half_normal <- function(obj,method='Lenth',
                        alpha=0.05,
                        label_active=FALSE,
                        ref_line = FALSE,
