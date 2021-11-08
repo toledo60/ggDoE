@@ -12,7 +12,7 @@
 #' @importFrom stats qnorm coef
 #' @importFrom utils tail
 #' @importFrom unrepx PSE ME
-#' @importFrom tibble tibble
+#' @importFrom dplyr tibble
 #' @export
 #'
 #' @examples m1 <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
@@ -49,7 +49,7 @@ half_normal <- function(obj,method='Lenth',
       if (logc) {names[i]<-NA}}
   }
 
-  dat <- tibble::tibble("effects"=names,
+  dat <- dplyr::tibble("effects"=names,
                         "absolute_effects"=effs,
                         "half_normal_quantiles"=zscore
   )

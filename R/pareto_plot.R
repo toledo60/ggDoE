@@ -6,7 +6,7 @@
 #' @param showME Default is TRUE, if false the cutoffs for margin of errors (ME) and simultaneous margin of error (SME) are not shown
 #' @param method Character value. Method to calculate PSE. Default is Lenth. Options include: Zahn, WZahn, Lenth, RMS, Dong, JuanPena, Daniel
 #' @return A bar plot with ordered effects, margin of error (ME) and simultaneous margin of error (SME) cutoffs.
-#' @importFrom tibble tibble
+#' @importFrom dplyr tibble
 #' @importFrom stats reorder coef
 #' @importFrom unrepx PSE ME
 #' @importFrom ggplot2 geom_hline geom_bar annotate labs coord_flip theme_classic aes_string
@@ -29,7 +29,7 @@ pareto_plot <- function(obj,alpha=0.05,method='Lenth',showME=TRUE,showplot=TRUE)
   ME <- unrepx::ME(estimates,method = method,alpha = alpha)[1]
   SME <- unrepx::ME(estimates,method = method,alpha=alpha)[2]
 
-  dat <- tibble("effect_names"=factor(names(estimates)),
+  dat <- dplyr::tibble("effect_names"=factor(names(estimates)),
                 "effects"=estimates,
                 'abs_effects' = abs(estimates),
                 "cols" = ifelse(effects >0,'#d9a698','#9ecede'))

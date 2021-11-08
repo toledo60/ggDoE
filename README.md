@@ -14,8 +14,6 @@ The following plots are currently available
 
 - [boxcox_transform()](https://ggdoe.netlify.app/reference/boxcox_transform.html): Boxcox transformation plot
 
-- [contour_plots()](https://ggdoe.netlify.app/reference/contour_plots.html): Contour plots for response surface plot(s) of a fitted linear model
-
 - [diagnostic_plots()](https://ggdoe.netlify.app/reference/diagnostic_plots.html): Regression diagnostics plots
 
 - [half_normal()](https://ggdoe.netlify.app/reference/half_normal.html): Half-Normal effects plot
