@@ -5,20 +5,29 @@
 #' @param point_size Change size of points in plots
 #' @param line_color Change color of the geom_smooth line for the respective diagnostic plot
 #' @return Regression Diagnostic plots. In the case where all hat values are equal only residual vs.fitted, normal-QQ, and scale-location plots are returned
-#' @importFrom broom augment
 #' @importFrom ggplot2 geom_smooth stat_qq geom_abline ylim aes_string geom_text theme_bw
 #' @importFrom gridExtra grid.arrange
-#' @importFrom stats quantile
+#' @importFrom stats quantile lm.influence cooks.distance rstandard
 #' @export
 #'
-#' @examples epitaxial_ybar <- lm(ybar ~ A+B+C+D,data=original_epitaxial)
-#' diagnostic_plots(epitaxial_ybar)
-diagnostic_plots <- function(model,SE=FALSE,point_size=3,line_color = "indianred3"){
+#' @examples
+#' data(mtcars)
+#' mtcars_lm <- lm(mpg ~ hp+wt,data=mtcars)
+#' diagnostic_plots(mtcars_lm)
+#' diagnostic_plots(mtcars_lm,SE=TRUE)
+diagnostic_plots <- function(model,SE=FALSE,point_size=2,line_color = "indianred3"){
   if(is.null(match("lm",c("glm","lm")))){
     stop("model should be of class lm or glm")
   }else{
 
-    df = broom::augment(model)
+    df = model$model
+    df$.fitted = model$fitted.values
+    df$.resid = model$residuals
+    df$.hat = lm.influence(model)$hat
+    df$.sigma = lm.influence(model)$sigma
+    df$.cooksd = cooks.distance(model)
+    df$.std.resid = rstandard(model)
+
     p = length(coef(model))
     n = nrow(df)
 
@@ -84,9 +93,11 @@ diagnostic_plots <- function(model,SE=FALSE,point_size=3,line_color = "indianred
 
     if( length(unique(round(df$.hat,4)))!=1 ){
 
-      stdres_leverage_base <- ggplot(data = df, aes_string(x = '.hat', y = '.std.resid')) +
+      stdres_leverage_base <- ggplot(data = df, aes_string(x = '.hat',
+                                                           y = '.std.resid')) +
         geom_point(size = point_size,shape=1) +
-        geom_smooth(method = 'loess',se=SE, color = line_color ,fill="#d9d9d9",size = 1.1) +
+        geom_smooth(method = 'loess',se=SE, color = line_color ,fill="#d9d9d9",
+                    size = 1.1) +
         labs(y = "Standardized Residuals", x = "Leverage",
              title = 'Residual vs. Leverage')+
         theme_bw()
@@ -107,7 +118,8 @@ diagnostic_plots <- function(model,SE=FALSE,point_size=3,line_color = "indianred
 
     }
     else{
-      return(suppressMessages(gridExtra::grid.arrange(res_fitted+labs(title = "Residual vs.\nFitted Value"),
+      return(suppressMessages(gridExtra::grid.arrange(res_fitted+
+                                                        labs(title = "Residual vs.\nFitted Value"),
                                                       qq_plot,stdres_fitted,ncol=3)))
     }
   }

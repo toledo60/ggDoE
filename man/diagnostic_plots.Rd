@@ -4,7 +4,7 @@
 \alias{diagnostic_plots}
 \title{Regression Diagnostic Plots with ggplot2}
 \usage{
-diagnostic_plots(model, SE = FALSE, point_size = 3, line_color = "indianred3")
+diagnostic_plots(model, SE = FALSE, point_size = 2, line_color = "indianred3")
 }
 \arguments{
 \item{model}{Model of class "lm" or "glm"}
@@ -22,6 +22,8 @@ Regression Diagnostic plots. In the case where all hat values are equal only res
 Regression Diagnostic Plots with ggplot2
 }
 \examples{
-epitaxial_ybar <- lm(ybar ~ A+B+C+D,data=original_epitaxial)
-diagnostic_plots(epitaxial_ybar)
+data(mtcars)
+mtcars_lm <- lm(mpg ~ hp+wt,data=mtcars)
+diagnostic_plots(mtcars_lm)
+diagnostic_plots(mtcars_lm,SE=TRUE)
 }
