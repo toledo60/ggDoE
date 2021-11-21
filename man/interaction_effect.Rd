@@ -5,36 +5,37 @@
 \title{Obtain interaction effects plot between two factors in a factorial design}
 \usage{
 interaction_effect(
-  Design,
-  factr1,
-  factr2,
-  response,
-  point_size = 1.5,
-  line_size = 1,
-  showplot = TRUE
+  data,
+  factor_1,
+  factor_2,
+  response_var,
+  linetypes = c("solid", "dashed"),
+  colors = c("#4260c9", "#d6443c"),
+  ...
 )
 }
 \arguments{
-\item{Design}{Data/Design used to plot}
+\item{data}{Data/Design used to plot}
 
-\item{factr1}{First factor}
+\item{factor_1}{First factor}
 
-\item{factr2}{Second factor}
+\item{factor_2}{Second factor}
 
-\item{response}{Response variable}
+\item{response_var}{Response variable}
 
-\item{point_size}{Change size of points}
+\item{linetypes}{Change linetypes. Default are ('solid','dashed)}
 
-\item{line_size}{Change thickness of lines}
+\item{colors}{Change color of lines/points. Default are ("#4260c9" ,"#d6443c")}
 
-\item{showplot}{logical indicating to show main effect plot. If false, a tibble containing the data used to construct the plot is returned. Default is TRUE}
+\item{...}{additional customization for both geom_line and geom_point (optional)}
 }
 \value{
-data to calculate interaction effects, and interaction effects plot
+interaction effects plot
 }
 \description{
 Obtain interaction effects plot between two factors in a factorial design
 }
 \examples{
-interaction_effect(Design = adapted_epitaxial, factr1 = A, factr2 = B, response = ybar)
+interaction_effect(data = adapted_epitaxial, factor_1 = A,
+factor_2 = B, response_var = ybar)
 }

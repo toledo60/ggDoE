@@ -2,41 +2,40 @@
 
 #' Obtain main effect plot for a factor in a factorial design
 #'
-#' @param Design Data/Design used to plot
-#' @param factr Factor variable (without quotes)
-#' @param response Response variable (without quotes)
+#' @param data Data/Design used to plot
+#' @param factor_1 Factor variable (without quotes)
+#' @param response_var Response variable (without quotes)
 #' @param colour A character string specifying the color of line/points
 #' @param point_size Change size of points
 #' @param line_size Change thickness of line
-#' @param showplot  logical indicating to show main effect plot. If false, a tibble containing the data used to construct the plot is returned. Default is TRUE
-#' @return main effect plot, or data used to construct main effect plot
-#' @importFrom ggplot2 theme_bw aes_string
-#' @importFrom dplyr enquo summarize group_by as_label
-#' @examples
-#' main_effect(Design = adapted_epitaxial, factr = B, response = ybar)
-#' main_effect(Design = adapted_epitaxial, factr = B, response = s2, colour = "red", point_size = 4)
+#' @param linetype Change type of line. Default is 'solid'
+#' @param shape Change shape of points. Default is 16
+#'
+#' @return main effects plot
 #' @export
-main_effect <- function(Design,factr,response,
-                       colour ="#4292c6",
-                       point_size=1.5,line_size=1,
-                       showplot=TRUE){
+#'
+#' @importFrom ggplot2 aes geom_point geom_line theme_bw labs
+#' @importFrom poorman group_by summarise "%>%"
+#' @examples main_effect(data = adapted_epitaxial, factor_1 = B, response_var = ybar)
+main_effect  <- function(data, factor_1, response_var,
+                         colour = "#4260c9",
+                         point_size=1.5,line_size=0.8,
+                         linetype = 'solid',
+                         shape= 16) {
+  factor1 <- substitute(factor_1)
+  response <- substitute(response_var)
 
-  var <- dplyr::enquo(factr)
-  rsp <- dplyr::enquo(response)
-
-  dat <- summarize(group_by(Design, factor(!!var)), mean_response=mean(!!rsp))
-  names(dat) = c("var","mean_response")
-
-  if(showplot){
-    plot <- ggplot(dat,aes_string(x='var',y='mean_response',group=1)) +
-      geom_line(aes(group=1),size=line_size,colour = colour)+
-      geom_point(size=point_size,colour = colour)+
+  x <- suppressWarnings(eval(bquote(
+    data %>%
+      group_by(.(factor1)) %>%
+      summarise(mean_response = mean(.(response))) %>%
+      ggplot(., aes(x = .(factor1), y = mean_response),group=1)+
+      geom_line(aes(group=1),size=line_size,colour = colour,
+                linetype = linetype)+
+      geom_point(size=point_size,colour = colour,shape=shape)+
       theme_bw()+
-      labs(y=paste0("Mean of ",as_label(rsp)),
-           x=as_label(var))
-    return(plot)
-  }else{
-    names(dat) = c(as_label(var),paste0("Mean_",as_label(rsp)))
-    return(dat)
-  }
+      labs(y=paste0("Mean of ",response))
+  )))
+
+  return(x)
 }

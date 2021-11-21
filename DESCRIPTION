@@ -1,7 +1,7 @@
 Package: ggDoE
 Type: Package
 Title: Modern graphs for Design of Experiments with ggplot2
-Version: 0.5.3
+Version: 0.5.4
 Authors@R: c(person(given = "Jose",family = "Toledo Luna",
              role = c("aut", "cre"),
              email = "toledo60@protonmail.com",
@@ -16,9 +16,16 @@ BugReports: https://github.com/toledo60/ggDoE/issues
 Imports: 
     ggplot2,
     gridExtra,
+    reshape2,
+    poorman (>= 0.2.5),
+Suggests:
+    knitr,
+    pkgdown,
+    rmarkdown,
+    roxygen2,
+    tibble,
     MASS,
     viridisLite,
-    reshape2,
     dplyr,
     unrepx
 RoxygenNote: 7.1.2

@@ -5,21 +5,22 @@
 \title{Obtain main effect plot for a factor in a factorial design}
 \usage{
 main_effect(
-  Design,
-  factr,
-  response,
-  colour = "#4292c6",
+  data,
+  factor_1,
+  response_var,
+  colour = "#4260c9",
   point_size = 1.5,
-  line_size = 1,
-  showplot = TRUE
+  line_size = 0.8,
+  linetype = "solid",
+  shape = 16
 )
 }
 \arguments{
-\item{Design}{Data/Design used to plot}
+\item{data}{Data/Design used to plot}
 
-\item{factr}{Factor variable (without quotes)}
+\item{factor_1}{Factor variable (without quotes)}
 
-\item{response}{Response variable (without quotes)}
+\item{response_var}{Response variable (without quotes)}
 
 \item{colour}{A character string specifying the color of line/points}
 
@@ -27,15 +28,16 @@ main_effect(
 
 \item{line_size}{Change thickness of line}
 
-\item{showplot}{logical indicating to show main effect plot. If false, a tibble containing the data used to construct the plot is returned. Default is TRUE}
+\item{linetype}{Change type of line. Default is 'solid'}
+
+\item{shape}{Change shape of points. Default is 16}
 }
 \value{
-main effect plot, or data used to construct main effect plot
+main effects plot
 }
 \description{
 Obtain main effect plot for a factor in a factorial design
 }
 \examples{
-main_effect(Design = adapted_epitaxial, factr = B, response = ybar)
-main_effect(Design = adapted_epitaxial, factr = B, response = s2, colour = "red", point_size = 4)
+main_effect(data = adapted_epitaxial, factor_1 = B, response_var = ybar)
 }

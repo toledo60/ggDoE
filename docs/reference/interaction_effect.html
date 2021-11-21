@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggDoE</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.4</span>
       </span>
     </div>
 
@@ -118,54 +118,55 @@
     </div>
 
     <pre class="usage"><span class='fu'>interaction_effect</span><span class='op'>(</span>
-  <span class='va'>Design</span>,
-  <span class='va'>factr1</span>,
-  <span class='va'>factr2</span>,
-  <span class='va'>response</span>,
-  point_size <span class='op'>=</span> <span class='fl'>1.5</span>,
-  line_size <span class='op'>=</span> <span class='fl'>1</span>,
-  showplot <span class='op'>=</span> <span class='cn'>TRUE</span>
+  <span class='va'>data</span>,
+  <span class='va'>factor_1</span>,
+  <span class='va'>factor_2</span>,
+  <span class='va'>response_var</span>,
+  linetypes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"solid"</span>, <span class='st'>"dashed"</span><span class='op'>)</span>,
+  colors <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"#4260c9"</span>, <span class='st'>"#d6443c"</span><span class='op'>)</span>,
+  <span class='va'>...</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>Design</th>
+      <th>data</th>
       <td><p>Data/Design used to plot</p></td>
     </tr>
     <tr>
-      <th>factr1</th>
+      <th>factor_1</th>
       <td><p>First factor</p></td>
     </tr>
     <tr>
-      <th>factr2</th>
+      <th>factor_2</th>
       <td><p>Second factor</p></td>
     </tr>
     <tr>
-      <th>response</th>
+      <th>response_var</th>
       <td><p>Response variable</p></td>
     </tr>
     <tr>
-      <th>point_size</th>
-      <td><p>Change size of points</p></td>
+      <th>linetypes</th>
+      <td><p>Change linetypes. Default are ('solid','dashed)</p></td>
     </tr>
     <tr>
-      <th>line_size</th>
-      <td><p>Change thickness of lines</p></td>
+      <th>colors</th>
+      <td><p>Change color of lines/points. Default are ("#4260c9" ,"#d6443c")</p></td>
     </tr>
     <tr>
-      <th>showplot</th>
-      <td><p>logical indicating to show main effect plot. If false, a tibble containing the data used to construct the plot is returned. Default is TRUE</p></td>
+      <th>...</th>
+      <td><p>additional customization for both geom_line and geom_point (optional)</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>data to calculate interaction effects, and interaction effects plot</p>
+    <p>interaction effects plot</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='fu'>interaction_effect</span><span class='op'>(</span>Design <span class='op'>=</span> <span class='va'>adapted_epitaxial</span>, factr1 <span class='op'>=</span> <span class='va'>A</span>, factr2 <span class='op'>=</span> <span class='va'>B</span>, response <span class='op'>=</span> <span class='va'>ybar</span><span class='op'>)</span></span>
+    <pre class="examples"><span class='r-in'><span class='fu'>interaction_effect</span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>adapted_epitaxial</span>, factor_1 <span class='op'>=</span> <span class='va'>A</span>,</span>
+<span class='r-in'>factor_2 <span class='op'>=</span> <span class='va'>B</span>, response_var <span class='op'>=</span> <span class='va'>ybar</span><span class='op'>)</span></span>
 <span class='r-plt img'><img src='interaction_effect-1.png' alt='' width='700' height='433' /></span>
 </pre>
   </div>

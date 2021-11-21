@@ -2,43 +2,56 @@
 
 #' Obtain interaction effects plot between two factors in a factorial design
 #'
-#' @param Design Data/Design used to plot
-#' @param factr1 First factor
-#' @param factr2 Second factor
-#' @param response Response variable
-#' @param point_size Change size of points
-#' @param line_size Change thickness of lines
-#' @param showplot  logical indicating to show main effect plot. If false, a tibble containing the data used to construct the plot is returned. Default is TRUE
-#' @return data to calculate interaction effects, and interaction effects plot
-#' @examples interaction_effect(Design = adapted_epitaxial, factr1 = A, factr2 = B, response = ybar)
-#' @importFrom ggplot2 ggplot aes_string geom_point geom_line theme_bw theme %+replace% element_rect
-#' @importFrom dplyr enquo summarize group_by as_label
+#' @param data Data/Design used to plot
+#' @param factor_1 First factor
+#' @param factor_2 Second factor
+#' @param response_var Response variable
+#' @param linetypes Change linetypes. Default are ('solid','dashed)
+#' @param colors Change color of lines/points. Default are ("#4260c9" ,"#d6443c")
+#' @param ... additional customization for both geom_line and geom_point (optional)
+#'
+#' @return interaction effects plot
 #' @export
-interaction_effect <- function(Design,factr1,factr2,
-                              response,point_size=1.5,
-                              line_size=1,
-                              showplot=TRUE){
-  var1 = dplyr::enquo(factr1)
-  var2 = dplyr::enquo(factr2)
-  rsp = dplyr::enquo(response)
+#'
+#' @examples
+#' interaction_effect(data = adapted_epitaxial, factor_1 = A,
+#' factor_2 = B, response_var = ybar)
+#' @importFrom ggplot2 aes geom_line geom_point theme labs element_rect scale_linetype_manual
+#' @importFrom ggplot2 scale_color_manual theme_bw
+#' @importFrom poorman group_by mutate summarise "%>%"
+interaction_effect  <- function(data, factor_1,
+                                factor_2,
+                                response_var,
+                                linetypes = c('solid','dashed'),
+                                colors = c("#4260c9" ,"#d6443c"),...) {
 
-  dat <- summarize(group_by(Design, factor(!!var1),
-                            factor(!!var2)), mean_response=mean(!!rsp),.groups = 'drop')
-  names(dat) = c(as_label(var1),as_label(var2),"mean_response")
+  factor1 <- substitute(factor_1)
+  factor2 <- substitute(factor_2)
+  response <- substitute(response_var)
 
-  if(showplot){
-    plot <- ggplot(dat,aes_string(x=as_label(var1),y='mean_response',color=as_label(var2))) +
-      geom_line(aes_string(group=as_label(var2)),
-                size=line_size)+
-      geom_point(size=point_size)+
-      theme_bw() %+replace%
-      theme(legend.background = element_rect(fill="gray96",
-                                             size=0.5,
-                                             linetype="solid"))+
-      labs(y=paste0("Mean of ",as_label(rsp)))
+  x <- suppressWarnings((eval(bquote(
+    data %>%
+      group_by(.(factor1),.(factor2),.add=TRUE) %>%
+      summarise(mean_response = mean(.(response)),.groups = "drop_last") %>%
+      mutate(factor1 = as.factor(.(factor1) ) ) %>%
+      mutate(factor2 = as.factor(.(factor2) ) ) %>%
+      ggplot(., aes(x = (factor1), y = mean_response,group=factor2,
+                    colour=factor2,
+                    shape=factor2,
+                    linetype=factor2) )+
+      geom_line(...)+
+      geom_point(...)+
+      scale_linetype_manual(values=linetypes)+
+      scale_color_manual(values=colors)+
+      theme_bw()+
+      theme(legend.background = element_rect(fill="gray96"))+
+      labs(y=paste0("Mean of ",response),
+           x= factor1,
+           colour=factor2,
+           linetype=factor2,
+           shape=factor2
+      )
+  ))))
 
-    return(plot)
-  }else{
-    return(dat)
-  }
+  return(x)
 }
