@@ -12,7 +12,7 @@
 #'
 #' @examples
 #' data(mtcars)
-#' mtcars_lm <- lm(mpg ~ hp+wt,data=mtcars)
+#' mtcars_lm <- lm(mpg ~.,data=mtcars)
 #' diagnostic_plots(mtcars_lm)
 #' diagnostic_plots(mtcars_lm,SE=TRUE)
 diagnostic_plots <- function(model,SE=FALSE,point_size=2,line_color = "indianred3"){

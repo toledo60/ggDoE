@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,25 +33,19 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ggDoE</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.5.5</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="reference/index.html">Reference</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/toledo60/ggDoE/">
+  <a href="https://github.com/toledo60/ggDoE/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -66,35 +62,85 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="ggdoe" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#ggdoe" class="anchor"></a>ggDoE</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="ggdoe">ggDoE<a class="anchor" aria-label="anchor" href="#ggdoe"></a>
+</h1></div>
 
-<div id="overview" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h2>
-<p>With ggDoE you’ll be able to generate common plots used in Design of Experiments with ggplot2.</p>
-<p>The following plots are currently available</p>
-<ul>
-<li><p><a href="https://ggdoe.netlify.app/reference/alias_matrix.html">alias_matrix()</a>: Correlation matrix plot to visualize the Alias matrix</p></li>
-<li><p><a href="https://ggdoe.netlify.app/reference/boxcox_transform.html">boxcox_transform()</a>: Boxcox transformation plot</p></li>
-<li><p><a href="https://ggdoe.netlify.app/reference/diagnostic_plots.html">diagnostic_plots()</a>: Regression diagnostics plots</p></li>
-<li><p><a href="https://ggdoe.netlify.app/reference/half_normal.html">half_normal()</a>: Half-Normal effects plot</p></li>
-<li><p><a href="https://ggdoe.netlify.app/reference/interaction_effect.html">interaction_effect()</a>: Interaction effects plot between two factors in a factorial design</p></li>
-<li><p><a href="https://ggdoe.netlify.app/reference/main_effect.html">main_effect()</a>: Main effect plot for one factor in a factorial design</p></li>
-<li><p><a href="https://ggdoe.netlify.app/reference/pareto_plot.html">pareto_plot()</a>: Pareto plot of effects with cutoff values for the margin of error (ME) and simultaneous margin of error (SME)</p></li>
-</ul>
-</div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p>You can get the development version from GitHub:</p>
-<pre class="{r}"><code>install.packages("remotes") # if not installed yet
-remotes::install_github("toledo60/ggDoE")</code></pre>
-<div id="contributing-to-the-package" class="section level3">
-<h3 class="hasAnchor">
-<a href="#contributing-to-the-package" class="anchor"></a>Contributing to the package</h3>
-<p>I welcome feedback, suggestions, issues, and contributions! Check out the <a href="https://github.com/toledo60/ggDoE/blob/main/.github/CONTRIBUTING.md">CONTRIBUTING</a> file for more details.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">#install.packages("remotes") </span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"toledo60/ggDoE"</span><span class="op">)</span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
+<p>With ggDoE you’ll be able to generate common plots used in Design of Experiments with ggplot2.</p>
+<p>The following plots are currently available:</p>
+<ul>
+<li><p><a href="https://ggdoe.netlify.app/reference/alias_matrix.html" class="external-link">alias_matrix()</a>: Correlation matrix plot to visualize the Alias matrix</p></li>
+<li><p><a href="https://ggdoe.netlify.app/reference/boxcox_transform.html" class="external-link">boxcox_transform()</a>: Boxcox transformation plot</p></li>
+<li><p><a href="https://ggdoe.netlify.app/reference/diagnostic_plots.html" class="external-link">diagnostic_plots()</a>: Regression diagnostics plots</p></li>
+<li><p><a href="https://ggdoe.netlify.app/reference/half_normal.html" class="external-link">half_normal()</a>: Half-Normal effects plot</p></li>
+<li><p><a href="https://ggdoe.netlify.app/reference/interaction_effect.html" class="external-link">interaction_effect()</a>: Interaction effects plot between two factors in a factorial design</p></li>
+<li><p><a href="https://ggdoe.netlify.app/reference/main_effect.html" class="external-link">main_effect()</a>: Main effect plot for one factor in a factorial design</p></li>
+<li><p><a href="https://ggdoe.netlify.app/reference/pareto_plot.html" class="external-link">pareto_plot()</a>: Pareto plot of effects with cutoff values for the margin of error (ME) and simultaneous margin of error (SME)</p></li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggdoe.netlify.app" class="external-link">ggDoE</a></span><span class="op">)</span></code></pre></div>
+<p><strong>Alias Matrix</strong></p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/alias_matrix.html">alias_matrix</a></span><span class="op">(</span>design<span class="op">=</span><span class="va">aliased_design</span><span class="op">)</span></code></pre></div>
+<p><img src="README_files/figure-gfm/unnamed-chunk-3-1.png"><!-- --></p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/alias_matrix.html">alias_matrix</a></span><span class="op">(</span>design<span class="op">=</span><span class="va">aliased_design</span>, symmetric<span class="op">=</span><span class="cn">TRUE</span>,
+             intercept<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<p><img src="README_files/figure-gfm/unnamed-chunk-4-1.png"><!-- --></p>
+<p><strong>Box-Cox Transformation</strong></p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">s2</span> <span class="op">~</span> <span class="op">(</span><span class="va">A</span><span class="op">+</span><span class="va">B</span><span class="op">+</span><span class="va">C</span><span class="op">+</span><span class="va">D</span><span class="op">)</span>,data <span class="op">=</span> <span class="va">adapted_epitaxial</span><span class="op">)</span>
+<span class="fu"><a href="reference/boxcox_transform.html">boxcox_transform</a></span><span class="op">(</span><span class="va">model</span>,lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">0.2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p><img src="README_files/figure-gfm/unnamed-chunk-5-1.png"><!-- --></p>
+<p><strong>Regression Diagnostic Plots</strong></p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span>
+<span class="va">mtcars_lm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span><span class="va">.</span>,data<span class="op">=</span><span class="va">mtcars</span><span class="op">)</span>
+<span class="fu"><a href="reference/diagnostic_plots.html">diagnostic_plots</a></span><span class="op">(</span><span class="va">mtcars_lm</span><span class="op">)</span></code></pre></div>
+<p><img src="README_files/figure-gfm/unnamed-chunk-6-1.png"><!-- --></p>
+<p><strong>Half-Normal Plot</strong></p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">lns2</span> <span class="op">~</span> <span class="op">(</span><span class="va">A</span><span class="op">+</span><span class="va">B</span><span class="op">+</span><span class="va">C</span><span class="op">+</span><span class="va">D</span><span class="op">)</span><span class="op">^</span><span class="fl">4</span>,data<span class="op">=</span><span class="va">original_epitaxial</span><span class="op">)</span>
+<span class="fu"><a href="reference/half_normal.html">half_normal</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></code></pre></div>
+<p><img src="README_files/figure-gfm/unnamed-chunk-7-1.png"><!-- --></p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/half_normal.html">half_normal</a></span><span class="op">(</span><span class="va">m1</span>,method<span class="op">=</span><span class="st">'Zahn'</span>,alpha<span class="op">=</span><span class="fl">0.1</span>,
+            ref_line<span class="op">=</span><span class="cn">TRUE</span>,label_active<span class="op">=</span><span class="cn">TRUE</span>,
+            showME<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<p><img src="README_files/figure-gfm/unnamed-chunk-8-1.png"><!-- --></p>
+<p><strong>Interaction Effects Plot (Factorial Design)</strong></p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/interaction_effect.html">interaction_effect</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">adapted_epitaxial</span>, factor_1 <span class="op">=</span> <span class="va">A</span>,
+                   factor_2 <span class="op">=</span> <span class="va">B</span>, response_var <span class="op">=</span> <span class="va">ybar</span><span class="op">)</span></code></pre></div>
+<p><img src="README_files/figure-gfm/unnamed-chunk-9-1.png"><!-- --></p>
+<p><strong>Main Effects Plots (Factorial Design)</strong></p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/main_effect.html">main_effect</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">adapted_epitaxial</span>, factor_1 <span class="op">=</span> <span class="va">B</span>, 
+            response_var <span class="op">=</span> <span class="va">ybar</span><span class="op">)</span></code></pre></div>
+<p><img src="README_files/figure-gfm/unnamed-chunk-10-1.png"><!-- --></p>
+<p><strong>Pareto Plot</strong></p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">lns2</span> <span class="op">~</span> <span class="op">(</span><span class="va">A</span><span class="op">+</span><span class="va">B</span><span class="op">+</span><span class="va">C</span><span class="op">+</span><span class="va">D</span><span class="op">)</span><span class="op">^</span><span class="fl">4</span>,data<span class="op">=</span><span class="va">original_epitaxial</span><span class="op">)</span>
+<span class="fu"><a href="reference/pareto_plot.html">pareto_plot</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></code></pre></div>
+<p><img src="README_files/figure-gfm/unnamed-chunk-11-1.png"><!-- --></p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/pareto_plot.html">pareto_plot</a></span><span class="op">(</span><span class="va">m1</span>,method<span class="op">=</span><span class="st">'Zahn'</span>,alpha<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span></code></pre></div>
+<p><img src="README_files/figure-gfm/unnamed-chunk-12-1.png"><!-- --></p>
+<div class="section level3">
+<h3 id="contributing-to-the-package">Contributing to the package<a class="anchor" aria-label="anchor" href="#contributing-to-the-package"></a>
+</h3>
+<p>I welcome feedback, suggestions, issues, and contributions! Check out the <a href="https://github.com/toledo60/ggDoE/blob/main/.github/CONTRIBUTING.md" class="external-link">CONTRIBUTING</a> file for more details.</p>
 </div>
 </div>
 </div>
@@ -102,52 +148,63 @@ remotes::install_github("toledo60/ggDoE")</code></pre>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/toledo60/ggDoE/">https://​github.com/​toledo60/​ggDoE/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/toledo60/ggDoE/issues">https://​github.com/​toledo60/​ggDoE/​issues</a>
-</li>
+<li><a href="https://github.com/toledo60/ggDoE/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/toledo60/ggDoE/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 </ul>
 </div>
-<div class="developers">
-<h2>Developers</h2>
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li>Jose Toledo Luna <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-8559-0027" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html#citation">Citing ggDoE</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/toledo60/ggDoE/actions"><img src="https://github.com/toledo60/ggDoE/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://ggdoe.netlify.app/"><img src="https://img.shields.io/badge/Documentation-ggDoE-blue" alt="Documentation"></a></li>
-<li><a href="https://app.netlify.com/sites/ggdoe/deploys"><img src="https://api.netlify.com/api/v1/badges/20d30180-f503-4b63-ba9c-c95bfca3826e/deploy-status" alt="Netlify Status"></a></li>
+<li>Jose Toledo Luna <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-8559-0027" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/toledo60/ggDoE/actions" class="external-link"><img src="https://github.com/toledo60/ggDoE/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://ggdoe.netlify.app/" class="external-link"><img src="https://img.shields.io/badge/Documentation-ggDoE-blue" alt="Documentation"></a></li>
+<li><a href="https://app.netlify.com/sites/ggdoe/deploys" class="external-link"><img src="https://api.netlify.com/api/v1/badges/20d30180-f503-4b63-ba9c-c95bfca3826e/deploy-status" alt="Netlify Status"></a></li>
+</ul>
 </div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Jose Toledo Luna.</p>
+  <p></p>
+<p>Developed by Jose Toledo Luna.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
@@ -155,6 +212,8 @@ remotes::install_github("toledo60/ggDoE")</code></pre>
 
   
 
+
+  
 
   </body>
 </html>

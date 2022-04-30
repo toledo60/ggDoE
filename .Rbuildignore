@@ -4,3 +4,5 @@
 ^LICENSE\.md$
 ^\.github$
 ^docs$
+^README.Rmd
+^README_files
