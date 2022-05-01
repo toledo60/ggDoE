@@ -110,9 +110,19 @@ interaction_effect(data = adapted_epitaxial, factor_1 = A,
 **Main Effects Plots (Factorial Design)**
 
 ```{r}
-main_effect(data = adapted_epitaxial, factor_1 = B, 
-            response_var = ybar)
+main_effects(original_epitaxial,
+             response='s2',
+             exclude_vars = c('ybar','lns2'))
 ```
+
+
+```{r}
+main_effects(original_epitaxial,
+             response='s2',
+             exclude_vars = c('A','ybar','lns2'),
+             ncols=3)
+```
+
 
 
 **Pareto Plot**

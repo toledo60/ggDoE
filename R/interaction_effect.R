@@ -18,7 +18,6 @@
 #' factor_2 = B, response_var = ybar)
 #' @importFrom ggplot2 aes geom_line geom_point theme labs element_rect scale_linetype_manual
 #' @importFrom ggplot2 scale_color_manual theme_bw
-#' @importFrom poorman group_by mutate summarise "%>%"
 interaction_effect  <- function(data, factor_1,
                                 factor_2,
                                 response_var,
@@ -31,10 +30,10 @@ interaction_effect  <- function(data, factor_1,
 
   x <- suppressWarnings((eval(bquote(
     data %>%
-      group_by(.(factor1),.(factor2),.add=TRUE) %>%
-      summarise(mean_response = mean(.(response)),.groups = "drop_last") %>%
-      mutate(factor1 = as.factor(.(factor1) ) ) %>%
-      mutate(factor2 = as.factor(.(factor2) ) ) %>%
+      poorman::group_by(.(factor1),.(factor2),.add=TRUE) %>%
+      poorman::summarise(mean_response = mean(.(response)),.groups = "drop_last") %>%
+      poorman::mutate(factor1 = as.factor(.(factor1) ) ) %>%
+      poorman::mutate(factor2 = as.factor(.(factor2) ) ) %>%
       ggplot(., aes(x = (factor1), y = mean_response,group=factor2,
                     colour=factor2,
                     shape=factor2,

@@ -1,7 +1,7 @@
 Package: ggDoE
 Type: Package
 Title: Modern graphs for Design of Experiments with ggplot2
-Version: 0.5.5
+Version: 0.5.6
 Authors@R: c(person(given = "Jose",family = "Toledo Luna",
              role = c("aut", "cre"),
              email = "toledo60@protonmail.com",
@@ -17,7 +17,7 @@ Imports:
     ggplot2,
     gridExtra,
     reshape2,
-    poorman (>= 0.2.5),
+    dplyr
 Suggests:
     knitr,
     pkgdown,
@@ -26,7 +26,7 @@ Suggests:
     tibble,
     MASS,
     viridisLite,
-    dplyr,
+    poorman,
     unrepx
 RoxygenNote: 7.1.2
 Depends: 

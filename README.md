@@ -111,11 +111,21 @@ interaction_effect(data = adapted_epitaxial, factor_1 = A,
 **Main Effects Plots (Factorial Design)**
 
 ``` r
-main_effect(data = adapted_epitaxial, factor_1 = B, 
-            response_var = ybar)
+main_effects(original_epitaxial,
+             response='s2',
+             exclude_vars = c('ybar','lns2'))
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+
+``` r
+main_effects(original_epitaxial,
+             response='s2',
+             exclude_vars = c('A','ybar','lns2'),
+             ncols=3)
+```
+
+![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 
 **Pareto Plot**
 
@@ -124,13 +134,13 @@ m1 <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
 pareto_plot(m1)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
 
 ``` r
 pareto_plot(m1,method='Zahn',alpha=0.1)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
 
 ### Contributing to the package
 

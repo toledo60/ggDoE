@@ -58,6 +58,9 @@
     <loc>/reference/main_effect.html</loc>
   </url>
   <url>
+    <loc>/reference/main_effects.html</loc>
+  </url>
+  <url>
     <loc>/reference/original_epitaxial.html</loc>
   </url>
   <url>
@@ -65,5 +68,8 @@
   </url>
   <url>
     <loc>/reference/summs_models.html</loc>
+  </url>
+  <url>
+    <loc>/reference/viridisPalette.html</loc>
   </url>
 </urlset>
