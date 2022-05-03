@@ -6,7 +6,6 @@
 #' @param line_color Change color of the geom_smooth line for the respective diagnostic plot
 #' @return Regression Diagnostic plots. In the case where all hat values are equal only residual vs.fitted, normal-QQ, and scale-location plots are returned
 #' @importFrom ggplot2 geom_smooth stat_qq geom_abline ylim aes_string geom_text theme_bw
-#' @importFrom gridExtra grid.arrange
 #' @importFrom stats quantile lm.influence cooks.distance rstandard
 #' @export
 #'

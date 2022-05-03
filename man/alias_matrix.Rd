@@ -7,7 +7,7 @@
 alias_matrix(
   design,
   midpoint = 0.5,
-  intercept = TRUE,
+  intercept = FALSE,
   showplot = TRUE,
   symmetric = FALSE,
   digits = 3,
@@ -21,7 +21,7 @@ alias_matrix(
 
 \item{midpoint}{A midpoint value between (0,1) to split the color scheme of three colors}
 
-\item{intercept}{logical indicating to include the intercept coefficient. Default is TRUE}
+\item{intercept}{logical indicating to include the intercept coefficient. Default is FALSE}
 
 \item{showplot}{logical indicating to show the correlation plot. If false, the correlation/alias matrix is returned. Default is TRUE}
 

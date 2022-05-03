@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggDoE</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.5.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6</span>
       </span>
     </div>
 
@@ -53,7 +53,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">alias_matrix</span><span class="op">(</span>
   <span class="va">design</span>,
   midpoint <span class="op">=</span> <span class="fl">0.5</span>,
-  intercept <span class="op">=</span> <span class="cn">TRUE</span>,
+  intercept <span class="op">=</span> <span class="cn">FALSE</span>,
   showplot <span class="op">=</span> <span class="cn">TRUE</span>,
   symmetric <span class="op">=</span> <span class="cn">FALSE</span>,
   digits <span class="op">=</span> <span class="fl">3</span>,
@@ -70,7 +70,7 @@
 <dt>midpoint</dt>
 <dd><p>A midpoint value between (0,1) to split the color scheme of three colors</p></dd>
 <dt>intercept</dt>
-<dd><p>logical indicating to include the intercept coefficient. Default is TRUE</p></dd>
+<dd><p>logical indicating to include the intercept coefficient. Default is FALSE</p></dd>
 <dt>showplot</dt>
 <dd><p>logical indicating to show the correlation plot. If false, the correlation/alias matrix is returned. Default is TRUE</p></dd>
 <dt>symmetric</dt>

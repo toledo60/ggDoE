@@ -34,11 +34,11 @@ The following plots are currently available:
 -   [half_normal()](https://ggdoe.netlify.app/reference/half_normal.html):
     Half-Normal effects plot
 
--   [interaction_effect()](https://ggdoe.netlify.app/reference/interaction_effect.html):
+-   [interaction_effects()](https://ggdoe.netlify.app/reference/interaction_effects.html):
     Interaction effects plot between two factors in a factorial design
 
--   [main_effect()](https://ggdoe.netlify.app/reference/main_effect.html):
-    Main effect plot for one factor in a factorial design
+-   [main_effects()](https://ggdoe.netlify.app/reference/main_effects.html):
+    Main effect plots for one factor in a factorial design
 
 -   [pareto_plot()](https://ggdoe.netlify.app/reference/pareto_plot.html):
     Pareto plot of effects with cutoff values for the margin of error
@@ -57,8 +57,7 @@ alias_matrix(design=aliased_design)
 ![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
 ``` r
-alias_matrix(design=aliased_design, symmetric=TRUE,
-             intercept=FALSE)
+alias_matrix(design=aliased_design, symmetric=TRUE)
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
@@ -102,11 +101,19 @@ half_normal(m1,method='Zahn',alpha=0.1,
 **Interaction Effects Plot (Factorial Design)**
 
 ``` r
-interaction_effect(data = adapted_epitaxial, factor_1 = A,
-                   factor_2 = B, response_var = ybar)
+interaction_effects(adapted_epitaxial,response = 'ybar',
+                    exclude_vars = c('s2','lns2'))
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+
+``` r
+interaction_effects(adapted_epitaxial,response = 'ybar',
+                    exclude_vars = c('A','s2','lns2'),
+                    ncols=3)
+```
+
+![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
 **Main Effects Plots (Factorial Design)**
 
@@ -116,7 +123,7 @@ main_effects(original_epitaxial,
              exclude_vars = c('ybar','lns2'))
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 
 ``` r
 main_effects(original_epitaxial,
@@ -125,7 +132,7 @@ main_effects(original_epitaxial,
              ncols=3)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
 
 **Pareto Plot**
 
@@ -134,13 +141,13 @@ m1 <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
 pareto_plot(m1)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
 
 ``` r
 pareto_plot(m1,method='Zahn',alpha=0.1)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
 
 ### Contributing to the package
 

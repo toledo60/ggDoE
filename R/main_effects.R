@@ -13,7 +13,6 @@
 #' @export
 #' @importFrom ggplot2 aes_ geom_point geom_line theme_bw labs facet_wrap scale_color_manual vars
 #' @importFrom dplyr group_by summarise "%>%" bind_rows
-#' @importFrom reshape2 melt
 #'
 #' @examples
 #' main_effects(original_epitaxial,response='s2',exclude_vars = c('ybar','lns2'))
@@ -39,7 +38,7 @@ main_effects <- function(design,response,ncols=2,
   }
   else{
     dat = bind_rows(dat_list)
-    melted_dat = melt(dat,na.rm=TRUE,id.vars=response)
+    melted_dat = reshape2::melt(dat,na.rm=TRUE,id.vars=response)
 
     factors_total = length(factor_names)
 
