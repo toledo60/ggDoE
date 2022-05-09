@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggDoE</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.1</span>
       </span>
     </div>
 
@@ -57,7 +57,7 @@
   showplot <span class="op">=</span> <span class="cn">TRUE</span>,
   symmetric <span class="op">=</span> <span class="cn">FALSE</span>,
   digits <span class="op">=</span> <span class="fl">3</span>,
-  palette <span class="op">=</span> <span class="st">"viridis"</span>,
+  color_palette <span class="op">=</span> <span class="st">"viridis"</span>,
   alpha <span class="op">=</span> <span class="fl">1</span>,
   direction <span class="op">=</span> <span class="fl">1</span>
 <span class="op">)</span></code></pre></div>
@@ -77,7 +77,7 @@
 <dd><p>logical indicating to return all pairwise correlations between main effects and interaction effects. Default is FALSE</p></dd>
 <dt>digits</dt>
 <dd><p>number of digits to round correlation values. Default is 3</p></dd>
-<dt>palette</dt>
+<dt>color_palette</dt>
 <dd><p>A character string indicating the color map option to use. Eight options are available: "viridis","cividis","magma","inferno","plasma","rocket","mako","turbo"</p></dd>
 <dt>alpha</dt>
 <dd><p>The alpha transparency, a number in [0,1]</p></dd>
@@ -95,9 +95,9 @@
 <span class="r-plt img"><img src="alias_matrix-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span class="fu">alias_matrix</span><span class="op">(</span>design<span class="op">=</span><span class="va">aliased_design</span>, symmetric<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-plt img"><img src="alias_matrix-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">alias_matrix</span><span class="op">(</span>design<span class="op">=</span><span class="va">aliased_design</span>, symmetric<span class="op">=</span><span class="cn">TRUE</span>, palette <span class="op">=</span> <span class="st">"plasma"</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">alias_matrix</span><span class="op">(</span>design<span class="op">=</span><span class="va">aliased_design</span>, symmetric<span class="op">=</span><span class="cn">TRUE</span>, color_palette <span class="op">=</span> <span class="st">"plasma"</span><span class="op">)</span></span>
 <span class="r-plt img"><img src="alias_matrix-3.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">alias_matrix</span><span class="op">(</span>design<span class="op">=</span><span class="va">aliased_design</span>, symmetric <span class="op">=</span> <span class="cn">TRUE</span>, palette <span class="op">=</span> <span class="st">"magma"</span>, direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">alias_matrix</span><span class="op">(</span>design<span class="op">=</span><span class="va">aliased_design</span>, symmetric <span class="op">=</span> <span class="cn">TRUE</span>, color_palette <span class="op">=</span> <span class="st">"magma"</span>, direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
 <span class="r-plt img"><img src="alias_matrix-4.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
