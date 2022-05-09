@@ -11,7 +11,7 @@ alias_matrix(
   showplot = TRUE,
   symmetric = FALSE,
   digits = 3,
-  palette = "viridis",
+  color_palette = "viridis",
   alpha = 1,
   direction = 1
 )
@@ -29,7 +29,7 @@ alias_matrix(
 
 \item{digits}{number of digits to round correlation values. Default is 3}
 
-\item{palette}{A character string indicating the color map option to use. Eight options are available: "viridis","cividis","magma","inferno","plasma","rocket","mako","turbo"}
+\item{color_palette}{A character string indicating the color map option to use. Eight options are available: "viridis","cividis","magma","inferno","plasma","rocket","mako","turbo"}
 
 \item{alpha}{The alpha transparency, a number in [0,1]}
 
@@ -44,6 +44,6 @@ Color Map on Correlations
 \examples{
 alias_matrix(design=aliased_design)
 alias_matrix(design=aliased_design, symmetric=TRUE)
-alias_matrix(design=aliased_design, symmetric=TRUE, palette = "plasma")
-alias_matrix(design=aliased_design, symmetric = TRUE, palette = "magma", direction = -1)
+alias_matrix(design=aliased_design, symmetric=TRUE, color_palette = "plasma")
+alias_matrix(design=aliased_design, symmetric = TRUE, color_palette = "magma", direction = -1)
 }

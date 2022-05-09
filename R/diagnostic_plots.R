@@ -14,7 +14,8 @@
 #' mtcars_lm <- lm(mpg ~.,data=mtcars)
 #' diagnostic_plots(mtcars_lm)
 #' diagnostic_plots(mtcars_lm,SE=TRUE)
-diagnostic_plots <- function(model,SE=FALSE,point_size=2,line_color = "indianred3"){
+diagnostic_plots <- function(model,SE=FALSE,point_size=1.5,
+                             line_color = "#21908CFF"){
   if(is.null(match("lm",c("glm","lm")))){
     stop("model should be of class lm or glm")
   }else{

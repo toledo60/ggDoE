@@ -10,7 +10,7 @@ half_normal(
   alpha = 0.05,
   label_active = FALSE,
   ref_line = FALSE,
-  showME = FALSE,
+  margin_errors = FALSE,
   showplot = TRUE
 )
 }
@@ -25,7 +25,7 @@ half_normal(
 
 \item{ref_line}{Dafault is TRUE, if FALSE the abline with slope (1/PSE) is not displayed. Reference line should follow along most points that are not considered outliers.}
 
-\item{showME}{Default is FALSE, if TRUE the cutoffs for margin of errors (ME) and simultaneous margin of error (SME) are shown}
+\item{margin_errors}{Default is FALSE, if TRUE the cutoffs for margin of errors (ME) and simultaneous margin of error (SME) are shown}
 
 \item{showplot}{Default is TRUE, if FALSE plot will not be shown and a tibble is returned used to create the plot along with the calculated PSE,ME,SME}
 }
@@ -38,6 +38,6 @@ Half-Normal Effects Plots
 \examples{
 m1 <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
 half_normal(m1)
-half_normal(m1,alpha=0.1,label_active=TRUE,showME=TRUE)
-half_normal(m1,method='Zahn',alpha=0.1,ref_line=TRUE,label_active=TRUE,showME=TRUE)
+half_normal(m1,alpha=0.1,label_active=TRUE,margin_errors=TRUE)
+half_normal(m1,method='Zahn',alpha=0.1,ref_line=TRUE,label_active=TRUE,margin_errors=TRUE)
 }

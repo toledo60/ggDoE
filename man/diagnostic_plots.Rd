@@ -4,7 +4,7 @@
 \alias{diagnostic_plots}
 \title{Regression Diagnostic Plots with ggplot2}
 \usage{
-diagnostic_plots(model, SE = FALSE, point_size = 2, line_color = "indianred3")
+diagnostic_plots(model, SE = FALSE, point_size = 1.5, line_color = "#21908CFF")
 }
 \arguments{
 \item{model}{Model of class "lm" or "glm"}

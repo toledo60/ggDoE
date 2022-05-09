@@ -11,12 +11,14 @@
 #' @return interaction effects plot between two factors
 #' @export
 #'
-#' @examples
-#' interaction_effects(adapted_epitaxial,response = 'ybar',exclude_vars = c('s2','lns2'))
 #' @importFrom ggplot2 aes geom_line geom_point theme labs element_rect scale_linetype_manual
 #' @importFrom ggplot2 scale_color_manual theme_bw
 #' @importFrom dplyr mutate_at setdiff group_by summarise "%>%"
 #' @importFrom utils combn
+#'
+#' @examples
+#' interaction_effects(adapted_epitaxial,response = 'ybar',exclude_vars = c('s2','lns2'))
+
 interaction_effects <- function(design,response,
                                 exclude_vars=c(),
                                 linetypes = c('solid','dashed'),

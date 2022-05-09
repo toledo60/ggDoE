@@ -13,8 +13,8 @@
 #'
 #' @examples
 #' model <- lm(s2 ~ (A+B+C+D),data = adapted_epitaxial)
-#' boxcox_transform(model,lambda = seq(-2,3,0.2))
-#' boxcox_transform(model,lambda = seq(-2,3,0.2),showplot=FALSE)
+#' boxcox_transform(model,lambda = seq(-5,5,0.2))
+#' boxcox_transform(model,lambda = seq(-5,5,0.2),showplot=FALSE)
 boxcox_transform <- function(model,lambda= seq(-2,2,1/10),
                              showlambda = TRUE, lambdaSF = 3,showplot=TRUE){
 
@@ -45,8 +45,8 @@ boxcox_transform <- function(model,lambda= seq(-2,2,1/10),
   if(showplot){
     plot <- ggplot(data = boxcox_unlist) +
       geom_segment(aes(x = xstart, y = ystart, xend = xend, yend = yend),
-                   size=1.3,color='#037eab') +
-      labs(x = "Lambda", y = "Log-likelihood",title = "Boxcox Plot",
+                   size=1.3,color="#21908CFF") +
+      labs(x = "Lambda", y = "Log-likelihood",title = "Boxcox Transformation",
            subtitle = paste0("95% CI for Lambda:",' (',conf_lo,', ',conf_hi,')')) +
       geom_vline(xintercept = best_lambda, linetype = "dotted",
                  color = '#2dab03',size=1.1) +

@@ -5,21 +5,21 @@
 \title{Pareto Plot of Effects}
 \usage{
 pareto_plot(
-  obj,
+  model,
   alpha = 0.05,
   method = "Lenth",
-  showME = TRUE,
+  margin_errors = TRUE,
   showplot = TRUE
 )
 }
 \arguments{
-\item{obj}{object of class lm}
+\item{model}{Model of class "lm" or "glm"#'}
 
 \item{alpha}{significance level to compute margin of errors based on Lenth method. Default is alpha=0.05}
 
 \item{method}{Character value. Method to calculate PSE. Default is Lenth. Options include: Zahn, WZahn, Lenth, RMS, Dong, JuanPena, Daniel}
 
-\item{showME}{Default is TRUE, if false the cutoffs for margin of errors (ME) and simultaneous margin of error (SME) are not shown}
+\item{margin_errors}{Default is TRUE, if false the cutoffs for margin of errors (ME) and simultaneous margin of error (SME) are not shown}
 
 \item{showplot}{Default is TRUE, if false plot will not be shown and a tibble is returned with data used to create the pareto plot}
 }
@@ -33,5 +33,5 @@ Pareto Plot of Effects
 m1 <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
 pareto_plot(m1)
 pareto_plot(m1,method='Zahn',alpha=0.1)
-pareto_plot(m1,showME=FALSE)
+pareto_plot(m1,margin_errors=FALSE)
 }

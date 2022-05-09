@@ -66,7 +66,7 @@ alias_matrix(design=aliased_design, symmetric=TRUE)
 
 ``` r
 model <- lm(s2 ~ (A+B+C+D),data = adapted_epitaxial)
-boxcox_transform(model,lambda = seq(-2,3,0.2))
+boxcox_transform(model,lambda = seq(-5,5,0.2))
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
@@ -93,7 +93,7 @@ half_normal(m1)
 ``` r
 half_normal(m1,method='Zahn',alpha=0.1,
             ref_line=TRUE,label_active=TRUE,
-            showME=TRUE)
+            margin_errors=TRUE)
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
@@ -129,6 +129,7 @@ main_effects(original_epitaxial,
 main_effects(original_epitaxial,
              response='s2',
              exclude_vars = c('A','ybar','lns2'),
+             color_palette = 'viridis',
              ncols=3)
 ```
 

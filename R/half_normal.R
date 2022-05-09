@@ -5,7 +5,7 @@
 #' @param alpha specify the significance level. Default is alpha=0.05
 #' @param label_active If TRUE, active effects are labeled if the effects cross the computed margin of error (ME). See method argument for more details
 #' @param ref_line Dafault is TRUE, if FALSE the abline with slope (1/PSE) is not displayed. Reference line should follow along most points that are not considered outliers.
-#' @param showME Default is FALSE, if TRUE the cutoffs for margin of errors (ME) and simultaneous margin of error (SME) are shown
+#' @param margin_errors Default is FALSE, if TRUE the cutoffs for margin of errors (ME) and simultaneous margin of error (SME) are shown
 #' @param showplot Default is TRUE, if FALSE plot will not be shown and a tibble is returned used to create the plot along with the calculated PSE,ME,SME
 #' @return A tibble with the absolute effects and half-normal quantiles. A ggplot2 version of halfnormal plot for factorial effects is returned
 #' @importFrom ggplot2 ggplot aes geom_point geom_text theme_bw labs geom_vline annotate geom_abline element_blank
@@ -15,13 +15,13 @@
 #'
 #' @examples m1 <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
 #' half_normal(m1)
-#' half_normal(m1,alpha=0.1,label_active=TRUE,showME=TRUE)
-#' half_normal(m1,method='Zahn',alpha=0.1,ref_line=TRUE,label_active=TRUE,showME=TRUE)
+#' half_normal(m1,alpha=0.1,label_active=TRUE,margin_errors=TRUE)
+#' half_normal(m1,method='Zahn',alpha=0.1,ref_line=TRUE,label_active=TRUE,margin_errors=TRUE)
 half_normal <- function(obj,method='Lenth',
                        alpha=0.05,
                        label_active=FALSE,
                        ref_line = FALSE,
-                       showME = FALSE,
+                       margin_errors = FALSE,
                        showplot=TRUE){
   if (inherits(obj, "lm")) {
     i <- pmatch("(Intercept)", names(coef(obj)))
@@ -63,7 +63,7 @@ half_normal <- function(obj,method='Lenth',
       theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
       labs(x="absolute effects",y="half-normal quantiles")
 
-    if(ref_line & showME){
+    if(ref_line & margin_errors){
       plt <- base_plot + geom_abline(intercept=0,slope = 1/PSE,linetype=2)+
         geom_vline(xintercept = ME,linetype=3)+
         annotate("text",x=ME,y=-Inf,hjust=-0.2,vjust=-0.5,
@@ -75,10 +75,10 @@ half_normal <- function(obj,method='Lenth',
              caption = paste0(method," ME=",round(ME,2),",",
                               " SME=",round(SME,2)))
     }
-    else if (!ref_line & !showME){
+    else if (!ref_line & !margin_errors){
       plt <- base_plot
     }
-    else if(!ref_line & showME){
+    else if(!ref_line & margin_errors){
       plt <- base_plot +geom_vline(xintercept = ME,linetype=3)+
         annotate("text",x=ME,y=-Inf,hjust=-0.2,vjust=-0.5,
                  label="ME",fontface="italic",size=2.8)+
@@ -89,7 +89,7 @@ half_normal <- function(obj,method='Lenth',
              caption = paste0(method," ME=",round(ME,2),",",
                               " SME=",round(SME,2)))
     }
-    else if(ref_line & !showME){
+    else if(ref_line & !margin_errors){
       plt <- base_plot + geom_abline(intercept=0,slope = 1/PSE,linetype=2)
     }
     return(plt)

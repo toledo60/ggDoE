@@ -9,7 +9,7 @@ main_effects(
   response,
   ncols = 2,
   exclude_vars = c(),
-  palette = "viridis",
+  color_palette = NA,
   alpha = 1,
   direction = 1,
   showplot = TRUE
@@ -24,7 +24,7 @@ main_effects(
 
 \item{exclude_vars}{A vector containing variables to exclude}
 
-\item{palette}{A character string indicating the color map option to use. Eight options are available: "viridis","cividis","magma","inferno","plasma","rocket","mako","turbo"}
+\item{color_palette}{A character string indicating the color map option to use. Eight options are available: "viridis","cividis","magma","inferno","plasma","rocket","mako","turbo"}
 
 \item{alpha}{The alpha transparency, a number in [0,1]}
 

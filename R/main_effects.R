@@ -4,7 +4,7 @@
 #' @param response A character string indicating the response of the data
 #' @param ncols number of columns for facet grid. Default is 2
 #' @param exclude_vars A vector containing variables to exclude
-#' @param palette A character string indicating the color map option to use. Eight options are available: "viridis","cividis","magma","inferno","plasma","rocket","mako","turbo"
+#' @param color_palette A character string indicating the color map option to use. Eight options are available: "viridis","cividis","magma","inferno","plasma","rocket","mako","turbo"
 #' @param alpha The alpha transparency, a number in [0,1]
 #' @param direction Sets the order of colors in the scale. If 1, the default, colors are ordered from darkest to lightest. If -1, the order of colors is reversed
 #' @param showplot logical indicating to show the main effect plots. If false, a list of tibbles is returned used to obtain the main effects for each factor. Default is TRUE
@@ -19,7 +19,7 @@
 #' main_effects(original_epitaxial,response='ybar',exclude_vars=c('A','s2','lns2'),ncols=3)
 main_effects <- function(design,response,ncols=2,
                          exclude_vars=c(),
-                         palette = "viridis",
+                         color_palette = NA,
                          alpha=1,direction = 1,
                          showplot=TRUE){
   factor_names = setdiff(names(design),c(response,exclude_vars))
@@ -42,10 +42,16 @@ main_effects <- function(design,response,ncols=2,
 
     factors_total = length(factor_names)
 
+    if(is.na(color_palette)){
+      factor_colors = rep("#21908CFF",factors_total)
+    }
+    else{
     factor_colors <- viridisPalette(factors_total,
-                                    palette = palette,
+                                    color_palette = color_palette,
                                     direction = direction,
                                     alpha = alpha)
+    }
+
     p <- ggplot(melted_dat) +
       aes_(x = ~value, y = as.name(response)  , colour = ~variable) +
       geom_line(size =0.5) +

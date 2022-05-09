@@ -4,12 +4,17 @@
 \alias{viridisPalette}
 \title{Simple viridisLite wrapper}
 \usage{
-viridisPalette(total_colors, palette = "viridis", alpha = 1, direction = 1)
+viridisPalette(
+  total_colors,
+  color_palette = "viridis",
+  alpha = 1,
+  direction = 1
+)
 }
 \arguments{
 \item{total_colors}{number of colors desired}
 
-\item{palette}{A character string indicating the color map option to use. Eight options are available: "viridis","cividis","magma","inferno","plasma","rocket","mako","turbo"}
+\item{color_palette}{A character string indicating the color map option to use. Eight options are available: "viridis","cividis","magma","inferno","plasma","rocket","mako","turbo"}
 
 \item{alpha}{The alpha transparency, a number in [0,1]}
 
@@ -23,6 +28,6 @@ Simple viridisLite wrapper
 }
 \examples{
 viridisPalette(5)
-viridisPalette(5,palette='magma',alpha=0.5)
-viridisPalette(5,palette='plasma',alpha=0.6,direction=-1)
+viridisPalette(5,color_palette='magma',alpha=0.5)
+viridisPalette(5,color_palette='plasma',alpha=0.6,direction=-1)
 }

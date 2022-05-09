@@ -6,7 +6,7 @@
 #' @param showplot logical indicating to show the correlation plot. If false, the correlation/alias matrix is returned. Default is TRUE
 #' @param symmetric logical indicating to return all pairwise correlations between main effects and interaction effects. Default is FALSE
 #' @param digits number of digits to round correlation values. Default is 3
-#' @param palette A character string indicating the color map option to use. Eight options are available: "viridis","cividis","magma","inferno","plasma","rocket","mako","turbo"
+#' @param color_palette A character string indicating the color map option to use. Eight options are available: "viridis","cividis","magma","inferno","plasma","rocket","mako","turbo"
 #' @param alpha The alpha transparency, a number in [0,1]
 #' @param direction Sets the order of colors in the scale. If 1, the default, colors are ordered from darkest to lightest. If -1, the order of colors is reversed
 #' @importFrom ggplot2 scale_fill_gradient2 geom_tile element_blank aes_string theme_minimal theme
@@ -17,12 +17,12 @@
 #' @examples
 #' alias_matrix(design=aliased_design)
 #' alias_matrix(design=aliased_design, symmetric=TRUE)
-#' alias_matrix(design=aliased_design, symmetric=TRUE, palette = "plasma")
-#' alias_matrix(design=aliased_design, symmetric = TRUE, palette = "magma", direction = -1)
+#' alias_matrix(design=aliased_design, symmetric=TRUE, color_palette = "plasma")
+#' alias_matrix(design=aliased_design, symmetric = TRUE, color_palette = "magma", direction = -1)
 alias_matrix <- function(design,midpoint=0.5,
                          intercept=FALSE,showplot=TRUE,
                          symmetric = FALSE,
-                         digits=3,palette = "viridis",
+                         digits=3,color_palette = "viridis",
                          alpha=1,direction = 1){
 
   k <- ncol(design)   # k is number of input factors
@@ -52,7 +52,7 @@ alias_matrix <- function(design,midpoint=0.5,
     }
 
     colors <- viridisPalette(3,
-                             palette = palette,
+                             color_palette = color_palette,
                              direction = direction,
                              alpha = alpha)
 
