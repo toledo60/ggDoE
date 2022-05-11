@@ -54,13 +54,13 @@ library(ggDoE)
 alias_matrix(design=aliased_design)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+![](man/figures/unnamed-chunk-3-1.png)
 
 ``` r
 alias_matrix(design=aliased_design, symmetric=TRUE)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+![](man/figures/unnamed-chunk-4-1.png)
 
 **Box-Cox Transformation**
 
@@ -69,7 +69,7 @@ model <- lm(s2 ~ (A+B+C+D),data = adapted_epitaxial)
 boxcox_transform(model,lambda = seq(-5,5,0.2))
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![](man/figures/unnamed-chunk-5-1.png)
 
 **Regression Diagnostic Plots**
 
@@ -79,7 +79,7 @@ mtcars_lm <- lm(mpg ~.,data=mtcars)
 diagnostic_plots(mtcars_lm)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+![](man/figures/unnamed-chunk-6-1.png)
 
 **Half-Normal Plot**
 
@@ -88,7 +88,7 @@ m1 <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
 half_normal(m1)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+![](man/figures/unnamed-chunk-7-1.png)
 
 ``` r
 half_normal(m1,method='Zahn',alpha=0.1,
@@ -96,7 +96,7 @@ half_normal(m1,method='Zahn',alpha=0.1,
             margin_errors=TRUE)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+![](man/figures/unnamed-chunk-8-1.png)
 
 **Interaction Effects Plot (Factorial Design)**
 
@@ -105,7 +105,7 @@ interaction_effects(adapted_epitaxial,response = 'ybar',
                     exclude_vars = c('s2','lns2'))
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+![](man/figures/unnamed-chunk-9-1.png)
 
 ``` r
 interaction_effects(adapted_epitaxial,response = 'ybar',
@@ -113,7 +113,7 @@ interaction_effects(adapted_epitaxial,response = 'ybar',
                     ncols=3)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+![](man/figures/unnamed-chunk-10-1.png)
 
 **Main Effects Plots (Factorial Design)**
 
@@ -123,7 +123,7 @@ main_effects(original_epitaxial,
              exclude_vars = c('ybar','lns2'))
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+![](man/figures/unnamed-chunk-11-1.png)
 
 ``` r
 main_effects(original_epitaxial,
@@ -133,7 +133,7 @@ main_effects(original_epitaxial,
              ncols=3)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+![](man/figures/unnamed-chunk-12-1.png)
 
 **Pareto Plot**
 
@@ -142,13 +142,13 @@ m1 <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
 pareto_plot(m1)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+![](man/figures/unnamed-chunk-13-1.png)
 
 ``` r
 pareto_plot(m1,method='Zahn',alpha=0.1)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
+![](man/figures/unnamed-chunk-14-1.png)
 
 ### Contributing to the package
 

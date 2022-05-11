@@ -12,7 +12,7 @@
 #' @export
 #'
 #' @importFrom ggplot2 aes geom_line geom_point theme labs element_rect scale_linetype_manual
-#' @importFrom ggplot2 scale_color_manual theme_bw
+#' @importFrom ggplot2 scale_color_manual theme_bw ylim element_blank
 #' @importFrom dplyr mutate_at setdiff group_by summarise "%>%"
 #' @importFrom utils combn
 #'
@@ -42,10 +42,22 @@ interaction_effects <- function(design,response,
     colnames(dat_list[[i]]) = c('factor1','factor2','response','group')
   }
 
-  if(showplot){
-    plot_list = vector('list',length = nrow(interactions))
 
-    for(i in 1:nrow(interactions)){
+  if(showplot){
+
+    vals = c()
+    n = length(dat_list)
+
+    for(i in 1:n){
+      vals = c(vals,dat_list[[i]][[3]])
+    }
+
+    minval = min(vals)
+    maxval = max(vals)
+
+    plot_list = vector('list',length = n)
+
+    for(i in 1:n){
 
       plot_list[[i]] <- dat_list[[i]] %>%
         ggplot(., aes(x = factor1, y = response,group=factor2,
@@ -57,7 +69,10 @@ interaction_effects <- function(design,response,
         scale_linetype_manual(values=linetypes)+
         scale_color_manual(values=colors)+
         theme_bw()+
-        theme(legend.background = element_rect(fill="gray96"))+
+        ylim(minval,maxval)+
+        theme(legend.background = element_rect(fill="gray96"),
+              panel.grid.major = element_blank(),
+              panel.grid.minor = element_blank())+
         labs(y=paste0("Mean of ",response),
              x= interactions[i,1],
              colour=interactions[i,2],
