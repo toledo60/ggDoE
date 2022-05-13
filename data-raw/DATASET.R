@@ -92,6 +92,7 @@ throughput_dat <- tribble( ~Day, ~ Operator, ~Machine, ~Method, ~Throughput,
                        3, 	  	 5, 	  	 "delta", 	  	 "B", 	  	 129,
                        4, 	  	 5, 	  	 "alpha", 	  	 "C", 	  	 100,
                        5,	  	 5, 	  	 "gamma", 	  	 "D", 	  	 100) %>%
-  mutate(across(where(is.character),as.factor))
+  mutate(across(where(is.character),as.factor)) %>%
+  mutate_at(c('Day','Operator'),as.factor)
 
 

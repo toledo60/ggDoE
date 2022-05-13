@@ -31,6 +31,9 @@ The following plots are currently available:
 -   [diagnostic_plots()](https://ggdoe.netlify.app/reference/diagnostic_plots.html):
     Regression diagnostics plots
 
+-   [gg_boxplots()](https://ggdoe.netlify.app/reference/gg_boxplots.html):
+    Boxplots used for comparing distributions between each group
+
 -   [half_normal()](https://ggdoe.netlify.app/reference/half_normal.html):
     Half-Normal effects plot
 
@@ -70,6 +73,15 @@ boxcox_transform(model,lambda = seq(-5,5,0.2))
 ```
 
 ![](man/figures/unnamed-chunk-5-1.png)
+
+**Boxplots**
+
+``` r
+gg_boxplots(data = throughput_dat,response = Throughput,factor = Machine,
+            alpha = 0.7,color_palette = 'viridis')
+```
+
+![](man/figures/boxplots.png)
 
 **Regression Diagnostic Plots**
 

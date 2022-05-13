@@ -4,13 +4,7 @@
     <loc>/404.html</loc>
   </url>
   <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
     <loc>/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
   </url>
   <url>
     <loc>/LICENSE-text.html</loc>
@@ -19,13 +13,22 @@
     <loc>/LICENSE.html</loc>
   </url>
   <url>
+    <loc>/authors.html</loc>
+  </url>
+  <url>
+    <loc>/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/Lenth_method.html</loc>
+  </url>
+  <url>
     <loc>/reference/adapted_epitaxial.html</loc>
   </url>
   <url>
-    <loc>/reference/aliased_design.html</loc>
+    <loc>/reference/alias_matrix.html</loc>
   </url>
   <url>
-    <loc>/reference/alias_matrix.html</loc>
+    <loc>/reference/aliased_design.html</loc>
   </url>
   <url>
     <loc>/reference/boxcox_transform.html</loc>
@@ -40,10 +43,13 @@
     <loc>/reference/epitaxial.html</loc>
   </url>
   <url>
-    <loc>/reference/halfnormal.html</loc>
+    <loc>/reference/gg_boxplots.html</loc>
   </url>
   <url>
     <loc>/reference/half_normal.html</loc>
+  </url>
+  <url>
+    <loc>/reference/halfnormal.html</loc>
   </url>
   <url>
     <loc>/reference/index.html</loc>
@@ -53,9 +59,6 @@
   </url>
   <url>
     <loc>/reference/interaction_effects.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Lenth_method.html</loc>
   </url>
   <url>
     <loc>/reference/main_effect.html</loc>
@@ -71,6 +74,9 @@
   </url>
   <url>
     <loc>/reference/summs_models.html</loc>
+  </url>
+  <url>
+    <loc>/reference/throughput_dat.html</loc>
   </url>
   <url>
     <loc>/reference/viridisPalette.html</loc>
