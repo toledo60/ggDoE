@@ -1,8 +1,9 @@
 #' Boxplots using ggplot2
 #'
 #' @param data provided dataset
-#' @param response A character string indicating the response of the data
-#' @param factor A character string indicating the factor of the data
+#' @param response Unquoted variable indicating the response of the data
+#' @param factor Unquoted variable indicating the factor of the data
+#' @param group_var Unquoted variable indicating the groups for facet_wrap
 #' @param horizontal Determine whether to change the orientation of the plot. Default is FALSE
 #' @param point_size Change size of points (outliers) in boxplots
 #' @param alpha The alpha transparency, a number in [0,1]
@@ -14,21 +15,24 @@
 #' @export
 #'
 #' @examples
-#' gg_boxplots(data = throughput_dat,response = Throughput,factor = Machine)
-#' gg_boxplots(data = throughput_dat,response = Throughput,factor = Machine,alpha = 0.7,
-#' color_palette = 'viridis')
+#' data <- ToothGrowth
+#' data$dose <- factor(data$dose,levels = c(0.5, 1, 2),labels = c("D0.5", "D1", "D2"))
+#' gg_boxplots(data,response = len,factor = dose,alpha=0.6)
+#' gg_boxplots(data,response = len,factor = dose,group_var = supp,
+#' alpha=0.6,color_palette = 'viridis')
 #' @importFrom dplyr enquo mutate select
 #' @importFrom ggplot2 aes geom_boxplot guides stat_summary coord_flip scale_fill_manual
-#' @importFrom ggplot2 theme_bw element_blank
+#' @importFrom ggplot2 theme_bw element_blank facet_wrap
 gg_boxplots <- function(data,response,factor,
+                        group_var = NULL,
                         horizontal = FALSE,
                         point_size=1,
                         alpha=1,
                         color_palette = NA,
                         direction=1,
                         show_mean=FALSE){
-  y <- enquo(response)
-  factor <- enquo(factor)
+  y = enquo(response)
+  factor = enquo(factor)
 
   if(!is.na(color_palette)){
 
@@ -45,7 +49,7 @@ gg_boxplots <- function(data,response,factor,
 
   p <- ggplot(data, aes(x=!!factor,y=!!y,
                         fill = !!factor)) +
-    geom_boxplot(alpha = alpha,colour='black',
+    geom_boxplot(alpha = alpha,
                  outlier.fill = "#ba3e30",
                  outlier.size = point_size) +
     guides(fill = 'none', colour = "none") +
@@ -56,5 +60,12 @@ gg_boxplots <- function(data,response,factor,
     theme(panel.grid.major = element_blank(),
           panel.grid.minor = element_blank())
 
-  return(p)
+  if(missing(group_var)){
+    return(p)
+  }
+  else{
+    group_var = enquo(group_var)
+    data <- mutate(data,group_var = !!group_var)
+    return(p+ facet_wrap(group_var))
+  }
 }

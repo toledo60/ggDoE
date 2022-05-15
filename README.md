@@ -32,7 +32,7 @@ The following plots are currently available:
     Regression diagnostics plots
 
 -   [gg_boxplots()](https://ggdoe.netlify.app/reference/gg_boxplots.html):
-    Boxplots used for comparing distributions between each group
+    Boxplots used for comparing distributions between groups
 
 -   [half_normal()](https://ggdoe.netlify.app/reference/half_normal.html):
     Half-Normal effects plot
@@ -77,11 +77,21 @@ boxcox_transform(model,lambda = seq(-5,5,0.2))
 **Boxplots**
 
 ``` r
-gg_boxplots(data = throughput_dat,response = Throughput,factor = Machine,
-            alpha = 0.7,color_palette = 'viridis')
+data <- ToothGrowth
+data$dose <- factor(data$dose,levels = c(0.5, 1, 2),
+                    labels = c("D0.5", "D1", "D2"))
+
+gg_boxplots(data,response = len,factor = dose,alpha=0.6)
 ```
 
-![](man/figures/boxplots.png)
+![](man/figures/boxplot1.png)
+
+``` r
+gg_boxplots(data,response = len,factor = dose,group_var = supp,
+            alpha=0.6,color_palette = 'viridis')
+```
+
+![](man/figures/boxplot2.png)
 
 **Regression Diagnostic Plots**
 

@@ -8,6 +8,7 @@ gg_boxplots(
   data,
   response,
   factor,
+  group_var = NULL,
   horizontal = FALSE,
   point_size = 1,
   alpha = 1,
@@ -19,9 +20,11 @@ gg_boxplots(
 \arguments{
 \item{data}{provided dataset}
 
-\item{response}{A character string indicating the response of the data}
+\item{response}{Unquoted variable indicating the response of the data}
 
-\item{factor}{A character string indicating the factor of the data}
+\item{factor}{Unquoted variable indicating the factor of the data}
+
+\item{group_var}{Unquoted variable indicating the groups for facet_wrap}
 
 \item{horizontal}{Determine whether to change the orientation of the plot. Default is FALSE}
 
@@ -42,7 +45,9 @@ Boxplots created with ggplot2
 Boxplots using ggplot2
 }
 \examples{
-gg_boxplots(data = throughput_dat,response = Throughput,factor = Machine)
-gg_boxplots(data = throughput_dat,response = Throughput,factor = Machine,alpha = 0.7,
-color_palette = 'viridis')
+data <- ToothGrowth
+data$dose <- factor(data$dose,levels = c(0.5, 1, 2),labels = c("D0.5", "D1", "D2"))
+gg_boxplots(data,response = len,factor = dose,alpha=0.6)
+gg_boxplots(data,response = len,factor = dose,group_var = supp,
+alpha=0.6,color_palette = 'viridis')
 }
