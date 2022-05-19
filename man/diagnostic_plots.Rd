@@ -4,16 +4,28 @@
 \alias{diagnostic_plots}
 \title{Regression Diagnostic Plots with ggplot2}
 \usage{
-diagnostic_plots(model, SE = FALSE, point_size = 1.5, line_color = "#21908CFF")
+diagnostic_plots(
+  model,
+  standard_errors = FALSE,
+  point_size = 1.5,
+  theme_color = "#21908CFF",
+  which_plots = 1:4,
+  ncols = 2
+)
 }
 \arguments{
 \item{model}{Model of class "lm" or "glm"}
 
-\item{SE}{Display confidence interval around geom_smooth, FALSE by default}
+\item{standard_errors}{Display confidence interval around geom_smooth, FALSE by default}
 
 \item{point_size}{Change size of points in plots}
 
-\item{line_color}{Change color of the geom_smooth line for the respective diagnostic plot}
+\item{theme_color}{Change color of the geom_smooth line and text labels for the respective diagnostic plot}
+
+\item{which_plots}{Choose which diagnostic plots to choose from. Options are 1 = 'residual vs fitted', 2 = 'Normal-QQ',
+3 = 'Scale-location', 4 = 'Residual vs Leverage', 5= "Cook's Distance". Default is 1:4}
+
+\item{ncols}{number of columns for grid layout. Default is 2}
 }
 \value{
 Regression Diagnostic plots. In the case where all hat values are equal only residual vs.fitted, normal-QQ, and scale-location plots are returned
@@ -25,5 +37,5 @@ Regression Diagnostic Plots with ggplot2
 data(mtcars)
 mtcars_lm <- lm(mpg ~.,data=mtcars)
 diagnostic_plots(mtcars_lm)
-diagnostic_plots(mtcars_lm,SE=TRUE)
+diagnostic_plots(mtcars_lm,which_plots=1:5)
 }

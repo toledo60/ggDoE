@@ -1,11 +1,14 @@
 #' Regression Diagnostic Plots with ggplot2
 #'
 #' @param model Model of class "lm" or "glm"
-#' @param SE Display confidence interval around geom_smooth, FALSE by default
+#' @param standard_errors Display confidence interval around geom_smooth, FALSE by default
 #' @param point_size Change size of points in plots
-#' @param line_color Change color of the geom_smooth line for the respective diagnostic plot
+#' @param theme_color Change color of the geom_smooth line and text labels for the respective diagnostic plot
+#' @param which_plots Choose which diagnostic plots to choose from. Options are 1 = 'residual vs fitted', 2 = 'Normal-QQ',
+#' 3 = 'Scale-location', 4 = 'Residual vs Leverage', 5= "Cook's Distance". Default is 1:4
+#' @param ncols number of columns for grid layout. Default is 2
 #' @return Regression Diagnostic plots. In the case where all hat values are equal only residual vs.fitted, normal-QQ, and scale-location plots are returned
-#' @importFrom ggplot2 geom_smooth stat_qq geom_abline ylim aes_string geom_text theme_bw
+#' @importFrom ggplot2 geom_smooth stat_qq geom_abline ylim aes_string geom_text theme_bw geom_linerange element_blank geom_hline
 #' @importFrom stats quantile lm.influence cooks.distance rstandard
 #' @export
 #'
@@ -13,9 +16,12 @@
 #' data(mtcars)
 #' mtcars_lm <- lm(mpg ~.,data=mtcars)
 #' diagnostic_plots(mtcars_lm)
-#' diagnostic_plots(mtcars_lm,SE=TRUE)
-diagnostic_plots <- function(model,SE=FALSE,point_size=1.5,
-                             line_color = "#21908CFF"){
+#' diagnostic_plots(mtcars_lm,which_plots=1:5)
+diagnostic_plots <- function(model,standard_errors=FALSE,
+                             point_size=1.5,
+                             theme_color = "#21908CFF",
+                             which_plots = 1:4,
+                             ncols=2){
   if(is.null(match("lm",c("glm","lm")))){
     stop("model should be of class lm or glm")
   }else{
@@ -33,10 +39,10 @@ diagnostic_plots <- function(model,SE=FALSE,point_size=1.5,
 
     res =  df$.resid
     df$sqrt_abs_stdres = sqrt(abs(df$.std.resid))
-    df$leverage = ifelse(df$.hat  > 2 * p / n,rownames(df),"")
-    df$outlier = ifelse(abs(df$.std.resid) > 3,rownames(df),"")
+    df$leverage = ifelse(df$.hat  > 2 * p / n,rownames(df),NA)
+    df$outlier = ifelse(abs(df$.std.resid) > 3,rownames(df),NA)
 
-
+    plot_list = list()
 
     # Residuals vs fitted -----------------------------------------------------
 
@@ -46,10 +52,13 @@ diagnostic_plots <- function(model,SE=FALSE,point_size=1.5,
 
     res_fitted_base <- ggplot(data = df, aes_string(y = '.resid', x = '.fitted')) +
       geom_point(size=point_size,shape=1) +
-      geom_smooth(fill="#d9d9d9",se=SE,color = line_color,size=1.1)+
+      geom_smooth(fill="#d9d9d9",se=standard_errors,color = theme_color,size=1.1)+
       labs(y = "Residuals", x = "Fitted Values",title = "Residual vs. Fitted Value") +
       ylim(-(limit + margin), limit + margin) +
-      theme_bw()
+      theme_bw()+
+      theme(panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank())
+
     if(sum(abs(df$.std.resid) > 3)==0){
       res_fitted <- res_fitted_base
     }
@@ -57,9 +66,9 @@ diagnostic_plots <- function(model,SE=FALSE,point_size=1.5,
 
       res_fitted <- res_fitted_base +
         geom_point(size=point_size,shape=1,
-                   color= ifelse(abs(df$.std.resid) > 3,line_color,"black")) +
-        geom_text(aes_string(label='outlier'),vjust = 0,
-                  nudge_y = 0.5,color=line_color)
+                   color= ifelse(abs(df$.std.resid) > 3,theme_color,"black")) +
+        geom_text(aes_string(label='outlier'),vjust = 0,na.rm=TRUE,
+                  nudge_y = 0.5,color=theme_color)
     }
 
 
@@ -74,8 +83,10 @@ diagnostic_plots <- function(model,SE=FALSE,point_size=1.5,
       labs(x = "Theoretical Quantile", y = "Standardized Residual",
            title = "Normal-QQ Plot") +
       geom_abline(data = qq_line ,aes(intercept = intercept ,slope = slope),
-                  color = line_color, size = 1.1)+
-      theme_bw()
+                  color = theme_color, size = 1.1)+
+      theme_bw()+
+      theme(panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank())
 
 
 
@@ -83,10 +94,42 @@ diagnostic_plots <- function(model,SE=FALSE,point_size=1.5,
 
     stdres_fitted <- ggplot(data = df, aes_string(y = 'sqrt_abs_stdres', x = '.fitted')) +
       geom_point(size = point_size,shape=1) +
-      geom_smooth(method = 'loess',se=SE, size = 1.1, color = line_color,fill="#d9d9d9") +
+      geom_smooth(method = 'loess',se=standard_errors,
+                  size = 1.1, color = theme_color,fill="#d9d9d9") +
       labs(y=expression(sqrt("|Standardized Residuals|")), x = "Fitted Values",
            title = "Scale-Location Plot")+
-      theme_bw()
+      theme_bw()+
+      theme(panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank())
+
+    # Cooks Distance ----------------------------------------------------------
+
+    cooksd <- cooks.distance(model)
+    h = 4/n
+    df$cooksD = ifelse(cooksd > h,rownames(df),
+                       NA)
+
+    limit = max(cooksd, na.rm = T)
+    margin_factor = 5
+    margin = round(limit / margin_factor)
+    max_cook = limit + margin
+
+    .cooksd <- NULL
+
+    cooksD_plot <- ggplot(data = df, aes(x=1:n,.cooksd, ymin = 0,
+                                         ymax = cooksd)) +
+      geom_point(size=1,shape=1) +
+      geom_hline(yintercept = h,
+                 color= "#21908CFF",linetype=2)+
+      geom_linerange(color='#bfbfbf') +
+      geom_text(label = df$cooksD, na.rm = TRUE,
+                color = "#21908CFF",nudge_x=0.008*max_cook,
+                nudge_y = 0.008*max_cook)+
+      labs(x= 'Observarion',y="Cook's Distance",
+           title="Cook's Distance Plot")+
+      theme_bw()+
+      theme(panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank())
 
 
     # Residual vs Leverage ----------------------------------------------------
@@ -96,31 +139,47 @@ diagnostic_plots <- function(model,SE=FALSE,point_size=1.5,
       stdres_leverage_base <- ggplot(data = df, aes_string(x = '.hat',
                                                            y = '.std.resid')) +
         geom_point(size = point_size,shape=1) +
-        geom_smooth(method = 'loess',se=SE, color = line_color ,fill="#d9d9d9",
+        geom_smooth(method = 'loess',se=standard_errors,
+                    color = theme_color ,fill="#d9d9d9",
                     size = 1.1) +
         labs(y = "Standardized Residuals", x = "Leverage",
              title = 'Residual vs. Leverage')+
-        theme_bw()
+        theme_bw()+
+        theme(panel.grid.major = element_blank(),
+              panel.grid.minor = element_blank())
       if(sum(df$.hat  > 2 * p / n) == 0){
         stdres_leverage <- stdres_leverage_base
       }else{
 
-
         stdres_leverage <- stdres_leverage_base+
           geom_point(size=point_size,shape=1,
-                     color= ifelse(df$.hat  > 2 * p / n,line_color,"black"))+
-          geom_text(aes_string(label='leverage'),
-                    vjust = 0, nudge_y = 0.1,color=line_color)
+                     color= ifelse(df$.hat  > 2 * p / n,theme_color,"black"))+
+          geom_text(aes_string(label='leverage'),na.rm = TRUE,
+                    vjust = 0, nudge_y = 0.1,color=theme_color)
       }
-      return(suppressMessages(gridExtra::grid.arrange(res_fitted,
-                                                      qq_plot,stdres_fitted,
-                                                      stdres_leverage,ncol=2)))
+
+      plot_list[[1]] = res_fitted
+      plot_list[[2]] = qq_plot
+      plot_list[[3]] = stdres_fitted
+      plot_list[[4]] = stdres_leverage
+      plot_list[[5]] = cooksD_plot
+
+
+
+      return(suppressMessages(gridExtra::grid.arrange(grobs=plot_list[which_plots],
+                                                      ncol=ncols)))
 
     }
     else{
-      return(suppressMessages(gridExtra::grid.arrange(res_fitted+
-                                                        labs(title = "Residual vs.\nFitted Value"),
-                                                      qq_plot,stdres_fitted,ncol=3)))
+
+      plot_list[[1]] = res_fitted + labs(title = "Residual vs.\nFitted Value")
+      plot_list[[2]] = qq_plot
+      plot_list[[3]] = stdres_fitted
+      plot_list[[4]] = cooksD_plot
+
+
+      return(suppressMessages(gridExtra::grid.arrange(grobs=plot_list[which_plots],
+                                                      ncol=ncols)))
     }
   }
 }

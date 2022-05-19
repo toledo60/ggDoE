@@ -95,13 +95,26 @@ gg_boxplots(data,response = len,factor = dose,group_var = supp,
 
 **Regression Diagnostic Plots**
 
+1.  Residual vs. Fitted Values
+2.  Normal-QQ plot
+3.  Scale-Location plot
+4.  Residual vs. Leverage
+5.  Cook’s Distance
+
 ``` r
 data(mtcars)
 mtcars_lm <- lm(mpg ~.,data=mtcars)
 diagnostic_plots(mtcars_lm)
 ```
 
-![](man/figures/unnamed-chunk-6-1.png)
+![](man/figures/diagnostic1.png)
+
+``` r
+diagnostic_plots(mtcars_lm,
+                 which_plots=c(1,3,4,5))
+```
+
+![](man/figures/diagnostic2.png)
 
 **Half-Normal Plot**
 
