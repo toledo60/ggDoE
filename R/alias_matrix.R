@@ -4,7 +4,7 @@
 #' @param midpoint A midpoint value between (0,1) to split the color scheme of three colors
 #' @param intercept logical indicating to include the intercept coefficient. Default is FALSE
 #' @param showplot logical indicating to show the correlation plot. If false, the correlation/alias matrix is returned. Default is TRUE
-#' @param symmetric logical indicating to return all pairwise correlations between main effects and interaction effects. Default is FALSE
+#' @param symmetric logical indicating to return all pairwise correlations between main effects and interaction effects. Default is TRUE
 #' @param digits number of digits to round correlation values. Default is 3
 #' @param color_palette A character string indicating the color map option to use. Eight options are available: "viridis","cividis","magma","inferno","plasma","rocket","mako","turbo"
 #' @param alpha The alpha transparency, a number in [0,1]
@@ -16,12 +16,11 @@
 #'
 #' @examples
 #' alias_matrix(design=aliased_design)
-#' alias_matrix(design=aliased_design, symmetric=TRUE)
-#' alias_matrix(design=aliased_design, symmetric=TRUE, color_palette = "plasma")
-#' alias_matrix(design=aliased_design, symmetric = TRUE, color_palette = "magma", direction = -1)
+#' alias_matrix(design=aliased_design, color_palette = "plasma")
+#' alias_matrix(design=aliased_design, color_palette = "magma", direction = -1)
 alias_matrix <- function(design,midpoint=0.5,
                          intercept=FALSE,showplot=TRUE,
-                         symmetric = FALSE,
+                         symmetric = TRUE,
                          digits=3,color_palette = "viridis",
                          alpha=1,direction = 1){
 

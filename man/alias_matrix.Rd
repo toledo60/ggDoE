@@ -9,7 +9,7 @@ alias_matrix(
   midpoint = 0.5,
   intercept = FALSE,
   showplot = TRUE,
-  symmetric = FALSE,
+  symmetric = TRUE,
   digits = 3,
   color_palette = "viridis",
   alpha = 1,
@@ -25,7 +25,7 @@ alias_matrix(
 
 \item{showplot}{logical indicating to show the correlation plot. If false, the correlation/alias matrix is returned. Default is TRUE}
 
-\item{symmetric}{logical indicating to return all pairwise correlations between main effects and interaction effects. Default is FALSE}
+\item{symmetric}{logical indicating to return all pairwise correlations between main effects and interaction effects. Default is TRUE}
 
 \item{digits}{number of digits to round correlation values. Default is 3}
 
@@ -43,7 +43,6 @@ Color Map on Correlations
 }
 \examples{
 alias_matrix(design=aliased_design)
-alias_matrix(design=aliased_design, symmetric=TRUE)
-alias_matrix(design=aliased_design, symmetric=TRUE, color_palette = "plasma")
-alias_matrix(design=aliased_design, symmetric = TRUE, color_palette = "magma", direction = -1)
+alias_matrix(design=aliased_design, color_palette = "plasma")
+alias_matrix(design=aliased_design, color_palette = "magma", direction = -1)
 }

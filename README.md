@@ -11,7 +11,7 @@ Status](https://api.netlify.com/api/v1/badges/20d30180-f503-4b63-ba9c-c95bfca382
 You can get the development version from GitHub:
 
 ``` r
-#install.packages("remotes") 
+if (!require("remotes")) install.packages("remotes")
 remotes::install_github("toledo60/ggDoE")
 ```
 
@@ -40,6 +40,10 @@ The following plots are currently available:
 -   [interaction_effects()](https://ggdoe.netlify.app/reference/interaction_effects.html):
     Interaction effects plot between two factors in a factorial design
 
+-   [lambda_plot()](https://ggdoe.netlify.app/reference/lambda_plot.html):
+    Obtain the trace plot of the *t*-statistics after applying Boxcox
+    transformation across a specified sequence of lambda values
+
 -   [main_effects()](https://ggdoe.netlify.app/reference/main_effects.html):
     Main effect plots for one factor in a factorial design
 
@@ -57,13 +61,7 @@ library(ggDoE)
 alias_matrix(design=aliased_design)
 ```
 
-![](man/figures/unnamed-chunk-3-1.png)
-
-``` r
-alias_matrix(design=aliased_design, symmetric=TRUE)
-```
-
-![](man/figures/unnamed-chunk-4-1.png)
+![](man/figures/alias_matrix.png)
 
 **Box-Cox Transformation**
 
@@ -72,7 +70,22 @@ model <- lm(s2 ~ (A+B+C+D),data = adapted_epitaxial)
 boxcox_transform(model,lambda = seq(-5,5,0.2))
 ```
 
-![](man/figures/unnamed-chunk-5-1.png)
+![](man/figures/boxcox_transformation.png)
+
+**Lambda Plot**
+
+``` r
+model <-  lm(s2 ~ (A+B+C)^2,data=original_epitaxial)
+lambda_plot(model)
+```
+
+![](man/figures/lambda_plot1.png)
+
+``` r
+lambda_plot(model, lambda = seq(0,2,by=0.1))
+```
+
+![](man/figures/lambda_plot2.png)
 
 **Boxplots**
 
@@ -81,14 +94,14 @@ data <- ToothGrowth
 data$dose <- factor(data$dose,levels = c(0.5, 1, 2),
                     labels = c("D0.5", "D1", "D2"))
 
-gg_boxplots(data,response = len,factor = dose,alpha=0.6)
+gg_boxplots(data,response = len,factor = dose)
 ```
 
 ![](man/figures/boxplot1.png)
 
 ``` r
 gg_boxplots(data,response = len,factor = dose,group_var = supp,
-            alpha=0.6,color_palette = 'viridis')
+            color_palette = 'viridis')
 ```
 
 ![](man/figures/boxplot2.png)
@@ -123,7 +136,7 @@ m1 <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
 half_normal(m1)
 ```
 
-![](man/figures/unnamed-chunk-7-1.png)
+![](man/figures/half_normal1.png)
 
 ``` r
 half_normal(m1,method='Zahn',alpha=0.1,
@@ -131,7 +144,7 @@ half_normal(m1,method='Zahn',alpha=0.1,
             margin_errors=TRUE)
 ```
 
-![](man/figures/unnamed-chunk-8-1.png)
+![](man/figures/half_normal2.png)
 
 **Interaction Effects Plot (Factorial Design)**
 
@@ -140,7 +153,7 @@ interaction_effects(adapted_epitaxial,response = 'ybar',
                     exclude_vars = c('s2','lns2'))
 ```
 
-![](man/figures/unnamed-chunk-9-1.png)
+![](man/figures/interactions1.png)
 
 ``` r
 interaction_effects(adapted_epitaxial,response = 'ybar',
@@ -148,7 +161,7 @@ interaction_effects(adapted_epitaxial,response = 'ybar',
                     ncols=3)
 ```
 
-![](man/figures/unnamed-chunk-10-1.png)
+![](man/figures/interactions2.png)
 
 **Main Effects Plots (Factorial Design)**
 
@@ -158,7 +171,7 @@ main_effects(original_epitaxial,
              exclude_vars = c('ybar','lns2'))
 ```
 
-![](man/figures/unnamed-chunk-11-1.png)
+![](man/figures/main_effects1.png)
 
 ``` r
 main_effects(original_epitaxial,
@@ -168,7 +181,7 @@ main_effects(original_epitaxial,
              ncols=3)
 ```
 
-![](man/figures/unnamed-chunk-12-1.png)
+![](man/figures/main_effects2.png)
 
 **Pareto Plot**
 
@@ -177,13 +190,13 @@ m1 <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
 pareto_plot(m1)
 ```
 
-![](man/figures/unnamed-chunk-13-1.png)
+![](man/figures/pareto_plot1.png)
 
 ``` r
 pareto_plot(m1,method='Zahn',alpha=0.1)
 ```
 
-![](man/figures/unnamed-chunk-14-1.png)
+![](man/figures/pareto_plot2.png)
 
 ### Contributing to the package
 
