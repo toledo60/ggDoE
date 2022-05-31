@@ -2,13 +2,11 @@
 #'
 #' @param design Design of experiment (Without response)
 #' @param midpoint A midpoint value between (0,1) to split the color scheme of three colors
-#' @param intercept logical indicating to include the intercept coefficient. Default is FALSE
-#' @param showplot logical indicating to show the correlation plot. If false, the correlation/alias matrix is returned. Default is TRUE
-#' @param symmetric logical indicating to return all pairwise correlations between main effects and interaction effects. Default is TRUE
 #' @param digits number of digits to round correlation values. Default is 3
 #' @param color_palette A character string indicating the color map option to use. Eight options are available: "viridis","cividis","magma","inferno","plasma","rocket","mako","turbo"
 #' @param alpha The alpha transparency, a number in [0,1]
 #' @param direction Sets the order of colors in the scale. If 1, the default, colors are ordered from darkest to lightest. If -1, the order of colors is reversed
+#' @param showplot logical indicating to show the correlation plot. If false, the correlation/alias matrix is returned. Default is TRUE
 #' @importFrom ggplot2 scale_fill_gradient2 geom_tile element_blank aes_string theme_minimal theme
 #' @importFrom stats model.matrix cor
 #' @return correlation matrix between main effects and interaction effects from the model.matrix. Alias matrix is also returned
@@ -19,10 +17,10 @@
 #' alias_matrix(design=aliased_design, color_palette = "plasma")
 #' alias_matrix(design=aliased_design, color_palette = "magma", direction = -1)
 alias_matrix <- function(design,midpoint=0.5,
-                         intercept=FALSE,showplot=TRUE,
-                         symmetric = TRUE,
-                         digits=3,color_palette = "viridis",
-                         alpha=1,direction = 1){
+                          digits=3,
+                          color_palette = "viridis",
+                          alpha=1,direction = 1,
+                          showplot=TRUE){
 
   k <- ncol(design)   # k is number of input factors
 
@@ -35,20 +33,13 @@ alias_matrix <- function(design,midpoint=0.5,
 
   A <- solve(t(linear_terms) %*% linear_terms) %*% t(linear_terms)%*%(bilinear_terms)
 
-  if(intercept){
-    Alias_mat <- round(A,digits = digits)
-  }
-  else{
-    Alias_mat <- round(A,digits = digits)[-1,]
-  }
+  Alias_mat <- round(A,digits = digits)[-1,]
 
   if(showplot){
-    if(symmetric){
-      melted_cormat <- reshape2::melt(abs(cor(M[,-1])))
-    }
-    else{
-      melted_cormat <- reshape2::melt(abs(Alias_mat))
-    }
+
+    dat <- abs(cor(M[,-1]))
+    melted_cormat <- cbind(expand.grid(colnames(dat),rownames(dat)),
+                           'value'= as.vector(dat))
 
     colors <- viridisPalette(3,
                              color_palette = color_palette,

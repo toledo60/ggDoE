@@ -8,6 +8,7 @@
 #' @return A bar plot with ordered effects, margin of error (ME) and simultaneous margin of error (SME) cutoffs.
 #' @importFrom stats reorder coef
 #' @importFrom ggplot2 geom_hline geom_bar annotate labs coord_flip theme_classic aes_string scale_fill_discrete
+#' @importFrom dplyr tibble
 #' @export
 #'
 #' @examples
@@ -28,7 +29,7 @@ pareto_plot <- function(model,alpha=0.05,method='Lenth',
   ME <- unrepx::ME(estimates,method = method,alpha = alpha)[1]
   SME <- unrepx::ME(estimates,method = method,alpha = alpha)[2]
 
-  dat <- tibble::tibble("effect_names" = factor(names(estimates)),
+  dat <- tibble("effect_names" = factor(names(estimates)),
                 "effects" = estimates,
                 'abs_effects' = abs(estimates),
                 "cols" = ifelse(effects >0,'#d9a698','#9ecede'))
@@ -62,7 +63,7 @@ pareto_plot <- function(model,alpha=0.05,method='Lenth',
 
     return(plot)
   }else{
-    return(list(errors = tibble::tibble(alpha,PSE,ME,SME),
+    return(list(errors = tibble(alpha,PSE,ME,SME),
                 dat = sorted_dat[,c(1,2,3)]))
   }
 }

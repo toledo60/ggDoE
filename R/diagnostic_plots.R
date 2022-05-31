@@ -22,7 +22,7 @@ diagnostic_plots <- function(model,standard_errors=FALSE,
                              theme_color = "#21908CFF",
                              which_plots = 1:4,
                              ncols=2){
-  if(is.null(match("lm",c("glm","lm")))){
+  if (!inherits(model, "lm")) {
     stop("model should be of class lm or glm")
   }else{
 

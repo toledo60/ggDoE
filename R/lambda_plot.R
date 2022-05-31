@@ -12,6 +12,7 @@
 #' @export
 #'
 #' @importFrom stats lm as.formula
+#' @importFrom utils stack
 #' @importFrom dplyr filter as_tibble tibble first last
 #' @importFrom ggplot2 aes_string scale_color_manual theme_bw element_blank labs
 #' @examples
@@ -74,18 +75,20 @@ lambda_plot <- function(model, lambda = seq(-2, 2, by = 0.1),
     return(t_lambda_dat)
   }else{
 
-    melted_t = reshape2::melt(t_lambda_dat,id='lambda')
+    factors_total = ncol(t_lambda)
+
+    melted_t <-cbind('lambda'=rep(lambda,factors_total),
+                     stack(as.vector(t_lambda_dat[,-1])))
 
     pattern <- "/|:|\\?|<|>|\\|\\\\|\\*"
     int_terms <- variables[grepl(pattern,variables)]
 
     label_left = filter(melted_t,lambda==first(lambda))
-    label_left_main = filter(label_left,!variable %in% int_terms)
+    label_left_main = filter(label_left,!ind %in% int_terms)
 
     label_right = filter(melted_t,lambda==last(lambda))
-    label_right_interactions = filter(label_right,variable %in% int_terms)
+    label_right_interactions = filter(label_right,ind %in% int_terms)
 
-    factors_total = ncol(t_lambda)
 
     if(is.na(color_palette)){
       factor_colors = rep("#21908CFF",factors_total)
@@ -96,14 +99,14 @@ lambda_plot <- function(model, lambda = seq(-2, 2, by = 0.1),
                                       alpha = alpha)
     }
 
-    plt <- ggplot(melted_t, aes_string(x='lambda', y="value",
-                                       colour="variable",
-                                       group="variable"))+
+    plt <- ggplot(melted_t, aes_string(x='lambda', y="values",
+                                       colour="ind",
+                                       group="ind"))+
       geom_line()+
-      ggrepel::geom_label_repel(data = label_left_main,aes(label=variable),
+      ggrepel::geom_label_repel(data = label_left_main,aes(label=ind),
                        max.overlaps = 15)+
       ggrepel::geom_label_repel(data = label_right_interactions,
-                       aes(label=variable),
+                       aes(label=ind),
                        max.overlaps = 15)+
       labs(x='lambda',y='t-statistic',title='Lambda Plot:',
            subtitle = 'Trace of t-statistic')+

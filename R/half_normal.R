@@ -10,6 +10,7 @@
 #' @return A tibble with the absolute effects and half-normal quantiles. A ggplot2 version of halfnormal plot for factorial effects is returned
 #' @importFrom ggplot2 ggplot aes geom_point geom_text theme_bw labs geom_vline annotate geom_abline element_blank
 #' @importFrom stats qnorm coef
+#' @importFrom dplyr tibble
 #' @importFrom utils tail
 #' @export
 #'
@@ -47,7 +48,7 @@ half_normal <- function(obj,method='Lenth',
       if (logc) {names[i]<-NA}}
   }
 
-  dat <- tibble::tibble("effects"=names,
+  dat <- tibble("effects"=names,
                         "absolute_effects"=effs,
                         "half_normal_quantiles"=zscore
   )

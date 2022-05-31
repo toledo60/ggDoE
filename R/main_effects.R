@@ -12,7 +12,9 @@
 #' @return Main effects plots, or a list of tibble with calculated main effects for each factors if showplot=FALSE.
 #' @export
 #' @importFrom ggplot2 aes_ geom_point geom_line theme_bw labs facet_wrap scale_color_manual vars ylim element_blank
-#' @importFrom dplyr group_by summarise "%>%" bind_rows
+#' @importFrom dplyr group_by summarise "%>%" bind_rows filter
+#' @importFrom utils stack
+
 #'
 #' @examples
 #' main_effects(original_epitaxial,response='s2',exclude_vars = c('ybar','lns2'))
@@ -24,10 +26,9 @@ main_effects <- function(design,response,ncols=2,
                          showplot=TRUE){
   factor_names = setdiff(names(design),c(response,exclude_vars))
   dat_list <-  vector("list", length = length(factor_names))
-  dat <- design %>% mutate_at(factor_names,factor)
 
   for (i in seq_along(factor_names)) {
-    dat_list[[i]] = dat %>%
+    dat_list[[i]] = design %>%
       group_by(eval(parse(text=factor_names[i]))) %>%
       summarise(mean = mean(eval(parse(text=response))))
     colnames(dat_list[[i]]) = c(factor_names[i],response)
@@ -50,7 +51,16 @@ main_effects <- function(design,response,ncols=2,
     maxval = max(vals)
 
     dat = bind_rows(dat_list)
-    melted_dat = reshape2::melt(dat,na.rm=TRUE,id.vars=response)
+
+    dat[is.na(dat)] = 0
+
+    vec_dat = as.vector(dat)
+
+    melted_dat <- stack(vec_dat) %>%
+      filter(values != 0) %>%
+      filter(ind != response) %>%
+      mutate(response_var = vec_dat[[response]]) %>%
+      mutate(values = as.factor(values))
 
     factors_total = length(factor_names)
 
@@ -65,7 +75,7 @@ main_effects <- function(design,response,ncols=2,
     }
 
     p <- ggplot(melted_dat) +
-      aes_(x = ~value, y = as.name(response)  , colour = ~variable, group=1) +
+      aes(x = values, y = response_var  , colour = ind, group=1) +
       geom_line(aes(group=1),size =0.5) +
       geom_point(size=1)+
       theme_bw() +
@@ -74,7 +84,7 @@ main_effects <- function(design,response,ncols=2,
             panel.grid.major = element_blank(),
             panel.grid.minor = element_blank()) +
       scale_color_manual(values = factor_colors)+
-      facet_wrap(vars(variable),ncol = ncols)+
+      facet_wrap(vars(ind),ncol = ncols)+
       labs(y=paste0("Mean of ",response),x='')
 
     return(p)

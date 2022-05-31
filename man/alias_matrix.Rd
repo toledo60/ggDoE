@@ -7,25 +7,17 @@
 alias_matrix(
   design,
   midpoint = 0.5,
-  intercept = FALSE,
-  showplot = TRUE,
-  symmetric = TRUE,
   digits = 3,
   color_palette = "viridis",
   alpha = 1,
-  direction = 1
+  direction = 1,
+  showplot = TRUE
 )
 }
 \arguments{
 \item{design}{Design of experiment (Without response)}
 
 \item{midpoint}{A midpoint value between (0,1) to split the color scheme of three colors}
-
-\item{intercept}{logical indicating to include the intercept coefficient. Default is FALSE}
-
-\item{showplot}{logical indicating to show the correlation plot. If false, the correlation/alias matrix is returned. Default is TRUE}
-
-\item{symmetric}{logical indicating to return all pairwise correlations between main effects and interaction effects. Default is TRUE}
 
 \item{digits}{number of digits to round correlation values. Default is 3}
 
@@ -34,6 +26,8 @@ alias_matrix(
 \item{alpha}{The alpha transparency, a number in [0,1]}
 
 \item{direction}{Sets the order of colors in the scale. If 1, the default, colors are ordered from darkest to lightest. If -1, the order of colors is reversed}
+
+\item{showplot}{logical indicating to show the correlation plot. If false, the correlation/alias matrix is returned. Default is TRUE}
 }
 \value{
 correlation matrix between main effects and interaction effects from the model.matrix. Alias matrix is also returned
