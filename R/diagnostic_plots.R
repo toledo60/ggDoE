@@ -8,7 +8,7 @@
 #' 3 = 'Scale-location', 4 = 'Residual vs Leverage', 5= "Cook's Distance". Default is 1:4
 #' @param ncols number of columns for grid layout. Default is 2
 #' @return Regression Diagnostic plots. In the case where all hat values are equal only residual vs.fitted, normal-QQ, and scale-location plots are returned
-#' @importFrom ggplot2 geom_smooth stat_qq geom_abline ylim aes_string geom_text theme_bw geom_linerange element_blank geom_hline
+#' @importFrom ggplot2 geom_smooth stat_qq geom_abline ylim aes_string theme_bw geom_linerange element_blank geom_hline
 #' @importFrom stats quantile lm.influence cooks.distance rstandard
 #' @export
 #'
@@ -67,8 +67,10 @@ diagnostic_plots <- function(model,standard_errors=FALSE,
       res_fitted <- res_fitted_base +
         geom_point(size=point_size,shape=1,
                    color= ifelse(abs(df$.std.resid) > 3,theme_color,"black")) +
-        geom_text(aes_string(label='outlier'),vjust = 0,na.rm=TRUE,
-                  nudge_y = 0.5,color=theme_color)
+        ggrepel::geom_label_repel(data = df,aes_string(label='outlier'),na.rm = TRUE,
+                                  max.overlaps = 20,
+                                  color="#21908CFF")
+
     }
 
 
@@ -122,9 +124,9 @@ diagnostic_plots <- function(model,standard_errors=FALSE,
       geom_hline(yintercept = h,
                  color= "#21908CFF",linetype=2)+
       geom_linerange(color='#bfbfbf') +
-      geom_text(label = df$cooksD, na.rm = TRUE,
-                color = "#21908CFF",nudge_x=0.008*max_cook,
-                nudge_y = 0.008*max_cook)+
+      ggrepel::geom_label_repel(data = df,aes_string(label='cooksD'),na.rm = TRUE,
+                                max.overlaps = 20,
+                                color="#21908CFF")+
       labs(x= 'Observarion',y="Cook's Distance",
            title="Cook's Distance Plot")+
       theme_bw()+
@@ -154,8 +156,10 @@ diagnostic_plots <- function(model,standard_errors=FALSE,
         stdres_leverage <- stdres_leverage_base+
           geom_point(size=point_size,shape=1,
                      color= ifelse(df$.hat  > 2 * p / n,theme_color,"black"))+
-          geom_text(aes_string(label='leverage'),na.rm = TRUE,
-                    vjust = 0, nudge_y = 0.1,color=theme_color)
+          ggrepel::geom_label_repel(data = df,aes_string(label='leverage'),
+                                    na.rm = TRUE,
+                                    max.iter = 20,
+                                    color=theme_color)
       }
 
       plot_list[[1]] = res_fitted

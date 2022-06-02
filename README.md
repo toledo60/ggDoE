@@ -20,42 +20,15 @@ remotes::install_github("toledo60/ggDoE")
 With ggDoE you’ll be able to generate common plots used in Design of
 Experiments with ggplot2.
 
-The following plots are currently available:
-
--   [alias_matrix()](https://ggdoe.netlify.app/reference/alias_matrix.html):
-    Correlation matrix plot to visualize the Alias matrix
-
--   [boxcox_transform()](https://ggdoe.netlify.app/reference/boxcox_transform.html):
-    Boxcox transformation plot
-
--   [diagnostic_plots()](https://ggdoe.netlify.app/reference/diagnostic_plots.html):
-    Regression diagnostics plots
-
--   [gg_boxplots()](https://ggdoe.netlify.app/reference/gg_boxplots.html):
-    Boxplots used for comparing distributions between groups
-
--   [half_normal()](https://ggdoe.netlify.app/reference/half_normal.html):
-    Half-Normal effects plot
-
--   [interaction_effects()](https://ggdoe.netlify.app/reference/interaction_effects.html):
-    Interaction effects plot between two factors in a factorial design
-
--   [lambda_plot()](https://ggdoe.netlify.app/reference/lambda_plot.html):
-    Obtain the trace plot of the *t*-statistics after applying Boxcox
-    transformation across a specified sequence of lambda values
-
--   [main_effects()](https://ggdoe.netlify.app/reference/main_effects.html):
-    Main effect plots for one factor in a factorial design
-
--   [pareto_plot()](https://ggdoe.netlify.app/reference/pareto_plot.html):
-    Pareto plot of effects with cutoff values for the margin of error
-    (ME) and simultaneous margin of error (SME)
-
 ``` r
 library(ggDoE)
 ```
 
+The following plots are currently available:
+
 **Alias Matrix**
+
+Correlation matrix plot to visualize the Alias matrix
 
 ``` r
 alias_matrix(design=aliased_design)
@@ -73,6 +46,9 @@ boxcox_transform(model,lambda = seq(-5,5,0.2))
 ![](man/figures/boxcox_transformation.png)
 
 **Lambda Plot**
+
+Obtain the trace plot of the *t*-statistics after applying Boxcox
+transformation across a specified sequence of lambda values
 
 ``` r
 model <-  lm(s2 ~ (A+B+C)^2,data=original_epitaxial)
@@ -94,13 +70,16 @@ data <- ToothGrowth
 data$dose <- factor(data$dose,levels = c(0.5, 1, 2),
                     labels = c("D0.5", "D1", "D2"))
 
-gg_boxplots(data,response = len,factor = dose)
+gg_boxplots(data,response = len,
+            factor = dose)
 ```
 
 ![](man/figures/boxplot1.png)
 
 ``` r
-gg_boxplots(data,response = len,factor = dose,group_var = supp,
+gg_boxplots(data,response = len,
+            factor = dose,
+            group_var = supp,
             color_palette = 'viridis')
 ```
 
@@ -148,6 +127,8 @@ half_normal(m1,method='Zahn',alpha=0.1,
 
 **Interaction Effects Plot (Factorial Design)**
 
+Interaction effects plot between two factors in a factorial design
+
 ``` r
 interaction_effects(adapted_epitaxial,response = 'ybar',
                     exclude_vars = c('s2','lns2'))
@@ -164,6 +145,8 @@ interaction_effects(adapted_epitaxial,response = 'ybar',
 ![](man/figures/interactions2.png)
 
 **Main Effects Plots (Factorial Design)**
+
+Main effect plots for each factor in a factorial design
 
 ``` r
 main_effects(original_epitaxial,
@@ -185,6 +168,9 @@ main_effects(original_epitaxial,
 
 **Pareto Plot**
 
+Pareto plot of effects with cutoff values for the margin of error (ME)
+and simultaneous margin of error (SME)
+
 ``` r
 m1 <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
 pareto_plot(m1)
@@ -197,6 +183,20 @@ pareto_plot(m1,method='Zahn',alpha=0.1)
 ```
 
 ![](man/figures/pareto_plot2.png)
+
+Lastly, the following datasets/designs are included in ggDoE as tibbles:
+
+-   **adapted_epitaxial**: Adapted epitaxial layer experiment obtain
+    from the book <br> *“Experiments: Planning, Analysis, and
+    Optimization, 2nd Edition”*
+    [source](https://www2.isye.gatech.edu/~jeffwu/wuhamadabook/data/originallayer.dat)
+-   **original_epitaxial**: Original epitaxial layer experiment obtain
+    from the book <br> *“Experiments: Planning, Analysis, and
+    Optimization, 2nd Edition”*
+    [source](https://www2.isye.gatech.edu/~jeffwu/wuhamadabook/data/originallayer.dat)
+-   **aliased_design**: D-efficient minimal aliasing design obtained
+    from the article <br> *“Efficient Designs With Minimal Aliasing”*
+    [source](https://www.tandfonline.com/doi/abs/10.1198/TECH.2010.09113)
 
 ### Contributing to the package
 

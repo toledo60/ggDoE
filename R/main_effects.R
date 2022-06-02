@@ -11,7 +11,7 @@
 #'
 #' @return Main effects plots, or a list of tibble with calculated main effects for each factors if showplot=FALSE.
 #' @export
-#' @importFrom ggplot2 aes_ geom_point geom_line theme_bw labs facet_wrap scale_color_manual vars ylim element_blank
+#' @importFrom ggplot2 aes_string geom_point geom_line theme_bw labs facet_wrap scale_color_manual vars ylim element_blank
 #' @importFrom dplyr group_by summarise "%>%" bind_rows filter
 #' @importFrom utils stack
 
@@ -52,12 +52,12 @@ main_effects <- function(design,response,ncols=2,
 
     dat = bind_rows(dat_list)
 
-    dat[is.na(dat)] = 0
+    dat[is.na(dat)] = 88
 
     vec_dat = as.vector(dat)
 
     melted_dat <- stack(vec_dat) %>%
-      filter(values != 0) %>%
+      filter(values != 88) %>%
       filter(ind != response) %>%
       mutate(response_var = vec_dat[[response]]) %>%
       mutate(values = as.factor(values))
@@ -75,7 +75,7 @@ main_effects <- function(design,response,ncols=2,
     }
 
     p <- ggplot(melted_dat) +
-      aes(x = values, y = response_var  , colour = ind, group=1) +
+      aes_string(x = 'values', y = 'response_var'  , colour = 'ind', group=1) +
       geom_line(aes(group=1),size =0.5) +
       geom_point(size=1)+
       theme_bw() +

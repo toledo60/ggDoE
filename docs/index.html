@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ggDoE</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.8</span>
       </span>
     </div>
 
@@ -78,21 +78,11 @@
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
 <p>With ggDoE you’ll be able to generate common plots used in Design of Experiments with ggplot2.</p>
-<p>The following plots are currently available:</p>
-<ul>
-<li><p><a href="https://ggdoe.netlify.app/reference/alias_matrix.html" class="external-link">alias_matrix()</a>: Correlation matrix plot to visualize the Alias matrix</p></li>
-<li><p><a href="https://ggdoe.netlify.app/reference/boxcox_transform.html" class="external-link">boxcox_transform()</a>: Boxcox transformation plot</p></li>
-<li><p><a href="https://ggdoe.netlify.app/reference/diagnostic_plots.html" class="external-link">diagnostic_plots()</a>: Regression diagnostics plots</p></li>
-<li><p><a href="https://ggdoe.netlify.app/reference/gg_boxplots.html" class="external-link">gg_boxplots()</a>: Boxplots used for comparing distributions between groups</p></li>
-<li><p><a href="https://ggdoe.netlify.app/reference/half_normal.html" class="external-link">half_normal()</a>: Half-Normal effects plot</p></li>
-<li><p><a href="https://ggdoe.netlify.app/reference/interaction_effects.html" class="external-link">interaction_effects()</a>: Interaction effects plot between two factors in a factorial design</p></li>
-<li><p><a href="https://ggdoe.netlify.app/reference/lambda_plot.html" class="external-link">lambda_plot()</a>: Obtain the trace plot of the <em>t</em>-statistics after applying Boxcox transformation across a specified sequence of lambda values</p></li>
-<li><p><a href="https://ggdoe.netlify.app/reference/main_effects.html" class="external-link">main_effects()</a>: Main effect plots for one factor in a factorial design</p></li>
-<li><p><a href="https://ggdoe.netlify.app/reference/pareto_plot.html" class="external-link">pareto_plot()</a>: Pareto plot of effects with cutoff values for the margin of error (ME) and simultaneous margin of error (SME)</p></li>
-</ul>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggdoe.netlify.app" class="external-link">ggDoE</a></span><span class="op">)</span></code></pre></div>
+<p>The following plots are currently available:</p>
 <p><strong>Alias Matrix</strong></p>
+<p>Correlation matrix plot to visualize the Alias matrix</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/alias_matrix.html">alias_matrix</a></span><span class="op">(</span>design<span class="op">=</span><span class="va">aliased_design</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/alias_matrix.png"></p>
@@ -102,6 +92,7 @@
 <span class="fu"><a href="reference/boxcox_transform.html">boxcox_transform</a></span><span class="op">(</span><span class="va">model</span>,lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">0.2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/boxcox_transformation.png"></p>
 <p><strong>Lambda Plot</strong></p>
+<p>Obtain the trace plot of the <em>t</em>-statistics after applying Boxcox transformation across a specified sequence of lambda values</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">s2</span> <span class="op">~</span> <span class="op">(</span><span class="va">A</span><span class="op">+</span><span class="va">B</span><span class="op">+</span><span class="va">C</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>,data<span class="op">=</span><span class="va">original_epitaxial</span><span class="op">)</span>
 <span class="fu"><a href="reference/lambda_plot.html">lambda_plot</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></code></pre></div>
@@ -115,10 +106,13 @@
 <span class="va">data</span><span class="op">$</span><span class="va">dose</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">dose</span>,levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>,
                     labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"D0.5"</span>, <span class="st">"D1"</span>, <span class="st">"D2"</span><span class="op">)</span><span class="op">)</span>
 
-<span class="fu"><a href="reference/gg_boxplots.html">gg_boxplots</a></span><span class="op">(</span><span class="va">data</span>,response <span class="op">=</span> <span class="va">len</span>,factor <span class="op">=</span> <span class="va">dose</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="reference/gg_boxplots.html">gg_boxplots</a></span><span class="op">(</span><span class="va">data</span>,response <span class="op">=</span> <span class="va">len</span>,
+            factor <span class="op">=</span> <span class="va">dose</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/boxplot1.png"></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/gg_boxplots.html">gg_boxplots</a></span><span class="op">(</span><span class="va">data</span>,response <span class="op">=</span> <span class="va">len</span>,factor <span class="op">=</span> <span class="va">dose</span>,group_var <span class="op">=</span> <span class="va">supp</span>,
+<code class="sourceCode R"><span class="fu"><a href="reference/gg_boxplots.html">gg_boxplots</a></span><span class="op">(</span><span class="va">data</span>,response <span class="op">=</span> <span class="va">len</span>,
+            factor <span class="op">=</span> <span class="va">dose</span>,
+            group_var <span class="op">=</span> <span class="va">supp</span>,
             color_palette <span class="op">=</span> <span class="st">'viridis'</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/boxplot2.png"></p>
 <p><strong>Regression Diagnostic Plots</strong></p>
@@ -149,6 +143,7 @@
             margin_errors<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/half_normal2.png"></p>
 <p><strong>Interaction Effects Plot (Factorial Design)</strong></p>
+<p>Interaction effects plot between two factors in a factorial design</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/interaction_effects.html">interaction_effects</a></span><span class="op">(</span><span class="va">adapted_epitaxial</span>,response <span class="op">=</span> <span class="st">'ybar'</span>,
                     exclude_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'s2'</span>,<span class="st">'lns2'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -159,6 +154,7 @@
                     ncols<span class="op">=</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/interactions2.png"></p>
 <p><strong>Main Effects Plots (Factorial Design)</strong></p>
+<p>Main effect plots for each factor in a factorial design</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/main_effects.html">main_effects</a></span><span class="op">(</span><span class="va">original_epitaxial</span>,
              response<span class="op">=</span><span class="st">'s2'</span>,
@@ -172,6 +168,7 @@
              ncols<span class="op">=</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/main_effects2.png"></p>
 <p><strong>Pareto Plot</strong></p>
+<p>Pareto plot of effects with cutoff values for the margin of error (ME) and simultaneous margin of error (SME)</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">lns2</span> <span class="op">~</span> <span class="op">(</span><span class="va">A</span><span class="op">+</span><span class="va">B</span><span class="op">+</span><span class="va">C</span><span class="op">+</span><span class="va">D</span><span class="op">)</span><span class="op">^</span><span class="fl">4</span>,data<span class="op">=</span><span class="va">original_epitaxial</span><span class="op">)</span>
 <span class="fu"><a href="reference/pareto_plot.html">pareto_plot</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></code></pre></div>
@@ -179,6 +176,18 @@
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/pareto_plot.html">pareto_plot</a></span><span class="op">(</span><span class="va">m1</span>,method<span class="op">=</span><span class="st">'Zahn'</span>,alpha<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/pareto_plot2.png"></p>
+<p>Lastly, the following datasets/designs are included in ggDoE as tibbles:</p>
+<ul>
+<li>
+<strong>adapted_epitaxial</strong>: Adapted epitaxial layer experiment obtain from the book <br><em>“Experiments: Planning, Analysis, and Optimization, 2nd Edition”</em> <a href="https://www2.isye.gatech.edu/~jeffwu/wuhamadabook/data/originallayer.dat" class="external-link">source</a>
+</li>
+<li>
+<strong>original_epitaxial</strong>: Original epitaxial layer experiment obtain from the book <br><em>“Experiments: Planning, Analysis, and Optimization, 2nd Edition”</em> <a href="https://www2.isye.gatech.edu/~jeffwu/wuhamadabook/data/originallayer.dat" class="external-link">source</a>
+</li>
+<li>
+<strong>aliased_design</strong>: D-efficient minimal aliasing design obtained from the article <br><em>“Efficient Designs With Minimal Aliasing”</em> <a href="https://www.tandfonline.com/doi/abs/10.1198/TECH.2010.09113" class="external-link">source</a>
+</li>
+</ul>
 <div class="section level3">
 <h3 id="contributing-to-the-package">Contributing to the package<a class="anchor" aria-label="anchor" href="#contributing-to-the-package"></a>
 </h3>

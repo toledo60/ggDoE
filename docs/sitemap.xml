@@ -19,9 +19,6 @@
     <loc>/index.html</loc>
   </url>
   <url>
-    <loc>/reference/Lenth_method.html</loc>
-  </url>
-  <url>
     <loc>/reference/adapted_epitaxial.html</loc>
   </url>
   <url>
@@ -34,13 +31,7 @@
     <loc>/reference/boxcox_transform.html</loc>
   </url>
   <url>
-    <loc>/reference/contour_plots.html</loc>
-  </url>
-  <url>
     <loc>/reference/diagnostic_plots.html</loc>
-  </url>
-  <url>
-    <loc>/reference/epitaxial.html</loc>
   </url>
   <url>
     <loc>/reference/gg_boxplots.html</loc>
@@ -49,22 +40,13 @@
     <loc>/reference/half_normal.html</loc>
   </url>
   <url>
-    <loc>/reference/halfnormal.html</loc>
-  </url>
-  <url>
     <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/interaction_effect.html</loc>
   </url>
   <url>
     <loc>/reference/interaction_effects.html</loc>
   </url>
   <url>
     <loc>/reference/lambda_plot.html</loc>
-  </url>
-  <url>
-    <loc>/reference/main_effect.html</loc>
   </url>
   <url>
     <loc>/reference/main_effects.html</loc>
@@ -74,9 +56,6 @@
   </url>
   <url>
     <loc>/reference/pareto_plot.html</loc>
-  </url>
-  <url>
-    <loc>/reference/summs_models.html</loc>
   </url>
   <url>
     <loc>/reference/throughput_dat.html</loc>
