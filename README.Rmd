@@ -213,6 +213,34 @@ main_effects(original_epitaxial,
 ![](man/figures/main_effects2.png)
 
 
+**Contour Plots**
+
+contour plot(s) that display the fitted surface for an *lm* or *rsm* 
+object involving two or more numerical predictors
+
+```{r}
+heli = rsm::heli
+heli.rsm <- rsm::rsm(ave ~ SO(x1, x2, x3, x4), data = heli)
+```
+
+
+```{r}
+gg_rsm(heli.rsm,form = ~x1+x2+x3+x4,
+       at = rsm::xs(heli.rsm))
+```
+
+
+![](man/figures/contour1.png)
+
+
+```{r}
+gg_rsm(heli.rsm,form = ~x1+x2+x3+x4,
+       at = rsm::xs(heli.rsm),
+       filled = TRUE)
+```
+
+![](man/figures/contour2.png)
+
 
 **Pareto Plot**
 
