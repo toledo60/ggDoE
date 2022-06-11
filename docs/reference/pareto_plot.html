@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggDoE</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7</span>
       </span>
     </div>
 
@@ -62,19 +62,60 @@
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>model</dt>
-<dd><p>Model of class "lm" or "glm"#'</p></dd>
+<dd><p>Model of class "lm"</p></dd>
+
+
 <dt>alpha</dt>
-<dd><p>significance level to compute margin of errors based on Lenth method. Default is alpha=0.05</p></dd>
+<dd><p>specify the significance level to compute margin of errors. Numeric significance level, between 0 and 1. Default is alpha=0.05</p></dd>
+
+
 <dt>method</dt>
-<dd><p>Character value. Method to calculate PSE. Default is Lenth. Options include: Zahn, WZahn, Lenth, RMS, Dong, JuanPena, Daniel</p></dd>
+<dd><p>Character value. Method to calculate PSE. Default is Lenth. Options include: Zahn, WZahn, Lenth, RMS, Dong, JuanPena, Daniel. See Details.</p></dd>
+
+
 <dt>margin_errors</dt>
 <dd><p>Default is TRUE, if false the cutoffs for margin of errors (ME) and simultaneous margin of error (SME) are not shown</p></dd>
+
+
 <dt>showplot</dt>
 <dd><p>Default is TRUE, if false plot will not be shown and a tibble is returned with data used to create the pareto plot</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A bar plot with ordered effects, margin of error (ME) and simultaneous margin of error (SME) cutoffs.</p>
+    
+
+<p>A bar plot with ordered effects, margin of error (ME) and simultaneous margin of error (SME) cutoffs.</p>
+    </div>
+    <div id="details">
+    <h2>Details</h2>
+    <p>The method argument is a simple wrapper for the function PSE() from the unrepx R package.
+For more details you can use ?unrepx::PSE(). The <em>method</em> arguement implements methods of estimating the standard error of
+effects estimates from unreplicatd designs. The methods include</p><ul><li><p>Daniel: The 68.3rd quantile of the absolute effects. See Daniel (1959)</p></li>
+<li><p>Dong: The RMS method, applied after excluding all
+effects that exceed 2.5 * PSE(effects, "SMedian") in absolute value. See Dong (1993)</p></li>
+<li><p>JuanPena: An iterated median method whereby we repeatedly calculate the
+median of the absolute effects that don't exceed 3.5 times the previous median, until it stabilizes.
+The estimate is the final median, divided by .6578. See Juan and Pena (1992).</p></li>
+<li><p>Lenth (Default): The SMedian method, applied after excluding all effects that exceed 2.5 * PSE(effects, "SMedian")
+in absolute value. See Lenth (1989)</p></li>
+<li><p>RMS: Square root of the mean of the squared effects. This is not a good PSE in the presence of active effects,
+but it is provided for sake of comparisons</p></li>
+<li><p>SMedian: 1.5 times the median of the absolute effects</p></li>
+<li><p>Zahn, WZahn: The Zahn method is the slope of the least-squares line fitted to the first m points of unrepx::hnplot(effects, horiz = FALSE),
+where m = floor(.683 * length(effects)). (This line is fitted through the origin.)
+The WZahn method is an experimental version of Zahn's method,
+based on weighted least-squares
+with weights decreasing linearly from m - .5 to .5, but bounded above by .65m</p></li>
+</ul></div>
+    <div id="references">
+    <h2>References</h2>
+    <p>Daniel, C (1959) Use of Half-Normal Plots in Interpreting Factorial Two-Level Experiments. Technometrics, 1(4), 311-341 <br><br>
+Dong, F (1993) On the Identification of Active Contrasts in Unreplicated Fractional Factorials. Statistica Sinica 3, 209-217 <br><br>
+Hamada and Balakrishnan (1998) Analyzing Unreplicated Factorial Experiments: A Review With Some New Proposals. Statistica Sinica 8, 1-41 <br><br>
+Juan, J and Pena, D (1992) A Simple Method to Identify Significant Effects in Unreplicated Two-Level Factorial Designs. Communications in Statistics: Theory and Methods 21, 1383-1403 <br><br>
+Lenth, R (1989) Quick and Easy Analysis of Unrelicated Factorials Technometrics 31(4), 469-473 <br><br>
+Zahn, D (1975) Modifications of and Revised Critical Values for the Half-Normal Plot. Technometrics 17(2), 189-200</p>
     </div>
 
     <div id="ref-examples">
@@ -100,7 +141,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

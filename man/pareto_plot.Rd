@@ -13,11 +13,11 @@ pareto_plot(
 )
 }
 \arguments{
-\item{model}{Model of class "lm" or "glm"#'}
+\item{model}{Model of class "lm"}
 
-\item{alpha}{significance level to compute margin of errors based on Lenth method. Default is alpha=0.05}
+\item{alpha}{specify the significance level to compute margin of errors. Numeric significance level, between 0 and 1. Default is alpha=0.05}
 
-\item{method}{Character value. Method to calculate PSE. Default is Lenth. Options include: Zahn, WZahn, Lenth, RMS, Dong, JuanPena, Daniel}
+\item{method}{Character value. Method to calculate PSE. Default is Lenth. Options include: Zahn, WZahn, Lenth, RMS, Dong, JuanPena, Daniel. See Details.}
 
 \item{margin_errors}{Default is TRUE, if false the cutoffs for margin of errors (ME) and simultaneous margin of error (SME) are not shown}
 
@@ -29,9 +29,41 @@ A bar plot with ordered effects, margin of error (ME) and simultaneous margin of
 \description{
 Pareto Plot of Effects
 }
+\details{
+The method argument is a simple wrapper for the function PSE() from the unrepx R package.
+For more details you can use ?unrepx::PSE(). The \emph{method} arguement implements methods of estimating the standard error of
+effects estimates from unreplicatd designs. The methods include
+\itemize{
+\item{Daniel: }{The 68.3rd quantile of the absolute effects. See Daniel (1959) }
+\item{Dong: }{The RMS method, applied after excluding all
+effects that exceed 2.5 * PSE(effects, "SMedian") in absolute value. See Dong (1993)}
+\item{JuanPena: }{An iterated median method whereby we repeatedly calculate the
+median of the absolute effects that don't exceed 3.5 times the previous median, until it stabilizes.
+The estimate is the final median, divided by .6578. See Juan and Pena (1992).}
+\item{Lenth (Default): }{The SMedian method, applied after excluding all effects that exceed 2.5 * PSE(effects, "SMedian")
+in absolute value. See Lenth (1989)}
+\item{RMS: }{Square root of the mean of the squared effects. This is not a good PSE in the presence of active effects,
+but it is provided for sake of comparisons}
+\item{SMedian: }{1.5 times the median of the absolute effects}
+\item{Zahn, WZahn: }{The Zahn method is the slope of the least-squares line fitted to the first m points of unrepx::hnplot(effects, horiz = FALSE),
+where m = floor(.683 * length(effects)). (This line is fitted through the origin.)
+The WZahn method is an experimental version of Zahn's method,
+based on weighted least-squares
+with weights decreasing linearly from m - .5 to .5, but bounded above by .65m}
+
+}
+}
 \examples{
 m1 <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
 pareto_plot(m1)
 pareto_plot(m1,method='Zahn',alpha=0.1)
 pareto_plot(m1,margin_errors=FALSE)
+}
+\references{
+Daniel, C (1959) Use of Half-Normal Plots in Interpreting Factorial Two-Level Experiments. Technometrics, 1(4), 311-341 \cr \cr
+Dong, F (1993) On the Identification of Active Contrasts in Unreplicated Fractional Factorials. Statistica Sinica 3, 209-217 \cr \cr
+Hamada and Balakrishnan (1998) Analyzing Unreplicated Factorial Experiments: A Review With Some New Proposals. Statistica Sinica 8, 1-41 \cr \cr
+Juan, J and Pena, D (1992) A Simple Method to Identify Significant Effects in Unreplicated Two-Level Factorial Designs. Communications in Statistics: Theory and Methods 21, 1383-1403 \cr \cr
+Lenth, R (1989) Quick and Easy Analysis of Unrelicated Factorials Technometrics 31(4), 469-473 \cr \cr
+Zahn, D (1975) Modifications of and Revised Critical Values for the Half-Normal Plot. Technometrics 17(2), 189-200
 }
