@@ -27,15 +27,15 @@ interaction_effects <- function(design,response,
                                 showplot=TRUE)
 {
 
-  factor_names = setdiff(names(design),c(response,exclude_vars))
+  factor_names <- setdiff(names(design),c(response,exclude_vars))
 
-  interactions = t(combn(factor_names,2))
-  dat_list = vector('list',length = nrow(interactions))
+  interactions <- t(combn(factor_names,2))
+  dat_list <- vector('list',length = nrow(interactions))
 
   dat <- design %>% mutate_at(factor_names,factor)
 
   for(i in 1:nrow(interactions)){
-    dat_list[[i]] = dat %>%
+    dat_list[[i]] <- dat %>%
       group_by(eval(parse(text=interactions[i,1])),
                eval(parse(text=interactions[i,2]))) %>%
       summarise(mean= mean(eval(parse(text=response))),.groups='drop')
@@ -45,17 +45,17 @@ interaction_effects <- function(design,response,
 
   if(showplot){
 
-    vals = c()
-    n = length(dat_list)
+    vals <- c()
+    n <- length(dat_list)
 
     for(i in 1:n){
-      vals = c(vals,dat_list[[i]][[3]])
+      vals <- c(vals,dat_list[[i]][[3]])
     }
 
-    minval = min(vals)
-    maxval = max(vals)
+    minval <- min(vals)
+    maxval <- max(vals)
 
-    plot_list = vector('list',length = n)
+    plot_list <- vector('list',length = n)
 
     for(i in 1:n){
 

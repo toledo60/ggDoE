@@ -31,13 +31,13 @@ gg_boxplots <- function(data,response,factor,
                         color_palette = NA,
                         direction=1,
                         show_mean=FALSE){
-  y = enquo(response)
-  factor = enquo(factor)
+  y <- enquo(response)
+  factor <- enquo(factor)
 
   if(!is.na(color_palette)){
 
   factor_levels <- unique(select(data,!!factor))
-  factors_total = nrow(factor_levels)
+  factors_total <- nrow(factor_levels)
 
   color_choice <- viridisPalette(factors_total,
                                   color_palette = color_palette,
@@ -64,7 +64,7 @@ gg_boxplots <- function(data,response,factor,
     return(p)
   }
   else{
-    group_var = enquo(group_var)
+    group_var <- enquo(group_var)
     data <- mutate(data,group_var = !!group_var)
     return(p+ facet_wrap(group_var))
   }

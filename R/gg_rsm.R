@@ -30,15 +30,15 @@ gg_rsm <- function(rsm_model,
                    stroke = 0.15,
                    size=4,
                    ...){
-  if(!inherits(rsm_model,'rsm') || !inherits(rsm_model,'lm')){
-    stop("rsm_obj should be of class lm or rsm")
+  if(!inherits(rsm_model,'rsm')){
+    stop("rsm_obj should be of class rsm")
   }
 
   rsm_contour <- contour(rsm_model, form, plot=FALSE,
                          decode=decode,
                          ...)
 
-  xy_labels = names(rsm_contour)
+  xy_labels <- names(rsm_contour)
   splits <- strsplit(xy_labels,split = " ")
   x_lab <- unlist(lapply(splits, function(x) x[[1]]))
   y_lab <- unlist(lapply(splits, function(x) x[[3]]))
@@ -49,14 +49,14 @@ gg_rsm <- function(rsm_model,
   zvec <- lapply(rsm_contour, function(x) x[[3]])
   zvec <-  lapply(zvec, c)
 
-  df_list = list()
-  cplots = list()
+  df_list <- list()
+  cplots <- list()
 
   if(!filled){
     for(i in 1:length(xvec)){
-      df_list[[i]]=cbind(expand.grid(xvec[[i]],yvec[[i]]),"z"=zvec[[i]])
+      df_list[[i]] <- cbind(expand.grid(xvec[[i]],yvec[[i]]),"z"=zvec[[i]])
 
-      cplots[[i]] = ggplot(df_list[[i]], aes_string(x='Var1', y='Var2')) +
+      cplots[[i]] <- ggplot(df_list[[i]], aes_string(x='Var1', y='Var2')) +
         metR::geom_contour2(aes(z = z, label = ..level..))+
         theme_bw()+
         labs(caption=rsm_contour[[i]][[4]],
@@ -71,9 +71,9 @@ gg_rsm <- function(rsm_model,
   }
   else{
     for(i in 1:length(xvec)){
-      df_list[[i]]=cbind(expand.grid(xvec[[i]],yvec[[i]]),"z"=zvec[[i]])
+      df_list[[i]] <- cbind(expand.grid(xvec[[i]],yvec[[i]]),"z"=zvec[[i]])
 
-      cplots[[i]] = ggplot(df_list[[i]],
+      cplots[[i]] <- ggplot(df_list[[i]],
                            aes_string(x='Var1', y='Var2',z='z')) +
         geom_contour_filled()+
         geom_contour(color = "black", size = 0.1)+

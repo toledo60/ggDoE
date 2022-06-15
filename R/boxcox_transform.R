@@ -75,7 +75,7 @@ boxcox_transform <- function(model,lambda= seq(-2,2,1/10),
     }
   }else{
     return(tibble("best_lambda" = best_lambda,
-                          "lambda_low"=conf_lo,
-                          "lambda_high"=conf_hi))
+                  "lambda_low"=conf_lo,
+                  "lambda_high"=conf_hi))
   }
 }

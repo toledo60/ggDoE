@@ -78,8 +78,8 @@ pareto_plot <- function(model,alpha=0.05,method='Lenth',
   if(showplot){
     base_plot <- ggplot(sorted_dat,
                         aes_string(x = paste0("reorder(",'effect_names',", abs_effects)"),
-                                  y = 'abs_effects',
-                                  fill = 'cols')) +
+                                   y = 'abs_effects',
+                                   fill = 'cols')) +
       geom_bar(stat = "identity")+
       theme_classic()+
       coord_flip()+

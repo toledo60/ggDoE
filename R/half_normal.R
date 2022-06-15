@@ -57,11 +57,11 @@
 #' half_normal(m1,alpha=0.1,label_active=TRUE,margin_errors=TRUE)
 #' half_normal(m1,method='Zahn',alpha=0.1,ref_line=TRUE,label_active=TRUE,margin_errors=TRUE)
 half_normal <- function(model,method='Lenth',
-                       alpha=0.05,
-                       label_active=FALSE,
-                       ref_line = FALSE,
-                       margin_errors = FALSE,
-                       showplot=TRUE){
+                        alpha=0.05,
+                        label_active=FALSE,
+                        ref_line = FALSE,
+                        margin_errors = FALSE,
+                        showplot=TRUE){
   if (inherits(model, "lm")) {
     i <- pmatch("(Intercept)", names(coef(model)))
     if (!is.na(i))
@@ -77,18 +77,18 @@ half_normal <- function(model,method='Lenth',
   names <- names(effs)
   m <- length(estimates)
   r <- c(1:m)
-  zscore<-c(rep(0,m))
+  zscore <- c(rep(0,m))
 
   for (i in 1:m) {
-    zscore[i]<-qnorm( ( ( r[i]-.5)/m+1)/2 )
+    zscore[i] <- qnorm( ( ( r[i]-.5)/m+1)/2 )
     if(label_active){
-      logc<-(abs(effs[i])<= ME)
+      logc <- (abs(effs[i])<= ME)
       if (logc) {names[i]<-NA}}
   }
 
   dat <- tibble("effects"=names,
-                        "absolute_effects"=effs,
-                        "half_normal_quantiles"=zscore
+                "absolute_effects"=effs,
+                "half_normal_quantiles"=zscore
   )
 
   if(showplot){

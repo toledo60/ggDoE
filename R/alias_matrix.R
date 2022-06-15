@@ -17,10 +17,10 @@
 #' alias_matrix(design=aliased_design, color_palette = "plasma")
 #' alias_matrix(design=aliased_design, color_palette = "magma", direction = -1)
 alias_matrix <- function(design,midpoint=0.5,
-                          digits=3,
-                          color_palette = "viridis",
-                          alpha=1,direction = 1,
-                          showplot=TRUE){
+                         digits=3,
+                         color_palette = "viridis",
+                         alpha=1,direction = 1,
+                         showplot=TRUE){
 
   k <- ncol(design)   # k is number of input factors
 

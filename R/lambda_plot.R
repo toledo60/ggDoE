@@ -8,7 +8,7 @@
 #' @param direction Sets the order of colors in the scale. If 1, the default, colors are ordered from darkest to lightest. If -1, the order of colors is reversed
 #' @param showplot logical indicating to show the main effect plots. If false, a list of tibbles is returned used to obtain the main effects for each factor. Default is TRUE
 #'
-#' @return Lambda plot for tracing t-staitics across different values of lamba (in ggplot2)
+#' @return Lambda plot for tracing t-staitics across different values of lambda (in ggplot2)
 #' @export
 #'
 #' @importFrom stats lm as.formula
@@ -29,12 +29,12 @@ lambda_plot <- function(model, lambda = seq(-2, 2, by = 0.1),
 
   y <- model$model[, 1]
 
-  response = model$terms[[2]]
+  response <- model$terms[[2]]
   variables <- attr(model$terms,'term.labels')
 
-  var_formula = paste(variables,
-                      collapse = '+')
-  data_name = model$call[[3]]
+  var_formula <- paste(variables,
+                       collapse = '+')
+  data_name <- model$call[[3]]
 
   org_fit <- lm(as.formula(paste(response,"~",var_formula)), qr = TRUE,
                 data = eval(data_name))
@@ -65,7 +65,7 @@ lambda_plot <- function(model, lambda = seq(-2, 2, by = 0.1),
   }
 
   t_lambda <- t(coef_lambda/se_lambda)[,-1]
-  colnames(t_lambda) = names(coef(org_fit))[-1]
+  colnames(t_lambda) <- names(coef(org_fit))[-1]
 
 
   t_lambda_dat <- tibble(lambda = lambda,
@@ -75,23 +75,23 @@ lambda_plot <- function(model, lambda = seq(-2, 2, by = 0.1),
     return(t_lambda_dat)
   }else{
 
-    factors_total = ncol(t_lambda)
+    factors_total <- ncol(t_lambda)
 
-    melted_t <-cbind('lambda'=rep(lambda,factors_total),
-                     stack(as.vector(t_lambda_dat[,-1])))
+    melted_t <- cbind('lambda'=rep(lambda,factors_total),
+                      stack(as.vector(t_lambda_dat[,-1])))
 
     pattern <- "/|:|\\?|<|>|\\|\\\\|\\*"
     int_terms <- variables[grepl(pattern,variables)]
 
-    label_left = filter(melted_t,lambda==first(lambda))
-    label_left_main = filter(label_left,!ind %in% int_terms)
+    label_left <- filter(melted_t,lambda==first(lambda))
+    label_left_main <- filter(label_left,!ind %in% int_terms)
 
-    label_right = filter(melted_t,lambda==last(lambda))
-    label_right_interactions = filter(label_right,ind %in% int_terms)
+    label_right <- filter(melted_t,lambda==last(lambda))
+    label_right_interactions <- filter(label_right,ind %in% int_terms)
 
 
     if(is.na(color_palette)){
-      factor_colors = rep("#21908CFF",factors_total)
+      factor_colors <- rep("#21908CFF",factors_total)
     }else{
       factor_colors <- viridisPalette(factors_total,
                                       color_palette = color_palette,
@@ -104,10 +104,10 @@ lambda_plot <- function(model, lambda = seq(-2, 2, by = 0.1),
                                        group="ind"))+
       geom_line()+
       ggrepel::geom_label_repel(data = label_left_main,aes(label=ind),
-                       max.overlaps = 15)+
+                                max.overlaps = 15)+
       ggrepel::geom_label_repel(data = label_right_interactions,
-                       aes(label=ind),
-                       max.overlaps = 15)+
+                                aes(label=ind),
+                                max.overlaps = 15)+
       labs(x='lambda',y='t-statistic',title='Lambda Plot:',
            subtitle = 'Trace of t-statistic')+
       scale_color_manual(values = factor_colors)+

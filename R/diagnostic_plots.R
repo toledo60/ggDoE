@@ -26,29 +26,33 @@ diagnostic_plots <- function(model,standard_errors=FALSE,
     stop("model should be of class lm or glm")
   }else{
 
-    df = model$model
-    df$.fitted = model$fitted.values
-    df$.resid = model$residuals
-    df$.hat = lm.influence(model)$hat
-    df$.sigma = lm.influence(model)$sigma
-    df$.cooksd = cooks.distance(model)
-    df$.std.resid = rstandard(model)
+    df <- model$model
+    df$.fitted <- model$fitted.values
+    df$.resid <- model$residuals
+    df$.hat <- lm.influence(model)$hat
+    df$.sigma <- lm.influence(model)$sigma
+    df$.cooksd <- cooks.distance(model)
+    df$.std.resid <- rstandard(model)
 
-    p = length(coef(model))
-    n = nrow(df)
+    if(sum(is.na(df$.std.resid)) > 0){
+      stop("Insufficient degrees of freedom, check your model. Can't obtain diagnostic plots")
+    }
 
-    res =  df$.resid
-    df$sqrt_abs_stdres = sqrt(abs(df$.std.resid))
-    df$leverage = ifelse(df$.hat  > 2 * p / n,rownames(df),NA)
-    df$outlier = ifelse(abs(df$.std.resid) > 3,rownames(df),NA)
+    p <- length(coef(model))
+    n <- nrow(df)
 
-    plot_list = list()
+    res <-  df$.resid
+    df$sqrt_abs_stdres <- sqrt(abs(df$.std.resid))
+    df$leverage <- ifelse(df$.hat  > 2 * p / n,rownames(df),NA)
+    df$outlier <- ifelse(abs(df$.std.resid) > 3,rownames(df),NA)
+
+    plot_list <- list()
 
     # Residuals vs fitted -----------------------------------------------------
 
-    limit = max(abs(res))
-    margin_factor = 5
-    margin = round(limit / margin_factor)
+    limit <- max(abs(res))
+    margin_factor <- 5
+    margin <- round(limit / margin_factor)
 
     res_fitted_base <- ggplot(data = df, aes_string(y = '.resid', x = '.fitted')) +
       geom_point(size=point_size,shape=1) +
@@ -76,9 +80,9 @@ diagnostic_plots <- function(model,standard_errors=FALSE,
 
     # QQ-plot -----------------------------------------------------------------
 
-    slope = (quantile(res, .75) - quantile(res, .25)) / (qnorm(.75) - qnorm(.25))
-    intercept = quantile(res,.25) - slope*qnorm(.25)
-    qq_line = data.frame(intercept = intercept, slope = slope)
+    slope <- (quantile(res, .75) - quantile(res, .25)) / (qnorm(.75) - qnorm(.25))
+    intercept <- quantile(res,.25) - slope*qnorm(.25)
+    qq_line <- data.frame(intercept = intercept, slope = slope)
 
     qq_plot <- ggplot(data = model) +
       stat_qq(aes_string(sample = 'res'), size=point_size,shape=1) +
@@ -107,26 +111,26 @@ diagnostic_plots <- function(model,standard_errors=FALSE,
     # Cooks Distance ----------------------------------------------------------
 
     cooksd <- cooks.distance(model)
-    h = 4/n
-    df$cooksD = ifelse(cooksd > h,rownames(df),
-                       NA)
+    h <- 4/n
+    df$cooksD <- ifelse(cooksd > h,rownames(df),
+                        NA)
 
-    limit = max(cooksd, na.rm = T)
-    margin_factor = 5
-    margin = round(limit / margin_factor)
-    max_cook = limit + margin
+    limit <- max(cooksd, na.rm = T)
+    margin_factor <- 5
+    margin <- round(limit / margin_factor)
+    max_cook <- limit + margin
 
     .cooksd <- NULL
 
     cooksD_plot <- ggplot(data = df, aes(x=1:n,.cooksd, ymin = 0,
                                          ymax = cooksd)) +
-      geom_point(size=1,shape=1) +
+      geom_point(size=point_size,shape=1) +
       geom_hline(yintercept = h,
-                 color= "#21908CFF",linetype=2)+
+                 color= theme_color,linetype=2)+
       geom_linerange(color='#bfbfbf') +
       ggrepel::geom_label_repel(data = df,aes_string(label='cooksD'),na.rm = TRUE,
                                 max.overlaps = 20,
-                                color="#21908CFF")+
+                                color=theme_color)+
       labs(x= 'Observarion',y="Cook's Distance",
            title="Cook's Distance Plot")+
       theme_bw()+
@@ -162,11 +166,11 @@ diagnostic_plots <- function(model,standard_errors=FALSE,
                                     color=theme_color)
       }
 
-      plot_list[[1]] = res_fitted
-      plot_list[[2]] = qq_plot
-      plot_list[[3]] = stdres_fitted
-      plot_list[[4]] = stdres_leverage
-      plot_list[[5]] = cooksD_plot
+      plot_list[[1]] <- res_fitted
+      plot_list[[2]] <- qq_plot
+      plot_list[[3]] <- stdres_fitted
+      plot_list[[4]] <- stdres_leverage
+      plot_list[[5]] <- cooksD_plot
 
 
 
@@ -176,10 +180,10 @@ diagnostic_plots <- function(model,standard_errors=FALSE,
     }
     else{
 
-      plot_list[[1]] = res_fitted + labs(title = "Residual vs.\nFitted Value")
-      plot_list[[2]] = qq_plot
-      plot_list[[3]] = stdres_fitted
-      plot_list[[4]] = cooksD_plot
+      plot_list[[1]] <- res_fitted + labs(title = "Residual vs.\nFitted Value")
+      plot_list[[2]] <- qq_plot
+      plot_list[[3]] <- stdres_fitted
+      plot_list[[4]] <- cooksD_plot
 
 
       return(suppressMessages(gridExtra::grid.arrange(grobs=plot_list[which_plots],

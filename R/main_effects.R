@@ -24,37 +24,36 @@ main_effects <- function(design,response,ncols=2,
                          color_palette = NA,
                          alpha=1,direction = 1,
                          showplot=TRUE){
-  factor_names = setdiff(names(design),c(response,exclude_vars))
+  factor_names <- setdiff(names(design),c(response,exclude_vars))
   dat_list <-  vector("list", length = length(factor_names))
 
   for (i in seq_along(factor_names)) {
-    dat_list[[i]] = design %>%
+    dat_list[[i]] <- design %>%
       group_by(eval(parse(text=factor_names[i]))) %>%
       summarise(mean = mean(eval(parse(text=response))))
     colnames(dat_list[[i]]) = c(factor_names[i],response)
   }
-  names(dat_list) = factor_names
+  names(dat_list) <- factor_names
 
   if(!showplot){
     return(dat_list)
   }
   else{
 
-    vals = c()
-    n = length(dat_list)
+    vals <- c()
+    n <- length(dat_list)
 
     for(i in 1:n){
-      vals = c(vals,dat_list[[i]][[2]])
+      vals <- c(vals,dat_list[[i]][[2]])
     }
 
-    minval = min(vals)
-    maxval = max(vals)
+    minval <- min(vals)
+    maxval <- max(vals)
 
-    dat = bind_rows(dat_list)
+    dat <- bind_rows(dat_list)
 
-    dat[is.na(dat)] = 88
-
-    vec_dat = as.vector(dat)
+    dat[is.na(dat)] <- 88
+    vec_dat <- as.vector(dat)
 
     melted_dat <- stack(vec_dat) %>%
       filter(values != 88) %>%
@@ -62,16 +61,16 @@ main_effects <- function(design,response,ncols=2,
       mutate(response_var = vec_dat[[response]]) %>%
       mutate(values = as.factor(values))
 
-    factors_total = length(factor_names)
+    factors_total <- length(factor_names)
 
     if(is.na(color_palette)){
-      factor_colors = rep("#21908CFF",factors_total)
+      factor_colors <- rep("#21908CFF",factors_total)
     }
     else{
-    factor_colors <- viridisPalette(factors_total,
-                                    color_palette = color_palette,
-                                    direction = direction,
-                                    alpha = alpha)
+      factor_colors <- viridisPalette(factors_total,
+                                      color_palette = color_palette,
+                                      direction = direction,
+                                      alpha = alpha)
     }
 
     p <- ggplot(melted_dat) +

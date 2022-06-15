@@ -28,7 +28,7 @@ Eight options are available: "viridis","cividis","magma","inferno","plasma","roc
 \item{showplot}{logical indicating to show the main effect plots. If false, a list of tibbles is returned used to obtain the main effects for each factor. Default is TRUE}
 }
 \value{
-Lambda plot for tracing t-staitics across different values of lamba (in ggplot2)
+Lambda plot for tracing t-staitics across different values of lambda (in ggplot2)
 }
 \description{
 Lambda Plot: Trace of t-statistics
