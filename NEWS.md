@@ -1,3 +1,15 @@
+# ggDoE 0.7.3
+
+NEW FUNCTIONS
+
+* Added new function `twoD_projections()`. This function will output all two dimensional projections from a Latin hypercube design. Will add further details to documentation in future updates.
+
+CHANGES
+
+* Switched `gridExtra` to Imports instead of Suggests under Description file
+
+---
+
 # ggDoE 0.7.2
 
 CHANGES

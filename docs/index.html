@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ggDoE</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.3</span>
       </span>
     </div>
 
@@ -190,6 +190,13 @@
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/pareto_plot.html">pareto_plot</a></span><span class="op">(</span><span class="va">m1</span>,method<span class="op">=</span><span class="st">'Zahn'</span>,alpha<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/pareto_plot2.png"></p>
+<p><strong>Two Dimensional Projections</strong></p>
+<p>This function will output all two dimensional projections from a Latin hypercube design</p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
+<span class="va">X</span> <span class="op">&lt;-</span> <span class="fu">lhs</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lhs/man/randomLHS.html" class="external-link">randomLHS</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">10</span>, k<span class="op">=</span><span class="fl">4</span><span class="op">)</span>
+<span class="fu"><a href="reference/twoD_projections.html">twoD_projections</a></span><span class="op">(</span><span class="va">X</span>,ncols<span class="op">=</span><span class="fl">3</span>,grid <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/twoD_projections.png"></p>
 <p>Lastly, the following datasets/designs are included in ggDoE as tibbles:</p>
 <ul>
 <li>

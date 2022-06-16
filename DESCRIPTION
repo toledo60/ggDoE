@@ -1,7 +1,7 @@
 Package: ggDoE
 Type: Package
 Title: Modern graphs for Design of Experiments with ggplot2
-Version: 0.7.2
+Version: 0.7.3
 Authors@R: c(person(given = "Jose",family = "Toledo Luna",
              role = c("aut", "cre"),
              email = "toledo60@protonmail.com",
@@ -15,7 +15,8 @@ URL: https://ggdoe.netlify.app
 BugReports: https://github.com/toledo60/ggDoE/issues
 Imports: 
     ggplot2,
-    dplyr
+    dplyr,
+    gridExtra
 Suggests:
     knitr,
     pkgdown,
@@ -24,10 +25,10 @@ Suggests:
     MASS,
     viridisLite,
     unrepx,
-    gridExtra,
     ggrepel,
     metR,
-    rsm
+    rsm,
+    lhs
 RoxygenNote: 7.2.0
 Depends: 
     R (>= 3.3.0)

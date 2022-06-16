@@ -256,6 +256,19 @@ pareto_plot(m1,method='Zahn',alpha=0.1)
 ![](man/figures/pareto_plot2.png)
 
 
+**Two Dimensional Projections**
+
+This function will output all two dimensional projections from a Latin hypercube design
+
+```{r}
+set.seed(10)
+X <- lhs::randomLHS(n=10, k=4)
+twoD_projections(X,ncols=3,grid = TRUE)
+```
+
+![](man/figures/twoD_projections.png)
+
+
 Lastly, the following datasets/designs are included in ggDoE as tibbles:
 
 - **adapted_epitaxial**: Adapted epitaxial layer experiment obtain from the book <br>

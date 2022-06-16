@@ -15,7 +15,8 @@
 #' @importFrom ggplot2 scale_color_manual theme_bw ylim element_blank
 #' @importFrom dplyr mutate_at setdiff group_by summarise "%>%"
 #' @importFrom utils combn
-#'
+#' @importFrom gridExtra grid.arrange
+
 #' @examples
 #' interaction_effects(adapted_epitaxial,response = 'ybar',exclude_vars = c('s2','lns2'))
 
@@ -80,7 +81,7 @@ interaction_effects <- function(design,response,
              shape=interactions[i,2]
         )
     }
-    return(gridExtra::grid.arrange(grobs=plot_list,ncol=ncols))
+    return(grid.arrange(grobs=plot_list,ncol=ncols))
   }
   else{
     return(dat_list)

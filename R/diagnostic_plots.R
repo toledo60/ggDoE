@@ -10,6 +10,7 @@
 #' @return Regression diagnostic plots
 #' @importFrom ggplot2 geom_smooth stat_qq geom_abline ylim aes_string theme_bw geom_linerange element_blank geom_hline
 #' @importFrom stats quantile lm.influence cooks.distance rstandard as.formula model.matrix
+#' @importFrom gridExtra grid.arrange
 #' @export
 #'
 #' @examples
@@ -230,8 +231,8 @@ diagnostic_plots <- function(model,standard_errors=FALSE,
 
 
 
-      return(suppressMessages(gridExtra::grid.arrange(grobs=plot_list[which_plots],
-                                                      ncol=ncols)))
+      return(suppressMessages(grid.arrange(grobs=plot_list[which_plots],
+                                           ncol=ncols)))
 
     }
     else{
@@ -244,8 +245,8 @@ diagnostic_plots <- function(model,standard_errors=FALSE,
                                  theme_color = theme_color)
 
 
-      return(suppressMessages(gridExtra::grid.arrange(grobs=plot_list[which_plots],
-                                                      ncol=ncols)))
+      return(suppressMessages(grid.arrange(grobs=plot_list[which_plots],
+                                           ncol=ncols)))
     }
   }
 }

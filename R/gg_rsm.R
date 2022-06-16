@@ -15,7 +15,8 @@
 #'
 #' @importFrom graphics contour
 #' @importFrom ggplot2 aes_string theme_bw theme_minimal labs element_blank element_text geom_contour geom_contour_filled
-#'
+#' @importFrom gridExtra grid.arrange
+
 #' @examples
 #' heli = rsm::heli
 #' heli.rsm <- rsm::rsm(ave ~ SO(x1, x2, x3, x4), data = heli)
@@ -74,7 +75,7 @@ gg_rsm <- function(rsm_model,
       df_list[[i]] <- cbind(expand.grid(xvec[[i]],yvec[[i]]),"z"=zvec[[i]])
 
       cplots[[i]] <- ggplot(df_list[[i]],
-                           aes_string(x='Var1', y='Var2',z='z')) +
+                            aes_string(x='Var1', y='Var2',z='z')) +
         geom_contour_filled()+
         geom_contour(color = "black", size = 0.1)+
         metR::geom_text_contour(aes_string(z = 'z'),
@@ -92,6 +93,6 @@ gg_rsm <- function(rsm_model,
         )
     }
   }
-  return(gridExtra::grid.arrange(grobs = cplots,
-                                 ncol=ncols))
+  return(grid.arrange(grobs = cplots,
+                      ncol=ncols))
 }
