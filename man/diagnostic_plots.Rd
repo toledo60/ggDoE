@@ -23,19 +23,17 @@ diagnostic_plots(
 \item{theme_color}{Change color of the geom_smooth line and text labels for the respective diagnostic plot}
 
 \item{which_plots}{Choose which diagnostic plots to choose from. Options are 1 = 'residual vs fitted', 2 = 'Normal-QQ',
-3 = 'Scale-location', 4 = 'Residual vs Leverage', 5= "Cook's Distance". Default is 1:4}
+3 = 'Scale-location', 4 = 'Residual vs Leverage', 5 = "Cook's Distance". 6 = "Collinearity". Default is 1:4}
 
 \item{ncols}{number of columns for grid layout. Default is 2}
 }
 \value{
-Regression Diagnostic plots. In the case where all hat values are equal only residual vs.fitted, normal-QQ, and scale-location plots are returned
+Regression diagnostic plots
 }
 \description{
 Regression Diagnostic Plots with ggplot2
 }
 \examples{
-data(mtcars)
-mtcars_lm <- lm(mpg ~.,data=mtcars)
-diagnostic_plots(mtcars_lm)
-diagnostic_plots(mtcars_lm,which_plots=1:5)
+model <- lm(mpg ~ wt + am + gear + vs * cyl, data = mtcars)
+diagnostic_plots(model,which_plots=1:6)
 }

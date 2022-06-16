@@ -92,21 +92,16 @@ gg_boxplots(data,response = len,
 3.  Scale-Location plot
 4.  Residual vs. Leverage
 5.  Cook’s Distance
+6.  Collinearity
+
+The default plots are 1-4
 
 ``` r
-data(mtcars)
-mtcars_lm <- lm(mpg ~.,data=mtcars)
-diagnostic_plots(mtcars_lm)
+model <- lm(mpg ~ wt + am + gear + vs * cyl, data = mtcars)
+diagnostic_plots(model,which_plots=1:6)
 ```
 
-![](man/figures/diagnostic1.png)
-
-``` r
-diagnostic_plots(mtcars_lm,
-                 which_plots=c(1,3,4,5))
-```
-
-![](man/figures/diagnostic2.png)
+![](man/figures/diagnostic_plots.png)
 
 **Half-Normal Plot**
 

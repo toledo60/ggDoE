@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggDoE</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.2</span>
       </span>
     </div>
 
@@ -83,7 +83,7 @@
 
 <dt>which_plots</dt>
 <dd><p>Choose which diagnostic plots to choose from. Options are 1 = 'residual vs fitted', 2 = 'Normal-QQ',
-3 = 'Scale-location', 4 = 'Residual vs Leverage', 5= "Cook's Distance". Default is 1:4</p></dd>
+3 = 'Scale-location', 4 = 'Residual vs Leverage', 5 = "Cook's Distance". 6 = "Collinearity". Default is 1:4</p></dd>
 
 
 <dt>ncols</dt>
@@ -94,17 +94,14 @@
     <h2>Value</h2>
     
 
-<p>Regression Diagnostic plots. In the case where all hat values are equal only residual vs.fitted, normal-QQ, and scale-location plots are returned</p>
+<p>Regression diagnostic plots</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mtcars_lm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span><span class="va">.</span>,data<span class="op">=</span><span class="va">mtcars</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">diagnostic_plots</span><span class="op">(</span><span class="va">mtcars_lm</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">am</span> <span class="op">+</span> <span class="va">gear</span> <span class="op">+</span> <span class="va">vs</span> <span class="op">*</span> <span class="va">cyl</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">diagnostic_plots</span><span class="op">(</span><span class="va">model</span>,which_plots<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span></span>
 <span class="r-plt img"><img src="diagnostic_plots-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">diagnostic_plots</span><span class="op">(</span><span class="va">mtcars_lm</span>,which_plots<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span>
-<span class="r-plt img"><img src="diagnostic_plots-2.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </div>

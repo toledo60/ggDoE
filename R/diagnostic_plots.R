@@ -5,18 +5,16 @@
 #' @param point_size Change size of points in plots
 #' @param theme_color Change color of the geom_smooth line and text labels for the respective diagnostic plot
 #' @param which_plots Choose which diagnostic plots to choose from. Options are 1 = 'residual vs fitted', 2 = 'Normal-QQ',
-#' 3 = 'Scale-location', 4 = 'Residual vs Leverage', 5= "Cook's Distance". Default is 1:4
+#' 3 = 'Scale-location', 4 = 'Residual vs Leverage', 5 = "Cook's Distance". 6 = "Collinearity". Default is 1:4
 #' @param ncols number of columns for grid layout. Default is 2
-#' @return Regression Diagnostic plots. In the case where all hat values are equal only residual vs.fitted, normal-QQ, and scale-location plots are returned
+#' @return Regression diagnostic plots
 #' @importFrom ggplot2 geom_smooth stat_qq geom_abline ylim aes_string theme_bw geom_linerange element_blank geom_hline
-#' @importFrom stats quantile lm.influence cooks.distance rstandard
+#' @importFrom stats quantile lm.influence cooks.distance rstandard as.formula model.matrix
 #' @export
 #'
 #' @examples
-#' data(mtcars)
-#' mtcars_lm <- lm(mpg ~.,data=mtcars)
-#' diagnostic_plots(mtcars_lm)
-#' diagnostic_plots(mtcars_lm,which_plots=1:5)
+#' model <- lm(mpg ~ wt + am + gear + vs * cyl, data = mtcars)
+#' diagnostic_plots(model,which_plots=1:6)
 diagnostic_plots <- function(model,standard_errors=FALSE,
                              point_size=1.5,
                              theme_color = "#21908CFF",
@@ -137,6 +135,61 @@ diagnostic_plots <- function(model,standard_errors=FALSE,
       theme(panel.grid.major = element_blank(),
             panel.grid.minor = element_blank())
 
+    # Variance Inflation Factor -----------------------------------------------
+
+    vif_plot <- function(model,point_size=point_size,
+                         theme_color = theme_color) {
+      m   <- as.data.frame(model.matrix(model))[, -1]
+      vars <- names(m)
+      p   <- length(model$coefficients) - 1
+      tolerane <- c()
+
+      regress_i <- function(vars, data, i) {
+
+        fm <- as.formula(paste0("`", vars[i], "` ", "~ ."))
+        R2 <- summary(lm(fm, data = data))$r.squared
+
+        return(1 - R2)
+      }
+
+      for (i in seq_len(p)) {
+        tolerane[i] <- regress_i(vars, m, i)
+      }
+
+      vifs <- 1 / tolerane
+
+      results <- data.frame(Variables = vars,
+                            VIF = vifs)
+
+      results$high_VIF <- ifelse(results$VIF  >= 5,
+                                 results$Variables,NA)
+
+      VIF <- NULL
+      Variables <- NULL
+
+      plt <- ggplot(results)+
+        aes(x = Variables, y = VIF,
+            ymin=0,ymax=VIF) +
+        geom_point(shape = 1, size = point_size,
+                   colour = theme_color) +
+        geom_linerange(color='#bfbfbf')+
+        geom_hline(yintercept = 5,
+                   color= theme_color,linetype=2)+
+        geom_hline(yintercept = 10,
+                   color= theme_color,linetype=2)+
+        ggrepel::geom_label_repel(data = results,aes_string(label='high_VIF'),
+                                  na.rm = TRUE,
+                                  max.overlaps = 20,
+                                  color=theme_color)+
+        labs(x = "", y = "Variance Inflation Factor (VIF)",
+             title = "Collinearity")+
+        theme_bw()+
+        theme(panel.grid.major = element_blank(),
+              panel.grid.minor = element_blank())
+
+      return(plt)
+    }
+
 
     # Residual vs Leverage ----------------------------------------------------
 
@@ -153,6 +206,7 @@ diagnostic_plots <- function(model,standard_errors=FALSE,
         theme_bw()+
         theme(panel.grid.major = element_blank(),
               panel.grid.minor = element_blank())
+
       if(sum(df$.hat  > 2 * p / n) == 0){
         stdres_leverage <- stdres_leverage_base
       }else{
@@ -171,6 +225,8 @@ diagnostic_plots <- function(model,standard_errors=FALSE,
       plot_list[[3]] <- stdres_fitted
       plot_list[[4]] <- stdres_leverage
       plot_list[[5]] <- cooksD_plot
+      plot_list[[6]] <- vif_plot(model,point_size=point_size,
+                                 theme_color = theme_color)
 
 
 
@@ -184,6 +240,8 @@ diagnostic_plots <- function(model,standard_errors=FALSE,
       plot_list[[2]] <- qq_plot
       plot_list[[3]] <- stdres_fitted
       plot_list[[4]] <- cooksD_plot
+      plot_list[[5]] <- vif_plot(model,point_size=point_size,
+                                 theme_color = theme_color)
 
 
       return(suppressMessages(gridExtra::grid.arrange(grobs=plot_list[which_plots],

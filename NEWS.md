@@ -1,3 +1,11 @@
+# ggDoE 0.7.2
+
+CHANGES
+
+* Added new plot to visualize collinearity through variance inflation factor (VIF) in `diagnostic_plots()` function. This is the sixth diagnostic plot.
+
+---
+
 # ggDoE 0.7.1
 
 BREAKING
