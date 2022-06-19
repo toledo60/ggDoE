@@ -1,3 +1,11 @@
+# ggDoE 0.7.4
+
+BUX FIXES
+
+* Fixed bug in `twoD_projections()` that would output the same plot for every plot in the grid
+
+---
+
 # ggDoE 0.7.3
 
 NEW FUNCTIONS

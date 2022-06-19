@@ -64,37 +64,50 @@ twoD_projections <- function(design,
 
     if(grid){
       for(i in 1:iters) {
-        plot_list[[i]] <- ggplot(dat[,two_combns[i,]]) +
-          aes(x = dat[,two_combns[i,1]], y = dat[,two_combns[i,2]]) +
-          geom_point(shape = "circle", size = point_size,
-                     colour = point_color) +
-          geom_hline(yintercept = seq(0,1,length=n_rows+1),
-                     color='grey',linetype=2,alpha=0.6)+
-          geom_vline(xintercept = seq(0,1,length=n_rows+1),
-                     color='grey',linetype=2,alpha=0.6)+
-          labs(x=two_combns_names[i,1],
-               y=two_combns_names[i,2])+
-          xlim(c(0,1))+
-          ylim(c(0,1))+
-          theme_bw()+
-          theme(panel.grid.major = element_blank(),
-                panel.grid.minor = element_blank())
+
+        plot_list[[i]] <- local({
+          i <- i
+          p1 <-ggplot(dat[,two_combns[i,]],
+                      aes(x = dat[,two_combns_names[i,1]],
+                          y = dat[,two_combns_names[i,2]])) +
+            geom_point(shape = "circle",
+                       colour = point_color,
+                       size = point_size) +
+            geom_hline(yintercept = seq(0,1,length=n_rows+1),
+                       color='grey',linetype=2,alpha=0.6)+
+            geom_vline(xintercept = seq(0,1,length=n_rows+1),
+                       color='grey',linetype=2,alpha=0.6)+
+            labs(x=two_combns_names[i,1],
+                 y=two_combns_names[i,2])+
+            xlim(c(0,1))+
+            ylim(c(0,1))+
+            theme_bw()+
+            theme(panel.grid.major = element_blank(),
+                  panel.grid.minor = element_blank())
+
+        })
       }
 
     }
     else{
       for(i in 1:iters) {
-        plot_list[[i]] <- ggplot(dat[,two_combns[i,]]) +
-          aes(x = dat[,two_combns[i,1]], y = dat[,two_combns[i,2]]) +
-          geom_point(shape = "circle", size = point_size,
-                     colour = point_color) +
-          labs(x=two_combns_names[i,1],
-               y=two_combns_names[i,2])+
-          xlim(c(0,1))+
-          ylim(c(0,1))+
-          theme_bw()+
-          theme(panel.grid.major = element_blank(),
-                panel.grid.minor = element_blank())
+        plot_list[[i]] <- local({
+          i <- i
+          p1 <-ggplot(dat[,two_combns[i,]],
+                      aes(x = dat[,two_combns_names[i,1]],
+                          y = dat[,two_combns_names[i,2]])) +
+            geom_point(shape = "circle",
+                       colour = point_color,
+                       size = point_size) +
+            labs(x=two_combns_names[i,1],
+                 y=two_combns_names[i,2])+
+            xlim(c(0,1))+
+            ylim(c(0,1))+
+            theme_bw()+
+            theme(panel.grid.major = element_blank(),
+                  panel.grid.minor = element_blank())
+
+        })
       }
 
     }

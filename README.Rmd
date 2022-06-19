@@ -268,7 +268,6 @@ twoD_projections(X,ncols=3,grid = TRUE)
 
 ![](man/figures/twoD_projections.png)
 
-
 Lastly, the following datasets/designs are included in ggDoE as tibbles:
 
 - **adapted_epitaxial**: Adapted epitaxial layer experiment obtain from the book <br>
