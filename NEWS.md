@@ -1,3 +1,13 @@
+# ggDoE 0.7.5
+
+NEW FEATURES
+
+* changed appearance of `gg_boxplots()` from using fill to color. Added new argument 
+`jitter_points` to `gg_boxplots()` to overlay points to boxplots.
+
+---
+
+
 # ggDoE 0.7.4
 
 BUX FIXES

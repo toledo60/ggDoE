@@ -4,6 +4,7 @@
 #' @param response Unquoted variable indicating the response of the data
 #' @param factor Unquoted variable indicating the factor of the data
 #' @param group_var Unquoted variable indicating the groups for facet_wrap
+#' @param jitter_points Overlay jittered points to boxplots. Default is FALSE.
 #' @param horizontal Determine whether to change the orientation of the plot. Default is FALSE
 #' @param point_size Change size of points (outliers) in boxplots
 #' @param alpha The alpha transparency, a number in [0,1]
@@ -19,12 +20,13 @@
 #' data$dose <- factor(data$dose,levels = c(0.5, 1, 2),labels = c("D0.5", "D1", "D2"))
 #' gg_boxplots(data,response = len,factor = dose,alpha=0.6)
 #' gg_boxplots(data,response = len,factor = dose,group_var = supp,
-#' alpha=0.6,color_palette = 'viridis')
+#' alpha=0.6,color_palette = 'viridis',jitter_points=TRUE)
 #' @importFrom dplyr enquo mutate select
-#' @importFrom ggplot2 aes geom_boxplot guides stat_summary coord_flip scale_fill_manual
+#' @importFrom ggplot2 aes geom_boxplot guides stat_summary coord_flip scale_color_manual geom_jitter position_jitterdodge
 #' @importFrom ggplot2 theme_bw element_blank facet_wrap
 gg_boxplots <- function(data,response,factor,
                         group_var = NULL,
+                        jitter_points = FALSE,
                         horizontal = FALSE,
                         point_size=1,
                         alpha=1,
@@ -48,12 +50,13 @@ gg_boxplots <- function(data,response,factor,
   }
 
   p <- ggplot(data, aes(x=!!factor,y=!!y,
-                        fill = !!factor)) +
+                        color = !!factor)) +
     geom_boxplot(alpha = alpha,
-                 outlier.fill = "#ba3e30",
-                 outlier.size = point_size) +
+                 outlier.shape = NA) +
+    {if(jitter_points)geom_jitter(alpha=0.4,size=3,
+                position=position_jitterdodge())}+
     guides(fill = 'none', colour = "none") +
-    {if(!is.na(color_palette))scale_fill_manual(values = factor_colors_dat$colors)}+
+    {if(!is.na(color_palette))scale_color_manual(values = factor_colors_dat$colors)}+
     {if(show_mean)stat_summary(fun="mean", colour = "#ba3e30",size=0.75)}+
     {if(horizontal)coord_flip()}+
     theme_bw()+

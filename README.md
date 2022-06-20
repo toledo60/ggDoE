@@ -80,7 +80,8 @@ gg_boxplots(data,response = len,
 gg_boxplots(data,response = len,
             factor = dose,
             group_var = supp,
-            color_palette = 'viridis')
+            color_palette = 'viridis',
+            jitter_points = TRUE)
 ```
 
 ![](man/figures/boxplot2.png)

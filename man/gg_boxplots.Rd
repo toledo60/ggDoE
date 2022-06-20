@@ -9,6 +9,7 @@ gg_boxplots(
   response,
   factor,
   group_var = NULL,
+  jitter_points = FALSE,
   horizontal = FALSE,
   point_size = 1,
   alpha = 1,
@@ -25,6 +26,8 @@ gg_boxplots(
 \item{factor}{Unquoted variable indicating the factor of the data}
 
 \item{group_var}{Unquoted variable indicating the groups for facet_wrap}
+
+\item{jitter_points}{Overlay jittered points to boxplots. Default is FALSE.}
 
 \item{horizontal}{Determine whether to change the orientation of the plot. Default is FALSE}
 
@@ -49,5 +52,5 @@ data <- ToothGrowth
 data$dose <- factor(data$dose,levels = c(0.5, 1, 2),labels = c("D0.5", "D1", "D2"))
 gg_boxplots(data,response = len,factor = dose,alpha=0.6)
 gg_boxplots(data,response = len,factor = dose,group_var = supp,
-alpha=0.6,color_palette = 'viridis')
+alpha=0.6,color_palette = 'viridis',jitter_points=TRUE)
 }
