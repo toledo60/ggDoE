@@ -5,6 +5,8 @@ NEW FEATURES
 * changed appearance of `gg_boxplots()` from using fill to color. Added new argument 
 `jitter_points` to `gg_boxplots()` to overlay points to boxplots.
 
+* Added initial vignette for a quick overview of `ggDoE`. Still needs further details for certain plots
+
 ---
 
 
