@@ -377,14 +377,6 @@ X_LHS <- lhs::randomLHS(n=20, k=4)
 twoD_projections(X_LHS,ncols=3,grid = TRUE)
 ```
 
-Another example, but generating a maximum projection Latin hypercube design
-using the R package `MaxPro`
-
-```{r,fig.height=6,fig.width=8}
-X_maxpro <- MaxPro::MaxProLHD(n=20,p=4)$Design
-twoD_projections(X_maxpro,ncols=3,grid=TRUE)
-```
-
 
 
 

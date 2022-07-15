@@ -63,14 +63,14 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">diagnostic_plots</span><span class="op">(</span>
-  <span class="va">model</span>,
-  standard_errors <span class="op">=</span> <span class="cn">FALSE</span>,
-  point_size <span class="op">=</span> <span class="fl">1.5</span>,
-  theme_color <span class="op">=</span> <span class="st">"#21908CFF"</span>,
-  which_plots <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>,
-  ncols <span class="op">=</span> <span class="fl">2</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">diagnostic_plots</span><span class="op">(</span></span>
+<span>  <span class="va">model</span>,</span>
+<span>  standard_errors <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  point_size <span class="op">=</span> <span class="fl">1.5</span>,</span>
+<span>  theme_color <span class="op">=</span> <span class="st">"#21908CFF"</span>,</span>
+<span>  which_plots <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>,</span>
+<span>  ncols <span class="op">=</span> <span class="fl">2</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -92,7 +92,7 @@
 
 
 <dt>which_plots</dt>
-<dd><p>Choose which diagnostic plots to choose from. Options are 1 = 'residual vs fitted', 2 = 'Normal-QQ',
+<dd><p>Choose which diagnostic plots to choose from. <br> Options are 1 = 'residual vs fitted', 2 = 'Normal-QQ',
 3 = 'Scale-location', 4 = 'Residual vs Leverage', 5 = "Cook's Distance". 6 = "Collinearity". Default is 1:4</p></dd>
 
 
@@ -106,11 +106,21 @@
 
 <p>Regression diagnostic plots</p>
     </div>
+    <div id="details">
+    <h2>Details</h2>
+    <p>Plot 5: "Cook's Distance": A data point having a large Cook's distance indicates that the data point
+strongly influences the fitted values of the model. The threshold used for detecting or classifying observations as outers is \(4/n\)
+where \(n\) is the number of observations.</p>
+<p>Plot 6: "Collinearity": Conisders the variance inflation factor (VIF) for multicollinearity: <br>
+Tolerance = \(1 - R_j^2\), VIF = (1/Tolerance)
+where \(R_j^2\) is the coefficient of determination of a regression of predictor \(j\) on all the other predictors.
+A general rule of thumb is that VIFs exceeding 4 warrant further investigation, while VIFs exceeding 10 indicates a multicollinearity problem <br><br></p>
+    </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">am</span> <span class="op">+</span> <span class="va">gear</span> <span class="op">+</span> <span class="va">vs</span> <span class="op">*</span> <span class="va">cyl</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">diagnostic_plots</span><span class="op">(</span><span class="va">model</span>,which_plots<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span> <span class="op">+</span> <span class="va">am</span> <span class="op">+</span> <span class="va">gear</span> <span class="op">+</span> <span class="va">vs</span> <span class="op">*</span> <span class="va">cyl</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">diagnostic_plots</span><span class="op">(</span><span class="va">model</span>,which_plots<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="diagnostic_plots-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
@@ -126,7 +136,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

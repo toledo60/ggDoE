@@ -63,13 +63,13 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">pareto_plot</span><span class="op">(</span>
-  <span class="va">model</span>,
-  alpha <span class="op">=</span> <span class="fl">0.05</span>,
-  method <span class="op">=</span> <span class="st">"Lenth"</span>,
-  margin_errors <span class="op">=</span> <span class="cn">TRUE</span>,
-  showplot <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">pareto_plot</span><span class="op">(</span></span>
+<span>  <span class="va">model</span>,</span>
+<span>  alpha <span class="op">=</span> <span class="fl">0.05</span>,</span>
+<span>  method <span class="op">=</span> <span class="st">"Lenth"</span>,</span>
+<span>  margin_errors <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  showplot <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -133,12 +133,12 @@ Zahn, D (1975) Modifications of and Revised Critical Values for the Half-Normal 
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">lns2</span> <span class="op">~</span> <span class="op">(</span><span class="va">A</span><span class="op">+</span><span class="va">B</span><span class="op">+</span><span class="va">C</span><span class="op">+</span><span class="va">D</span><span class="op">)</span><span class="op">^</span><span class="fl">4</span>,data<span class="op">=</span><span class="va">original_epitaxial</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">pareto_plot</span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">lns2</span> <span class="op">~</span> <span class="op">(</span><span class="va">A</span><span class="op">+</span><span class="va">B</span><span class="op">+</span><span class="va">C</span><span class="op">+</span><span class="va">D</span><span class="op">)</span><span class="op">^</span><span class="fl">4</span>,data<span class="op">=</span><span class="va">original_epitaxial</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">pareto_plot</span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="pareto_plot-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">pareto_plot</span><span class="op">(</span><span class="va">m1</span>,method<span class="op">=</span><span class="st">'Zahn'</span>,alpha<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">pareto_plot</span><span class="op">(</span><span class="va">m1</span>,method<span class="op">=</span><span class="st">'Zahn'</span>,alpha<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="pareto_plot-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">pareto_plot</span><span class="op">(</span><span class="va">m1</span>,margin_errors<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">pareto_plot</span><span class="op">(</span><span class="va">m1</span>,margin_errors<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="pareto_plot-3.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
@@ -154,7 +154,7 @@ Zahn, D (1975) Modifications of and Revised Critical Values for the Half-Normal 
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

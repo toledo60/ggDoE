@@ -63,16 +63,16 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">gg_rsm</span><span class="op">(</span>
-  <span class="va">rsm_model</span>,
-  <span class="va">form</span>,
-  filled <span class="op">=</span> <span class="cn">FALSE</span>,
-  decode <span class="op">=</span> <span class="cn">FALSE</span>,
-  ncols <span class="op">=</span> <span class="fl">2</span>,
-  stroke <span class="op">=</span> <span class="fl">0.15</span>,
-  size <span class="op">=</span> <span class="fl">4</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gg_rsm</span><span class="op">(</span></span>
+<span>  <span class="va">rsm_model</span>,</span>
+<span>  <span class="va">form</span>,</span>
+<span>  filled <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  decode <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  ncols <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  stroke <span class="op">=</span> <span class="fl">0.15</span>,</span>
+<span>  size <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -119,12 +119,12 @@ In such cases, if decode is TRUE, the coordinate axes are transformed to their d
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">heli</span> <span class="op">=</span> <span class="fu">rsm</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/rsm/man/heli.html" class="external-link">heli</a></span></span>
-<span class="r-in"><span class="va">heli.rsm</span> <span class="op">&lt;-</span> <span class="fu">rsm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rsm/man/rsm.html" class="external-link">rsm</a></span><span class="op">(</span><span class="va">ave</span> <span class="op">~</span> <span class="fu">SO</span><span class="op">(</span><span class="va">x1</span>, <span class="va">x2</span>, <span class="va">x3</span>, <span class="va">x4</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">heli</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">gg_rsm</span><span class="op">(</span><span class="va">heli.rsm</span>,form <span class="op">=</span> <span class="op">~</span><span class="va">x1</span><span class="op">+</span><span class="va">x3</span><span class="op">+</span><span class="va">x4</span>,at <span class="op">=</span> <span class="fu">rsm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rsm/man/rsm.html" class="external-link">xs</a></span><span class="op">(</span><span class="va">heli.rsm</span><span class="op">)</span>,ncols<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">heli</span> <span class="op">=</span> <span class="fu">rsm</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/rsm/man/heli.html" class="external-link">heli</a></span></span></span>
+<span class="r-in"><span><span class="va">heli.rsm</span> <span class="op">&lt;-</span> <span class="fu">rsm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rsm/man/rsm.html" class="external-link">rsm</a></span><span class="op">(</span><span class="va">ave</span> <span class="op">~</span> <span class="fu">SO</span><span class="op">(</span><span class="va">x1</span>, <span class="va">x2</span>, <span class="va">x3</span>, <span class="va">x4</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">heli</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">gg_rsm</span><span class="op">(</span><span class="va">heli.rsm</span>,form <span class="op">=</span> <span class="op">~</span><span class="va">x1</span><span class="op">+</span><span class="va">x3</span><span class="op">+</span><span class="va">x4</span>,at <span class="op">=</span> <span class="fu">rsm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rsm/man/rsm.html" class="external-link">xs</a></span><span class="op">(</span><span class="va">heli.rsm</span><span class="op">)</span>,ncols<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="gg_rsm-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">gg_rsm</span><span class="op">(</span><span class="va">heli.rsm</span>,form <span class="op">=</span> <span class="op">~</span><span class="va">x2</span><span class="op">+</span><span class="va">x3</span><span class="op">+</span><span class="va">x4</span>,at <span class="op">=</span> <span class="fu">rsm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rsm/man/rsm.html" class="external-link">xs</a></span><span class="op">(</span><span class="va">heli.rsm</span><span class="op">)</span>,ncols<span class="op">=</span><span class="fl">3</span>,filled <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">gg_rsm</span><span class="op">(</span><span class="va">heli.rsm</span>,form <span class="op">=</span> <span class="op">~</span><span class="va">x2</span><span class="op">+</span><span class="va">x3</span><span class="op">+</span><span class="va">x4</span>,at <span class="op">=</span> <span class="fu">rsm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rsm/man/rsm.html" class="external-link">xs</a></span><span class="op">(</span><span class="va">heli.rsm</span><span class="op">)</span>,ncols<span class="op">=</span><span class="fl">3</span>,filled <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="gg_rsm-2.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
@@ -140,7 +140,7 @@ In such cases, if decode is TRUE, the coordinate axes are transformed to their d
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

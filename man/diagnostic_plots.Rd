@@ -22,7 +22,7 @@ diagnostic_plots(
 
 \item{theme_color}{Change color of the geom_smooth line and text labels for the respective diagnostic plot}
 
-\item{which_plots}{Choose which diagnostic plots to choose from. Options are 1 = 'residual vs fitted', 2 = 'Normal-QQ',
+\item{which_plots}{Choose which diagnostic plots to choose from. \cr Options are 1 = 'residual vs fitted', 2 = 'Normal-QQ',
 3 = 'Scale-location', 4 = 'Residual vs Leverage', 5 = "Cook's Distance". 6 = "Collinearity". Default is 1:4}
 
 \item{ncols}{number of columns for grid layout. Default is 2}
@@ -32,6 +32,16 @@ Regression diagnostic plots
 }
 \description{
 Regression Diagnostic Plots with ggplot2
+}
+\details{
+Plot 5: "Cook's Distance": A data point having a large Cook's distance indicates that the data point
+strongly influences the fitted values of the model. The threshold used for detecting or classifying observations as outers is \eqn{4/n}
+where \eqn{n} is the number of observations.
+
+Plot 6: "Collinearity": Conisders the variance inflation factor (VIF) for multicollinearity: \cr
+Tolerance = \eqn{1 - R_j^2}, VIF = (1/Tolerance)
+where \eqn{R_j^2} is the coefficient of determination of a regression of predictor \eqn{j} on all the other predictors.
+A general rule of thumb is that VIFs exceeding 4 warrant further investigation, while VIFs exceeding 10 indicates a multicollinearity problem \cr \cr
 }
 \examples{
 model <- lm(mpg ~ wt + am + gear + vs * cyl, data = mtcars)

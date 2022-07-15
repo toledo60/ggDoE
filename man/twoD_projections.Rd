@@ -13,7 +13,7 @@ twoD_projections(
 )
 }
 \arguments{
-\item{design}{A latin hypercube design. Can be matrix, or data.frame}
+\item{design}{A Latin hypercube design. Can be matrix, or data.frame}
 
 \item{point_color}{Change color of points in plots}
 
@@ -25,7 +25,7 @@ The grid is constructed using seq(0,1,length=nrows(design)+1). Default is FALSE}
 \item{ncols}{number of columns for grid layout. Default is 2}
 }
 \value{
-A grid of ggplots from all two dimensional projections of a latin hypercube design.
+A grid of scatter plots from all two dimensional projections of a Latin hypercube design.
 }
 \description{
 Two Dimensional Projections of Latin Hypercube Designs

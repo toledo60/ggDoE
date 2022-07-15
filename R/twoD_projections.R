@@ -1,6 +1,6 @@
 #' Two Dimensional Projections of Latin Hypercube Designs
 #'
-#' @param design A latin hypercube design. Can be matrix, or data.frame
+#' @param design A Latin hypercube design. Can be matrix, or data.frame
 #' @param point_color Change color of points in plots
 #' @param grid Logial argument. Specify if a grid should be added to each projection.
 #' The grid is constructed using seq(0,1,length=nrows(design)+1). Default is FALSE
@@ -10,7 +10,7 @@
 #' @importFrom ggplot2 xlim ylim aes theme_bw element_blank geom_hline geom_vline labs geom_point
 #' @importFrom gridExtra grid.arrange
 #' @importFrom graphics hist
-#' @return A grid of ggplots from all two dimensional projections of a latin hypercube design.
+#' @return A grid of scatter plots from all two dimensional projections of a Latin hypercube design.
 #' @export
 #'
 #' @examples
