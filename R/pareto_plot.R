@@ -9,6 +9,7 @@
 #' @importFrom stats reorder coef
 #' @importFrom ggplot2 geom_hline geom_bar annotate labs coord_flip theme_classic aes_string scale_fill_discrete
 #' @importFrom dplyr tibble
+#' @importFrom unrepx PSE ME
 #' @export
 #'
 #'
@@ -64,9 +65,9 @@ pareto_plot <- function(model,alpha=0.05,method='Lenth',
     obj <- 2 * effects
   }
   estimates <- obj
-  PSE <- unrepx::PSE(estimates,method = method)
-  ME <- unrepx::ME(estimates,method = method,alpha = alpha)[1]
-  SME <- unrepx::ME(estimates,method = method,alpha = alpha)[2]
+  PSE <- PSE(estimates,method = method)
+  ME <- ME(estimates,method = method,alpha = alpha)[1]
+  SME <- ME(estimates,method = method,alpha = alpha)[2]
 
   dat <- tibble("effect_names" = factor(names(estimates)),
                 "effects" = estimates,

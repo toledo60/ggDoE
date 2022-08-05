@@ -1,3 +1,10 @@
+# ggDoE 0.7.6
+
+* minor fixes to documentation/vignettes
+* moved `unrepex` from Suggests to Imports 
+
+---
+
 # ggDoE 0.7.5
 
 NEW FEATURES
@@ -8,7 +15,6 @@ NEW FEATURES
 * Added initial vignette for a quick overview of `ggDoE`. Still needs further details for certain plots
 
 ---
-
 
 # ggDoE 0.7.4
 

@@ -12,6 +12,7 @@
 #' @importFrom stats qnorm coef
 #' @importFrom dplyr tibble
 #' @importFrom utils tail
+#' @importFrom unrepx PSE ME
 #' @export
 #'
 #' @details
@@ -69,9 +70,9 @@ half_normal <- function(model,method='Lenth',
     obj <- 2 * effects
   }
   estimates <- obj
-  PSE <- unrepx::PSE(estimates,method = method)
-  ME <- unrepx::ME(estimates,method = method,alpha = alpha)[1]
-  SME <- unrepx::ME(estimates,method = method,alpha=alpha)[2]
+  PSE <- PSE(estimates,method = method)
+  ME <- ME(estimates,method = method,alpha = alpha)[1]
+  SME <- ME(estimates,method = method,alpha=alpha)[2]
 
   effs <- sort(abs(estimates))
   names <- names(effs)

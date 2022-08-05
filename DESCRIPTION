@@ -1,13 +1,13 @@
 Package: ggDoE
 Type: Package
-Title: Modern graphs for Design of Experiments with ggplot2
-Version: 0.7.5
+Title: Modern Graphs for Design of Experiments with 'ggplot2'
+Version: 0.7.6
 Authors@R: c(person(given = "Jose",family = "Toledo Luna",
              role = c("aut", "cre"),
              email = "toledo60@protonmail.com",
              comment = c(ORCID = "0000-0001-8559-0027")))
 Maintainer: Jose Toledo Luna <toledo60@protonmail.com>            
-Description: Common plots in Design of Experiments implemented with ggplot2.
+Description: Commonly used plots in Design of Experiments implemented with 'ggplot2'.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -16,7 +16,8 @@ BugReports: https://github.com/toledo60/ggDoE/issues
 Imports: 
     ggplot2,
     dplyr,
-    gridExtra
+    gridExtra,
+    unrepx
 Suggests:
     knitr,
     pkgdown,
@@ -24,12 +25,12 @@ Suggests:
     roxygen2,
     MASS,
     viridisLite,
-    unrepx,
     ggrepel,
     metR,
     rsm,
     lhs
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1
 Depends: 
     R (>= 3.3.0)
 VignetteBuilder: knitr
+Language: en-US

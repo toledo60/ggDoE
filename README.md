@@ -164,8 +164,8 @@ main_effects(original_epitaxial,
 
 **Contour Plots**
 
-contour plot(s) that display the fitted surface for an *lm* or *rsm*
-object involving two or more numerical predictors
+contour plot(s) that display the fitted surface for an *rsm* object
+involving two or more numerical predictors
 
 ``` r
 heli = rsm::heli
@@ -223,14 +223,49 @@ Lastly, the following datasets/designs are included in ggDoE as tibbles:
 -   **adapted_epitaxial**: Adapted epitaxial layer experiment obtain
     from the book <br> *“Experiments: Planning, Analysis, and
     Optimization, 2nd Edition”*
-    [source](https://www2.isye.gatech.edu/~jeffwu/wuhamadabook/data/originallayer.dat)
+
 -   **original_epitaxial**: Original epitaxial layer experiment obtain
     from the book <br> *“Experiments: Planning, Analysis, and
     Optimization, 2nd Edition”*
-    [source](https://www2.isye.gatech.edu/~jeffwu/wuhamadabook/data/originallayer.dat)
+
 -   **aliased_design**: D-efficient minimal aliasing design obtained
-    from the article <br> *“Efficient Designs With Minimal Aliasing”*
-    [source](https://www.tandfonline.com/doi/abs/10.1198/TECH.2010.09113)
+    from the article <br> *“Efficient Designs With Minimal Aliasing by
+    Bradley Jones and Christopher J. Nachtsheim”* <br> *Source:*
+    <https://www.tandfonline.com/doi/abs/10.1198/TECH.2010.09113>
+
+## Citation
+
+If you want to cite this package in a scientific journal or in any other
+context, run the following code in your `R` console
+
+``` r
+citation('ggDoE')
+```
+
+    Warning in citation("ggDoE"): no date field in DESCRIPTION file of package
+    'ggDoE'
+
+    Warning in citation("ggDoE"): could not determine year for 'ggDoE' from package
+    DESCRIPTION file
+
+
+    To cite package 'ggDoE' in publications use:
+
+      Toledo Luna J (????). _ggDoE: Modern Graphs for Design of Experiments
+      with 'ggplot2'_. R package version 0.7.6,
+      <https://ggdoe.netlify.app>.
+
+    A BibTeX entry for LaTeX users is
+
+      @Manual{,
+        title = {ggDoE: Modern Graphs for Design of Experiments with 'ggplot2'},
+        author = {Jose {Toledo Luna}},
+        note = {R package version 0.7.6},
+        url = {https://ggdoe.netlify.app},
+      }
+
+*Note:* Once this package is submitted to CRAN the date warning will
+disappear. Simply change (????) to (2022)
 
 ### Contributing to the package
 
