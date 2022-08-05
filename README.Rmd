@@ -292,6 +292,7 @@ citation('ggDoE')
 *Note:* Once this package is submitted to CRAN the date warning will disappear. Simply change (????) to (2022)
 
 
-### Contributing to the package
+## Contributing to the package
+
 I welcome feedback, suggestions, issues, and contributions!
 Check out the [CONTRIBUTING](https://github.com/toledo60/ggDoE/blob/main/.github/CONTRIBUTING.md) file for more details.

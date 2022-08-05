@@ -2,6 +2,7 @@
 
 * minor fixes to documentation/vignettes
 * moved `unrepex` from Suggests to Imports 
+* added cran-comments.md
 
 ---
 

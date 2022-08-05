@@ -267,7 +267,7 @@ citation('ggDoE')
 *Note:* Once this package is submitted to CRAN the date warning will
 disappear. Simply change (????) to (2022)
 
-### Contributing to the package
+## Contributing to the package
 
 I welcome feedback, suggestions, issues, and contributions! Check out
 the
