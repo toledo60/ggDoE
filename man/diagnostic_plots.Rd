@@ -10,7 +10,7 @@ diagnostic_plots(
   point_size = 1.5,
   theme_color = "#21908CFF",
   which_plots = 1:4,
-  ncols = 2
+  n_columns = 2
 )
 }
 \arguments{
@@ -25,7 +25,7 @@ diagnostic_plots(
 \item{which_plots}{Choose which diagnostic plots to choose from. \cr Options are 1 = 'residual vs fitted', 2 = 'Normal-QQ',
 3 = 'Scale-location', 4 = 'Residual vs Leverage', 5 = "Cook's Distance". 6 = "Collinearity". Default is 1:4}
 
-\item{ncols}{number of columns for grid layout. Default is 2}
+\item{n_columns}{number of columns for grid layout. Default is 2}
 }
 \value{
 Regression diagnostic plots
@@ -46,4 +46,9 @@ A general rule of thumb is that VIFs exceeding 4 warrant further investigation, 
 \examples{
 model <- lm(mpg ~ wt + am + gear + vs * cyl, data = mtcars)
 diagnostic_plots(model,which_plots=1:6)
+}
+\references{
+Belsley, D. A., Kuh, E., and Welsch, R. E. (1980). Regression Diagnostics: Identifying Influential Data and Sources of Collinearity. New York: John Wiley & Sons. \cr \cr
+
+Sheather, S. (2009). A modern approach to regression with R. Springer Science & Business Media.
 }

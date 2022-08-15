@@ -284,7 +284,7 @@ interaction_effects(adapted_epitaxial,response = 'ybar',
 ```{r,fig.width=9,fig.height=4}
 interaction_effects(adapted_epitaxial,response = 'ybar',
                     exclude_vars = c('A','s2','lns2'),
-                    ncols=3)
+                    n_columns=3)
 ```
 
 
@@ -306,7 +306,7 @@ main_effects(original_epitaxial,
              response='s2',
              exclude_vars = c('A','ybar','lns2'),
              color_palette = 'viridis',
-             ncols=3)
+             n_columns=3)
 ```
 
 
@@ -327,7 +327,7 @@ By default the contour plots produce will be in black and white color
 ```{r,fig.height=8,fig.width=10}
 gg_rsm(heli.rsm,form = ~x1+x2+x3,
        at = rsm::xs(heli.rsm),
-       ncols=2)
+       n_columns=2)
 ```
 
 with `filled=TRUE`, a viridis color scheme is applied.
@@ -337,7 +337,7 @@ with `filled=TRUE`, a viridis color scheme is applied.
 gg_rsm(heli.rsm,form = ~x1+x2+x3,
        at = rsm::xs(heli.rsm),
        filled = TRUE,
-       ncols=2)
+       n_columns=2)
 ```
 
 
@@ -378,14 +378,14 @@ Below is an example from generating a random Latin hypercube design using the R 
 ```{r,fig.height=6,fig.width=8}
 set.seed(10)
 random_LHS <- lhs::randomLHS(n=15, k=4)
-twoD_projections(random_LHS,ncols=3,grid = TRUE)
+twoD_projections(random_LHS,n_columns=3,grid = TRUE)
 ```
 
 Below is an example of a maximin Latin hypercube design with red color points and no grid (default setting)
 
 ```{r,fig.height=6,fig.width=8}
 maximin_LHS <- lhs::maximinLHS(n=15, k=4)
-twoD_projections(maximin_LHS,ncols=3,point_color = 'red')
+twoD_projections(maximin_LHS,n_columns=3,point_color = 'red')
 ```
 
 

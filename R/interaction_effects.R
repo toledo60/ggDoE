@@ -5,7 +5,7 @@
 #' @param exclude_vars A vector containing variables to exclude
 #' @param linetypes Change linetypes. Default are ('solid','dashed)
 #' @param colors Change color of lines/points. Default are ("#4260c9" ,"#d6443c")
-#' @param ncols number of columns for facet grid. Default is 2
+#' @param n_columns number of columns for facet grid. Default is 2
 #' @param showplot logical indicating to show the interaction effect plots. If false, a list of tibbles is returned used to obtain the interaction effects for each factor. Default is TRUE
 #'
 #' @return interaction effects plot between two factors
@@ -24,7 +24,7 @@ interaction_effects <- function(design,response,
                                 exclude_vars=c(),
                                 linetypes = c('solid','dashed'),
                                 colors = c("#4260c9" ,"#d6443c"),
-                                ncols=2,
+                                n_columns=2,
                                 showplot=TRUE)
 {
 
@@ -81,7 +81,7 @@ interaction_effects <- function(design,response,
              shape=interactions[i,2]
         )
     }
-    return(grid.arrange(grobs=plot_list,ncol=ncols))
+    return(grid.arrange(grobs=plot_list,ncol=n_columns))
   }
   else{
     return(dat_list)

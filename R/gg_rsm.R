@@ -5,7 +5,7 @@
 #' @param filled Determine if the surface plots should be filled by viridis color palette. Default is FALSE
 #' @param decode This has an effect only if x is an rsm object or other model object that supports coded.data.
 #' In such cases, if decode is TRUE, the coordinate axes are transformed to their decoded values.
-#' @param ncols number of columns for grid layout. Default is 2
+#' @param n_columns number of columns for grid layout. Default is 2
 #' @param stroke width of stroke relative to the size of the text. Ignored if less than zero. Only applied if contour plots are filled
 #' @param size size of text for contour lines. Only applied if contour plots are filled
 #' @param ... Other arguments passed on to contour(). For help with more arguments see ?rsm::contour.lm
@@ -21,13 +21,13 @@
 #' heli = rsm::heli
 #' heli.rsm <- rsm::rsm(ave ~ SO(x1, x2, x3, x4), data = heli)
 #'
-#' gg_rsm(heli.rsm,form = ~x1+x3+x4,at = rsm::xs(heli.rsm),ncols=3)
-#' gg_rsm(heli.rsm,form = ~x2+x3+x4,at = rsm::xs(heli.rsm),ncols=3,filled = TRUE)
+#' gg_rsm(heli.rsm,form = ~x1+x3+x4,at = rsm::xs(heli.rsm),n_columns=3)
+#' gg_rsm(heli.rsm,form = ~x2+x3+x4,at = rsm::xs(heli.rsm),n_columns=3,filled = TRUE)
 gg_rsm <- function(rsm_model,
                    form,
                    filled=FALSE,
                    decode=FALSE,
-                   ncols=2,
+                   n_columns=2,
                    stroke = 0.15,
                    size=4,
                    ...){
@@ -94,5 +94,5 @@ gg_rsm <- function(rsm_model,
     }
   }
   return(grid.arrange(grobs = cplots,
-                      ncol=ncols))
+                      ncol=n_columns))
 }

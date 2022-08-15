@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggDoE</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.7</span>
       </span>
     </div>
 
@@ -57,6 +57,18 @@
       <small>Source: <a href="https://github.com/toledo60/ggDoE/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.7.7" id="ggdoe-077">ggDoE 0.7.7<a class="anchor" aria-label="anchor" href="#ggdoe-077"></a></h2>
+<p>BREAKING</p>
+<ul><li>renamed argument <code>ncols</code> to <code>n_columns</code> in all functions which previously used this argument. These functions are: <code><a href="../reference/diagnostic_plots.html">diagnostic_plots()</a></code>,<code><a href="../reference/gg_rsm.html">gg_rsm()</a></code>, <code><a href="../reference/interaction_effects.html">interaction_effects()</a></code>,<code><a href="../reference/main_effects.html">main_effects()</a></code>,<code><a href="../reference/twoD_projections.html">twoD_projections()</a></code>
+</li>
+</ul><p>NEW FEATURES</p>
+<ul><li>
+<code><a href="../reference/half_normal.html">half_normal()</a></code> has new argument <code>point_color</code> to change the color of the points</li>
+</ul><p>CHANGES</p>
+<ul><li>
+<code><a href="../reference/half_normal.html">half_normal()</a></code> now uses <code><a href="https://rdrr.io/pkg/ggrepel/man/geom_text_repel.html" class="external-link">ggrepel::geom_text_repel</a></code> instead of hard-coded <code>geom_text</code> to try and avoid label overlap</li>
+</ul><hr></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.7.6" id="ggdoe-076">ggDoE 0.7.6<a class="anchor" aria-label="anchor" href="#ggdoe-076"></a></h2>
 <ul><li>minor fixes to documentation/vignettes</li>

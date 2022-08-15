@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggDoE</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.7</span>
       </span>
     </div>
 
@@ -69,7 +69,7 @@
 <span>  point_size <span class="op">=</span> <span class="fl">1.5</span>,</span>
 <span>  theme_color <span class="op">=</span> <span class="st">"#21908CFF"</span>,</span>
 <span>  which_plots <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>,</span>
-<span>  ncols <span class="op">=</span> <span class="fl">2</span></span>
+<span>  n_columns <span class="op">=</span> <span class="fl">2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -96,7 +96,7 @@
 3 = 'Scale-location', 4 = 'Residual vs Leverage', 5 = "Cook's Distance". 6 = "Collinearity". Default is 1:4</p></dd>
 
 
-<dt>ncols</dt>
+<dt>n_columns</dt>
 <dd><p>number of columns for grid layout. Default is 2</p></dd>
 
 </dl></div>
@@ -115,6 +115,11 @@ where \(n\) is the number of observations.</p>
 Tolerance = \(1 - R_j^2\), VIF = (1/Tolerance)
 where \(R_j^2\) is the coefficient of determination of a regression of predictor \(j\) on all the other predictors.
 A general rule of thumb is that VIFs exceeding 4 warrant further investigation, while VIFs exceeding 10 indicates a multicollinearity problem <br><br></p>
+    </div>
+    <div id="references">
+    <h2>References</h2>
+    <p>Belsley, D. A., Kuh, E., and Welsch, R. E. (1980). Regression Diagnostics: Identifying Influential Data and Sources of Collinearity. New York: John Wiley &amp; Sons. <br><br></p>
+<p>Sheather, S. (2009). A modern approach to regression with R. Springer Science &amp; Business Media.</p>
     </div>
 
     <div id="ref-examples">

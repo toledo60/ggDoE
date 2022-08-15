@@ -11,6 +11,7 @@ half_normal(
   label_active = FALSE,
   ref_line = FALSE,
   margin_errors = FALSE,
+  point_color = "#21908CFF",
   showplot = TRUE
 )
 }
@@ -26,6 +27,8 @@ half_normal(
 \item{ref_line}{Dafault is TRUE, if FALSE the abline with slope (1/PSE) is not displayed. Reference line should follow along most points that are not considered outliers.}
 
 \item{margin_errors}{Default is FALSE, if TRUE the cutoffs for margin of errors (ME) and simultaneous margin of error (SME) are shown}
+
+\item{point_color}{Change color of points in plot}
 
 \item{showplot}{Default is TRUE, if FALSE plot will not be shown and a tibble is returned used to create the plot along with the calculated PSE,ME,SME}
 }
@@ -63,7 +66,8 @@ with weights decreasing linearly from m - .5 to .5, but bounded above by .65m}
 m1 <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
 half_normal(m1)
 half_normal(m1,alpha=0.1,label_active=TRUE,margin_errors=TRUE)
-half_normal(m1,method='Zahn',alpha=0.1,ref_line=TRUE,label_active=TRUE,margin_errors=TRUE)
+half_normal(m1,method='Zahn',alpha=0.1,ref_line=TRUE,
+            label_active=TRUE,margin_errors=TRUE)
 }
 \references{
 Daniel, C (1959) Use of Half-Normal Plots in Interpreting Factorial Two-Level Experiments. Technometrics, 1(4), 311-341 \cr \cr

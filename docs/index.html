@@ -12,7 +12,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Modern Graphs for Design of Experiments with ggplot2">
-<meta property="og:description" content="Commonly used plots in Design of Experiments implemented with ggplot2.">
+<meta property="og:description" content="ggDoE provides an easy approach to generate commonly used plots in the field of design of experiments using ggplot2. 
+            It currently supports the following plots: alias matrix, box cox transformation, boxplots, lambda plot, regression diagnostic plots, 
+            half normal plots, main and interaction effect plots for factorial designs, contour plots for response surface methodology, pareto plot, 
+            and two dimensional projections of a latin hypercube design.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -33,7 +36,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ggDoE</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.7</span>
       </span>
     </div>
 
@@ -164,7 +167,7 @@
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/interaction_effects.html">interaction_effects</a></span><span class="op">(</span><span class="va">adapted_epitaxial</span>,response <span class="op">=</span> <span class="st">'ybar'</span>,</span>
 <span>                    exclude_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'A'</span>,<span class="st">'s2'</span>,<span class="st">'lns2'</span><span class="op">)</span>,</span>
-<span>                    ncols<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<span>                    n_columns<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/interactions2.png"></p>
 <p><strong>Main Effects Plots (Factorial Design)</strong></p>
 <p>Main effect plots for each factor in a factorial design</p>
@@ -178,13 +181,13 @@
 <span>             response<span class="op">=</span><span class="st">'s2'</span>,</span>
 <span>             exclude_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'A'</span>,<span class="st">'ybar'</span>,<span class="st">'lns2'</span><span class="op">)</span>,</span>
 <span>             color_palette <span class="op">=</span> <span class="st">'viridis'</span>,</span>
-<span>             ncols<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<span>             n_columns<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/main_effects2.png"></p>
 <p><strong>Contour Plots</strong></p>
 <p>contour plot(s) that display the fitted surface for an <em>rsm</em> object involving two or more numerical predictors</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">heli</span> <span class="op">=</span> <span class="fu">rsm</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/rsm/man/heli.html" class="external-link">heli</a></span></span>
-<span><span class="va">heli.rsm</span> <span class="op">&lt;-</span> <span class="fu">rsm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rsm/man/rsm.html" class="external-link">rsm</a></span><span class="op">(</span><span class="va">ave</span> <span class="op">~</span> <span class="fu">SO</span><span class="op">(</span><span class="va">x1</span>, <span class="va">x2</span>, <span class="va">x3</span>, <span class="va">x4</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">heli</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">heli.rsm</span> <span class="op">&lt;-</span> <span class="fu">rsm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rsm/man/rsm.html" class="external-link">rsm</a></span><span class="op">(</span><span class="va">ave</span> <span class="op">~</span> <span class="fu">SO</span><span class="op">(</span><span class="va">x1</span>, <span class="va">x2</span>, <span class="va">x3</span>, <span class="va">x4</span><span class="op">)</span>, </span>
+<span>                     data <span class="op">=</span> <span class="fu">rsm</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/rsm/man/heli.html" class="external-link">heli</a></span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/gg_rsm.html">gg_rsm</a></span><span class="op">(</span><span class="va">heli.rsm</span>,form <span class="op">=</span> <span class="op">~</span><span class="va">x1</span><span class="op">+</span><span class="va">x2</span><span class="op">+</span><span class="va">x3</span><span class="op">+</span><span class="va">x4</span>,</span>
 <span>       at <span class="op">=</span> <span class="fu">rsm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rsm/man/rsm.html" class="external-link">xs</a></span><span class="op">(</span><span class="va">heli.rsm</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -208,7 +211,7 @@
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu">lhs</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lhs/man/randomLHS.html" class="external-link">randomLHS</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">10</span>, k<span class="op">=</span><span class="fl">4</span><span class="op">)</span></span>
-<span><span class="fu"><a href="reference/twoD_projections.html">twoD_projections</a></span><span class="op">(</span><span class="va">X</span>,ncols<span class="op">=</span><span class="fl">3</span>,grid <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/twoD_projections.html">twoD_projections</a></span><span class="op">(</span><span class="va">X</span>,n_columns<span class="op">=</span><span class="fl">3</span>,grid <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/twoD_projections.png"></p>
 <p>Lastly, the following datasets/designs are included in ggDoE as tibbles:</p>
 <ul>

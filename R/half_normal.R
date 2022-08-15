@@ -6,9 +6,10 @@
 #' @param label_active If TRUE, active effects are labeled if the effects cross the computed margin of error (ME). See method argument for more details
 #' @param ref_line Dafault is TRUE, if FALSE the abline with slope (1/PSE) is not displayed. Reference line should follow along most points that are not considered outliers.
 #' @param margin_errors Default is FALSE, if TRUE the cutoffs for margin of errors (ME) and simultaneous margin of error (SME) are shown
+#' @param point_color Change color of points in plot
 #' @param showplot Default is TRUE, if FALSE plot will not be shown and a tibble is returned used to create the plot along with the calculated PSE,ME,SME
 #' @return A tibble with the absolute effects and half-normal quantiles. A ggplot2 version of halfnormal plot for factorial effects is returned
-#' @importFrom ggplot2 ggplot aes geom_point geom_text theme_bw labs geom_vline annotate geom_abline element_blank
+#' @importFrom ggplot2 ggplot aes geom_point theme_bw labs geom_vline annotate geom_abline element_blank
 #' @importFrom stats qnorm coef
 #' @importFrom dplyr tibble
 #' @importFrom utils tail
@@ -56,20 +57,22 @@
 #' @examples m1 <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
 #' half_normal(m1)
 #' half_normal(m1,alpha=0.1,label_active=TRUE,margin_errors=TRUE)
-#' half_normal(m1,method='Zahn',alpha=0.1,ref_line=TRUE,label_active=TRUE,margin_errors=TRUE)
+#' half_normal(m1,method='Zahn',alpha=0.1,ref_line=TRUE,
+#'             label_active=TRUE,margin_errors=TRUE)
 half_normal <- function(model,method='Lenth',
                         alpha=0.05,
                         label_active=FALSE,
                         ref_line = FALSE,
                         margin_errors = FALSE,
+                        point_color="#21908CFF",
                         showplot=TRUE){
   if (inherits(model, "lm")) {
     i <- pmatch("(Intercept)", names(coef(model)))
     if (!is.na(i))
       effects <- coef(model)[-pmatch("(Intercept)", names(coef(model)))]
-    obj <- 2 * effects
+    estimates <- 2 * effects
   }
-  estimates <- obj
+
   PSE <- PSE(estimates,method = method)
   ME <- ME(estimates,method = method,alpha = alpha)[1]
   SME <- ME(estimates,method = method,alpha=alpha)[2]
@@ -96,11 +99,16 @@ half_normal <- function(model,method='Lenth',
     base_plot <- ggplot(dat,aes_string(x= 'absolute_effects',
                                        y = 'half_normal_quantiles',
                                        label='effects')) +
-      geom_point(color = "#1b9e77", size = 2.5)+
-      geom_text(hjust = 0,nudge_x = 0.01*max(dat$absolute_effects),
-                check_overlap = TRUE,na.rm = TRUE)+
+      geom_point(color = point_color, size = 2.5)+
+      ggrepel::geom_text_repel(data = dat,
+                               min.segment.length = Inf,
+                               nudge_y = 0.001*max(dat$half_normal_quantiles),
+                               nudge_x = 0.001*max(dat$absolute_effects),
+                               na.rm = TRUE
+      )+
       theme_bw()+
-      theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+      theme(panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank())+
       labs(x="absolute effects",y="half-normal quantiles")
 
     if(ref_line & margin_errors){

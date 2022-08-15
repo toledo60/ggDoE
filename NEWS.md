@@ -1,3 +1,21 @@
+# ggDoE 0.7.7
+
+BREAKING
+
+* renamed argument `ncols` to `n_columns` in all functions which previously used this argument. These functions are: `diagnostic_plots()`,`gg_rsm()`, `interaction_effects()`,`main_effects()`,`twoD_projections()`
+
+
+NEW FEATURES
+
+* `half_normal()` has new argument `point_color` to change the color of the points
+
+
+CHANGES
+
+* `half_normal()` now uses `ggrepel::geom_text_repel` instead of hard-coded `geom_text` to try and avoid label overlap
+
+---
+
 # ggDoE 0.7.6
 
 * minor fixes to documentation/vignettes

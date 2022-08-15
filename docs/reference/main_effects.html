@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggDoE</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.7</span>
       </span>
     </div>
 
@@ -66,7 +66,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">main_effects</span><span class="op">(</span></span>
 <span>  <span class="va">design</span>,</span>
 <span>  <span class="va">response</span>,</span>
-<span>  ncols <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  n_columns <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>  exclude_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  color_palette <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  alpha <span class="op">=</span> <span class="fl">1</span>,</span>
@@ -85,7 +85,7 @@
 <dd><p>A character string indicating the response of the data</p></dd>
 
 
-<dt>ncols</dt>
+<dt>n_columns</dt>
 <dd><p>number of columns for facet grid. Default is 2</p></dd>
 
 
@@ -120,7 +120,7 @@
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">main_effects</span><span class="op">(</span><span class="va">original_epitaxial</span>,response<span class="op">=</span><span class="st">'s2'</span>,exclude_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'ybar'</span>,<span class="st">'lns2'</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="main_effects-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span><span class="fu">main_effects</span><span class="op">(</span><span class="va">original_epitaxial</span>,response<span class="op">=</span><span class="st">'ybar'</span>,exclude_vars<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'A'</span>,<span class="st">'s2'</span>,<span class="st">'lns2'</span><span class="op">)</span>,ncols<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">main_effects</span><span class="op">(</span><span class="va">original_epitaxial</span>,response<span class="op">=</span><span class="st">'ybar'</span>,exclude_vars<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'A'</span>,<span class="st">'s2'</span>,<span class="st">'lns2'</span><span class="op">)</span>,n_columns<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="main_effects-2.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>

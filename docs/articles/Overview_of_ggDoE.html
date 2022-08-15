@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggDoE</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.7.7</span>
       </span>
     </div>
 
@@ -467,7 +467,7 @@ design</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/interaction_effects.html">interaction_effects</a></span><span class="op">(</span><span class="va">adapted_epitaxial</span>,response <span class="op">=</span> <span class="st">'ybar'</span>,</span>
 <span>                    exclude_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'A'</span>,<span class="st">'s2'</span>,<span class="st">'lns2'</span><span class="op">)</span>,</span>
-<span>                    ncols<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<span>                    n_columns<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Overview_of_ggDoE_files/figure-html/unnamed-chunk-22-1.png" width="864"></p>
 </div>
 <div class="section level2">
@@ -484,7 +484,7 @@ design</p>
 <span>             response<span class="op">=</span><span class="st">'s2'</span>,</span>
 <span>             exclude_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'A'</span>,<span class="st">'ybar'</span>,<span class="st">'lns2'</span><span class="op">)</span>,</span>
 <span>             color_palette <span class="op">=</span> <span class="st">'viridis'</span>,</span>
-<span>             ncols<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<span>             n_columns<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Overview_of_ggDoE_files/figure-html/unnamed-chunk-24-1.png" width="576"></p>
 </div>
 <div class="section level2">
@@ -505,14 +505,14 @@ color</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gg_rsm.html">gg_rsm</a></span><span class="op">(</span><span class="va">heli.rsm</span>,form <span class="op">=</span> <span class="op">~</span><span class="va">x1</span><span class="op">+</span><span class="va">x2</span><span class="op">+</span><span class="va">x3</span>,</span>
 <span>       at <span class="op">=</span> <span class="fu">rsm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rsm/man/rsm.html" class="external-link">xs</a></span><span class="op">(</span><span class="va">heli.rsm</span><span class="op">)</span>,</span>
-<span>       ncols<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<span>       n_columns<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Overview_of_ggDoE_files/figure-html/unnamed-chunk-26-1.png" width="960"></p>
 <p>with <code>filled=TRUE</code>, a viridis color scheme is applied.</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gg_rsm.html">gg_rsm</a></span><span class="op">(</span><span class="va">heli.rsm</span>,form <span class="op">=</span> <span class="op">~</span><span class="va">x1</span><span class="op">+</span><span class="va">x2</span><span class="op">+</span><span class="va">x3</span>,</span>
 <span>       at <span class="op">=</span> <span class="fu">rsm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rsm/man/rsm.html" class="external-link">xs</a></span><span class="op">(</span><span class="va">heli.rsm</span><span class="op">)</span>,</span>
 <span>       filled <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>       ncols<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<span>       n_columns<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Overview_of_ggDoE_files/figure-html/unnamed-chunk-27-1.png" width="960"></p>
 </div>
 <div class="section level2">
@@ -542,7 +542,7 @@ construct the pareto plot.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 4</span></span></span>
 <span><span class="co">#&gt;   alpha   PSE    ME   SME</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>   0.1 0.335 0.604  1.10</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>   0.1 0.335 0.600  1.12</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $dat</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 15 × 3</span></span></span>
@@ -574,13 +574,13 @@ using the R package <code>lhs</code></p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">random_LHS</span> <span class="op">&lt;-</span> <span class="fu">lhs</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lhs/man/randomLHS.html" class="external-link">randomLHS</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">15</span>, k<span class="op">=</span><span class="fl">4</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/twoD_projections.html">twoD_projections</a></span><span class="op">(</span><span class="va">random_LHS</span>,ncols<span class="op">=</span><span class="fl">3</span>,grid <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/twoD_projections.html">twoD_projections</a></span><span class="op">(</span><span class="va">random_LHS</span>,n_columns<span class="op">=</span><span class="fl">3</span>,grid <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Overview_of_ggDoE_files/figure-html/unnamed-chunk-31-1.png" width="768"></p>
 <p>Below is an example of a maximin Latin hypercube design with red
 color points and no grid (default setting)</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">maximin_LHS</span> <span class="op">&lt;-</span> <span class="fu">lhs</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lhs/man/maximinLHS.html" class="external-link">maximinLHS</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">15</span>, k<span class="op">=</span><span class="fl">4</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/twoD_projections.html">twoD_projections</a></span><span class="op">(</span><span class="va">maximin_LHS</span>,ncols<span class="op">=</span><span class="fl">3</span>,point_color <span class="op">=</span> <span class="st">'red'</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/twoD_projections.html">twoD_projections</a></span><span class="op">(</span><span class="va">maximin_LHS</span>,n_columns<span class="op">=</span><span class="fl">3</span>,point_color <span class="op">=</span> <span class="st">'red'</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Overview_of_ggDoE_files/figure-html/unnamed-chunk-32-1.png" width="768"></p>
 </div>
   </div>

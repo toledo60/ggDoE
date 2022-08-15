@@ -5,7 +5,7 @@
 #' @param grid Logial argument. Specify if a grid should be added to each projection.
 #' The grid is constructed using seq(0,1,length=nrows(design)+1). Default is FALSE
 #' @param point_size Change size of points in plots
-#' @param ncols number of columns for grid layout. Default is 2
+#' @param n_columns number of columns for grid layout. Default is 2
 #'
 #' @importFrom ggplot2 xlim ylim aes theme_bw element_blank geom_hline geom_vline labs geom_point
 #' @importFrom gridExtra grid.arrange
@@ -16,12 +16,12 @@
 #' @examples
 #' set.seed(100)
 #' X <- lhs::randomLHS(n = 10, k = 4)
-#' twoD_projections(X,ncols=3,grid = TRUE)
+#' twoD_projections(X,n_columns=3,grid = TRUE)
 twoD_projections <- function(design,
                              point_color="#21908CFF",
                              grid=FALSE,
                              point_size = 1.5,
-                             ncols=2){
+                             n_columns=2){
 
   check_LHD <- function(design)
   {
@@ -112,7 +112,7 @@ twoD_projections <- function(design,
 
     }
     return(grid.arrange(grobs=plot_list,
-                        ncol=ncols))
+                        ncol=n_columns))
   }
 
 }

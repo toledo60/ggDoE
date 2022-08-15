@@ -135,7 +135,7 @@ interaction_effects(adapted_epitaxial,response = 'ybar',
 ``` r
 interaction_effects(adapted_epitaxial,response = 'ybar',
                     exclude_vars = c('A','s2','lns2'),
-                    ncols=3)
+                    n_columns=3)
 ```
 
 ![](man/figures/interactions2.png)
@@ -157,7 +157,7 @@ main_effects(original_epitaxial,
              response='s2',
              exclude_vars = c('A','ybar','lns2'),
              color_palette = 'viridis',
-             ncols=3)
+             n_columns=3)
 ```
 
 ![](man/figures/main_effects2.png)
@@ -168,8 +168,8 @@ contour plot(s) that display the fitted surface for an *rsm* object
 involving two or more numerical predictors
 
 ``` r
-heli = rsm::heli
-heli.rsm <- rsm::rsm(ave ~ SO(x1, x2, x3, x4), data = heli)
+heli.rsm <- rsm::rsm(ave ~ SO(x1, x2, x3, x4), 
+                     data = rsm::heli)
 ```
 
 ``` r
@@ -213,7 +213,7 @@ hypercube design
 ``` r
 set.seed(10)
 X <- lhs::randomLHS(n=10, k=4)
-twoD_projections(X,ncols=3,grid = TRUE)
+twoD_projections(X,n_columns=3,grid = TRUE)
 ```
 
 ![](man/figures/twoD_projections.png)

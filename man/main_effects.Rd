@@ -7,7 +7,7 @@
 main_effects(
   design,
   response,
-  ncols = 2,
+  n_columns = 2,
   exclude_vars = c(),
   color_palette = NA,
   alpha = 1,
@@ -20,7 +20,7 @@ main_effects(
 
 \item{response}{A character string indicating the response of the data}
 
-\item{ncols}{number of columns for facet grid. Default is 2}
+\item{n_columns}{number of columns for facet grid. Default is 2}
 
 \item{exclude_vars}{A vector containing variables to exclude}
 
@@ -40,5 +40,5 @@ Obtain main effect plots in a factorial design
 }
 \examples{
 main_effects(original_epitaxial,response='s2',exclude_vars = c('ybar','lns2'))
-main_effects(original_epitaxial,response='ybar',exclude_vars=c('A','s2','lns2'),ncols=3)
+main_effects(original_epitaxial,response='ybar',exclude_vars=c('A','s2','lns2'),n_columns=3)
 }

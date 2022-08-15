@@ -26,9 +26,7 @@ lambda_plot <- function(model, lambda = seq(-2, 2, by = 0.1),
                         direction =1,
                         showplot=TRUE){
 
-
   y <- model$model[, 1]
-
   response <- model$terms[[2]]
   variables <- attr(model$terms,'term.labels')
 
@@ -67,7 +65,6 @@ lambda_plot <- function(model, lambda = seq(-2, 2, by = 0.1),
   t_lambda <- t(coef_lambda/se_lambda)[,-1]
   colnames(t_lambda) <- names(coef(org_fit))[-1]
 
-
   t_lambda_dat <- tibble(lambda = lambda,
                          as_tibble(t_lambda))
 
@@ -88,7 +85,6 @@ lambda_plot <- function(model, lambda = seq(-2, 2, by = 0.1),
 
     label_right <- filter(melted_t,lambda==last(lambda))
     label_right_interactions <- filter(label_right,ind %in% int_terms)
-
 
     if(is.na(color_palette)){
       factor_colors <- rep("#21908CFF",factors_total)

@@ -58,18 +58,21 @@ boxcox_transform <- function(model,lambda= seq(-2,2,1/10),
       geom_hline(yintercept = y[min(accept_inds)],
                  linetype = "dashed")+
       theme_bw()+
-      theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
-
+      theme(panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank())
 
     # add label if show lambda range
     if (showlambda) {
       return(plot +
                geom_text(aes(x = best_lambda-0.1,
-                             label = as.character(rounded_lambda), y = min_y),color='#2dab03') +
+                             label = as.character(rounded_lambda), y = min_y),
+                         color='#2dab03') +
                geom_text(aes(x = conf_lo-0.1,
-                             label = as.character(conf_lo), y = min_y), color = "indianred3") +
+                             label = as.character(conf_lo), y = min_y),
+                         color = "indianred3") +
                geom_text(aes(x = conf_hi-0.1,
-                             label = as.character(conf_hi), y = min_y), color = "indianred3"))
+                             label = as.character(conf_hi), y = min_y),
+                         color = "indianred3"))
     }else {
       return (plot)
     }

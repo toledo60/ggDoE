@@ -6,7 +6,7 @@
 #' @param theme_color Change color of the geom_smooth line and text labels for the respective diagnostic plot
 #' @param which_plots Choose which diagnostic plots to choose from. \cr Options are 1 = 'residual vs fitted', 2 = 'Normal-QQ',
 #' 3 = 'Scale-location', 4 = 'Residual vs Leverage', 5 = "Cook's Distance". 6 = "Collinearity". Default is 1:4
-#' @param ncols number of columns for grid layout. Default is 2
+#' @param n_columns number of columns for grid layout. Default is 2
 #' @return Regression diagnostic plots
 #' @importFrom ggplot2 geom_smooth stat_qq geom_abline ylim aes_string theme_bw geom_linerange element_blank geom_hline
 #' @importFrom stats quantile lm.influence cooks.distance rstandard as.formula model.matrix
@@ -24,6 +24,10 @@
 #' where \eqn{R_j^2} is the coefficient of determination of a regression of predictor \eqn{j} on all the other predictors.
 #' A general rule of thumb is that VIFs exceeding 4 warrant further investigation, while VIFs exceeding 10 indicates a multicollinearity problem \cr \cr
 #'
+#' @references
+#' Belsley, D. A., Kuh, E., and Welsch, R. E. (1980). Regression Diagnostics: Identifying Influential Data and Sources of Collinearity. New York: John Wiley & Sons. \cr \cr
+#'
+#' Sheather, S. (2009). A modern approach to regression with R. Springer Science & Business Media.
 #'
 #' @examples
 #' model <- lm(mpg ~ wt + am + gear + vs * cyl, data = mtcars)
@@ -32,7 +36,7 @@ diagnostic_plots <- function(model,standard_errors=FALSE,
                              point_size=1.5,
                              theme_color = "#21908CFF",
                              which_plots = 1:4,
-                             ncols=2){
+                             n_columns=2){
   if (!inherits(model, "lm")) {
     stop("model should be of class lm or glm")
   }else{
@@ -244,7 +248,7 @@ diagnostic_plots <- function(model,standard_errors=FALSE,
 
 
       return(suppressMessages(grid.arrange(grobs=plot_list[which_plots],
-                                           ncol=ncols)))
+                                           ncol=n_columns)))
 
     }
     else{
@@ -258,7 +262,7 @@ diagnostic_plots <- function(model,standard_errors=FALSE,
 
 
       return(suppressMessages(grid.arrange(grobs=plot_list[which_plots],
-                                           ncol=ncols)))
+                                           ncol=n_columns)))
     }
   }
 }

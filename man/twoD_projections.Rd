@@ -9,7 +9,7 @@ twoD_projections(
   point_color = "#21908CFF",
   grid = FALSE,
   point_size = 1.5,
-  ncols = 2
+  n_columns = 2
 )
 }
 \arguments{
@@ -22,7 +22,7 @@ The grid is constructed using seq(0,1,length=nrows(design)+1). Default is FALSE}
 
 \item{point_size}{Change size of points in plots}
 
-\item{ncols}{number of columns for grid layout. Default is 2}
+\item{n_columns}{number of columns for grid layout. Default is 2}
 }
 \value{
 A grid of scatter plots from all two dimensional projections of a Latin hypercube design.
@@ -33,5 +33,5 @@ Two Dimensional Projections of Latin Hypercube Designs
 \examples{
 set.seed(100)
 X <- lhs::randomLHS(n = 10, k = 4)
-twoD_projections(X,ncols=3,grid = TRUE)
+twoD_projections(X,n_columns=3,grid = TRUE)
 }
