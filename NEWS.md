@@ -4,11 +4,10 @@ BREAKING
 
 * renamed argument `ncols` to `n_columns` in all functions which previously used this argument. These functions are: `diagnostic_plots()`,`gg_rsm()`, `interaction_effects()`,`main_effects()`,`twoD_projections()`
 
-
 NEW FEATURES
 
 * `half_normal()` has new argument `point_color` to change the color of the points
-
+* `diagnostic_plots()` has a new argument `cooksD_type` to change the threshold computed for Cook's distance plot (plot #6)
 
 CHANGES
 

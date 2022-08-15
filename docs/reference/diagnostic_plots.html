@@ -65,10 +65,11 @@
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">diagnostic_plots</span><span class="op">(</span></span>
 <span>  <span class="va">model</span>,</span>
+<span>  which_plots <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>,</span>
+<span>  cooksD_type <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  standard_errors <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  point_size <span class="op">=</span> <span class="fl">1.5</span>,</span>
 <span>  theme_color <span class="op">=</span> <span class="st">"#21908CFF"</span>,</span>
-<span>  which_plots <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>,</span>
 <span>  n_columns <span class="op">=</span> <span class="fl">2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -77,6 +78,15 @@
     <h2>Arguments</h2>
     <dl><dt>model</dt>
 <dd><p>Model of class "lm" or "glm"</p></dd>
+
+
+<dt>which_plots</dt>
+<dd><p>Choose which diagnostic plots to choose from. <br> Options are 1 = 'residual vs fitted', 2 = 'Normal-QQ',
+3 = 'Scale-location', 4 = 'Residual vs Leverage', 5 = "Cook's Distance". 6 = "Collinearity". Default is 1:4</p></dd>
+
+
+<dt>cooksD_type</dt>
+<dd><p>An integer between 1 and 4 indicating the threshold to be computed for Cook's Distance plot. Default is 1. See details for threshold computation</p></dd>
 
 
 <dt>standard_errors</dt>
@@ -91,11 +101,6 @@
 <dd><p>Change color of the geom_smooth line and text labels for the respective diagnostic plot</p></dd>
 
 
-<dt>which_plots</dt>
-<dd><p>Choose which diagnostic plots to choose from. <br> Options are 1 = 'residual vs fitted', 2 = 'Normal-QQ',
-3 = 'Scale-location', 4 = 'Residual vs Leverage', 5 = "Cook's Distance". 6 = "Collinearity". Default is 1:4</p></dd>
-
-
 <dt>n_columns</dt>
 <dd><p>number of columns for grid layout. Default is 2</p></dd>
 
@@ -108,17 +113,21 @@
     </div>
     <div id="details">
     <h2>Details</h2>
-    <p>Plot 5: "Cook's Distance": A data point having a large Cook's distance indicates that the data point
-strongly influences the fitted values of the model. The threshold used for detecting or classifying observations as outers is \(4/n\)
-where \(n\) is the number of observations.</p>
-<p>Plot 6: "Collinearity": Conisders the variance inflation factor (VIF) for multicollinearity: <br>
+    <p><strong>Plot 5:</strong> "Cook's Distance": A data point having a large Cook's distance indicates that the data point
+strongly influences the fitted values of the model. The default threshold used for detecting or classifying observations as outers is \(4/n\) (i.e cooksD_type=1)
+where \(n\) is the number of observations. The thresholds computed are as follows: <br></p><ul><li><p>cooksD_type = 1: 4/n</p></li>
+<li><p>cooksD_type = 2: 4/(n-p-1)</p></li>
+<li><p>cooksD_type = 3: 1/(n-p-1)</p></li>
+<li><p>cooksD_type = 4: 3* mean(cook's distance values)</p></li>
+</ul><p>where \(n\) is the number of observations and \(p\) is the number of predictors. <br></p>
+<p><strong>Plot 6:</strong> "Collinearity": Conisders the variance inflation factor (VIF) for multicollinearity: <br>
 Tolerance = \(1 - R_j^2\), VIF = (1/Tolerance)
 where \(R_j^2\) is the coefficient of determination of a regression of predictor \(j\) on all the other predictors.
 A general rule of thumb is that VIFs exceeding 4 warrant further investigation, while VIFs exceeding 10 indicates a multicollinearity problem <br><br></p>
     </div>
     <div id="references">
     <h2>References</h2>
-    <p>Belsley, D. A., Kuh, E., and Welsch, R. E. (1980). Regression Diagnostics: Identifying Influential Data and Sources of Collinearity. New York: John Wiley &amp; Sons. <br><br></p>
+    <p>Belsley, D. A., Kuh, E., and Welsch, R. E. (1980). Regression Diagnostics: Identifying Influential Data and Sources of Collinearity. New York: John Wiley &amp; Sons.<br></p>
 <p>Sheather, S. (2009). A modern approach to regression with R. Springer Science &amp; Business Media.</p>
     </div>
 
