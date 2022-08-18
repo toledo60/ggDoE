@@ -7,8 +7,8 @@
 main_effects(
   design,
   response,
-  n_columns = 2,
   exclude_vars = c(),
+  n_columns = 2,
   color_palette = NA,
   alpha = 1,
   direction = 1,
@@ -20,9 +20,9 @@ main_effects(
 
 \item{response}{A character string indicating the response of the data}
 
-\item{n_columns}{number of columns for facet grid. Default is 2}
-
 \item{exclude_vars}{A vector containing variables to exclude}
+
+\item{n_columns}{number of columns for facet grid. Default is 2}
 
 \item{color_palette}{A character string indicating the color map option to use. Eight options are available: "viridis","cividis","magma","inferno","plasma","rocket","mako","turbo"}
 

@@ -16,7 +16,7 @@ gg_rsm(
 )
 }
 \arguments{
-\item{rsm_model}{Model of class "lm" or "glm"}
+\item{rsm_model}{Model of class "rsm"}
 
 \item{form}{A formula, or a list of formulas}
 
@@ -34,14 +34,14 @@ In such cases, if decode is TRUE, the coordinate axes are transformed to their d
 \item{...}{Other arguments passed on to contour(). For help with more arguments see ?rsm::contour.lm}
 }
 \value{
-A grid of contour plot(s) of a fitted linear model in ggplot2
+A grid of contour plot(s) of a fitted linear model in 'ggplot2'
 }
 \description{
 Contour plot(s) of a fitted linear model in ggplot2
 }
 \examples{
-heli = rsm::heli
-heli.rsm <- rsm::rsm(ave ~ SO(x1, x2, x3, x4), data = heli)
+heli.rsm <- rsm::rsm(ave ~ SO(x1, x2, x3, x4),
+                     data = rsm::heli)
 
 gg_rsm(heli.rsm,form = ~x1+x3+x4,at = rsm::xs(heli.rsm),n_columns=3)
 gg_rsm(heli.rsm,form = ~x2+x3+x4,at = rsm::xs(heli.rsm),n_columns=3,filled = TRUE)

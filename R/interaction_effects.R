@@ -11,60 +11,64 @@
 #' @return interaction effects plot between two factors
 #' @export
 #'
-#' @importFrom ggplot2 aes geom_line geom_point theme labs element_rect scale_linetype_manual
+#' @importFrom ggplot2 aes_string geom_line geom_point theme labs element_rect scale_linetype_manual
 #' @importFrom ggplot2 scale_color_manual theme_bw ylim element_blank
-#' @importFrom dplyr mutate_at setdiff group_by summarise "%>%"
 #' @importFrom utils combn
-#' @importFrom gridExtra grid.arrange
-
+#' @importFrom data.table data.table .SD
 #' @examples
 #' interaction_effects(adapted_epitaxial,response = 'ybar',exclude_vars = c('s2','lns2'))
-
 interaction_effects <- function(design,response,
-                                exclude_vars=c(),
-                                linetypes = c('solid','dashed'),
-                                colors = c("#4260c9" ,"#d6443c"),
-                                n_columns=2,
-                                showplot=TRUE)
-{
+                                 exclude_vars=c(),
+                                 linetypes = c('solid','dashed'),
+                                 colors = c("#4260c9" ,"#d6443c"),
+                                 n_columns=2,
+                                 showplot=TRUE){
+  insight::check_if_installed('gridExtra')
 
+  design <- data.table(design)
   factor_names <- setdiff(names(design),c(response,exclude_vars))
 
+  group_mean <- function(DT, response_var, group_by){
+    return(DT[,.(mean_response=mean(.SD[[1]])),
+              by= group_by, .SDcols = response_var
+    ])
+  }
+  convert_to_factors <- function(DT, cols) {
+    return(DT[,(cols) := lapply(.SD, 'as.factor'), .SDcols = cols])
+  }
   interactions <- t(combn(factor_names,2))
-  dat_list <- vector('list',length = nrow(interactions))
+  n_iteractions <- nrow(interactions)
 
-  dat <- design %>% mutate_at(factor_names,factor)
+  dat_list <- vector('list',length = n_iteractions)
+  convert_to_factors(design,cols = factor_names)
 
-  for(i in 1:nrow(interactions)){
-    dat_list[[i]] <- dat %>%
-      group_by(eval(parse(text=interactions[i,1])),
-               eval(parse(text=interactions[i,2]))) %>%
-      summarise(mean= mean(eval(parse(text=response))),.groups='drop')
-    colnames(dat_list[[i]]) = c('factor1','factor2','response','group')
+  for (i in 1:n_iteractions) {
+    dat_list[[i]] <- group_mean(DT=design,
+                                group_by = c(interactions[i,1],
+                                             interactions[i,2]),
+                                response_var=response )
   }
 
-
   if(showplot){
-
     vals <- c()
-    n <- length(dat_list)
 
-    for(i in 1:n){
+    for(i in 1:n_iteractions){
       vals <- c(vals,dat_list[[i]][[3]])
     }
 
     minval <- min(vals)
     maxval <- max(vals)
 
-    plot_list <- vector('list',length = n)
+    plot_list <- vector('list',length = n_iteractions)
 
-    for(i in 1:n){
-
-      plot_list[[i]] <- dat_list[[i]] %>%
-        ggplot(., aes(x = factor1, y = response,group=factor2,
-                      colour=factor2,
-                      shape=factor2,
-                      linetype=factor2) )+
+    for(i in 1:n_iteractions){
+      plot_list[[i]] <- ggplot(dat_list[[i]],
+                               aes_string(x = interactions[i,1],
+                                          y = 'mean_response',
+                                          group=interactions[i,2],
+                                          colour=interactions[i,2],
+                                          shape=interactions[i,2],
+                                          linetype=interactions[i,2]))+
         geom_line()+
         geom_point()+
         scale_linetype_manual(values=linetypes)+
@@ -81,9 +85,13 @@ interaction_effects <- function(design,response,
              shape=interactions[i,2]
         )
     }
-    return(grid.arrange(grobs=plot_list,ncol=n_columns))
+    return(gridExtra::grid.arrange(grobs=plot_list,
+                                   ncol=n_columns))
   }
   else{
     return(dat_list)
   }
 }
+
+
+

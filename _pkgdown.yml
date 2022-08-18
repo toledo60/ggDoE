@@ -1,0 +1,31 @@
+template:
+  bootstrap: 5
+  theme: github-light
+  bslib:
+    primary: "#4c7fb0"
+    code_font: {google: "Fira Code"}
+
+reference:
+- title: Plots
+  contents:
+  - alias_matrix
+  - boxcox_transform
+  - diagnostic_plots
+  - gg_boxplots
+  - gg_rsm
+  - half_normal
+  - interaction_effects
+  - lambda_plot
+  - main_effects
+  - pareto_plot
+  - twoD_projections
+
+- title: Datasets
+  contents:
+  - adapted_epitaxial
+  - aliased_design
+  - original_epitaxial
+
+- title: Utilities
+  contents:
+  - viridisPalette

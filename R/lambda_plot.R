@@ -13,10 +13,10 @@
 #'
 #' @importFrom stats lm as.formula
 #' @importFrom utils stack
-#' @importFrom dplyr filter as_tibble tibble first last
+#' @importFrom data.table data.table first last
 #' @importFrom ggplot2 aes_string scale_color_manual theme_bw element_blank labs
 #' @examples
-#' mod = lm(s2 ~ (A+B+C)^2,data=original_epitaxial)
+#' mod <- lm(s2 ~ (A+B+C)^2,data=original_epitaxial)
 #' lambda_plot(mod)
 #' lambda_plot(mod,lambda = seq(0,2,0.1))
 #' lambda_plot(mod,lambda = seq(0,2,0.1),showplot = FALSE)
@@ -25,6 +25,7 @@ lambda_plot <- function(model, lambda = seq(-2, 2, by = 0.1),
                         alpha=1,
                         direction =1,
                         showplot=TRUE){
+  insight::check_if_installed('ggrepel')
 
   y <- model$model[, 1]
   response <- model$terms[[2]]
@@ -65,8 +66,8 @@ lambda_plot <- function(model, lambda = seq(-2, 2, by = 0.1),
   t_lambda <- t(coef_lambda/se_lambda)[,-1]
   colnames(t_lambda) <- names(coef(org_fit))[-1]
 
-  t_lambda_dat <- tibble(lambda = lambda,
-                         as_tibble(t_lambda))
+  t_lambda_dat <- tibble::tibble(lambda = lambda,
+                                 tibble::as_tibble(t_lambda))
 
   if(!showplot){
     return(t_lambda_dat)
@@ -74,17 +75,17 @@ lambda_plot <- function(model, lambda = seq(-2, 2, by = 0.1),
 
     factors_total <- ncol(t_lambda)
 
-    melted_t <- cbind('lambda'=rep(lambda,factors_total),
-                      stack(as.vector(t_lambda_dat[,-1])))
+    melted_t <- data.table(cbind('lambda'=rep(lambda,factors_total),
+                      stack(as.vector(t_lambda_dat[,-1]))))
 
     pattern <- "/|:|\\?|<|>|\\|\\\\|\\*"
     int_terms <- variables[grepl(pattern,variables)]
 
-    label_left <- filter(melted_t,lambda==first(lambda))
-    label_left_main <- filter(label_left,!ind %in% int_terms)
+    label_left <- melted_t[lambda == first(lambda)]
+    label_left_main <- label_left[!ind %in% int_terms]
 
-    label_right <- filter(melted_t,lambda==last(lambda))
-    label_right_interactions <- filter(label_right,ind %in% int_terms)
+    label_right <- melted_t[lambda == last(lambda)]
+    label_right_interactions <- label_right[ind %in% int_terms]
 
     if(is.na(color_palette)){
       factor_colors <- rep("#21908CFF",factors_total)

@@ -1,3 +1,23 @@
+# ggDoE 0.7.8
+
+BREAKING
+
+* `gg_boxplots()` arguments `response`,`factor`,`group_var` are now string characters 
+
+CHANGES
+
+* removed `dplyr` dependency in favor of `data.table`. `data.table` has significantly less dependencies compared to `dplyr`.
+
+* added `insight`to Imports for checking if required packages are installed for each respective function. `insight` will later be used for cleaning up source code for extracting information from model objects such as variables, responses, etc...
+
+* switched `gridExtra` and `unrepx` from Imports to Suggests
+
+MINOR CHANGES
+
+* updated pkgdown website with new theme and reference structure
+
+---
+
 # ggDoE 0.7.7
 
 BREAKING

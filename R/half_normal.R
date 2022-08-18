@@ -11,9 +11,7 @@
 #' @return A tibble with the absolute effects and half-normal quantiles. A ggplot2 version of halfnormal plot for factorial effects is returned
 #' @importFrom ggplot2 ggplot aes geom_point theme_bw labs geom_vline annotate geom_abline element_blank
 #' @importFrom stats qnorm coef
-#' @importFrom dplyr tibble
 #' @importFrom utils tail
-#' @importFrom unrepx PSE ME
 #' @export
 #'
 #' @details
@@ -72,10 +70,11 @@ half_normal <- function(model,method='Lenth',
       effects <- coef(model)[-pmatch("(Intercept)", names(coef(model)))]
     estimates <- 2 * effects
   }
+  insight::check_if_installed(c('unrepx','ggrepel'))
 
-  PSE <- PSE(estimates,method = method)
-  ME <- ME(estimates,method = method,alpha = alpha)[1]
-  SME <- ME(estimates,method = method,alpha=alpha)[2]
+  PSE <- unrepx::PSE(estimates,method = method)
+  ME <- unrepx::ME(estimates,method = method,alpha = alpha)[1]
+  SME <- unrepx::ME(estimates,method = method,alpha=alpha)[2]
 
   effs <- sort(abs(estimates))
   names <- names(effs)
@@ -90,10 +89,9 @@ half_normal <- function(model,method='Lenth',
       if (logc) {names[i]<-NA}}
   }
 
-  dat <- tibble("effects"=names,
-                "absolute_effects"=effs,
-                "half_normal_quantiles"=zscore
-  )
+  dat <- tibble::tibble("effects"=names,
+                        "absolute_effects"=effs,
+                        "half_normal_quantiles"=zscore)
 
   if(showplot){
     base_plot <- ggplot(dat,aes_string(x= 'absolute_effects',

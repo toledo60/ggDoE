@@ -193,17 +193,17 @@ head(data)
 
 
 ```{r}
-gg_boxplots(data,response = len,
-            factor = dose)
+gg_boxplots(data,response = 'len',
+            factor = 'dose')
 ```
 
 We can group each sample using the `group_var` argument, again this argument must be unquoted. With `color_palette` we can change the color palette for each of the boxplots.  With `color_palette` eight options are available: *"viridis","cividis","magma","inferno","plasma","rocket","mako","turbo"*. Lastly,
 one can overlay jittered points to each boxplot using `jitter_points=TRUE`.
 
 ```{r,fig.height=5,fig.width=7}
-gg_boxplots(data,response = len,
-            factor = dose,
-            group_var = supp,
+gg_boxplots(data,response = 'len',
+            factor = 'dose',
+            group_var = 'supp',
             color_palette = 'viridis',
             jitter_points = TRUE)
 ```
@@ -316,8 +316,8 @@ main_effects(original_epitaxial,
 
 
 ```{r}
-heli <- rsm::heli
-heli.rsm <- rsm::rsm(ave ~ SO(x1, x2, x3, x4), data = heli)
+heli.rsm <- rsm::rsm(ave ~ SO(x1, x2, x3, x4), 
+                     data = rsm::heli)
 ```
 
 Using `gg_rsm` we can obtain contour plots that display the fitted surface for an `rsm` object. It is best to use `rsm` object such as the one defined above, as the plots below are produced using information from an `rsm` object. `gg_rsm` includes an `...` argument for additional arguments from  `rsm::contour.lm`, see `rsm::contour.lm` for more details on its arguments.

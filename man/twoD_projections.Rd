@@ -31,7 +31,7 @@ A grid of scatter plots from all two dimensional projections of a Latin hypercub
 Two Dimensional Projections of Latin Hypercube Designs
 }
 \examples{
-set.seed(100)
-X <- lhs::randomLHS(n = 10, k = 4)
-twoD_projections(X,n_columns=3,grid = TRUE)
+set.seed(10)
+X <- lhs::randomLHS(n=15,k=4)
+twoD_projections(X, n_columns=3, grid = TRUE)
 }

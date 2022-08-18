@@ -8,7 +8,6 @@
 #'
 #' @importFrom ggplot2 geom_segment geom_vline geom_hline element_blank geom_text
 #' @importFrom stats qchisq
-#' @importFrom dplyr tibble
 #' @return Box-Cox transformation plot with 95\% confidence interval of lambda values to consider
 #' @export
 #'
@@ -77,8 +76,8 @@ boxcox_transform <- function(model,lambda= seq(-2,2,1/10),
       return (plot)
     }
   }else{
-    return(tibble("best_lambda" = best_lambda,
-                  "lambda_low"=conf_lo,
-                  "lambda_high"=conf_hi))
+    return(tibble::tibble("best_lambda" = best_lambda,
+                          "lambda_low"=conf_lo,
+                          "lambda_high"=conf_hi))
   }
 }

@@ -11,7 +11,6 @@
 #' @return Regression diagnostic plots
 #' @importFrom ggplot2 geom_smooth stat_qq geom_abline ylim aes_string theme_bw geom_linerange element_blank geom_hline
 #' @importFrom stats quantile lm.influence cooks.distance rstandard as.formula model.matrix
-#' @importFrom gridExtra grid.arrange
 #' @export
 #'
 #' @details
@@ -49,7 +48,7 @@ diagnostic_plots <- function(model,which_plots = 1:4,
   if (!inherits(model, "lm")) {
     stop("model should be of class lm or glm")
   }else{
-
+    insight::check_if_installed(c('gridExtra','ggrepel'))
     df <- model$model
     df$.fitted <- model$fitted.values
     df$.resid <- model$residuals
@@ -268,8 +267,8 @@ diagnostic_plots <- function(model,which_plots = 1:4,
                                  theme_color = theme_color)
 
 
-      return(suppressMessages(grid.arrange(grobs=plot_list[which_plots],
-                                           ncol=n_columns)))
+      return(suppressMessages(gridExtra::grid.arrange(grobs=plot_list[which_plots],
+                                                      ncol=n_columns)))
 
     }
     else{
@@ -281,8 +280,8 @@ diagnostic_plots <- function(model,which_plots = 1:4,
       plot_list[[5]] <- vif_plot(model,point_size=point_size,
                                  theme_color = theme_color)
 
-      return(suppressMessages(grid.arrange(grobs=plot_list[which_plots],
-                                           ncol=n_columns)))
+      return(suppressMessages(gridExtra::grid.arrange(grobs=plot_list[which_plots],
+                                                      ncol=n_columns)))
     }
   }
 }

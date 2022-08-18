@@ -12,81 +12,80 @@
 #' @return Main effects plots, or a list of tibble with calculated main effects for each factors if showplot=FALSE.
 #' @export
 #' @importFrom ggplot2 aes_string geom_point geom_line theme_bw labs facet_wrap scale_color_manual vars ylim element_blank
-#' @importFrom dplyr group_by summarise "%>%" bind_rows filter
 #' @importFrom utils stack
-
+#' @importFrom data.table data.table rbindlist
 #'
 #' @examples
 #' main_effects(original_epitaxial,response='s2',exclude_vars = c('ybar','lns2'))
 #' main_effects(original_epitaxial,response='ybar',exclude_vars=c('A','s2','lns2'),n_columns=3)
-main_effects <- function(design,response,n_columns=2,
+main_effects <- function(design,response,
                          exclude_vars=c(),
+                         n_columns=2,
                          color_palette = NA,
                          alpha=1,direction = 1,
                          showplot=TRUE){
-  factor_names <- setdiff(names(design),c(response,exclude_vars))
-  dat_list <-  vector("list", length = length(factor_names))
 
+  design <- data.table(design)
+  factor_names <- setdiff(names(design),c(response,exclude_vars))
+  factors_total <- length(factor_names)
+
+  dat_list <-  vector("list", length = factors_total)
+
+  group_mean <- function(DT, response_var, group_by){
+    return(DT[,.(mean(.SD[[1]])),
+              by= group_by, .SDcols = response_var
+    ])
+  }
   for (i in seq_along(factor_names)) {
-    dat_list[[i]] <- design %>%
-      group_by(eval(parse(text=factor_names[i]))) %>%
-      summarise(mean = mean(eval(parse(text=response))))
+    dat_list[[i]] <- group_mean(DT=design,
+                                group_by = c(factor_names[i]),
+                                response_var=response )
     colnames(dat_list[[i]]) = c(factor_names[i],response)
   }
+
   names(dat_list) <- factor_names
 
-  if(!showplot){
-    return(dat_list)
+  vals <- c()
+  for(i in 1:factors_total){
+    vals <- c(vals,dat_list[[i]][[2]])
+  }
+
+  minval <- min(vals)
+  maxval <- max(vals)
+
+  dat <- rbindlist(dat_list,fill = TRUE)
+
+  dat[is.na(dat)] <- 88
+  melt_dat <- stack(as.vector(dat))
+
+  melted_dat <- melt_dat[melt_dat$values != 88 & melt_dat$ind != response,]
+  melted_dat$response_var <- as.vector(dat)[[response]]
+  melted_dat$values <- as.factor(melted_dat$values)
+
+  if(is.na(color_palette)){
+    factor_colors <- rep("#21908CFF",factors_total)
   }
   else{
-
-    vals <- c()
-    n <- length(dat_list)
-
-    for(i in 1:n){
-      vals <- c(vals,dat_list[[i]][[2]])
-    }
-
-    minval <- min(vals)
-    maxval <- max(vals)
-
-    dat <- bind_rows(dat_list)
-
-    dat[is.na(dat)] <- 88
-    vec_dat <- as.vector(dat)
-
-    melted_dat <- stack(vec_dat) %>%
-      filter(values != 88) %>%
-      filter(ind != response) %>%
-      mutate(response_var = vec_dat[[response]]) %>%
-      mutate(values = as.factor(values))
-
-    factors_total <- length(factor_names)
-
-    if(is.na(color_palette)){
-      factor_colors <- rep("#21908CFF",factors_total)
-    }
-    else{
-      factor_colors <- viridisPalette(factors_total,
-                                      color_palette = color_palette,
-                                      direction = direction,
-                                      alpha = alpha)
-    }
-
-    p <- ggplot(melted_dat) +
-      aes_string(x = 'values', y = 'response_var'  , colour = 'ind', group=1) +
-      geom_line(aes(group=1),size =0.5) +
-      geom_point(size=1)+
-      theme_bw() +
-      ylim(minval,maxval)+
-      theme(legend.position = "none",
-            panel.grid.major = element_blank(),
-            panel.grid.minor = element_blank()) +
-      scale_color_manual(values = factor_colors)+
-      facet_wrap(vars(ind),ncol = n_columns)+
-      labs(y=paste0("Mean of ",response),x='')
-
-    return(p)
+    factor_colors <- viridisPalette(factors_total,
+                                    color_palette = color_palette,
+                                    direction = direction,
+                                    alpha = alpha)
   }
+
+  p <- ggplot(melted_dat) +
+    aes_string(x = 'values', y = 'response_var',
+               colour = 'ind', group=1) +
+    geom_line(aes(group=1),size =0.5) +
+    geom_point(size=1)+
+    theme_bw() +
+    ylim(minval,maxval)+
+    theme(legend.position = "none",
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank()) +
+    scale_color_manual(values = factor_colors)+
+    facet_wrap(vars(ind),ncol = n_columns)+
+    labs(y=paste0("Mean of ",response),x='')
+
+  return(p)
 }
 

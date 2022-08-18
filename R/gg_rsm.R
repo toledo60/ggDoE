@@ -1,6 +1,6 @@
 #' Contour plot(s) of a fitted linear model in ggplot2
 #'
-#' @param rsm_model Model of class "lm" or "glm"
+#' @param rsm_model Model of class "rsm"
 #' @param form A formula, or a list of formulas
 #' @param filled Determine if the surface plots should be filled by viridis color palette. Default is FALSE
 #' @param decode This has an effect only if x is an rsm object or other model object that supports coded.data.
@@ -10,16 +10,15 @@
 #' @param size size of text for contour lines. Only applied if contour plots are filled
 #' @param ... Other arguments passed on to contour(). For help with more arguments see ?rsm::contour.lm
 #'
-#' @return A grid of contour plot(s) of a fitted linear model in ggplot2
+#' @return A grid of contour plot(s) of a fitted linear model in 'ggplot2'
 #' @export
 #'
 #' @importFrom graphics contour
 #' @importFrom ggplot2 aes_string theme_bw theme_minimal labs element_blank element_text geom_contour geom_contour_filled
-#' @importFrom gridExtra grid.arrange
 
 #' @examples
-#' heli = rsm::heli
-#' heli.rsm <- rsm::rsm(ave ~ SO(x1, x2, x3, x4), data = heli)
+#' heli.rsm <- rsm::rsm(ave ~ SO(x1, x2, x3, x4),
+#'                      data = rsm::heli)
 #'
 #' gg_rsm(heli.rsm,form = ~x1+x3+x4,at = rsm::xs(heli.rsm),n_columns=3)
 #' gg_rsm(heli.rsm,form = ~x2+x3+x4,at = rsm::xs(heli.rsm),n_columns=3,filled = TRUE)
@@ -34,6 +33,7 @@ gg_rsm <- function(rsm_model,
   if(!inherits(rsm_model,'rsm')){
     stop("rsm_obj should be of class rsm")
   }
+  insight::check_if_installed(c('metR','gridExtra'))
 
   rsm_contour <- contour(rsm_model, form, plot=FALSE,
                          decode=decode,
@@ -93,6 +93,6 @@ gg_rsm <- function(rsm_model,
         )
     }
   }
-  return(grid.arrange(grobs = cplots,
-                      ncol=n_columns))
+  return(gridExtra::grid.arrange(grobs = cplots,
+                                 ncol=n_columns))
 }
