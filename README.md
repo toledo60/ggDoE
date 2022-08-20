@@ -70,16 +70,16 @@ data <- ToothGrowth
 data$dose <- factor(data$dose,levels = c(0.5, 1, 2),
                     labels = c("D0.5", "D1", "D2"))
 
-gg_boxplots(data,response = len,
-            factor = dose)
+gg_boxplots(data,response = 'len',
+            factor = 'dose')
 ```
 
 ![](man/figures/boxplot1.png)
 
 ``` r
-gg_boxplots(data,response = len,
-            factor = dose,
-            group_var = supp,
+gg_boxplots(data,response = 'len',
+            factor = 'dose',
+            group_var = 'supp',
             color_palette = 'viridis',
             jitter_points = TRUE)
 ```
@@ -107,14 +107,14 @@ diagnostic_plots(model,which_plots=1:6)
 **Half-Normal Plot**
 
 ``` r
-m1 <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
-half_normal(m1)
+model <- lm(ybar ~ (A+B+C+D)^4,data=adapted_epitaxial)
+half_normal(model)
 ```
 
 ![](man/figures/half_normal1.png)
 
 ``` r
-half_normal(m1,method='Zahn',alpha=0.1,
+half_normal(model,method='Zahn',alpha=0.1,
             ref_line=TRUE,label_active=TRUE,
             margin_errors=TRUE)
 ```
@@ -193,14 +193,14 @@ Pareto plot of effects with cutoff values for the margin of error (ME)
 and simultaneous margin of error (SME)
 
 ``` r
-m1 <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
-pareto_plot(m1)
+model <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
+pareto_plot(model)
 ```
 
 ![](man/figures/pareto_plot1.png)
 
 ``` r
-pareto_plot(m1,method='Zahn',alpha=0.1)
+pareto_plot(model,method='Zahn',alpha=0.1)
 ```
 
 ![](man/figures/pareto_plot2.png)
@@ -252,7 +252,7 @@ citation('ggDoE')
     To cite package 'ggDoE' in publications use:
 
       Toledo Luna J (????). _ggDoE: Modern Graphs for Design of Experiments
-      with 'ggplot2'_. R package version 0.7.6,
+      with 'ggplot2'_. R package version 0.7.8,
       <https://ggdoe.netlify.app>.
 
     A BibTeX entry for LaTeX users is
@@ -260,7 +260,7 @@ citation('ggDoE')
       @Manual{,
         title = {ggDoE: Modern Graphs for Design of Experiments with 'ggplot2'},
         author = {Jose {Toledo Luna}},
-        note = {R package version 0.7.6},
+        note = {R package version 0.7.8},
         url = {https://ggdoe.netlify.app},
       }
 

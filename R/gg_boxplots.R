@@ -21,8 +21,8 @@
 #' gg_boxplots(data,response = "len",factor = "dose",alpha=0.6)
 #' gg_boxplots(data,response = "len",factor = "dose",group_var = "supp",
 #' alpha=0.6,color_palette = 'viridis',jitter_points=TRUE)
-#' @importFrom ggplot2 aes geom_boxplot guides stat_summary coord_flip scale_color_manual geom_jitter position_jitterdodge
-#' @importFrom ggplot2 theme_bw element_blank facet_wrap
+#' @importFrom ggplot2 aes geom_boxplot guides stat_summary coord_flip
+#' @importFrom ggplot2  facet_wrap scale_color_manual geom_jitter position_jitterdodge
 #' @importFrom data.table data.table .SD
 gg_boxplots <- function(data,response,factor,
                         group_var = NULL,
@@ -64,9 +64,7 @@ gg_boxplots <- function(data,response,factor,
     {if(!is.na(color_palette))scale_color_manual(values = factor_levels$colors)}+
     {if(show_mean)stat_summary(fun="mean", colour = "#ba3e30",size=0.75)}+
     {if(horizontal)coord_flip()}+
-    theme_bw()+
-    theme(panel.grid.major = element_blank(),
-          panel.grid.minor = element_blank())
+    theme_bw_nogrid()
 
   if(missing(group_var)){
     return(p)

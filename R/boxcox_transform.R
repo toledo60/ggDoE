@@ -6,7 +6,7 @@
 #' @param lambdaSF Digits to round lambda values shown in plot
 #' @param showplot Default is TRUE, if false plot will not be shown and a tibble is returned with a 95\% confidence interval for lambda and lambda value which maximizes log-likelihood
 #'
-#' @importFrom ggplot2 geom_segment geom_vline geom_hline element_blank geom_text
+#' @importFrom ggplot2 geom_segment geom_vline geom_hline geom_text
 #' @importFrom stats qchisq
 #' @return Box-Cox transformation plot with 95\% confidence interval of lambda values to consider
 #' @export
@@ -56,9 +56,7 @@ boxcox_transform <- function(model,lambda= seq(-2,2,1/10),
                  color = "indianred3",size=1.1) +
       geom_hline(yintercept = y[min(accept_inds)],
                  linetype = "dashed")+
-      theme_bw()+
-      theme(panel.grid.major = element_blank(),
-            panel.grid.minor = element_blank())
+      theme_bw_nogrid()
 
     # add label if show lambda range
     if (showlambda) {

@@ -25,7 +25,6 @@ if (!require("remotes")) install.packages("remotes")
 remotes::install_github("toledo60/ggDoE")
 ```
 
-
 ## Overview
 
 With ggDoE you'll be able to generate common plots used in Design of Experiments with ggplot2.
@@ -35,9 +34,7 @@ With ggDoE you'll be able to generate common plots used in Design of Experiments
 library(ggDoE)
 ```
 
-
 The following plots are currently available:
-
 
 **Alias Matrix**
 
@@ -48,7 +45,6 @@ alias_matrix(design=aliased_design)
 ```
 
 ![](man/figures/alias_matrix.png)
-
 
 
 **Box-Cox Transformation**
@@ -71,7 +67,6 @@ lambda_plot(model)
 ```
 
 ![](man/figures/lambda_plot1.png)
-
 
 
 ```{r}
@@ -106,7 +101,6 @@ gg_boxplots(data,response = 'len',
 
 ![](man/figures/boxplot2.png)
 
-
 **Regression Diagnostic Plots**
 
 1. Residual vs. Fitted Values
@@ -125,13 +119,11 @@ diagnostic_plots(model,which_plots=1:6)
 
 ![](man/figures/diagnostic_plots.png)
 
-
 **Half-Normal Plot**
 
-
 ```{r}
-m1 <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
-half_normal(m1)
+model <- lm(ybar ~ (A+B+C+D)^4,data=adapted_epitaxial)
+half_normal(model)
 ```
 
 
@@ -140,7 +132,7 @@ half_normal(m1)
 
 
 ```{r}
-half_normal(m1,method='Zahn',alpha=0.1,
+half_normal(model,method='Zahn',alpha=0.1,
             ref_line=TRUE,label_active=TRUE,
             margin_errors=TRUE)
 ```
@@ -148,7 +140,6 @@ half_normal(m1,method='Zahn',alpha=0.1,
 
 
 ![](man/figures/half_normal2.png)
-
 
 
 **Interaction Effects Plot (Factorial Design)**
@@ -165,8 +156,6 @@ interaction_effects(adapted_epitaxial,response = 'ybar',
 ![](man/figures/interactions1.png)
 
 
-
-
 ```{r,fig.width=9,fig.height=4}
 interaction_effects(adapted_epitaxial,response = 'ybar',
                     exclude_vars = c('A','s2','lns2'),
@@ -176,7 +165,6 @@ interaction_effects(adapted_epitaxial,response = 'ybar',
 
 
 ![](man/figures/interactions2.png)
-
 
 **Main Effects Plots (Factorial Design)**
 
@@ -190,7 +178,6 @@ main_effects(original_epitaxial,
 
 
 ![](man/figures/main_effects1.png)
-
 
 
 ```{r}
@@ -240,17 +227,16 @@ gg_rsm(heli.rsm,form = ~x1+x2+x3+x4,
 Pareto plot of effects with cutoff values for the margin of error (ME) and simultaneous margin of error (SME)
 
 ```{r}
-m1 <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
-pareto_plot(m1)
+model <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
+pareto_plot(model)
 ```
 
 
 ![](man/figures/pareto_plot1.png)
 
 
-
 ```{r}
-pareto_plot(m1,method='Zahn',alpha=0.1)
+pareto_plot(model,method='Zahn',alpha=0.1)
 ```
 
 

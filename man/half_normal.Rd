@@ -63,10 +63,10 @@ with weights decreasing linearly from m - .5 to .5, but bounded above by .65m}
 }
 }
 \examples{
-m1 <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
-half_normal(m1)
-half_normal(m1,alpha=0.1,label_active=TRUE,margin_errors=TRUE)
-half_normal(m1,method='Zahn',alpha=0.1,ref_line=TRUE,
+model <- lm(ybar ~ (A+B+C+D)^4,data=adapted_epitaxial)
+half_normal(model)
+half_normal(model,alpha=0.1,label_active=TRUE,margin_errors=TRUE)
+half_normal(model,method='Zahn',alpha=0.1,ref_line=TRUE,
             label_active=TRUE,margin_errors=TRUE)
 }
 \references{

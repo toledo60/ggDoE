@@ -9,7 +9,7 @@
 #' @param theme_color Change color of the geom_smooth line and text labels for the respective diagnostic plot
 #' @param n_columns number of columns for grid layout. Default is 2
 #' @return Regression diagnostic plots
-#' @importFrom ggplot2 geom_smooth stat_qq geom_abline ylim aes_string theme_bw geom_linerange element_blank geom_hline
+#' @importFrom ggplot2 geom_smooth stat_qq geom_abline ylim aes_string geom_linerange geom_hline
 #' @importFrom stats quantile lm.influence cooks.distance rstandard as.formula model.matrix
 #' @export
 #'
@@ -82,12 +82,11 @@ diagnostic_plots <- function(model,which_plots = 1:4,
       geom_point(size=point_size,shape=1) +
       geom_smooth(fill="#d9d9d9",se=standard_errors,
                   color = theme_color,size=1.1)+
+      geom_hline(yintercept = 0,linetype='dashed')+
       labs(y = "Residuals", x = "Fitted Values",
            title = "Residual vs. Fitted Value") +
       ylim(-(limit + margin), limit + margin) +
-      theme_bw()+
-      theme(panel.grid.major = element_blank(),
-            panel.grid.minor = element_blank())
+      theme_bw_nogrid()
 
     if(sum(abs(df$.std.resid) > 3)==0){
       res_fitted <- res_fitted_base
@@ -117,9 +116,7 @@ diagnostic_plots <- function(model,which_plots = 1:4,
            title = "Normal-QQ Plot") +
       geom_abline(data = qq_line ,aes(intercept = intercept ,slope = slope),
                   color = theme_color, size = 1.1)+
-      theme_bw()+
-      theme(panel.grid.major = element_blank(),
-            panel.grid.minor = element_blank())
+      theme_bw_nogrid()
 
 
     # Scale-Location ----------------------------------------------------------
@@ -132,9 +129,7 @@ diagnostic_plots <- function(model,which_plots = 1:4,
       labs(y=expression(sqrt("|Standardized Residuals|")),
            x = "Fitted Values",
            title = "Scale-Location Plot")+
-      theme_bw()+
-      theme(panel.grid.major = element_blank(),
-            panel.grid.minor = element_blank())
+      theme_bw_nogrid()
 
     # Cooks Distance ----------------------------------------------------------
 
@@ -158,7 +153,7 @@ diagnostic_plots <- function(model,which_plots = 1:4,
 
     cooksD_plot <- ggplot(data = df, aes(x=1:n,.cooksd, ymin = 0,
                                          ymax = cooksd)) +
-      geom_point(size=point_size,shape=1,colour = theme_color) +
+      geom_point(size=point_size,shape=1) +
       geom_hline(yintercept = h,
                  color= theme_color,linetype=2)+
       geom_linerange(color='#bfbfbf') +
@@ -168,9 +163,7 @@ diagnostic_plots <- function(model,which_plots = 1:4,
                                 color=theme_color)+
       labs(x= 'Observarion',y="Cook's Distance",
            title="Cook's Distance Plot")+
-      theme_bw()+
-      theme(panel.grid.major = element_blank(),
-            panel.grid.minor = element_blank())
+      theme_bw_nogrid()
 
 
     # Variance Inflation Factor -----------------------------------------------
@@ -208,8 +201,7 @@ diagnostic_plots <- function(model,which_plots = 1:4,
       plt <- ggplot(results)+
         aes(x = Variables, y = VIF,
             ymin=0,ymax=VIF) +
-        geom_point(shape = 1, size = point_size,
-                   colour = theme_color) +
+        geom_point(shape = 1, size = point_size) +
         geom_linerange(color='#bfbfbf')+
         geom_hline(yintercept = 5,
                    color= theme_color,linetype=2)+
@@ -222,9 +214,7 @@ diagnostic_plots <- function(model,which_plots = 1:4,
                                   color=theme_color)+
         labs(x = "", y = "Variance Inflation Factor (VIF)",
              title = "Collinearity")+
-        theme_bw()+
-        theme(panel.grid.major = element_blank(),
-              panel.grid.minor = element_blank())
+        theme_bw_nogrid()
 
       return(plt)
     }
@@ -241,9 +231,7 @@ diagnostic_plots <- function(model,which_plots = 1:4,
                     size = 1.1) +
         labs(y = "Standardized Residuals", x = "Leverage",
              title = 'Residual vs. Leverage')+
-        theme_bw()+
-        theme(panel.grid.major = element_blank(),
-              panel.grid.minor = element_blank())
+        theme_bw_nogrid()
 
       if(sum(df$.hat  > 2 * p / n) == 0){
         stdres_leverage <- stdres_leverage_base

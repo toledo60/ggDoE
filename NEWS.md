@@ -4,6 +4,10 @@ BREAKING
 
 * `gg_boxplots()` arguments `response`,`factor`,`group_var` are now string characters 
 
+NEW FUNCTIONS
+
+* added `theme_bw_nogrid()`, simple theme settings which were used throughout `ggDoE` plots
+
 CHANGES
 
 * removed `dplyr` dependency in favor of `data.table`. `data.table` has significantly less dependencies compared to `dplyr`.

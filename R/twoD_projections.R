@@ -7,7 +7,7 @@
 #' @param point_size Change size of points in plots
 #' @param n_columns number of columns for grid layout. Default is 2
 #'
-#' @importFrom ggplot2 xlim ylim aes theme_bw element_blank geom_hline geom_vline labs geom_point
+#' @importFrom ggplot2 xlim ylim aes geom_hline geom_vline labs geom_point
 #' @importFrom graphics hist
 #' @return A grid of scatter plots from all two dimensional projections of a Latin hypercube design.
 #' @export
@@ -15,7 +15,8 @@
 #' @examples
 #' set.seed(10)
 #' X <- lhs::randomLHS(n=15,k=4)
-#' twoD_projections(X, n_columns=3, grid = TRUE)
+#' twoD_projections(X,n_columns = 3,grid = TRUE)
+#' twoD_projections(X,n_columns = 2,point_color='red')
 twoD_projections <- function(design,
                              point_color="#21908CFF",
                              grid=FALSE,
@@ -79,10 +80,7 @@ twoD_projections <- function(design,
                  y=two_combns_names[i,2])+
             xlim(c(0,1))+
             ylim(c(0,1))+
-            theme_bw()+
-            theme(panel.grid.major = element_blank(),
-                  panel.grid.minor = element_blank())
-
+            theme_bw_nogrid()
         })
       }
 
@@ -101,10 +99,7 @@ twoD_projections <- function(design,
                  y=two_combns_names[i,2])+
             xlim(c(0,1))+
             ylim(c(0,1))+
-            theme_bw()+
-            theme(panel.grid.major = element_blank(),
-                  panel.grid.minor = element_blank())
-
+            theme_bw_nogrid()
         })
       }
 

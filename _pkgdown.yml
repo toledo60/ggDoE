@@ -29,3 +29,4 @@ reference:
 - title: Utilities
   contents:
   - viridisPalette
+  - theme_bw_nogrid
