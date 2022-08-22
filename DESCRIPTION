@@ -7,10 +7,10 @@ Authors@R: c(person(given = "Jose",family = "Toledo Luna",
              email = "toledo60@protonmail.com",
              comment = c(ORCID = "0000-0001-8559-0027")))
 Maintainer: Jose Toledo Luna <toledo60@protonmail.com>            
-Description: With 'ggDoE' one can generate commonly used plots in the field of design of experiments using 'ggplot2'. 
-            It currently supports the following plots: alias matrix, box cox transformation, boxplots, lambda plot, regression diagnostic plots, 
-            half normal plots, main and interaction effect plots for factorial designs, contour plots for response surface methodology, pareto plot, 
-            and two dimensional projections of a latin hypercube design.
+Description: Generate commonly used plots in the field of design of experiments using 'ggplot2'.
+  'ggDoE' currently supports the following plots: alias matrix, box cox transformation, boxplots, lambda plot,
+  regression diagnostic plots,half normal plots, main and interaction effect plots for factorial designs,
+  contour plots for response surface methodology, pareto plot, and two dimensional projections of a latin hypercube design.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

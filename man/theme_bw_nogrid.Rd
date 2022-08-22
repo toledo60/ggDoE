@@ -6,6 +6,9 @@
 \usage{
 theme_bw_nogrid()
 }
+\value{
+A simple black and white theme without grid.major and grid.minor for ggplot objects.
+}
 \description{
 Theme for plots used in 'ggDoE'
 }

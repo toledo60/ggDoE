@@ -2,6 +2,7 @@
 #'
 #' @importFrom ggplot2 %+replace% theme_bw element_blank
 #' @export
+#' @return A simple black and white theme without grid.major and grid.minor for ggplot objects.
 #'
 #' @examples
 #' library(ggplot2)
@@ -12,7 +13,6 @@
 #' ggplot(data, aes(x=dose, y=len)) +
 #'  geom_boxplot()+
 #'  theme_bw_nogrid()
-
 theme_bw_nogrid <- function(){
   theme_bw() %+replace%    #replace elements we want to change
     theme(
