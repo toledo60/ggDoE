@@ -1,14 +1,22 @@
 
 # ggDoE
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/ggDoE)](https://cran.r-project.org/package=ggDoE)
 [![R-CMD-check](https://github.com/toledo60/ggDoE/workflows/R-CMD-check/badge.svg)](https://github.com/toledo60/ggDoE/actions)
 [![Documentation](https://img.shields.io/badge/Documentation-ggDoE-blue)](https://ggdoe.netlify.app/)
-[![Netlify
-Status](https://api.netlify.com/api/v1/badges/20d30180-f503-4b63-ba9c-c95bfca3826e/deploy-status)](https://app.netlify.com/sites/ggdoe/deploys)
 
 ## Installation
 
-You can get the development version from GitHub:
+You can install:
+
+-   the latest release from CRAN with
+
+``` r
+install.packages('ggDoE')
+```
+
+-   the development version from GitHub with
 
 ``` r
 if (!require("remotes")) install.packages("remotes")
@@ -242,30 +250,22 @@ context, run the following code in your `R` console
 citation('ggDoE')
 ```
 
-    Warning in citation("ggDoE"): no date field in DESCRIPTION file of package
-    'ggDoE'
-
-    Warning in citation("ggDoE"): could not determine year for 'ggDoE' from package
-    DESCRIPTION file
-
 
     To cite package 'ggDoE' in publications use:
 
-      Toledo Luna J (????). _ggDoE: Modern Graphs for Design of Experiments
+      Toledo Luna J (2022). _ggDoE: Modern Graphs for Design of Experiments
       with 'ggplot2'_. R package version 0.7.8,
-      <https://ggdoe.netlify.app>.
+      <https://CRAN.R-project.org/package=ggDoE>.
 
     A BibTeX entry for LaTeX users is
 
       @Manual{,
         title = {ggDoE: Modern Graphs for Design of Experiments with 'ggplot2'},
         author = {Jose {Toledo Luna}},
+        year = {2022},
         note = {R package version 0.7.8},
-        url = {https://ggdoe.netlify.app},
+        url = {https://CRAN.R-project.org/package=ggDoE},
       }
-
-*Note:* Once this package is submitted to CRAN the date warning will
-disappear. Simply change (????) to (2022)
 
 ## Contributing to the package
 

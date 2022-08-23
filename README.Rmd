@@ -3,15 +3,9 @@ output: github_document
 ---
 
 # ggDoE
-
+[![CRAN status](https://www.r-pkg.org/badges/version/ggDoE)](https://cran.r-project.org/package=ggDoE)
 [![R-CMD-check](https://github.com/toledo60/ggDoE/workflows/R-CMD-check/badge.svg)](https://github.com/toledo60/ggDoE/actions)
 [![Documentation](https://img.shields.io/badge/Documentation-ggDoE-blue)](https://ggdoe.netlify.app/)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/20d30180-f503-4b63-ba9c-c95bfca3826e/deploy-status)](https://app.netlify.com/sites/ggdoe/deploys)
-
-## Installation
-
-You can get the development version from GitHub:
-
 
 ```{r,echo=FALSE}
 knitr::opts_chunk$set(
@@ -19,6 +13,18 @@ knitr::opts_chunk$set(
 )
 ```
 
+
+## Installation
+
+You can install:
+
+* the latest release from CRAN with 
+
+```{r}
+install.packages('ggDoE')
+```
+
+* the development version from GitHub with
 
 ```{r,eval=FALSE}
 if (!require("remotes")) install.packages("remotes")
@@ -274,9 +280,6 @@ If you want to cite this package in a scientific journal or in any other context
 ```{r,eval=TRUE,comment=NA}
 citation('ggDoE')
 ```
-
-*Note:* Once this package is submitted to CRAN the date warning will disappear. Simply change (????) to (2022)
-
 
 ## Contributing to the package
 
