@@ -19,18 +19,18 @@ knitr::opts_chunk$set(
 
 The *ggDoE* package provides an easy approach to creating commonly used graphs in Design of Experiments with the R package *ggplot2*. The following plots are currently available in *ggDoE*:
 
-1. Alias Matrix 
-2. Box-Cox Transformation
-3. Lambda Plot
-4. Boxplots
-5. Regression Diagnostic Plots
-6. GLM Diagnostic Plots
-7. Half-Normal Plot
-8. Interaction Effects Plot for a Factorial Design
-9. Main Effects Plot for a Factorial Design
-10. Contour Plots for Response Surface Methodology
-11. Pareto Plot
-12. Two Dimensional Projections of a Latin Hypercube Design
+1. [Alias Matrix](#alias-matrix) 
+2. [Box-Cox Transformation](#box-cox-transformation)
+3. [Lambda Plot](#lambda-plot)
+4. [Boxplots](#boxplots)
+5. [Regression Diagnostic Plots](#regression-diagnostic-plots)
+6. [GLM Diagnostic Plots](#glm-diagnostic-plots)
+7. [Half-Normal Plot](#half-normal-plot)
+8. [Interaction Effects Plot for a Factorial Design](#interaction-effects-plot-for-a-factorial-design)
+9. [Main Effects Plot for a Factorial Design](#main-effects-plot-for-a-factorial-design)
+10. [Contour Plots for Response Surface Methodology](#contour-plots-for-response-surface-methodology)
+11. [Pareto Plot](#pareto-plot)
+12. [Two Dimensional Projections of a Latin Hypercube Design](#two-dimensional-projections)
 
 
 The following datasets/designs are included in *ggDoE* as tibbles:
@@ -266,7 +266,7 @@ There seems to be a non-linear trend in the 'Residuals vs Fitted' plot above. Th
 ```{r glm-model-3,fig.height=6,fig.width=8}
 glm_model_2 <- glm(Volume ~ log(Girth) + log(Height), family = Gamma(link = "log"), data = trees)
 
-glm_diagnostic_plots(glm_model_2, discrete_edm = FALSE, text_width = 50)
+glm_diagnostic_plots(glm_model_2, discrete_edm = FALSE, standard_errors = TRUE, text_width = 50)
 ```
 
 The new 'Residuals vs Fitted' graph above looks better (ie, no trends). There are 9 total plots in this function, and it is encouraged to go through them in the following sequence to avoid any graphing errors: "1:4", "5:6", "7:8", "9".
