@@ -10,7 +10,7 @@ interaction_effects(
   exclude_vars = c(),
   linetypes = c("solid", "dashed"),
   colors = c("#4260c9", "#d6443c"),
-  ncols = 2,
+  n_columns = 2,
   showplot = TRUE
 )
 }
@@ -25,7 +25,7 @@ interaction_effects(
 
 \item{colors}{Change color of lines/points. Default are ("#4260c9" ,"#d6443c")}
 
-\item{ncols}{number of columns for facet grid. Default is 2}
+\item{n_columns}{number of columns for facet grid. Default is 2}
 
 \item{showplot}{logical indicating to show the interaction effect plots. If false, a list of tibbles is returned used to obtain the interaction effects for each factor. Default is TRUE}
 }

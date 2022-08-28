@@ -3,15 +3,9 @@ output: github_document
 ---
 
 # ggDoE
-
+[![CRAN status](https://www.r-pkg.org/badges/version/ggDoE)](https://cran.r-project.org/package=ggDoE)
 [![R-CMD-check](https://github.com/toledo60/ggDoE/workflows/R-CMD-check/badge.svg)](https://github.com/toledo60/ggDoE/actions)
 [![Documentation](https://img.shields.io/badge/Documentation-ggDoE-blue)](https://ggdoe.netlify.app/)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/20d30180-f503-4b63-ba9c-c95bfca3826e/deploy-status)](https://app.netlify.com/sites/ggdoe/deploys)
-
-## Installation
-
-You can get the development version from GitHub:
-
 
 ```{r,echo=FALSE}
 knitr::opts_chunk$set(
@@ -20,6 +14,17 @@ knitr::opts_chunk$set(
 ```
 
 
+## Installation
+
+You can install:
+
+* the latest release from CRAN with 
+
+```{r}
+install.packages('ggDoE')
+```
+
+* the development version from GitHub with
 
 ```{r,eval=FALSE}
 if (!require("remotes")) install.packages("remotes")
@@ -35,9 +40,7 @@ With ggDoE you'll be able to generate common plots used in Design of Experiments
 library(ggDoE)
 ```
 
-
 The following plots are currently available:
-
 
 **Alias Matrix**
 
@@ -48,7 +51,6 @@ alias_matrix(design=aliased_design)
 ```
 
 ![](man/figures/alias_matrix.png)
-
 
 
 **Box-Cox Transformation**
@@ -73,7 +75,6 @@ lambda_plot(model)
 ![](man/figures/lambda_plot1.png)
 
 
-
 ```{r}
 lambda_plot(model, lambda = seq(0,2,by=0.1))
 ```
@@ -88,24 +89,23 @@ data <- ToothGrowth
 data$dose <- factor(data$dose,levels = c(0.5, 1, 2),
                     labels = c("D0.5", "D1", "D2"))
 
-gg_boxplots(data,response = len,
-            factor = dose)
+gg_boxplots(data,response = 'len',
+            factor = 'dose')
 ```
 
 ![](man/figures/boxplot1.png)
 
 
 ```{r}
-gg_boxplots(data,response = len,
-            factor = dose,
-            group_var = supp,
+gg_boxplots(data,response = 'len',
+            factor = 'dose',
+            group_var = 'supp',
             color_palette = 'viridis',
             jitter_points = TRUE)
 ```
 
 
 ![](man/figures/boxplot2.png)
-
 
 **Regression Diagnostic Plots**
 
@@ -125,13 +125,11 @@ diagnostic_plots(model,which_plots=1:6)
 
 ![](man/figures/diagnostic_plots.png)
 
-
 **Half-Normal Plot**
 
-
 ```{r}
-m1 <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
-half_normal(m1)
+model <- lm(ybar ~ (A+B+C+D)^4,data=adapted_epitaxial)
+half_normal(model)
 ```
 
 
@@ -140,7 +138,7 @@ half_normal(m1)
 
 
 ```{r}
-half_normal(m1,method='Zahn',alpha=0.1,
+half_normal(model,method='Zahn',alpha=0.1,
             ref_line=TRUE,label_active=TRUE,
             margin_errors=TRUE)
 ```
@@ -148,7 +146,6 @@ half_normal(m1,method='Zahn',alpha=0.1,
 
 
 ![](man/figures/half_normal2.png)
-
 
 
 **Interaction Effects Plot (Factorial Design)**
@@ -165,18 +162,15 @@ interaction_effects(adapted_epitaxial,response = 'ybar',
 ![](man/figures/interactions1.png)
 
 
-
-
 ```{r,fig.width=9,fig.height=4}
 interaction_effects(adapted_epitaxial,response = 'ybar',
                     exclude_vars = c('A','s2','lns2'),
-                    ncols=3)
+                    n_columns=3)
 ```
 
 
 
 ![](man/figures/interactions2.png)
-
 
 **Main Effects Plots (Factorial Design)**
 
@@ -192,13 +186,12 @@ main_effects(original_epitaxial,
 ![](man/figures/main_effects1.png)
 
 
-
 ```{r}
 main_effects(original_epitaxial,
              response='s2',
              exclude_vars = c('A','ybar','lns2'),
              color_palette = 'viridis',
-             ncols=3)
+             n_columns=3)
 ```
 
 
@@ -208,12 +201,12 @@ main_effects(original_epitaxial,
 
 **Contour Plots**
 
-contour plot(s) that display the fitted surface for an *lm* or *rsm* 
+contour plot(s) that display the fitted surface for an *rsm* 
 object involving two or more numerical predictors
 
 ```{r}
-heli = rsm::heli
-heli.rsm <- rsm::rsm(ave ~ SO(x1, x2, x3, x4), data = heli)
+heli.rsm <- rsm::rsm(ave ~ SO(x1, x2, x3, x4), 
+                     data = rsm::heli)
 ```
 
 
@@ -240,17 +233,16 @@ gg_rsm(heli.rsm,form = ~x1+x2+x3+x4,
 Pareto plot of effects with cutoff values for the margin of error (ME) and simultaneous margin of error (SME)
 
 ```{r}
-m1 <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
-pareto_plot(m1)
+model <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
+pareto_plot(model)
 ```
 
 
 ![](man/figures/pareto_plot1.png)
 
 
-
 ```{r}
-pareto_plot(m1,method='Zahn',alpha=0.1)
+pareto_plot(model,method='Zahn',alpha=0.1)
 ```
 
 
@@ -264,7 +256,7 @@ This function will output all two dimensional projections from a Latin hypercube
 ```{r}
 set.seed(10)
 X <- lhs::randomLHS(n=10, k=4)
-twoD_projections(X,ncols=3,grid = TRUE)
+twoD_projections(X,n_columns=3,grid = TRUE)
 ```
 
 ![](man/figures/twoD_projections.png)
@@ -272,13 +264,24 @@ twoD_projections(X,ncols=3,grid = TRUE)
 Lastly, the following datasets/designs are included in ggDoE as tibbles:
 
 - **adapted_epitaxial**: Adapted epitaxial layer experiment obtain from the book <br>
-*"Experiments: Planning, Analysis, and Optimization, 2nd Edition"* [source](https://www2.isye.gatech.edu/~jeffwu/wuhamadabook/data/originallayer.dat)
+*"Experiments: Planning, Analysis, and Optimization, 2nd Edition"*
+
 - **original_epitaxial**: Original epitaxial layer experiment obtain from the book <br>
-*"Experiments: Planning, Analysis, and Optimization, 2nd Edition"* [source](https://www2.isye.gatech.edu/~jeffwu/wuhamadabook/data/originallayer.dat)
+*"Experiments: Planning, Analysis, and Optimization, 2nd Edition"*
+
 - **aliased_design**: D-efficient minimal aliasing design obtained from the article  <br>
-*"Efficient Designs With Minimal Aliasing"* [source](https://www.tandfonline.com/doi/abs/10.1198/TECH.2010.09113)
+*"Efficient Designs With Minimal Aliasing by Bradley Jones and Christopher J. Nachtsheim"* <br>
+*Source:* <https://www.tandfonline.com/doi/abs/10.1198/TECH.2010.09113>
 
+## Citation
 
-### Contributing to the package
+If you want to cite this package in a scientific journal or in any other context, run the following code in your `R` console
+
+```{r,eval=TRUE,comment=NA}
+citation('ggDoE')
+```
+
+## Contributing to the package
+
 I welcome feedback, suggestions, issues, and contributions!
 Check out the [CONTRIBUTING](https://github.com/toledo60/ggDoE/blob/main/.github/CONTRIBUTING.md) file for more details.

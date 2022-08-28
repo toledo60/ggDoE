@@ -6,15 +6,21 @@
 \usage{
 diagnostic_plots(
   model,
+  which_plots = 1:4,
+  cooksD_type = 1,
   standard_errors = FALSE,
   point_size = 1.5,
   theme_color = "#21908CFF",
-  which_plots = 1:4,
-  ncols = 2
+  n_columns = 2
 )
 }
 \arguments{
 \item{model}{Model of class "lm" or "glm"}
+
+\item{which_plots}{Choose which diagnostic plots to choose from. \cr Options are 1 = 'residual vs fitted', 2 = 'Normal-QQ',
+3 = 'Scale-location', 4 = 'Residual vs Leverage', 5 = "Cook's Distance". 6 = "Collinearity". Default is 1:4}
+
+\item{cooksD_type}{An integer between 1 and 4 indicating the threshold to be computed for Cook's Distance plot. Default is 1. See details for threshold computation}
 
 \item{standard_errors}{Display confidence interval around geom_smooth, FALSE by default}
 
@@ -22,10 +28,7 @@ diagnostic_plots(
 
 \item{theme_color}{Change color of the geom_smooth line and text labels for the respective diagnostic plot}
 
-\item{which_plots}{Choose which diagnostic plots to choose from. \cr Options are 1 = 'residual vs fitted', 2 = 'Normal-QQ',
-3 = 'Scale-location', 4 = 'Residual vs Leverage', 5 = "Cook's Distance". 6 = "Collinearity". Default is 1:4}
-
-\item{ncols}{number of columns for grid layout. Default is 2}
+\item{n_columns}{number of columns for grid layout. Default is 2}
 }
 \value{
 Regression diagnostic plots
@@ -34,11 +37,18 @@ Regression diagnostic plots
 Regression Diagnostic Plots with ggplot2
 }
 \details{
-Plot 5: "Cook's Distance": A data point having a large Cook's distance indicates that the data point
-strongly influences the fitted values of the model. The threshold used for detecting or classifying observations as outers is \eqn{4/n}
-where \eqn{n} is the number of observations.
+\strong{Plot 5:} "Cook's Distance": A data point having a large Cook's distance indicates that the data point
+strongly influences the fitted values of the model. The default threshold used for detecting or classifying observations as outers is \eqn{4/n} (i.e cooksD_type=1)
+where \eqn{n} is the number of observations. The thresholds computed are as follows: \cr
+\itemize{
+\item{cooksD_type = 1: }{4/n}
+\item{cooksD_type = 2: }{4/(n-p-1)}
+\item{cooksD_type = 3: }{1/(n-p-1)}
+\item{cooksD_type = 4: }{3* mean(cook's distance values)}
+}
+where \eqn{n} is the number of observations and \eqn{p} is the number of predictors. \cr
 
-Plot 6: "Collinearity": Conisders the variance inflation factor (VIF) for multicollinearity: \cr
+\strong{Plot 6:} "Collinearity": Conisders the variance inflation factor (VIF) for multicollinearity: \cr
 Tolerance = \eqn{1 - R_j^2}, VIF = (1/Tolerance)
 where \eqn{R_j^2} is the coefficient of determination of a regression of predictor \eqn{j} on all the other predictors.
 A general rule of thumb is that VIFs exceeding 4 warrant further investigation, while VIFs exceeding 10 indicates a multicollinearity problem \cr \cr
@@ -46,4 +56,9 @@ A general rule of thumb is that VIFs exceeding 4 warrant further investigation, 
 \examples{
 model <- lm(mpg ~ wt + am + gear + vs * cyl, data = mtcars)
 diagnostic_plots(model,which_plots=1:6)
+}
+\references{
+Belsley, D. A., Kuh, E., and Welsch, R. E. (1980). Regression Diagnostics: Identifying Influential Data and Sources of Collinearity. New York: John Wiley & Sons.\cr
+
+Sheather, S. (2009). A modern approach to regression with R. Springer Science & Business Media.
 }

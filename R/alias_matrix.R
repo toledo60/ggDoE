@@ -23,16 +23,12 @@ alias_matrix <- function(design,midpoint=0.5,
                          showplot=TRUE){
 
   k <- ncol(design)   # k is number of input factors
-
-
   M <- as.matrix(model.matrix(~ (.)^2, data = design))
-
 
   bilinear_terms <- as.matrix(M[, (k+2):ncol(M)])
   linear_terms <- as.matrix(M[,!(colnames(M) %in% colnames(bilinear_terms))])
 
   A <- solve(t(linear_terms) %*% linear_terms) %*% t(linear_terms)%*%(bilinear_terms)
-
   Alias_mat <- round(A,digits = digits)[-1,]
 
   if(showplot){

@@ -8,7 +8,6 @@
 #' @return A bar plot with ordered effects, margin of error (ME) and simultaneous margin of error (SME) cutoffs.
 #' @importFrom stats reorder coef
 #' @importFrom ggplot2 geom_hline geom_bar annotate labs coord_flip theme_classic aes_string scale_fill_discrete
-#' @importFrom dplyr tibble
 #' @export
 #'
 #'
@@ -61,17 +60,17 @@ pareto_plot <- function(model,alpha=0.05,method='Lenth',
     i <- pmatch("(Intercept)", names(coef(model)))
     if (!is.na(i))
       effects <- coef(model)[-pmatch("(Intercept)", names(coef(model)))]
-    obj <- 2 * effects
+    estimates <- 2 * effects
   }
-  estimates <- obj
+  insight::check_if_installed('unrepx')
   PSE <- unrepx::PSE(estimates,method = method)
   ME <- unrepx::ME(estimates,method = method,alpha = alpha)[1]
   SME <- unrepx::ME(estimates,method = method,alpha = alpha)[2]
 
-  dat <- tibble("effect_names" = factor(names(estimates)),
-                "effects" = estimates,
-                'abs_effects' = abs(estimates),
-                "cols" = ifelse(effects >0,'#d9a698','#9ecede'))
+  dat <- tibble::tibble("effect_names" = factor(names(estimates)),
+                        "effects" = estimates,
+                        'abs_effects' = abs(estimates),
+                        "cols" = ifelse(effects >0,'#d9a698','#9ecede'))
 
   sorted_dat <- dat[order(dat$abs_effects),]
 
@@ -102,7 +101,7 @@ pareto_plot <- function(model,alpha=0.05,method='Lenth',
 
     return(plot)
   }else{
-    return(list(errors = tibble(alpha,PSE,ME,SME),
+    return(list(errors = tibble::tibble(alpha,PSE,ME,SME),
                 dat = sorted_dat[,c(1,2,3)]))
   }
 }

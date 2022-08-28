@@ -1,13 +1,16 @@
 Package: ggDoE
 Type: Package
-Title: Modern graphs for Design of Experiments with ggplot2
-Version: 0.7.5
+Title: Modern Graphs for Design of Experiments with 'ggplot2'
+Version: 0.7.8
 Authors@R: c(person(given = "Jose",family = "Toledo Luna",
              role = c("aut", "cre"),
              email = "toledo60@protonmail.com",
              comment = c(ORCID = "0000-0001-8559-0027")))
 Maintainer: Jose Toledo Luna <toledo60@protonmail.com>            
-Description: Common plots in Design of Experiments implemented with ggplot2.
+Description: Generate commonly used plots in the field of design of experiments using 'ggplot2'.
+  'ggDoE' currently supports the following plots: alias matrix, box cox transformation, boxplots, lambda plot,
+  regression diagnostic plots, half normal plots, main and interaction effect plots for factorial designs,
+  contour plots for response surface methodology, pareto plot, and two dimensional projections of a latin hypercube design.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -15,19 +18,22 @@ URL: https://ggdoe.netlify.app
 BugReports: https://github.com/toledo60/ggDoE/issues
 Imports: 
     ggplot2,
+    data.table,
+    insight
     dplyr,
     gridExtra,
     stringr,
     glue
 Suggests:
     knitr,
-    pkgdown,
     rmarkdown,
     roxygen2,
+    tibble,
     MASS,
     viridisLite,
-    unrepx,
     ggrepel,
+    gridExtra,
+    unrepx,
     metR,
     rsm,
     lhs
@@ -35,3 +41,4 @@ RoxygenNote: 7.2.1
 Depends: 
     R (>= 3.3.0)
 VignetteBuilder: knitr
+Language: en-US

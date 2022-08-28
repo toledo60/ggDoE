@@ -34,7 +34,7 @@ Lambda plot for tracing t-staitics across different values of lambda (in ggplot2
 Lambda Plot: Trace of t-statistics
 }
 \examples{
-mod = lm(s2 ~ (A+B+C)^2,data=original_epitaxial)
+mod <- lm(s2 ~ (A+B+C)^2,data=original_epitaxial)
 lambda_plot(mod)
 lambda_plot(mod,lambda = seq(0,2,0.1))
 lambda_plot(mod,lambda = seq(0,2,0.1),showplot = FALSE)

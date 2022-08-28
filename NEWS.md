@@ -1,3 +1,52 @@
+# ggDoE 0.7.8
+
+BREAKING
+
+* `gg_boxplots()` arguments `response`,`factor`,`group_var` are now string characters 
+
+NEW FUNCTIONS
+
+* added `theme_bw_nogrid()`, simple theme settings which were used throughout `ggDoE` plots
+
+CHANGES
+
+* removed `dplyr` dependency in favor of `data.table`. `data.table` has significantly less dependencies compared to `dplyr`.
+
+* added `insight`to Imports for checking if required packages are installed for each respective function. `insight` will later be used for cleaning up source code for extracting information from model objects such as variables, responses, etc...
+
+* switched `gridExtra` and `unrepx` from Imports to Suggests
+
+MINOR CHANGES
+
+* updated pkgdown website with new theme and reference structure
+
+---
+
+# ggDoE 0.7.7
+
+BREAKING
+
+* renamed argument `ncols` to `n_columns` in all functions which previously used this argument. These functions are: `diagnostic_plots()`,`gg_rsm()`, `interaction_effects()`,`main_effects()`,`twoD_projections()`
+
+NEW FEATURES
+
+* `half_normal()` has new argument `point_color` to change the color of the points
+* `diagnostic_plots()` has a new argument `cooksD_type` to change the threshold computed for Cook's distance plot (plot #6)
+
+CHANGES
+
+* `half_normal()` now uses `ggrepel::geom_text_repel` instead of hard-coded `geom_text` to try and avoid label overlap
+
+---
+
+# ggDoE 0.7.6
+
+* minor fixes to documentation/vignettes
+* moved `unrepex` from Suggests to Imports 
+* added cran-comments.md
+
+---
+
 # ggDoE 0.7.5
 
 NEW FEATURES
@@ -8,7 +57,6 @@ NEW FEATURES
 * Added initial vignette for a quick overview of `ggDoE`. Still needs further details for certain plots
 
 ---
-
 
 # ggDoE 0.7.4
 

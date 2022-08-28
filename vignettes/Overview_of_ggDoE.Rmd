@@ -2,7 +2,7 @@
 title: "Overview of ggDoE"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Overview_of_ggDoE}
+  %\VignetteIndexEntry{Overview of ggDoE}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -36,7 +36,7 @@ The *ggDoE* package provides an easy approach to creating commonly used graphs i
 The following datasets/designs are included in *ggDoE* as tibbles:
 
 - **adapted_epitaxial**: Adapted epitaxial layer experiment obtain from the book <br>
-*"Experiments: Planning, Analysis, and Optimization, 2nd Edition"* [source](https://www2.isye.gatech.edu/~jeffwu/wuhamadabook/data/originallayer.dat)
+*"Experiments: Planning, Analysis, and Optimization, 2nd Edition"* 
 
 ```{r}
 ggDoE::adapted_epitaxial
@@ -45,7 +45,7 @@ ggDoE::adapted_epitaxial
 
 
 - **original_epitaxial**: Original epitaxial layer experiment obtain from the book <br>
-*"Experiments: Planning, Analysis, and Optimization, 2nd Edition"* [source](https://www2.isye.gatech.edu/~jeffwu/wuhamadabook/data/originallayer.dat)
+*"Experiments: Planning, Analysis, and Optimization, 2nd Edition"* 
 
 
 ```{r}
@@ -55,7 +55,7 @@ ggDoE::original_epitaxial
 
 
 - **aliased_design**: D-efficient minimal aliasing design obtained from the article  <br>
-*"Efficient Designs With Minimal Aliasing"* [source](https://www.tandfonline.com/doi/abs/10.1198/TECH.2010.09113)
+*"Efficient Designs With Minimal Aliasing"*
 
 ```{r}
 ggDoE::aliased_design
@@ -194,17 +194,17 @@ head(data)
 
 
 ```{r}
-gg_boxplots(data,response = len,
-            factor = dose)
+gg_boxplots(data,response = 'len',
+            factor = 'dose')
 ```
 
 We can group each sample using the `group_var` argument, again this argument must be unquoted. With `color_palette` we can change the color palette for each of the boxplots.  With `color_palette` eight options are available: *"viridis","cividis","magma","inferno","plasma","rocket","mako","turbo"*. Lastly,
 one can overlay jittered points to each boxplot using `jitter_points=TRUE`.
 
 ```{r,fig.height=5,fig.width=7}
-gg_boxplots(data,response = len,
-            factor = dose,
-            group_var = supp,
+gg_boxplots(data,response = 'len',
+            factor = 'dose',
+            group_var = 'supp',
             color_palette = 'viridis',
             jitter_points = TRUE)
 ```
@@ -224,7 +224,7 @@ gg_boxplots(data,response = len,
 model <- lm(mpg ~ wt + am + gear + vs * cyl, data = mtcars)
 ```
 
-The default plots in `diagnostic_plots()` is the first four in the list mentioned above. However, one can choose any of the six plots they need. For example if one needs all six plots use `which_plots=1:6`. 
+The default plots in `diagnostic_plots()` are the first four in the list mentioned above. However, one can choose any of the six plots they need. For example if one needs all six plots use `which_plots=1:6`. 
 
 ```{r,fig.height=8,fig.width=9}
 diagnostic_plots(model, which_plots=1:6)
@@ -308,6 +308,8 @@ half_normal(m1,method='Daniel',alpha=0.1,
 
 ## Interaction Effects Plot for a Factorial Design
 
+Interaction effects plot between two factors in a factorial design
+
 
 ```{r,fig.width=8,fig.height=6}
 interaction_effects(adapted_epitaxial,response = 'ybar',
@@ -319,11 +321,13 @@ interaction_effects(adapted_epitaxial,response = 'ybar',
 ```{r,fig.width=9,fig.height=4}
 interaction_effects(adapted_epitaxial,response = 'ybar',
                     exclude_vars = c('A','s2','lns2'),
-                    ncols=3)
+                    n_columns=3)
 ```
 
 
 ## Main Effects Plot for a Factorial Design
+
+Main effect plots for each factor in a factorial design
 
 
 ```{r}
@@ -339,7 +343,7 @@ main_effects(original_epitaxial,
              response='s2',
              exclude_vars = c('A','ybar','lns2'),
              color_palette = 'viridis',
-             ncols=3)
+             n_columns=3)
 ```
 
 
@@ -349,8 +353,8 @@ main_effects(original_epitaxial,
 
 
 ```{r}
-heli <- rsm::heli
-heli.rsm <- rsm::rsm(ave ~ SO(x1, x2, x3, x4), data = heli)
+heli.rsm <- rsm::rsm(ave ~ SO(x1, x2, x3, x4), 
+                     data = rsm::heli)
 ```
 
 Using `gg_rsm` we can obtain contour plots that display the fitted surface for an `rsm` object. It is best to use `rsm` object such as the one defined above, as the plots below are produced using information from an `rsm` object. `gg_rsm` includes an `...` argument for additional arguments from  `rsm::contour.lm`, see `rsm::contour.lm` for more details on its arguments.
@@ -360,7 +364,7 @@ By default the contour plots produce will be in black and white color
 ```{r,fig.height=8,fig.width=10}
 gg_rsm(heli.rsm,form = ~x1+x2+x3,
        at = rsm::xs(heli.rsm),
-       ncols=2)
+       n_columns=2)
 ```
 
 with `filled=TRUE`, a viridis color scheme is applied.
@@ -370,7 +374,7 @@ with `filled=TRUE`, a viridis color scheme is applied.
 gg_rsm(heli.rsm,form = ~x1+x2+x3,
        at = rsm::xs(heli.rsm),
        filled = TRUE,
-       ncols=2)
+       n_columns=2)
 ```
 
 
@@ -410,8 +414,15 @@ Below is an example from generating a random Latin hypercube design using the R 
 
 ```{r,fig.height=6,fig.width=8}
 set.seed(10)
-X_LHS <- lhs::randomLHS(n=20, k=4)
-twoD_projections(X_LHS,ncols=3,grid = TRUE)
+random_LHS <- lhs::randomLHS(n=15, k=4)
+twoD_projections(random_LHS,n_columns=3,grid = TRUE)
+```
+
+Below is an example of a maximin Latin hypercube design with red color points and no grid (default setting)
+
+```{r,fig.height=6,fig.width=8}
+maximin_LHS <- lhs::maximinLHS(n=15, k=4)
+twoD_projections(maximin_LHS,n_columns=3,point_color = 'red')
 ```
 
 

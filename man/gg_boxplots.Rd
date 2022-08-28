@@ -21,11 +21,11 @@ gg_boxplots(
 \arguments{
 \item{data}{provided dataset}
 
-\item{response}{Unquoted variable indicating the response of the data}
+\item{response}{A character string indicating the response of the data}
 
-\item{factor}{Unquoted variable indicating the factor of the data}
+\item{factor}{A character string indicating the factor of the data}
 
-\item{group_var}{Unquoted variable indicating the groups for facet_wrap}
+\item{group_var}{A character string indicating the groups for facet_wrap}
 
 \item{jitter_points}{Overlay jittered points to boxplots. Default is FALSE.}
 
@@ -39,7 +39,7 @@ gg_boxplots(
 
 \item{direction}{Sets the order of colors in the scale. If 1, the default, colors are ordered from darkest to lightest. If -1, the order of colors is reversed}
 
-\item{show_mean}{Dispaly the mean for each boxplot. Default is FALSE}
+\item{show_mean}{Display the mean for each boxplot. Default is FALSE}
 }
 \value{
 Boxplots created with ggplot2
@@ -50,7 +50,7 @@ Boxplots using ggplot2
 \examples{
 data <- ToothGrowth
 data$dose <- factor(data$dose,levels = c(0.5, 1, 2),labels = c("D0.5", "D1", "D2"))
-gg_boxplots(data,response = len,factor = dose,alpha=0.6)
-gg_boxplots(data,response = len,factor = dose,group_var = supp,
+gg_boxplots(data,response = "len",factor = "dose",alpha=0.6)
+gg_boxplots(data,response = "len",factor = "dose",group_var = "supp",
 alpha=0.6,color_palette = 'viridis',jitter_points=TRUE)
 }

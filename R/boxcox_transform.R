@@ -6,9 +6,8 @@
 #' @param lambdaSF Digits to round lambda values shown in plot
 #' @param showplot Default is TRUE, if false plot will not be shown and a tibble is returned with a 95\% confidence interval for lambda and lambda value which maximizes log-likelihood
 #'
-#' @importFrom ggplot2 geom_segment geom_vline geom_hline element_blank geom_text
+#' @importFrom ggplot2 geom_segment geom_vline geom_hline geom_text
 #' @importFrom stats qchisq
-#' @importFrom dplyr tibble
 #' @return Box-Cox transformation plot with 95\% confidence interval of lambda values to consider
 #' @export
 #'
@@ -57,25 +56,26 @@ boxcox_transform <- function(model,lambda= seq(-2,2,1/10),
                  color = "indianred3",size=1.1) +
       geom_hline(yintercept = y[min(accept_inds)],
                  linetype = "dashed")+
-      theme_bw()+
-      theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
-
+      theme_bw_nogrid()
 
     # add label if show lambda range
     if (showlambda) {
       return(plot +
                geom_text(aes(x = best_lambda-0.1,
-                             label = as.character(rounded_lambda), y = min_y),color='#2dab03') +
+                             label = as.character(rounded_lambda), y = min_y),
+                         color='#2dab03') +
                geom_text(aes(x = conf_lo-0.1,
-                             label = as.character(conf_lo), y = min_y), color = "indianred3") +
+                             label = as.character(conf_lo), y = min_y),
+                         color = "indianred3") +
                geom_text(aes(x = conf_hi-0.1,
-                             label = as.character(conf_hi), y = min_y), color = "indianred3"))
+                             label = as.character(conf_hi), y = min_y),
+                         color = "indianred3"))
     }else {
       return (plot)
     }
   }else{
-    return(tibble("best_lambda" = best_lambda,
-                  "lambda_low"=conf_lo,
-                  "lambda_high"=conf_hi))
+    return(tibble::tibble("best_lambda" = best_lambda,
+                          "lambda_low"=conf_lo,
+                          "lambda_high"=conf_hi))
   }
 }

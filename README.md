@@ -1,14 +1,22 @@
 
 # ggDoE <img src="ggdoe-hexsticker.png" align="right" height="250px" />
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/ggDoE)](https://cran.r-project.org/package=ggDoE)
 [![R-CMD-check](https://github.com/toledo60/ggDoE/workflows/R-CMD-check/badge.svg)](https://github.com/toledo60/ggDoE/actions)
 [![Documentation](https://img.shields.io/badge/Documentation-ggDoE-blue)](https://ggdoe.netlify.app/)
-[![Netlify
-Status](https://api.netlify.com/api/v1/badges/20d30180-f503-4b63-ba9c-c95bfca3826e/deploy-status)](https://app.netlify.com/sites/ggdoe/deploys)
 
 ## Installation
 
-You can get the development version from GitHub:
+You can install:
+
+-   the latest release from CRAN with
+
+``` r
+install.packages('ggDoE')
+```
+
+-   the development version from GitHub with
 
 ``` r
 if (!require("remotes")) install.packages("remotes")
@@ -70,16 +78,16 @@ data <- ToothGrowth
 data$dose <- factor(data$dose,levels = c(0.5, 1, 2),
                     labels = c("D0.5", "D1", "D2"))
 
-gg_boxplots(data,response = len,
-            factor = dose)
+gg_boxplots(data,response = 'len',
+            factor = 'dose')
 ```
 
 ![](man/figures/boxplot1.png)
 
 ``` r
-gg_boxplots(data,response = len,
-            factor = dose,
-            group_var = supp,
+gg_boxplots(data,response = 'len',
+            factor = 'dose',
+            group_var = 'supp',
             color_palette = 'viridis',
             jitter_points = TRUE)
 ```
@@ -107,14 +115,14 @@ diagnostic_plots(model,which_plots=1:6)
 **Half-Normal Plot**
 
 ``` r
-m1 <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
-half_normal(m1)
+model <- lm(ybar ~ (A+B+C+D)^4,data=adapted_epitaxial)
+half_normal(model)
 ```
 
 ![](man/figures/half_normal1.png)
 
 ``` r
-half_normal(m1,method='Zahn',alpha=0.1,
+half_normal(model,method='Zahn',alpha=0.1,
             ref_line=TRUE,label_active=TRUE,
             margin_errors=TRUE)
 ```
@@ -135,7 +143,7 @@ interaction_effects(adapted_epitaxial,response = 'ybar',
 ``` r
 interaction_effects(adapted_epitaxial,response = 'ybar',
                     exclude_vars = c('A','s2','lns2'),
-                    ncols=3)
+                    n_columns=3)
 ```
 
 ![](man/figures/interactions2.png)
@@ -157,19 +165,19 @@ main_effects(original_epitaxial,
              response='s2',
              exclude_vars = c('A','ybar','lns2'),
              color_palette = 'viridis',
-             ncols=3)
+             n_columns=3)
 ```
 
 ![](man/figures/main_effects2.png)
 
 **Contour Plots**
 
-contour plot(s) that display the fitted surface for an *lm* or *rsm*
-object involving two or more numerical predictors
+contour plot(s) that display the fitted surface for an *rsm* object
+involving two or more numerical predictors
 
 ``` r
-heli = rsm::heli
-heli.rsm <- rsm::rsm(ave ~ SO(x1, x2, x3, x4), data = heli)
+heli.rsm <- rsm::rsm(ave ~ SO(x1, x2, x3, x4), 
+                     data = rsm::heli)
 ```
 
 ``` r
@@ -193,14 +201,14 @@ Pareto plot of effects with cutoff values for the margin of error (ME)
 and simultaneous margin of error (SME)
 
 ``` r
-m1 <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
-pareto_plot(m1)
+model <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
+pareto_plot(model)
 ```
 
 ![](man/figures/pareto_plot1.png)
 
 ``` r
-pareto_plot(m1,method='Zahn',alpha=0.1)
+pareto_plot(model,method='Zahn',alpha=0.1)
 ```
 
 ![](man/figures/pareto_plot2.png)
@@ -213,7 +221,7 @@ hypercube design
 ``` r
 set.seed(10)
 X <- lhs::randomLHS(n=10, k=4)
-twoD_projections(X,ncols=3,grid = TRUE)
+twoD_projections(X,n_columns=3,grid = TRUE)
 ```
 
 ![](man/figures/twoD_projections.png)
@@ -223,16 +231,43 @@ Lastly, the following datasets/designs are included in ggDoE as tibbles:
 -   **adapted_epitaxial**: Adapted epitaxial layer experiment obtain
     from the book <br> *“Experiments: Planning, Analysis, and
     Optimization, 2nd Edition”*
-    [source](https://www2.isye.gatech.edu/~jeffwu/wuhamadabook/data/originallayer.dat)
+
 -   **original_epitaxial**: Original epitaxial layer experiment obtain
     from the book <br> *“Experiments: Planning, Analysis, and
     Optimization, 2nd Edition”*
-    [source](https://www2.isye.gatech.edu/~jeffwu/wuhamadabook/data/originallayer.dat)
--   **aliased_design**: D-efficient minimal aliasing design obtained
-    from the article <br> *“Efficient Designs With Minimal Aliasing”*
-    [source](https://www.tandfonline.com/doi/abs/10.1198/TECH.2010.09113)
 
-### Contributing to the package
+-   **aliased_design**: D-efficient minimal aliasing design obtained
+    from the article <br> *“Efficient Designs With Minimal Aliasing by
+    Bradley Jones and Christopher J. Nachtsheim”* <br> *Source:*
+    <https://www.tandfonline.com/doi/abs/10.1198/TECH.2010.09113>
+
+## Citation
+
+If you want to cite this package in a scientific journal or in any other
+context, run the following code in your `R` console
+
+``` r
+citation('ggDoE')
+```
+
+
+    To cite package 'ggDoE' in publications use:
+
+      Toledo Luna J (2022). _ggDoE: Modern Graphs for Design of Experiments
+      with 'ggplot2'_. R package version 0.7.8,
+      <https://CRAN.R-project.org/package=ggDoE>.
+
+    A BibTeX entry for LaTeX users is
+
+      @Manual{,
+        title = {ggDoE: Modern Graphs for Design of Experiments with 'ggplot2'},
+        author = {Jose {Toledo Luna}},
+        year = {2022},
+        note = {R package version 0.7.8},
+        url = {https://CRAN.R-project.org/package=ggDoE},
+      }
+
+## Contributing to the package
 
 I welcome feedback, suggestions, issues, and contributions! Check out
 the
