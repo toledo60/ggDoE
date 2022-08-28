@@ -20,6 +20,10 @@ Imports:
     ggplot2,
     data.table,
     insight
+    dplyr,
+    gridExtra,
+    stringr,
+    glue
 Suggests:
     knitr,
     rmarkdown,

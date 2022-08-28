@@ -1,5 +1,5 @@
 
-# ggDoE
+# ggDoE <img src="ggdoe-hexsticker.png" align="right" height="250px" />
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ggDoE)](https://cran.r-project.org/package=ggDoE)
