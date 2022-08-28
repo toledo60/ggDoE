@@ -1,5 +1,5 @@
 
-# ggDoE
+# ggDoE <img src="ggdoe-hexsticker.png" align="right" height="250px" />
 
 [![R-CMD-check](https://github.com/toledo60/ggDoE/workflows/R-CMD-check/badge.svg)](https://github.com/toledo60/ggDoE/actions)
 [![Documentation](https://img.shields.io/badge/Documentation-ggDoE-blue)](https://ggdoe.netlify.app/)
