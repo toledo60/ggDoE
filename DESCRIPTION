@@ -16,7 +16,9 @@ BugReports: https://github.com/toledo60/ggDoE/issues
 Imports: 
     ggplot2,
     dplyr,
-    gridExtra
+    gridExtra,
+    stringr,
+    glue
 Suggests:
     knitr,
     pkgdown,
@@ -29,7 +31,7 @@ Suggests:
     metR,
     rsm,
     lhs
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1
 Depends: 
     R (>= 3.3.0)
 VignetteBuilder: knitr
