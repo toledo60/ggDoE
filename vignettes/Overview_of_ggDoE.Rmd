@@ -24,12 +24,13 @@ The *ggDoE* package provides an easy approach to creating commonly used graphs i
 3. Lambda Plot
 4. Boxplots
 5. Regression Diagnostic Plots
-6. Half-Normal Plot
-7. Interaction Effects Plot for a Factorial Design
-8. Main Effects Plot for a Factorial Design
-9. Contour Plots for Response Surface Methodology
-10. Pareto Plot
-11. Two Dimensional Projections of a Latin Hypercube Design
+6. GLM Diagnostic Plots
+7. Half-Normal Plot
+8. Interaction Effects Plot for a Factorial Design
+9. Main Effects Plot for a Factorial Design
+10. Contour Plots for Response Surface Methodology
+11. Pareto Plot
+12. Two Dimensional Projections of a Latin Hypercube Design
 
 
 The following datasets/designs are included in *ggDoE* as tibbles:
@@ -229,7 +230,6 @@ The default plots in `diagnostic_plots()` is the first four in the list mentione
 diagnostic_plots(model, which_plots=1:6)
 ```
 
-
 Another example, if one simply requires the  Residual vs. Fitted Values and Cook's Distance plots, use `which_plots = c(1,5)`. If one wants to display confidence intervals, use `standard_error=TRUE` 
 
 ```{r,fig.height=6,fig.width=9}
@@ -237,6 +237,43 @@ diagnostic_plots(model, which_plots=c(1,5),
                  standard_errors = TRUE)
 ```
 
+## GLM Diagnostic Plots
+
+1. Residual vs. Fitted Values  
+2. Working Responses vs Linear Predictors  
+3. Normal Q-Q plot  
+4. Outlier Detection  
+5. Half norm plot using leverages  
+6. Half norm plot using Cook's Distance  
+7. Cook's Distance  
+8. DFFITS  
+9. Collinearity  
+
+```{r glm-model-1,fig.height=6,fig.width=8}
+glm_model <- glm(Volume ~ Girth + Height, family = Gamma(link = "log"), data = trees)
+```
+
+The default plots in `glm_diagnostic_plots()` is the first four in the list mentioned above. Besides specifying the model, one needs to also exclusively mention whether the EDM family used in the model is discrete or not (ie, continuous). The reason is that quantile residuals will be used when `discrete_edm = TRUE` as they are prefered over Pearson or Deviance (default in R) residuals for plotting purposes for discrete EDMs (ie, it is easier to detect patterns).
+
+One can display confidence intervals using `standard_error = TRUE`. Also, it is possible to specify the line width in characters for the title and subtitle of the plots using `text_width = 25`.
+
+```{r glm-model-2,fig.height=8,fig.width=9}
+glm_diagnostic_plots(glm_model, discrete_edm = FALSE, text_width = 50)
+```
+
+There seems to be a non-linear trend in the 'Residuals vs Fitted' plot above. This means that the systematic component of the GLM can be improved. This would usually involve changing the link function, adding new predictor variables, or trasnforming the current predictors. The 'Working Responses vs Link Predictors' looks linear, so the chosen link function seems to be appropriate. One can log transform the predictor variables and recheck the graphs.
+
+```{r glm-model-3,fig.height=6,fig.width=8}
+glm_model_2 <- glm(Volume ~ log(Girth) + log(Height), family = Gamma(link = "log"), data = trees)
+
+glm_diagnostic_plots(glm_model_2, discrete_edm = FALSE, text_width = 50)
+```
+
+The new 'Residuals vs Fitted' graph above looks better (ie, no trends). There are 9 total plots in this function, and it is encouraged to go through them in the following sequence to avoid any graphing errors: "1:4", "5:6", "7:8", "9".
+
+```{r glm-model-4,fig.height=8,fig.width=9}
+glm_diagnostic_plots(glm_model_2, discrete_edm = FALSE, which_plots = 7:8, text_width = 50)
+```
 
 ## Half-Normal Plot
 
