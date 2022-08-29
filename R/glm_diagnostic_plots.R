@@ -85,6 +85,8 @@ glm_diagnostic_plots <- function(model,
     stop("Model should be of class glm")
 
   } else {
+    # Avoid adding these packages under Imports in Description file
+    insight::check_if_installed(c("gridExtra","ggrepel"))
 
     # Calculate the residuals
     df <- model$model
@@ -328,6 +330,6 @@ glm_diagnostic_plots <- function(model,
 
     names(plot_list) <- c("rf", "wp", "qq", "od_s", "od_h", "od_c", "cd", "df", "vi")
 
-    return(suppressMessages(grid.arrange(grobs = plot_list[which_plots], ncol = n_columns)))
+    return(suppressMessages(gridExtra::grid.arrange(grobs = plot_list[which_plots], ncol = n_columns)))
   }
 }
