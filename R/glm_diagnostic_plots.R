@@ -85,6 +85,11 @@ glm_diagnostic_plots <- function(model,
     stop("Model should be of class glm")
 
   } else {
+
+    if (!is.logical(discrete_edm)) {
+      stop("Input for discrete_edm argument must be logical: TRUE or FALSE")
+    }
+
     # Avoid adding these packages under Imports in Description file
     insight::check_if_installed(c("gridExtra","ggrepel"))
 
