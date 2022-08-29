@@ -2,7 +2,7 @@
 output: github_document
 ---
 
-# ggDoE
+# ggDoE <img src="ggdoe-hexsticker.png" align="right" height="250px" />
 [![CRAN status](https://www.r-pkg.org/badges/version/ggDoE)](https://cran.r-project.org/package=ggDoE)
 [![R-CMD-check](https://github.com/toledo60/ggDoE/workflows/R-CMD-check/badge.svg)](https://github.com/toledo60/ggDoE/actions)
 [![Documentation](https://img.shields.io/badge/Documentation-ggDoE-blue)](https://ggdoe.netlify.app/)
