@@ -3,10 +3,11 @@
 #' @param model Model of class "glm"
 #' @param discrete_edm Logical value to exclusively specify if a discrete EDM is chosen to build model. Quantile residuals are used instead of Deviance/Pearson residuals for the plots for Discrete EDMs
 #' @param which_plots Choose which diagnostic plots to choose from. \cr Options are 1 = "Residuals vs Fitted"; 2 = "Working Responses vs Linear Predictors"; 3 = "Normal Q-Q"; 4 = "Outlier Detection"; 5 = "Half norm plot using leverages"; 6 = "Half norm plot using Cook's Distance"; 7 = "Cook's Distance"; 8 = "DFFITS"; 9 = "VIF"
-#' @param n_columns number of columns for grid layout. Default is 2
+#' @param cooksD_type An integer between 1 and 4 indicating the threshold to be computed for Cook's Distance plot. Default is 1. See details for threshold computation
 #' @param standard_errors Display confidence interval around geom_smooth, FALSE by default
-#' @param theme_color Change color of the geom_smooth line and text labels for the respective diagnostic plot
 #' @param point_size Change size of points in plots
+#' @param theme_color Change color of the geom_smooth line and text labels for the respective diagnostic plot
+#' @param n_columns number of columns for grid layout. Default is 2
 #'
 #' @return GLM diagnostic plots
 #' @importFrom ggplot2 geom_smooth stat_qq geom_abline ylim aes_string theme_bw geom_linerange element_blank geom_hline
@@ -30,9 +31,18 @@
 #'
 #' \emph{Plot 4}: If |residual| > 3, then the observation is flagged as an outlier.
 #'
-#' \emph{Plot 5 & 6}: Observations that deviate too much from red line are potential outliers.
+#' \emph{Plot 5 & 6}: Observations that deviate greatly from the rest of the data are potential outliers. It is not necessary that all points fall on the red line since the leverages and cook's distance values are not strictly expected to have a postive normal distribution. The 5 observations with the largest values are labelled on each plot.
 #'
-#' \emph{Plot 7}: Check for outliers with Cook's Distance. A data point having a large Cook's distance indicates that the data point strongly influences the fitted values of the model. If Cook's Distance > \eqn{4 / observations}, then the observation is flagged as influential.
+#' \emph{Plot 7}: Check for outliers with Cook's Distance. A data point having a large Cook's distance indicates that the data point strongly influences the fitted values of the model. The default threshold used for detecting or classifying observations as outliers is \eqn{4/n} (i.e cooksD_type = 1)
+#' where \eqn{n} is the number of observations. The thresholds computed are as follows:
+#' \itemize{
+#'    \item{cooksD_type = 1: }{4/n}
+#'    \item{cooksD_type = 2: }{4/(n-p-1)}
+#'    \item{cooksD_type = 3: }{1/(n-p-1)}
+#'    \item{cooksD_type = 4: }{3 * mean(cook's distance values)}
+#' }
+#' where \eqn{n} is the number of observations and \eqn{p} is the number of predictors.
+#'
 #'
 #' \emph{Plot 8}: Check for outliers with DFFITS, which considers how much the fitted value of observation i changes between the model fitted with all the data and the model fitted with obervation i omitted. If |DFFITS| > \eqn{2 * sqrt((parameters + 1) / (observations - parameters - 1))}, then the observation is flagged as influential.
 #'
@@ -75,10 +85,11 @@
 glm_diagnostic_plots <- function(model,
                                  discrete_edm,
                                  which_plots = 1:4,
-                                 n_columns = 2,
+                                 cooksD_type = 1,
                                  standard_errors = FALSE,
+                                 point_size = 1.1,
                                  theme_color = "#008EA0FF",
-                                 point_size = 1.1) {
+                                 n_columns = 2) {
 
   if (!inherits(model, "glm")) {
 
@@ -117,7 +128,13 @@ glm_diagnostic_plots <- function(model,
 
     nr <- nrow(df)
     npara <- length(model$terms)
-    h <- 4 / nr # cooks distance threshold
+
+    # cooks distance threshold
+    h <- switch(cooksD_type,
+                "1" = 4 / nr,
+                "2" = 4 / (nr - npara - 1),
+                "3" = 1 / (nr - npara - 1),
+                "4" = 3 * mean(cooks_distance))
     df$cooksD <- ifelse(cooks_distance > h, rownames(df), NA)
 
     y_value_std <- ifelse(isTRUE(discrete_edm), ".resid.quantile.std", ".resid.deviance.std")
@@ -229,7 +246,7 @@ glm_diagnostic_plots <- function(model,
 
     halfnorm_cooks <-
       gghalfnorm::gghalfnorm(cooks_distance, nlab = 5, repel = TRUE, color = "#008EA0FF",
-                             box.padding = ggplot2::unit(.5, "lines"), max.overlaps = 20) +
+                             box.padding = ggplot2::unit(1, "lines"), max.overlaps = 20) +
       labs(title = "Half Norm Plot using Cook's Distance") +
       theme_bw_nogrid()
 
