@@ -3,7 +3,7 @@
 #' @param model Model of class "glm"
 #' @param discrete_edm Logical value to exclusively specify if a discrete EDM is chosen to build model. Quantile residuals are used instead of Deviance/Pearson residuals for the plots for Discrete EDMs
 #' @param which_plots Choose which diagnostic plots to choose from. \cr Options are 1 = "Residuals vs Fitted"; 2 = "Working Responses vs Linear Predictors"; 3 = "Normal Q-Q"; 4 = "Outlier Detection"; 5 = "Half norm plot using leverages"; 6 = "Half norm plot using Cook's Distance"; 7 = "Cook's Distance"; 8 = "DFFITS"; 9 = "VIF"
-#' @param ncols number of columns for grid layout. Default is 2
+#' @param n_columns number of columns for grid layout. Default is 2
 #' @param standard_errors Display confidence interval around geom_smooth, FALSE by default
 #' @param theme_color Change color of the geom_smooth line and text labels for the respective diagnostic plot
 #' @param point_size Change size of points in plots
@@ -44,11 +44,11 @@
 #' glm_diagnostic_plots(model, discrete_edm = FALSE, which_plots = 7:8)
 #'
 #' # Collinearity
-#' glm_diagnostic_plots(model, discrete_edm = FALSE, which_plots = 9, ncols = 1)
+#' glm_diagnostic_plots(model, discrete_edm = FALSE, which_plots = 9, n_columns = 1)
 glm_diagnostic_plots <- function(model,
                                  discrete_edm,
                                  which_plots = 1:4,
-                                 ncols = 2,
+                                 n_columns = 2,
                                  standard_errors = FALSE,
                                  theme_color = "#008EA0FF",
                                  point_size = 1.1,
@@ -331,6 +331,6 @@ glm_diagnostic_plots <- function(model,
 
     names(plot_list) <- c("rf", "wp", "qq", "od_s", "od_h", "od_c", "cd", "df", "vi")
 
-    return(suppressMessages(grid.arrange(grobs = plot_list[which_plots], ncol = ncols)))
+    return(suppressMessages(grid.arrange(grobs = plot_list[which_plots], ncol = n_columns)))
   }
 }
