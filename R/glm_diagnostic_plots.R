@@ -3,11 +3,11 @@
 #' @param model Model of class "glm"
 #' @param discrete_edm Logical value to exclusively specify if a discrete EDM is chosen to build model. Quantile residuals are used instead of Deviance/Pearson residuals for the plots for Discrete EDMs
 #' @param which_plots Choose which diagnostic plots to choose from. \cr Options are 1 = "Residuals vs Fitted"; 2 = "Working Responses vs Linear Predictors"; 3 = "Normal Q-Q"; 4 = "Outlier Detection"; 5 = "Half norm plot using leverages"; 6 = "Half norm plot using Cook's Distance"; 7 = "Cook's Distance"; 8 = "DFFITS"; 9 = "VIF"
-#' @param ncols number of columns for grid layout. Default is 2
+#' @param cooksD_type An integer between 1 and 4 indicating the threshold to be computed for Cook's Distance plot. Default is 1. See details for threshold computation
 #' @param standard_errors Display confidence interval around geom_smooth, FALSE by default
-#' @param theme_color Change color of the geom_smooth line and text labels for the respective diagnostic plot
 #' @param point_size Change size of points in plots
-#' @param text_width Passed onto `stringr::str_wrap`. Positive integer giving target line width in characters. A width less than or equal to 1 will put each word on its own line.
+#' @param theme_color Change color of the geom_smooth line and text labels for the respective diagnostic plot
+#' @param n_columns number of columns for grid layout. Default is 2
 #'
 #' @return GLM diagnostic plots
 #' @importFrom ggplot2 geom_smooth stat_qq geom_abline ylim aes_string theme_bw geom_linerange element_blank geom_hline
@@ -17,19 +17,56 @@
 #'
 #' @details
 #'
-#' Plots 1 & 2: Check the assumptions for the *systematic component of the GLM*.
+#' \bold{Check the assumptions for the systematic component of the GLM}:
 #'
-#' Plot 3: Check the for the *random component (ie, EDM distribution) of the GLM*.
+#' \emph{Plot 1}: If any trends appear, then the systematic component can be improved. This usually involves doing 1 or a combination of the following: (1) changing the link fucntion, (2) adding new predictor variables, and/or (3) transforming the current predictor variables in the model.
 #'
-#' Plot 4: Check for *outliers* with |residuals| > 3.
+#' \emph{Plot 2}: If plot is not roughly linear, then another link function might be more appropriate.
 #'
-#' Plots 5 & 6: Check for outliers with *half norm plots*.
+#' \bold{Check the assumptions for the random component - EDM distribution - of the GLM}:
 #'
-#' Plot 7: Check for outliers with *Cook's Distance*. A data point having a large Cook's distance indicates that the data point strongly influences the fitted values of the model. The threshold used for detecting or classifying observations as outers is 4/n4/n where nn is the number of observations.
+#' \emph{Plot 3}: If most points are NOT close to the line, then the EDM distribution may not be appropriate. The quantile residuals are used since they have an exact normal distribution if the appropriate EDM has been chosen.
 #'
-#' Plot 8: Check for outliers with *DFFITS*, which considers how much the fitted value of observation i changes between the model fitted with all the data and the model fitted with obervation i omitted. The threshold used for detecting or classifying observations as outers is \eqn{2 * sqrt((parameters + 1) / (observations - parameters - 1))}
+#' \bold{Check for outliers and influential points}:
 #'
-#' Plot 9: Check for collinearity with the variance inflation factor (VIF). Tolerance = \eqn{1 - R_j^2}, VIF = (1/Tolerance) where R_j^2 is the coefficient of determination of a regression of predictor jj on all the other predictors. A general rule of thumb is that VIFs exceeding 4 warrant further investigation, while VIFs exceeding 10 indicates a multicollinearity problem
+#' \emph{Plot 4}: If |residual| > 3, then the observation is flagged as an outlier.
+#'
+#' \emph{Plot 5 & 6}: Observations that deviate greatly from the rest of the data are potential outliers. It is not necessary that all points fall on the red line since the leverages and cook's distance values are not strictly expected to have a postive normal distribution. The 5 observations with the largest values are labelled on each plot.
+#'
+#' \emph{Plot 7}: Check for outliers with Cook's Distance. A data point having a large Cook's distance indicates that the data point strongly influences the fitted values of the model. The default threshold used for detecting or classifying observations as outliers is \eqn{4/n} (i.e cooksD_type = 1)
+#' where \eqn{n} is the number of observations. The thresholds computed are as follows:
+#' \itemize{
+#'    \item{cooksD_type = 1: }{4/n}
+#'    \item{cooksD_type = 2: }{4/(n-p-1)}
+#'    \item{cooksD_type = 3: }{1/(n-p-1)}
+#'    \item{cooksD_type = 4: }{3 * mean(cook's distance values)}
+#' }
+#' where \eqn{n} is the number of observations and \eqn{p} is the number of predictors.
+#'
+#'
+#' \emph{Plot 8}: Check for outliers with DFFITS, which considers how much the fitted value of observation i changes between the model fitted with all the data and the model fitted with obervation i omitted. If |DFFITS| > \eqn{2 * sqrt((parameters + 1) / (observations - parameters - 1))}, then the observation is flagged as influential.
+#'
+#' \bold{Check for collinearity}:
+#'
+#' \emph{Plot 9}: Check for collinearity with the variance inflation factor (VIF). Tolerance = \eqn{1 - R_j^2}, VIF = \eqn{1 / Tolerance}, where \eqn{R_j^2} is the coefficient of determination of a regression of predictor j on all the other predictors. A general rule of thumb is that VIFs exceeding 4 warrant further investigation, while VIFs exceeding 10 indicates a multicollinearity problem.
+#'
+#' @references
+#'
+#' Weisberg, S.: Applied Linear Regression. John Wiley and Sons, New York (1985)
+#'
+#' Pierce, D.A., Shafer, D.W.: Residuals in generalized linear models. Journal of the American Statistical Association 81, 977–986 (1986)
+#'
+#' Williams, D.A.: Generalized linear models diagnostics using the deviance and single-case deletions. Applied Statistics 36(2), 181–191 (1987)
+#'
+#' McCullagh, P., Nelder, J.A.: Generalized Linear Models, second edn. Chapman and Hall, London (1989)
+#'
+#' Dunn, P.K., Smyth, G.K.: Randomized quantile residuals. Journal of Computational and Graphical Statistics 5(3), 236–244 (1996)
+#'
+#' Dunn, P.K., Smyth, G.K. Generalized Linear Models with Examples in R. Springer Texts in Statistics, 297-327 (2018)
+#'
+#' @author
+#'
+#' Mo Amiri \email{moamiristat@@protonmail.com}
 #'
 #' @examples
 #' model <- glm(Volume ~ Girth + Height, family = Gamma(link = "log"), data = trees)
@@ -44,21 +81,28 @@
 #' glm_diagnostic_plots(model, discrete_edm = FALSE, which_plots = 7:8)
 #'
 #' # Collinearity
-#' glm_diagnostic_plots(model, discrete_edm = FALSE, which_plots = 9, ncols = 1)
+#' glm_diagnostic_plots(model, discrete_edm = FALSE, which_plots = 9, n_columns = 1)
 glm_diagnostic_plots <- function(model,
                                  discrete_edm,
                                  which_plots = 1:4,
-                                 ncols = 2,
+                                 cooksD_type = 1,
                                  standard_errors = FALSE,
-                                 theme_color = "#008EA0FF",
                                  point_size = 1.1,
-                                 text_width = 25) {
+                                 theme_color = "#008EA0FF",
+                                 n_columns = 2) {
 
   if (!inherits(model, "glm")) {
 
     stop("Model should be of class glm")
 
   } else {
+
+    if (!is.logical(discrete_edm)) {
+      stop("Input for discrete_edm argument must be logical: TRUE or FALSE")
+    }
+
+    # Avoid adding these packages under Imports in Description file
+    insight::check_if_installed(c("gridExtra","ggrepel"))
 
     # Calculate the residuals
     df <- model$model
@@ -84,7 +128,13 @@ glm_diagnostic_plots <- function(model,
 
     nr <- nrow(df)
     npara <- length(model$terms)
-    h <- 4 / nr # cooks distance threshold
+
+    # cooks distance threshold
+    h <- switch(cooksD_type,
+                "1" = 4 / nr,
+                "2" = 4 / (nr - npara - 1),
+                "3" = 1 / (nr - npara - 1),
+                "4" = 3 * mean(cooks_distance))
     df$cooksD <- ifelse(cooks_distance > h, rownames(df), NA)
 
     y_value_std <- ifelse(isTRUE(discrete_edm), ".resid.quantile.std", ".resid.deviance.std")
@@ -111,11 +161,8 @@ glm_diagnostic_plots <- function(model,
       geom_point(size = point_size, shape = 1) +
       geom_smooth(fill = "#d9d9d9", se = standard_errors, color = theme_color, size = 1.1) +
       labs(title = "Residuals vs Fitted",
-           subtitle = stringr::str_wrap("If any trends appear, then the systematic component can be improved", text_width),
            x = "Fitted Values", y = y_label_std) +
-      theme_bw() +
-      theme(panel.grid.major = element_blank(),
-            panel.grid.minor = element_blank())
+      theme_bw_nogrid()
 
     if (sum(abs(df$.resid.deviance.std) > 3) == 0 | sum(abs(df$.resid.quantile.std) > 3) == 0) {
       resid_fitted <- resid_fitted_base
@@ -139,12 +186,9 @@ glm_diagnostic_plots <- function(model,
                         y = ".working.linear")) +
       geom_abline(intercept = 0, slope = 1, color = theme_color, size = 1.1) +
       geom_point(size = point_size, shape = 1) +
-      labs(title = stringr::str_wrap("Working Responses vs Linear Predictors", text_width),
-           subtitle = stringr::str_wrap("If plot is not roughly linear,\nthen another link function\nmight be more appropriate", text_width),
+      labs(title = "Working Responses vs Linear Predictors",
            x = "Linear Predictors", y = "Working Responses") +
-      theme_bw() +
-      theme(panel.grid.major = element_blank(),
-            panel.grid.minor = element_blank())
+      theme_bw_nogrid()
 
 
     ########################
@@ -165,11 +209,8 @@ glm_diagnostic_plots <- function(model,
                   aes(intercept = intercept, slope = slope),
                   color = theme_color, size = 1.1) +
       labs(title = "Normal Q-Q Plot",
-           subtitle = stringr::str_wrap("If most points are NOT close\nto the line, then the\nchosen EDM\nmay not be appropriate", text_width),
            x = "Theoretical Quantile", y = "Standardized Quantile Residuals") +
-      theme_bw() +
-      theme(panel.grid.major = element_blank(),
-            panel.grid.minor = element_blank())
+      theme_bw_nogrid()
 
     ##############################
     ### Outliers & Influential ### --------------------------------------------
@@ -188,12 +229,8 @@ glm_diagnostic_plots <- function(model,
       geom_point(size = point_size, shape = 20) +
       geom_hline(yintercept = 3, color = theme_color, linetype = 2) +
       labs(title = "Outlier Detection",
-           subtitle = stringr::str_wrap("If residual > 3, then\nthe observation is flagged as an outlier", text_width),
-           x = "Observation",
-           y = y_label_stu) +
-      theme_bw() +
-      theme(panel.grid.major = element_blank(),
-            panel.grid.minor = element_blank()) +
+           x = "Observation", y = y_label_stu) +
+      theme_bw_nogrid() +
       ggrepel::geom_label_repel(data = df,
                                 aes_string(label = "outlier.detect"), na.rm = TRUE,
                                 max.overlaps = 20,
@@ -203,21 +240,15 @@ glm_diagnostic_plots <- function(model,
     halfnorm_hat <-
       gghalfnorm::gghalfnorm(influence_measures$hat, nlab = 5, repel = TRUE,
                              box.padding = ggplot2::unit(1, "lines"), color = "#008EA0FF") +
-      labs(title = stringr::str_wrap("Half Norm Plot using Leverage", text_width),
-           subtitle = stringr::str_wrap("Observations that deviate too much from red line\nare potential outliers", text_width)) +
-      theme_bw() +
-      theme(panel.grid.major = element_blank(),
-            panel.grid.minor = element_blank())
+      labs(title = "Half Norm Plot using Leverage") +
+      theme_bw_nogrid()
 
 
     halfnorm_cooks <-
       gghalfnorm::gghalfnorm(cooks_distance, nlab = 5, repel = TRUE, color = "#008EA0FF",
-                             box.padding = ggplot2::unit(.5, "lines"), max.overlaps = 20) +
-      labs(title = stringr::str_wrap("Half Norm Plot using Cook's Distance", text_width),
-           subtitle = stringr::str_wrap("Observations that deviate too much from red line\nare potential outliers", text_width)) +
-      theme_bw() +
-      theme(panel.grid.major = element_blank(),
-            panel.grid.minor = element_blank())
+                             box.padding = ggplot2::unit(1, "lines"), max.overlaps = 20) +
+      labs(title = "Half Norm Plot using Cook's Distance") +
+      theme_bw_nogrid()
 
     # Cooks distance plot -----------------------------------------------------
     limit <- max(cooks_distance, na.rm = T)
@@ -236,12 +267,8 @@ glm_diagnostic_plots <- function(model,
       geom_point(size = point_size, shape = 20) +
       geom_hline(yintercept = h, color = theme_color, linetype = 2) +
       labs(title = "Cook's Distance",
-           subtitle = stringr::str_wrap(glue::glue("If Cook's Distance > {round(h, 2)}, then the observation is flagged as influential"), text_width),
-           x = "Observation",
-           y = "Cook's Distance") +
-      theme_bw() +
-      theme(panel.grid.major = element_blank(),
-            panel.grid.minor = element_blank()) +
+           x = "Observation", y = "Cook's Distance") +
+      theme_bw_nogrid() +
       ggrepel::geom_label_repel(data = df, aes_string(label = "cook.detect"), na.rm = TRUE,
                                 max.overlaps = 20, color = "#5A9599FF")
 
@@ -257,12 +284,8 @@ glm_diagnostic_plots <- function(model,
       geom_hline(yintercept = j, color = theme_color, linetype = 2) +
       geom_hline(yintercept = -j, color = theme_color, linetype = 2) +
       labs(title = "Difference in Fits",
-           subtitle = stringr::str_wrap(glue::glue("If |DFFITS| > {round(j, 2)}, then the observation is flagged as influential"), text_width),
-           x = "Observation",
-           y = "DFFITS") +
-      theme_bw() +
-      theme(panel.grid.major = element_blank(),
-            panel.grid.minor = element_blank()) +
+           x = "Observation", y = "DFFITS") +
+      theme_bw_nogrid() +
       ggrepel::geom_label_repel(data = df, aes_string(label = "dffits"), na.rm = TRUE,
                                 max.overlaps = 20, color = "#5A9599FF")
 
@@ -307,9 +330,7 @@ glm_diagnostic_plots <- function(model,
                                   max.overlaps = 20,
                                   color = theme_color) +
         labs(title = "VIF Plot (Collinearity)", x = "", y = "Variance Inflation Factor (VIF)") +
-        theme_bw() +
-        theme(panel.grid.major = element_blank(),
-              panel.grid.minor = element_blank())
+        theme_bw_nogrid()
 
       return(plt)
     }
@@ -331,6 +352,6 @@ glm_diagnostic_plots <- function(model,
 
     names(plot_list) <- c("rf", "wp", "qq", "od_s", "od_h", "od_c", "cd", "df", "vi")
 
-    return(suppressMessages(grid.arrange(grobs = plot_list[which_plots], ncol = ncols)))
+    return(suppressMessages(gridExtra::grid.arrange(grobs = plot_list[which_plots], ncol = n_columns)))
   }
 }

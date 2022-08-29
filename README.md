@@ -1,5 +1,5 @@
 
-# ggDoE <img src="ggdoe-hexsticker.png" align="right" height="250px" />
+# ggDoE
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ggDoE)](https://cran.r-project.org/package=ggDoE)
@@ -111,6 +111,27 @@ diagnostic_plots(model,which_plots=1:6)
 ```
 
 ![](man/figures/diagnostic_plots.png)
+
+**GLM Diagnostic Plots**
+
+1.  Residual vs. Fitted Values  
+2.  Working Responses vs Linear Predictors  
+3.  Normal Q-Q plot  
+4.  Outlier Detection  
+5.  Half norm plot using leverages  
+6.  Half norm plot using Cook’s Distance  
+7.  Cook’s Distance  
+8.  DFFITS  
+9.  Collinearity
+
+The default plots are 1-4
+
+``` r
+glm_model <- glm(Volume ~ log(Girth) + log(Height), family = Gamma(link = "log"), data = trees)
+glm_diagnostic_plots(glm_model, discrete_edm = FALSE, which_plots = c(1:4, 7:8))
+```
+
+![](man/figures/glm_diagnostic_plots.png)
 
 **Half-Normal Plot**
 
@@ -250,12 +271,15 @@ context, run the following code in your `R` console
 citation('ggDoE')
 ```
 
+    Warning in citation("ggDoE"): no date field in DESCRIPTION file of package
+    'ggDoE'
+
 
     To cite package 'ggDoE' in publications use:
 
       Toledo Luna J (2022). _ggDoE: Modern Graphs for Design of Experiments
       with 'ggplot2'_. R package version 0.7.8,
-      <https://CRAN.R-project.org/package=ggDoE>.
+      <https://ggdoe.netlify.app>.
 
     A BibTeX entry for LaTeX users is
 
@@ -264,7 +288,7 @@ citation('ggDoE')
         author = {Jose {Toledo Luna}},
         year = {2022},
         note = {R package version 0.7.8},
-        url = {https://CRAN.R-project.org/package=ggDoE},
+        url = {https://ggdoe.netlify.app},
       }
 
 ## Contributing to the package

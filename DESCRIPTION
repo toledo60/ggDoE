@@ -20,10 +20,6 @@ Imports:
     ggplot2,
     data.table,
     insight
-    dplyr,
-    gridExtra,
-    stringr,
-    glue
 Suggests:
     knitr,
     rmarkdown,
@@ -36,7 +32,8 @@ Suggests:
     unrepx,
     metR,
     rsm,
-    lhs
+    lhs, 
+    gghalfnorm
 RoxygenNote: 7.2.1
 Depends: 
     R (>= 3.3.0)
