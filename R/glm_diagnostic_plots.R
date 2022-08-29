@@ -40,6 +40,24 @@
 #'
 #' \emph{Plot 9}: Check for collinearity with the variance inflation factor (VIF). Tolerance = \eqn{1 - R_j^2}, VIF = \eqn{1 / Tolerance}, where \eqn{R_j^2} is the coefficient of determination of a regression of predictor j on all the other predictors. A general rule of thumb is that VIFs exceeding 4 warrant further investigation, while VIFs exceeding 10 indicates a multicollinearity problem.
 #'
+#' @references
+#'
+#' Weisberg, S.: Applied Linear Regression. John Wiley and Sons, New York (1985)
+#'
+#' Pierce, D.A., Shafer, D.W.: Residuals in generalized linear models. Journal of the American Statistical Association 81, 977–986 (1986)
+#'
+#' Williams, D.A.: Generalized linear models diagnostics using the deviance and single-case deletions. Applied Statistics 36(2), 181–191 (1987)
+#'
+#' McCullagh, P., Nelder, J.A.: Generalized Linear Models, second edn. Chapman and Hall, London (1989)
+#'
+#' Dunn, P.K., Smyth, G.K.: Randomized quantile residuals. Journal of Computational and Graphical Statistics 5(3), 236–244 (1996)
+#'
+#' Dunn, P.K., Smyth, G.K. Generalized Linear Models with Examples in R. Springer Texts in Statistics, 297-327 (2018)
+#'
+#' @author
+#'
+#' Mo Amiri \email{moamiristat@@protonmail.com}
+#'
 #' @examples
 #' model <- glm(Volume ~ Girth + Height, family = Gamma(link = "log"), data = trees)
 #'
