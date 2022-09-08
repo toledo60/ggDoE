@@ -2,7 +2,7 @@
 output: github_document
 ---
 
-# ggDoE
+# ggDoE <img src="ggdoe-hexsticker.png" align="right" height="250px" />
 [![CRAN status](https://www.r-pkg.org/badges/version/ggDoE)](https://cran.r-project.org/package=ggDoE)
 [![R-CMD-check](https://github.com/toledo60/ggDoE/workflows/R-CMD-check/badge.svg)](https://github.com/toledo60/ggDoE/actions)
 [![Documentation](https://img.shields.io/badge/Documentation-ggDoE-blue)](https://ggdoe.netlify.app/)
@@ -124,6 +124,27 @@ diagnostic_plots(model,which_plots=1:6)
 ```
 
 ![](man/figures/diagnostic_plots.png)
+
+**GLM Diagnostic Plots**
+
+1. Residual vs. Fitted Values  
+2. Working Responses vs Linear Predictors  
+3. Normal Q-Q plot  
+4. Outlier Detection  
+5. Half norm plot using leverages  
+6. Half norm plot using Cook's Distance  
+7. Cook's Distance  
+8. DFFITS  
+9. Collinearity  
+
+The default plots are 1-4
+
+```{r,fig.height=10,fig.width=8}
+glm_model <- glm(Volume ~ log(Girth) + log(Height), family = Gamma(link = "log"), data = trees)
+glm_diagnostic_plots(glm_model, discrete_edm = FALSE, which_plots = c(1:4, 7:8))
+```
+
+![](man/figures/glm_diagnostic_plots.png)
 
 **Half-Normal Plot**
 
