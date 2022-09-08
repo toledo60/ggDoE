@@ -1,5 +1,5 @@
 
-# ggDoE <img src="ggdoe-hexsticker.png" align="right" height="250px" />
+# ggDoE
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ggDoE)](https://cran.r-project.org/package=ggDoE)
@@ -271,15 +271,12 @@ context, run the following code in your `R` console
 citation('ggDoE')
 ```
 
-    Warning in citation("ggDoE"): no date field in DESCRIPTION file of package
-    'ggDoE'
-
 
     To cite package 'ggDoE' in publications use:
 
       Toledo Luna J (2022). _ggDoE: Modern Graphs for Design of Experiments
       with 'ggplot2'_. R package version 0.7.8,
-      <https://ggdoe.netlify.app>.
+      <https://CRAN.R-project.org/package=ggDoE>.
 
     A BibTeX entry for LaTeX users is
 
@@ -288,7 +285,7 @@ citation('ggDoE')
         author = {Jose {Toledo Luna}},
         year = {2022},
         note = {R package version 0.7.8},
-        url = {https://ggdoe.netlify.app},
+        url = {https://CRAN.R-project.org/package=ggDoE},
       }
 
 ## Contributing to the package

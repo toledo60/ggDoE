@@ -27,7 +27,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ggDoE</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.8-1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,17 +86,23 @@ commonly used graphs in Design of Experiments with the R package
 <em>ggplot2</em>. The following plots are currently available in
 <em>ggDoE</em>:</p>
 <ol style="list-style-type: decimal">
-<li>Alias Matrix</li>
-<li>Box-Cox Transformation</li>
-<li>Lambda Plot</li>
-<li>Boxplots</li>
-<li>Regression Diagnostic Plots</li>
-<li>Half-Normal Plot</li>
-<li>Interaction Effects Plot for a Factorial Design</li>
-<li>Main Effects Plot for a Factorial Design</li>
-<li>Contour Plots for Response Surface Methodology</li>
-<li>Pareto Plot</li>
-<li>Two Dimensional Projections of a Latin Hypercube Design</li>
+<li><a href="#alias-matrix">Alias Matrix</a></li>
+<li><a href="#box-cox-transformation">Box-Cox Transformation</a></li>
+<li><a href="#lambda-plot">Lambda Plot</a></li>
+<li><a href="#boxplots">Boxplots</a></li>
+<li><a href="#regression-diagnostic-plots">Regression Diagnostic
+Plots</a></li>
+<li><a href="#glm-diagnostic-plots">GLM Diagnostic Plots</a></li>
+<li><a href="#half-normal-plot">Half-Normal Plot</a></li>
+<li><a href="#interaction-effects-plot-for-a-factorial-design">Interaction
+Effects Plot for a Factorial Design</a></li>
+<li><a href="#main-effects-plot-for-a-factorial-design">Main Effects
+Plot for a Factorial Design</a></li>
+<li><a href="#contour-plots-for-response-surface-methodology">Contour
+Plots for Response Surface Methodology</a></li>
+<li><a href="#pareto-plot">Pareto Plot</a></li>
+<li><a href="#two-dimensional-projections">Two Dimensional Projections
+of a Latin Hypercube Design</a></li>
 </ol>
 <p>The following datasets/designs are included in <em>ggDoE</em> as
 tibbles:</p>
@@ -396,6 +402,64 @@ If one wants to display confidence intervals, use
 <p><img src="Overview_of_ggDoE_files/figure-html/unnamed-chunk-17-1.png" width="864"></p>
 </div>
 <div class="section level2">
+<h2 id="glm-diagnostic-plots">GLM Diagnostic Plots<a class="anchor" aria-label="anchor" href="#glm-diagnostic-plots"></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li>Residual vs. Fitted Values<br>
+</li>
+<li>Working Responses vs Linear Predictors<br>
+</li>
+<li>Normal Q-Q plot<br>
+</li>
+<li>Outlier Detection<br>
+</li>
+<li>Half norm plot using leverages<br>
+</li>
+<li>Half norm plot using Cook’s Distance<br>
+</li>
+<li>Cook’s Distance<br>
+</li>
+<li>DFFITS<br>
+</li>
+<li>Collinearity</li>
+</ol>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">glm_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">Volume</span> <span class="op">~</span> <span class="va">Girth</span> <span class="op">+</span> <span class="va">Height</span>, family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html" class="external-link">Gamma</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"log"</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">trees</span><span class="op">)</span></span></code></pre></div>
+<p>The default plots in <code><a href="../reference/glm_diagnostic_plots.html">glm_diagnostic_plots()</a></code> is the first
+four in the list mentioned above. Besides specifying the model, one
+needs to also exclusively mention whether the EDM family used in the
+model is discrete or not (ie, continuous). The reason is that quantile
+residuals will be used when <code>discrete_edm = TRUE</code> as they are
+prefered over Pearson or Deviance (default in R) residuals for plotting
+purposes for discrete EDMs (ie, it is easier to detect patterns).</p>
+<p>One can display confidence intervals using
+<code>standard_error = TRUE</code>. Also, it is possible to specify the
+line width in characters for the title and subtitle of the plots using
+<code>text_width = 25</code>.</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/glm_diagnostic_plots.html">glm_diagnostic_plots</a></span><span class="op">(</span><span class="va">glm_model</span>, discrete_edm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Overview_of_ggDoE_files/figure-html/glm-model-2-1.png" width="864"></p>
+<p>There seems to be a non-linear trend in the ‘Residuals vs Fitted’
+plot above. This means that the systematic component of the GLM can be
+improved. This would usually involve changing the link function, adding
+new predictor variables, or trasnforming the current predictors. The
+‘Working Responses vs Link Predictors’ looks linear, so the chosen link
+function seems to be appropriate. One can log transform the predictor
+variables and recheck the graphs.</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">glm_model_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">Volume</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">Girth</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">Height</span><span class="op">)</span>, family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html" class="external-link">Gamma</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"log"</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">trees</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/glm_diagnostic_plots.html">glm_diagnostic_plots</a></span><span class="op">(</span><span class="va">glm_model_2</span>, discrete_edm <span class="op">=</span> <span class="cn">FALSE</span>, standard_errors <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Overview_of_ggDoE_files/figure-html/glm-model-3-1.png" width="768"></p>
+<p>The new ‘Residuals vs Fitted’ graph above looks better (ie, no
+trends). There are 9 total plots in this function, and it is encouraged
+to go through them in the following sequence to avoid any graphing
+errors: “1:4”, “5:6”, “7:8”, “9”.</p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/glm_diagnostic_plots.html">glm_diagnostic_plots</a></span><span class="op">(</span><span class="va">glm_model_2</span>, discrete_edm <span class="op">=</span> <span class="cn">FALSE</span>, which_plots <span class="op">=</span> <span class="fl">7</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Overview_of_ggDoE_files/figure-html/glm-model-4-1.png" width="864"></p>
+</div>
+<div class="section level2">
 <h2 id="half-normal-plot">Half-Normal Plot<a class="anchor" aria-label="anchor" href="#half-normal-plot"></a>
 </h2>
 <p>The Half-Normal plot is a graphical tool used to help identify which
@@ -403,7 +467,7 @@ experiment factors have significant effects on the response. In
 addition, cutoff line(s) are added for the margin of error (ME) and the
 simultaneous margin of error (SME) of the effects. These values are
 obtained using <code><a href="https://rdrr.io/pkg/unrepx/man/PSE.html" class="external-link">unrepx::ME()</a></code>.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">lns2</span> <span class="op">~</span> <span class="op">(</span><span class="va">A</span><span class="op">+</span><span class="va">B</span><span class="op">+</span><span class="va">C</span><span class="op">+</span><span class="va">D</span><span class="op">)</span><span class="op">^</span><span class="fl">4</span>,data<span class="op">=</span><span class="va">original_epitaxial</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/half_normal.html">half_normal</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Overview_of_ggDoE_files/figure-html/unnamed-chunk-18-1.png" width="576"></p>
@@ -413,7 +477,7 @@ and (SME). These methods are <em>“Daniel”, “Dong”, “JuanPena”, “Le
 (Default), “RMS”, “SMedian”, “Zahn”, “WZahn”</em>. See
 <code><a href="../reference/half_normal.html">?ggDoE::half_normal</a></code> for more details and references on each
 of the methods.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/half_normal.html">half_normal</a></span><span class="op">(</span><span class="va">m1</span>,method<span class="op">=</span><span class="st">'Daniel'</span>,alpha<span class="op">=</span><span class="fl">0.1</span>,</span>
 <span>            ref_line<span class="op">=</span><span class="cn">TRUE</span>,label_active<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>            margin_errors<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
@@ -425,7 +489,7 @@ argument. Default is <code>alpha=0.05</code>. Using
 the experiment.</p>
 <p>Using <code>showplot=FALSE</code> will return the needed information
 to reproduce/change the above half-normal plot</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/half_normal.html">half_normal</a></span><span class="op">(</span><span class="va">m1</span>,method<span class="op">=</span><span class="st">'Daniel'</span>,alpha<span class="op">=</span><span class="fl">0.1</span>,</span>
 <span>            showplot<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 15 × 3</span></span></span>
@@ -452,11 +516,11 @@ to reproduce/change the above half-normal plot</p>
 </h2>
 <p>Interaction effects plot between two factors in a factorial
 design</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/interaction_effects.html">interaction_effects</a></span><span class="op">(</span><span class="va">adapted_epitaxial</span>,response <span class="op">=</span> <span class="st">'ybar'</span>,</span>
 <span>                    exclude_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'s2'</span>,<span class="st">'lns2'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Overview_of_ggDoE_files/figure-html/unnamed-chunk-21-1.png" width="768"></p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/interaction_effects.html">interaction_effects</a></span><span class="op">(</span><span class="va">adapted_epitaxial</span>,response <span class="op">=</span> <span class="st">'ybar'</span>,</span>
 <span>                    exclude_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'A'</span>,<span class="st">'s2'</span>,<span class="st">'lns2'</span><span class="op">)</span>,</span>
 <span>                    n_columns<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
@@ -466,12 +530,12 @@ design</p>
 <h2 id="main-effects-plot-for-a-factorial-design">Main Effects Plot for a Factorial Design<a class="anchor" aria-label="anchor" href="#main-effects-plot-for-a-factorial-design"></a>
 </h2>
 <p>Main effect plots for each factor in a factorial design</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/main_effects.html">main_effects</a></span><span class="op">(</span><span class="va">original_epitaxial</span>,</span>
 <span>             response<span class="op">=</span><span class="st">'s2'</span>,</span>
 <span>             exclude_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'ybar'</span>,<span class="st">'lns2'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Overview_of_ggDoE_files/figure-html/unnamed-chunk-23-1.png" width="576"></p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/main_effects.html">main_effects</a></span><span class="op">(</span><span class="va">original_epitaxial</span>,</span>
 <span>             response<span class="op">=</span><span class="st">'s2'</span>,</span>
 <span>             exclude_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'A'</span>,<span class="st">'ybar'</span>,<span class="st">'lns2'</span><span class="op">)</span>,</span>
@@ -482,7 +546,7 @@ design</p>
 <div class="section level2">
 <h2 id="contour-plots-for-response-surface-methodology">Contour Plots for Response Surface Methodology<a class="anchor" aria-label="anchor" href="#contour-plots-for-response-surface-methodology"></a>
 </h2>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">heli.rsm</span> <span class="op">&lt;-</span> <span class="fu">rsm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rsm/man/rsm.html" class="external-link">rsm</a></span><span class="op">(</span><span class="va">ave</span> <span class="op">~</span> <span class="fu">SO</span><span class="op">(</span><span class="va">x1</span>, <span class="va">x2</span>, <span class="va">x3</span>, <span class="va">x4</span><span class="op">)</span>, </span>
 <span>                     data <span class="op">=</span> <span class="fu">rsm</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/rsm/man/heli.html" class="external-link">heli</a></span><span class="op">)</span></span></code></pre></div>
 <p>Using <code>gg_rsm</code> we can obtain contour plots that display
@@ -494,13 +558,13 @@ arguments from <code><a href="https://rdrr.io/pkg/rsm/man/contour.lm.html" class
 <code><a href="https://rdrr.io/pkg/rsm/man/contour.lm.html" class="external-link">rsm::contour.lm</a></code> for more details on its arguments.</p>
 <p>By default the contour plots produce will be in black and white
 color</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gg_rsm.html">gg_rsm</a></span><span class="op">(</span><span class="va">heli.rsm</span>,form <span class="op">=</span> <span class="op">~</span><span class="va">x1</span><span class="op">+</span><span class="va">x2</span><span class="op">+</span><span class="va">x3</span>,</span>
 <span>       at <span class="op">=</span> <span class="fu">rsm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rsm/man/rsm.html" class="external-link">xs</a></span><span class="op">(</span><span class="va">heli.rsm</span><span class="op">)</span>,</span>
 <span>       n_columns<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Overview_of_ggDoE_files/figure-html/unnamed-chunk-26-1.png" width="960"></p>
 <p>with <code>filled=TRUE</code>, a viridis color scheme is applied.</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gg_rsm.html">gg_rsm</a></span><span class="op">(</span><span class="va">heli.rsm</span>,form <span class="op">=</span> <span class="op">~</span><span class="va">x1</span><span class="op">+</span><span class="va">x2</span><span class="op">+</span><span class="va">x3</span>,</span>
 <span>       at <span class="op">=</span> <span class="fu">rsm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rsm/man/rsm.html" class="external-link">xs</a></span><span class="op">(</span><span class="va">heli.rsm</span><span class="op">)</span>,</span>
 <span>       filled <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -513,7 +577,7 @@ color</p>
 <p>Pareto plot is a bar graph with the bars ordered by the size of the
 effect. In addition, cutoff line(s) are added for the margin of error
 (ME) and the simultaneous margin of error (SME) of the effects.</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">lns2</span> <span class="op">~</span> <span class="op">(</span><span class="va">A</span><span class="op">+</span><span class="va">B</span><span class="op">+</span><span class="va">C</span><span class="op">+</span><span class="va">D</span><span class="op">)</span><span class="op">^</span><span class="fl">4</span>,data<span class="op">=</span><span class="va">original_epitaxial</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/pareto_plot.html">pareto_plot</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Overview_of_ggDoE_files/figure-html/unnamed-chunk-28-1.png" width="576"></p>
@@ -521,20 +585,20 @@ effect. In addition, cutoff line(s) are added for the margin of error
 to compute the pseudo standard errors. For example, we consider ‘Daniel’
 construction method using a significance level of <span class="math inline">\(\alpha=0.1\)</span>. Default arguments for
 <code>method</code> is “Lenth” and <code>alpha = 0.05</code>.</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/pareto_plot.html">pareto_plot</a></span><span class="op">(</span><span class="va">m1</span>,method<span class="op">=</span><span class="st">'Daniel'</span>,alpha<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Overview_of_ggDoE_files/figure-html/unnamed-chunk-29-1.png" width="576"></p>
 <p>If one uses the <code>showplot=FALSE</code> argument, a list will be
 returned with the calculated PSE,ME,SME as well as the data used to
 construct the pareto plot.</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/pareto_plot.html">pareto_plot</a></span><span class="op">(</span><span class="va">m1</span>,method<span class="op">=</span><span class="st">'Daniel'</span>,</span>
 <span>            alpha<span class="op">=</span><span class="fl">0.1</span>, showplot<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $errors</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 4</span></span></span>
 <span><span class="co">#&gt;   alpha   PSE    ME   SME</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>   0.1 0.335 0.603  1.11</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>   0.1 0.335 0.601  1.12</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $dat</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 15 × 3</span></span></span>
@@ -563,14 +627,14 @@ construct the pareto plot.</p>
 Latin hypercube design.</p>
 <p>Below is an example from generating a random Latin hypercube design
 using the R package <code>lhs</code></p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">random_LHS</span> <span class="op">&lt;-</span> <span class="fu">lhs</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lhs/man/randomLHS.html" class="external-link">randomLHS</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">15</span>, k<span class="op">=</span><span class="fl">4</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/twoD_projections.html">twoD_projections</a></span><span class="op">(</span><span class="va">random_LHS</span>,n_columns<span class="op">=</span><span class="fl">3</span>,grid <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Overview_of_ggDoE_files/figure-html/unnamed-chunk-31-1.png" width="768"></p>
 <p>Below is an example of a maximin Latin hypercube design with red
 color points and no grid (default setting)</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">maximin_LHS</span> <span class="op">&lt;-</span> <span class="fu">lhs</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lhs/man/maximinLHS.html" class="external-link">maximinLHS</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">15</span>, k<span class="op">=</span><span class="fl">4</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/twoD_projections.html">twoD_projections</a></span><span class="op">(</span><span class="va">maximin_LHS</span>,n_columns<span class="op">=</span><span class="fl">3</span>,point_color <span class="op">=</span> <span class="st">'red'</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Overview_of_ggDoE_files/figure-html/unnamed-chunk-32-1.png" width="768"></p>

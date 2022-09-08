@@ -12,7 +12,7 @@
 #' @return GLM diagnostic plots
 #' @importFrom ggplot2 geom_smooth stat_qq geom_abline ylim aes_string theme_bw geom_linerange element_blank geom_hline
 #' @importFrom stats quantile lm.influence cooks.distance rstandard as.formula model.matrix
-#' @importFrom gridExtra grid.arrange
+#' @importFrom stats dffits fitted hatvalues predict resid rstudent
 #' @export
 #'
 #' @details

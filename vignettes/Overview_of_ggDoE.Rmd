@@ -258,7 +258,7 @@ The default plots in `glm_diagnostic_plots()` is the first four in the list ment
 One can display confidence intervals using `standard_error = TRUE`. Also, it is possible to specify the line width in characters for the title and subtitle of the plots using `text_width = 25`.
 
 ```{r glm-model-2,fig.height=8,fig.width=9}
-glm_diagnostic_plots(glm_model, discrete_edm = FALSE, text_width = 50)
+glm_diagnostic_plots(glm_model, discrete_edm = FALSE)
 ```
 
 There seems to be a non-linear trend in the 'Residuals vs Fitted' plot above. This means that the systematic component of the GLM can be improved. This would usually involve changing the link function, adding new predictor variables, or trasnforming the current predictors. The 'Working Responses vs Link Predictors' looks linear, so the chosen link function seems to be appropriate. One can log transform the predictor variables and recheck the graphs.
@@ -266,13 +266,13 @@ There seems to be a non-linear trend in the 'Residuals vs Fitted' plot above. Th
 ```{r glm-model-3,fig.height=6,fig.width=8}
 glm_model_2 <- glm(Volume ~ log(Girth) + log(Height), family = Gamma(link = "log"), data = trees)
 
-glm_diagnostic_plots(glm_model_2, discrete_edm = FALSE, standard_errors = TRUE, text_width = 50)
+glm_diagnostic_plots(glm_model_2, discrete_edm = FALSE, standard_errors = TRUE)
 ```
 
 The new 'Residuals vs Fitted' graph above looks better (ie, no trends). There are 9 total plots in this function, and it is encouraged to go through them in the following sequence to avoid any graphing errors: "1:4", "5:6", "7:8", "9".
 
 ```{r glm-model-4,fig.height=8,fig.width=9}
-glm_diagnostic_plots(glm_model_2, discrete_edm = FALSE, which_plots = 7:8, text_width = 50)
+glm_diagnostic_plots(glm_model_2, discrete_edm = FALSE, which_plots = 7:8)
 ```
 
 ## Half-Normal Plot

@@ -11,6 +11,7 @@ reference:
   - alias_matrix
   - boxcox_transform
   - diagnostic_plots
+  - glm_diagnostic_plots
   - gg_boxplots
   - gg_rsm
   - half_normal
