@@ -1,5 +1,5 @@
 
-# ggDoE
+# {ggDoE} <a href='https://ggdoe.netlify.app'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ggDoE)](https://cran.r-project.org/package=ggDoE)
@@ -107,7 +107,7 @@ The default plots are 1-4
 
 ``` r
 model <- lm(mpg ~ wt + am + gear + vs * cyl, data = mtcars)
-diagnostic_plots(model,which_plots=1:6)
+gg_lm(model,which_plots=1:6)
 ```
 
 ![](man/figures/diagnostic_plots.png)
@@ -128,7 +128,7 @@ The default plots are 1-4
 
 ``` r
 glm_model <- glm(Volume ~ log(Girth) + log(Height), family = Gamma(link = "log"), data = trees)
-glm_diagnostic_plots(glm_model, discrete_edm = FALSE, which_plots = c(1:4, 7:8))
+gg_glm(glm_model, discrete_edm = FALSE, which_plots = c(1:4, 7:8))
 ```
 
 ![](man/figures/glm_diagnostic_plots.png)

@@ -10,8 +10,8 @@ reference:
   contents:
   - alias_matrix
   - boxcox_transform
-  - diagnostic_plots
-  - glm_diagnostic_plots
+  - gg_lm
+  - gg_glm
   - gg_boxplots
   - gg_rsm
   - half_normal
