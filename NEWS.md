@@ -1,3 +1,9 @@
+# ggDoE 0.7.9
+
+BREAKING
+
+* renamed `diagnostic_plots()` to `gg_lm()`s
+
 # ggDoE 0.7.8
 
 BREAKING

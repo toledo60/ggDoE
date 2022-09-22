@@ -72,36 +72,31 @@
 #' model <- glm(Volume ~ Girth + Height, family = Gamma(link = "log"), data = trees)
 #'
 #' # Default plots returned
-#' glm_diagnostic_plots(model, discrete_edm = FALSE, which_plots = 1:4)
+#' gg_glm(model, discrete_edm = FALSE, which_plots = 1:4)
 #'
 #' # Half norm plots
-#' glm_diagnostic_plots(model, discrete_edm = FALSE, which_plots = 5:6)
+#' gg_glm(model, discrete_edm = FALSE, which_plots = 5:6)
 #'
 #' # Cook's Distance & DFFITS
-#' glm_diagnostic_plots(model, discrete_edm = FALSE, which_plots = 7:8)
+#' gg_glm(model, discrete_edm = FALSE, which_plots = 7:8)
 #'
 #' # Collinearity
-#' glm_diagnostic_plots(model, discrete_edm = FALSE, which_plots = 9, n_columns = 1)
-glm_diagnostic_plots <- function(model,
-                                 discrete_edm,
-                                 which_plots = 1:4,
-                                 cooksD_type = 1,
-                                 standard_errors = FALSE,
-                                 point_size = 1.1,
-                                 theme_color = "#008EA0FF",
-                                 n_columns = 2) {
+#' gg_glm(model, discrete_edm = FALSE, which_plots = 9, n_columns = 1)
+gg_glm <- function(model,
+                   discrete_edm,
+                   which_plots = 1:4,
+                   cooksD_type = 1,
+                   standard_errors = FALSE,
+                   point_size = 1.1,
+                   theme_color = "#008EA0FF",
+                   n_columns = 2) {
 
   if (!inherits(model, "glm")) {
-
     stop("Model should be of class glm")
-
   } else {
-
     if (!is.logical(discrete_edm)) {
       stop("Input for discrete_edm argument must be logical: TRUE or FALSE")
     }
-
-    # Avoid adding these packages under Imports in Description file
     insight::check_if_installed(c("gridExtra","ggrepel"))
 
     # Calculate the residuals
@@ -218,7 +213,7 @@ glm_diagnostic_plots <- function(model,
 
     # Detect outliers with studentized residuals > 3
     df$outlier.detect <- ifelse(abs(df$.resid.deviance.std) > 3 | abs(df$.resid.quantile.std) > 3,
-                        rownames(df), NA)
+                                rownames(df), NA)
 
     outlier_student <-
       ggplot(data = df,

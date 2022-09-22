@@ -224,16 +224,16 @@ gg_boxplots(data,response = 'len',
 model <- lm(mpg ~ wt + am + gear + vs * cyl, data = mtcars)
 ```
 
-The default plots in `diagnostic_plots()` are the first four in the list mentioned above. However, one can choose any of the six plots they need. For example if one needs all six plots use `which_plots=1:6`. 
+The default plots in `gg_lm()` are the first four in the list mentioned above. However, one can choose any of the six plots they need. For example if one needs all six plots use `which_plots=1:6`. 
 
 ```{r,fig.height=8,fig.width=9}
-diagnostic_plots(model, which_plots=1:6)
+gg_lm(model, which_plots=1:6)
 ```
 
 Another example, if one simply requires the  Residual vs. Fitted Values and Cook's Distance plots, use `which_plots = c(1,5)`. If one wants to display confidence intervals, use `standard_error=TRUE` 
 
 ```{r,fig.height=6,fig.width=9}
-diagnostic_plots(model, which_plots=c(1,5),
+gg_lm(model, which_plots=c(1,5),
                  standard_errors = TRUE)
 ```
 
@@ -253,26 +253,26 @@ diagnostic_plots(model, which_plots=c(1,5),
 glm_model <- glm(Volume ~ Girth + Height, family = Gamma(link = "log"), data = trees)
 ```
 
-The default plots in `glm_diagnostic_plots()` is the first four in the list mentioned above. Besides specifying the model, one needs to also exclusively mention whether the EDM family used in the model is discrete or not (ie, continuous). The reason is that quantile residuals will be used when `discrete_edm = TRUE` as they are prefered over Pearson or Deviance (default in R) residuals for plotting purposes for discrete EDMs (ie, it is easier to detect patterns).
+The default plots in `gg_glm()` is the first four in the list mentioned above. Besides specifying the model, one needs to also exclusively mention whether the EDM family used in the model is discrete or not (ie, continuous). The reason is that quantile residuals will be used when `discrete_edm = TRUE` as they are prefered over Pearson or Deviance (default in R) residuals for plotting purposes for discrete EDMs (ie, it is easier to detect patterns).
 
 One can display confidence intervals using `standard_error = TRUE`. Also, it is possible to specify the line width in characters for the title and subtitle of the plots using `text_width = 25`.
 
 ```{r glm-model-2,fig.height=8,fig.width=9}
-glm_diagnostic_plots(glm_model, discrete_edm = FALSE)
+gg_glm(glm_model, discrete_edm = FALSE)
 ```
 
-There seems to be a non-linear trend in the 'Residuals vs Fitted' plot above. This means that the systematic component of the GLM can be improved. This would usually involve changing the link function, adding new predictor variables, or trasnforming the current predictors. The 'Working Responses vs Link Predictors' looks linear, so the chosen link function seems to be appropriate. One can log transform the predictor variables and recheck the graphs.
+There seems to be a non-linear trend in the 'Residuals vs Fitted' plot above. This means that the systematic component of the GLM can be improved. This would usually involve changing the link function, adding new predictor variables, or transforming the current predictors. The 'Working Responses vs Link Predictors' looks linear, so the chosen link function seems to be appropriate. One can log transform the predictor variables and recheck the graphs.
 
 ```{r glm-model-3,fig.height=6,fig.width=8}
 glm_model_2 <- glm(Volume ~ log(Girth) + log(Height), family = Gamma(link = "log"), data = trees)
 
-glm_diagnostic_plots(glm_model_2, discrete_edm = FALSE, standard_errors = TRUE)
+gg_glm(glm_model_2, discrete_edm = FALSE, standard_errors = TRUE)
 ```
 
 The new 'Residuals vs Fitted' graph above looks better (ie, no trends). There are 9 total plots in this function, and it is encouraged to go through them in the following sequence to avoid any graphing errors: "1:4", "5:6", "7:8", "9".
 
 ```{r glm-model-4,fig.height=8,fig.width=9}
-glm_diagnostic_plots(glm_model_2, discrete_edm = FALSE, which_plots = 7:8)
+gg_glm(glm_model_2, discrete_edm = FALSE, which_plots = 7:8)
 ```
 
 ## Half-Normal Plot

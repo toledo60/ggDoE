@@ -38,15 +38,15 @@
 #'
 #' @examples
 #' model <- lm(mpg ~ wt + am + gear + vs * cyl, data = mtcars)
-#' diagnostic_plots(model,which_plots=1:6)
-diagnostic_plots <- function(model,which_plots = 1:4,
-                              cooksD_type = 1,
-                              standard_errors=FALSE,
-                              point_size=1.5,
-                              theme_color = "#21908CFF",
-                              n_columns=2){
+#' gg_lm(model,which_plots=1:6)
+gg_lm <- function(model,which_plots = 1:4,
+                  cooksD_type = 1,
+                  standard_errors=FALSE,
+                  point_size=1.5,
+                  theme_color = "#21908CFF",
+                  n_columns=2){
   if (!inherits(model, "lm")) {
-    stop("model should be of class lm or glm")
+    stop("model should be of class lm")
   }else{
     insight::check_if_installed(c('gridExtra','ggrepel'))
     df <- model$model
