@@ -91,16 +91,14 @@ data <- ToothGrowth
 data$dose <- factor(data$dose,levels = c(0.5, 1, 2),
                     labels = c("D0.5", "D1", "D2"))
 
-gg_boxplots(data,response = 'len',
-            factor = 'dose')
+gg_boxplots(data,y = 'len',x = 'dose')
 ```
 
 ![](man/figures/boxplot1.png)
 
 
 ```{r}
-gg_boxplots(data,response = 'len',
-            factor = 'dose',
+gg_boxplots(data,y = 'len',x = 'dose',
             group_var = 'supp',
             color_palette = 'viridis',
             jitter_points = TRUE)

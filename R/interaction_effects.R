@@ -18,12 +18,12 @@
 #' @examples
 #' interaction_effects(adapted_epitaxial,response = 'ybar',exclude_vars = c('s2','lns2'))
 interaction_effects <- function(design,response,
-                                 exclude_vars=c(),
-                                 linetypes = c('solid','dashed'),
-                                 colors = c("#4260c9" ,"#d6443c"),
-                                 n_columns=2,
-                                 showplot=TRUE){
-  insight::check_if_installed('gridExtra')
+                                exclude_vars=c(),
+                                linetypes = c('solid','dashed'),
+                                colors = c("#4260c9" ,"#d6443c"),
+                                n_columns=2,
+                                showplot=TRUE){
+  insight::check_if_installed('patchwork')
 
   design <- data.table(design)
   factor_names <- setdiff(names(design),c(response,exclude_vars))
@@ -85,8 +85,8 @@ interaction_effects <- function(design,response,
              shape=interactions[i,2]
         )
     }
-    return(gridExtra::grid.arrange(grobs=plot_list,
-                                   ncol=n_columns))
+    return(patchwork::wrap_plots(plot_list,
+                                 ncol = n_columns))
   }
   else{
     return(dat_list)

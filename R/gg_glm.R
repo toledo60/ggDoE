@@ -97,7 +97,7 @@ gg_glm <- function(model,
     if (!is.logical(discrete_edm)) {
       stop("Input for discrete_edm argument must be logical: TRUE or FALSE")
     }
-    insight::check_if_installed(c("gridExtra","ggrepel"))
+    insight::check_if_installed(c("patchwork","ggrepel"))
 
     # Calculate the residuals
     df <- model$model
@@ -347,6 +347,7 @@ gg_glm <- function(model,
 
     names(plot_list) <- c("rf", "wp", "qq", "od_s", "od_h", "od_c", "cd", "df", "vi")
 
-    return(suppressMessages(gridExtra::grid.arrange(grobs = plot_list[which_plots], ncol = n_columns)))
+    return(patchwork::wrap_plots(plot_list[which_plots],
+                                 ncol = n_columns))
   }
 }

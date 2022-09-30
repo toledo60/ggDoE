@@ -78,15 +78,13 @@ data <- ToothGrowth
 data$dose <- factor(data$dose,levels = c(0.5, 1, 2),
                     labels = c("D0.5", "D1", "D2"))
 
-gg_boxplots(data,response = 'len',
-            factor = 'dose')
+gg_boxplots(data,y = 'len',x = 'dose')
 ```
 
 ![](man/figures/boxplot1.png)
 
 ``` r
-gg_boxplots(data,response = 'len',
-            factor = 'dose',
+gg_boxplots(data,y = 'len',x = 'dose',
             group_var = 'supp',
             color_palette = 'viridis',
             jitter_points = TRUE)
@@ -271,21 +269,26 @@ context, run the following code in your `R` console
 citation('ggDoE')
 ```
 
+    Warning in citation("ggDoE"): no date field in DESCRIPTION file of package
+    'ggDoE'
+
+    Warning in citation("ggDoE"): could not determine year for 'ggDoE' from package
+    DESCRIPTION file
+
 
     To cite package 'ggDoE' in publications use:
 
-      Toledo Luna J (2022). _ggDoE: Modern Graphs for Design of Experiments
-      with 'ggplot2'_. R package version 0.7.8,
-      <https://CRAN.R-project.org/package=ggDoE>.
+      Toledo Luna J (????). _ggDoE: Modern Graphs for Design of Experiments
+      with 'ggplot2'_. R package version 0.7.9,
+      <https://ggdoe.netlify.app>.
 
     A BibTeX entry for LaTeX users is
 
       @Manual{,
         title = {ggDoE: Modern Graphs for Design of Experiments with 'ggplot2'},
         author = {Jose {Toledo Luna}},
-        year = {2022},
-        note = {R package version 0.7.8},
-        url = {https://CRAN.R-project.org/package=ggDoE},
+        note = {R package version 0.7.9},
+        url = {https://ggdoe.netlify.app},
       }
 
 ## Contributing to the package
