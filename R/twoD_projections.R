@@ -52,7 +52,7 @@ twoD_projections <- function(design,
          Matrix must be a latin hypercube with values between (0,1)')
   }
   else{
-    insight::check_if_installed('gridExtra')
+    insight::check_if_installed('patchwork')
     dat <- as.data.frame(design)
     two_combns <- t(combn(ncol(dat),2))
     two_combns_names <-t(combn(colnames(dat),2))
@@ -104,8 +104,8 @@ twoD_projections <- function(design,
       }
 
     }
-    return(gridExtra::grid.arrange(grobs=plot_list,
-                                   ncol=n_columns))
+    return(patchwork::wrap_plots(plot_list,
+                                 ncol = n_columns))
   }
 
 }

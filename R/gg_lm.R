@@ -48,7 +48,7 @@ gg_lm <- function(model,which_plots = 1:4,
   if (!inherits(model, "lm")) {
     stop("model should be of class lm")
   }else{
-    insight::check_if_installed(c('gridExtra','ggrepel'))
+    insight::check_if_installed(c('patchwork','ggrepel'))
     df <- model$model
     df$.fitted <- model$fitted.values
     df$.resid <- model$residuals
@@ -81,7 +81,8 @@ gg_lm <- function(model,which_plots = 1:4,
                               aes_string(y = '.resid', x = '.fitted')) +
       geom_point(size=point_size,shape=1) +
       geom_smooth(fill="#d9d9d9",se=standard_errors,
-                  color = theme_color,size=1.1)+
+                  color = theme_color,size=1.1,
+                  method = 'loess',formula = 'y ~ x')+
       geom_hline(yintercept = 0,linetype='dashed')+
       labs(y = "Residuals", x = "Fitted Values",
            title = "Residual vs. Fitted Value") +
@@ -125,7 +126,8 @@ gg_lm <- function(model,which_plots = 1:4,
                                                   x = '.fitted')) +
       geom_point(size = point_size,shape=1) +
       geom_smooth(method = 'loess',se=standard_errors,
-                  size = 1.1, color = theme_color,fill="#d9d9d9") +
+                  size = 1.1, color = theme_color,
+                  fill="#d9d9d9",formula = 'y ~ x') +
       labs(y=expression(sqrt("|Standardized Residuals|")),
            x = "Fitted Values",
            title = "Scale-Location Plot")+
@@ -228,7 +230,7 @@ gg_lm <- function(model,which_plots = 1:4,
         geom_point(size = point_size,shape=1) +
         geom_smooth(method = 'loess',se=standard_errors,
                     color = theme_color ,fill="#d9d9d9",
-                    size = 1.1) +
+                    size = 1.1,formula = 'y ~ x') +
         labs(y = "Standardized Residuals", x = "Leverage",
              title = 'Residual vs. Leverage')+
         theme_bw_nogrid()
@@ -255,8 +257,8 @@ gg_lm <- function(model,which_plots = 1:4,
                                  theme_color = theme_color)
 
 
-      return(suppressMessages(gridExtra::grid.arrange(grobs=plot_list[which_plots],
-                                                      ncol=n_columns)))
+      return(patchwork::wrap_plots(plot_list[which_plots],
+                                   ncol = n_columns))
 
     }
     else{
@@ -268,8 +270,8 @@ gg_lm <- function(model,which_plots = 1:4,
       plot_list[[5]] <- vif_plot(model,point_size=point_size,
                                  theme_color = theme_color)
 
-      return(suppressMessages(gridExtra::grid.arrange(grobs=plot_list[which_plots],
-                                                      ncol=n_columns)))
+      return(patchwork::wrap_plots(plot_list[which_plots],
+                                   ncol = n_columns))
     }
   }
 }

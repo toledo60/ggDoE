@@ -33,7 +33,7 @@ gg_rsm <- function(rsm_model,
   if(!inherits(rsm_model,'rsm')){
     stop("rsm_obj should be of class rsm")
   }
-  insight::check_if_installed(c('metR','gridExtra'))
+  insight::check_if_installed(c('metR','patchwork'))
 
   rsm_contour <- contour(rsm_model, form, plot=FALSE,
                          decode=decode,
@@ -93,6 +93,6 @@ gg_rsm <- function(rsm_model,
         )
     }
   }
-  return(gridExtra::grid.arrange(grobs = cplots,
-                                 ncol=n_columns))
+  return(patchwork::wrap_plots(cplots,
+                               ncol = n_columns))
 }

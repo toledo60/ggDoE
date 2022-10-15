@@ -6,8 +6,8 @@
 \usage{
 gg_boxplots(
   data,
-  response,
-  factor,
+  x,
+  y,
   group_var = NULL,
   jitter_points = FALSE,
   horizontal = FALSE,
@@ -21,9 +21,9 @@ gg_boxplots(
 \arguments{
 \item{data}{provided dataset}
 
-\item{response}{A character string indicating the response of the data}
+\item{x}{A character string indicating the factor of the data}
 
-\item{factor}{A character string indicating the factor of the data}
+\item{y}{A character string indicating the response of the data}
 
 \item{group_var}{A character string indicating the groups for facet_wrap}
 
@@ -50,7 +50,7 @@ Boxplots using ggplot2
 \examples{
 data <- ToothGrowth
 data$dose <- factor(data$dose,levels = c(0.5, 1, 2),labels = c("D0.5", "D1", "D2"))
-gg_boxplots(data,response = "len",factor = "dose",alpha=0.6)
-gg_boxplots(data,response = "len",factor = "dose",group_var = "supp",
+gg_boxplots(data,y= "len",x= "dose",alpha=0.6)
+gg_boxplots(data,y = "len",x= "dose",group_var = "supp",
 alpha=0.6,color_palette = 'viridis',jitter_points=TRUE)
 }

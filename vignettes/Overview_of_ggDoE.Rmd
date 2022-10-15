@@ -178,8 +178,7 @@ lambda_plot(model, showplot=FALSE)
 
 ## Boxplots
 
-Using `gg_boxplots()` constructs boxplots making it easy to visually compare the shape, the central tendency, and the variability of the samples. It is important to note the `response` and `factor` arguments
-for `gg_boxplots()` must be unquoted. 
+Using `gg_boxplots()` constructs boxplots making it easy to visually compare the shape, the central tendency, and the variability of the samples.
 
 ```{r}
 data <- ToothGrowth
@@ -194,21 +193,19 @@ head(data)
 
 
 ```{r}
-gg_boxplots(data,response = 'len',
-            factor = 'dose')
+gg_boxplots(data,x = 'dose',y = 'len')
 ```
 
 We can group each sample using the `group_var` argument, again this argument must be unquoted. With `color_palette` we can change the color palette for each of the boxplots.  With `color_palette` eight options are available: *"viridis","cividis","magma","inferno","plasma","rocket","mako","turbo"*. Lastly,
 one can overlay jittered points to each boxplot using `jitter_points=TRUE`.
 
 ```{r,fig.height=5,fig.width=7}
-gg_boxplots(data,response = 'len',
-            factor = 'dose',
+gg_boxplots(data,x = 'dose',
+            y = 'len',
             group_var = 'supp',
             color_palette = 'viridis',
             jitter_points = TRUE)
 ```
-
 
 
 ## Regression Diagnostic Plots

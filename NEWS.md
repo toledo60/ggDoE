@@ -2,7 +2,12 @@
 
 BREAKING
 
-* renamed `diagnostic_plots()` to `gg_lm()`s
+* renamed `diagnostic_plots()` to `gg_lm()`
+* renamed `gg_boxplots()` arguments `factor`,`response` to `x`,`y`, respectively.
+
+MINOR CHANGES
+
+* switched `gridExtra` to `patchwork`. No functionality change.
 
 # ggDoE 0.7.8
 
