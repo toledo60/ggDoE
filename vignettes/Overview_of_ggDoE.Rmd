@@ -231,46 +231,9 @@ Another example, if one simply requires the  Residual vs. Fitted Values and Cook
 
 ```{r,fig.height=6,fig.width=9}
 gg_lm(model, which_plots=c(1,5),
-                 standard_errors = TRUE)
+      standard_errors = TRUE)
 ```
 
-## GLM Diagnostic Plots
-
-1. Residual vs. Fitted Values  
-2. Working Responses vs Linear Predictors  
-3. Normal Q-Q plot  
-4. Outlier Detection  
-5. Half norm plot using leverages  
-6. Half norm plot using Cook's Distance  
-7. Cook's Distance  
-8. DFFITS  
-9. Collinearity  
-
-```{r glm-model-1,fig.height=6,fig.width=8}
-glm_model <- glm(Volume ~ Girth + Height, family = Gamma(link = "log"), data = trees)
-```
-
-The default plots in `gg_glm()` is the first four in the list mentioned above. Besides specifying the model, one needs to also exclusively mention whether the EDM family used in the model is discrete or not (ie, continuous). The reason is that quantile residuals will be used when `discrete_edm = TRUE` as they are prefered over Pearson or Deviance (default in R) residuals for plotting purposes for discrete EDMs (ie, it is easier to detect patterns).
-
-One can display confidence intervals using `standard_error = TRUE`. Also, it is possible to specify the line width in characters for the title and subtitle of the plots using `text_width = 25`.
-
-```{r glm-model-2,fig.height=8,fig.width=9}
-gg_glm(glm_model, discrete_edm = FALSE)
-```
-
-There seems to be a non-linear trend in the 'Residuals vs Fitted' plot above. This means that the systematic component of the GLM can be improved. This would usually involve changing the link function, adding new predictor variables, or transforming the current predictors. The 'Working Responses vs Link Predictors' looks linear, so the chosen link function seems to be appropriate. One can log transform the predictor variables and recheck the graphs.
-
-```{r glm-model-3,fig.height=6,fig.width=8}
-glm_model_2 <- glm(Volume ~ log(Girth) + log(Height), family = Gamma(link = "log"), data = trees)
-
-gg_glm(glm_model_2, discrete_edm = FALSE, standard_errors = TRUE)
-```
-
-The new 'Residuals vs Fitted' graph above looks better (ie, no trends). There are 9 total plots in this function, and it is encouraged to go through them in the following sequence to avoid any graphing errors: "1:4", "5:6", "7:8", "9".
-
-```{r glm-model-4,fig.height=8,fig.width=9}
-gg_glm(glm_model_2, discrete_edm = FALSE, which_plots = 7:8)
-```
 
 ## Half-Normal Plot
 

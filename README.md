@@ -10,13 +10,13 @@ status](https://www.r-pkg.org/badges/version/ggDoE)](https://cran.r-project.org/
 
 You can install:
 
--   the latest release from CRAN with
+- the latest release from CRAN with
 
 ``` r
 install.packages('ggDoE')
 ```
 
--   the development version from GitHub with
+- the development version from GitHub with
 
 ``` r
 if (!require("remotes")) install.packages("remotes")
@@ -109,27 +109,6 @@ gg_lm(model,which_plots=1:6)
 ```
 
 ![](man/figures/diagnostic_plots.png)
-
-**GLM Diagnostic Plots**
-
-1.  Residual vs. Fitted Values  
-2.  Working Responses vs Linear Predictors  
-3.  Normal Q-Q plot  
-4.  Outlier Detection  
-5.  Half norm plot using leverages  
-6.  Half norm plot using Cook’s Distance  
-7.  Cook’s Distance  
-8.  DFFITS  
-9.  Collinearity
-
-The default plots are 1-4
-
-``` r
-glm_model <- glm(Volume ~ log(Girth) + log(Height), family = Gamma(link = "log"), data = trees)
-gg_glm(glm_model, discrete_edm = FALSE, which_plots = c(1:4, 7:8))
-```
-
-![](man/figures/glm_diagnostic_plots.png)
 
 **Half-Normal Plot**
 
@@ -247,18 +226,18 @@ twoD_projections(X,n_columns=3,grid = TRUE)
 
 Lastly, the following datasets/designs are included in ggDoE as tibbles:
 
--   **adapted_epitaxial**: Adapted epitaxial layer experiment obtain
-    from the book <br> *“Experiments: Planning, Analysis, and
-    Optimization, 2nd Edition”*
+- **adapted_epitaxial**: Adapted epitaxial layer experiment obtain from
+  the book <br> *“Experiments: Planning, Analysis, and Optimization, 2nd
+  Edition”*
 
--   **original_epitaxial**: Original epitaxial layer experiment obtain
-    from the book <br> *“Experiments: Planning, Analysis, and
-    Optimization, 2nd Edition”*
+- **original_epitaxial**: Original epitaxial layer experiment obtain
+  from the book <br> *“Experiments: Planning, Analysis, and
+  Optimization, 2nd Edition”*
 
--   **aliased_design**: D-efficient minimal aliasing design obtained
-    from the article <br> *“Efficient Designs With Minimal Aliasing by
-    Bradley Jones and Christopher J. Nachtsheim”* <br> *Source:*
-    <https://www.tandfonline.com/doi/abs/10.1198/TECH.2010.09113>
+- **aliased_design**: D-efficient minimal aliasing design obtained from
+  the article <br> *“Efficient Designs With Minimal Aliasing by Bradley
+  Jones and Christopher J. Nachtsheim”* <br> *Source:*
+  <https://www.tandfonline.com/doi/abs/10.1198/TECH.2010.09113>
 
 ## Citation
 
@@ -272,13 +251,10 @@ citation('ggDoE')
     Warning in citation("ggDoE"): no date field in DESCRIPTION file of package
     'ggDoE'
 
-    Warning in citation("ggDoE"): could not determine year for 'ggDoE' from package
-    DESCRIPTION file
-
 
     To cite package 'ggDoE' in publications use:
 
-      Toledo Luna J (????). _ggDoE: Modern Graphs for Design of Experiments
+      Toledo Luna J (2022). _ggDoE: Modern Graphs for Design of Experiments
       with 'ggplot2'_. R package version 0.7.9,
       <https://ggdoe.netlify.app>.
 
@@ -287,6 +263,7 @@ citation('ggDoE')
       @Manual{,
         title = {ggDoE: Modern Graphs for Design of Experiments with 'ggplot2'},
         author = {Jose {Toledo Luna}},
+        year = {2022},
         note = {R package version 0.7.9},
         url = {https://ggdoe.netlify.app},
       }

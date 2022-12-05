@@ -125,26 +125,6 @@ gg_lm(model,which_plots=1:6)
 
 ![](man/figures/diagnostic_plots.png)
 
-**GLM Diagnostic Plots**
-
-1. Residual vs. Fitted Values  
-2. Working Responses vs Linear Predictors  
-3. Normal Q-Q plot  
-4. Outlier Detection  
-5. Half norm plot using leverages  
-6. Half norm plot using Cook's Distance  
-7. Cook's Distance  
-8. DFFITS  
-9. Collinearity  
-
-The default plots are 1-4
-
-```{r,fig.height=10,fig.width=8}
-glm_model <- glm(Volume ~ log(Girth) + log(Height), family = Gamma(link = "log"), data = trees)
-gg_glm(glm_model, discrete_edm = FALSE, which_plots = c(1:4, 7:8))
-```
-
-![](man/figures/glm_diagnostic_plots.png)
 
 **Half-Normal Plot**
 
