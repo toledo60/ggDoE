@@ -33,7 +33,7 @@ Suggests:
     metR,
     rsm,
     lhs
-RoxygenNote: 7.2.2
+RoxygenNote: 7.2.3
 Depends: 
     R (>= 3.3.0)
 VignetteBuilder: knitr

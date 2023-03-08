@@ -4,6 +4,7 @@ BREAKING
 
 * renamed `diagnostic_plots()` to `gg_lm()`
 * renamed `gg_boxplots()` arguments `factor`,`response` to `x`,`y`, respectively.
+* renamed `twoD_projections()` to `pair_plots()`
 
 MINOR CHANGES
 

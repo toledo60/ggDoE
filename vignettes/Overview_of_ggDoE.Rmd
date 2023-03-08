@@ -369,20 +369,19 @@ pareto_plot(m1,method='Daniel',
 
 This function will output all two dimensional projections from a Latin hypercube design.
 
-Below is an example from generating a random Latin hypercube design using the R package
-`lhs`
+Below is an example from generating a random Latin hypercube design using the R package `lhs`
 
 ```{r,fig.height=6,fig.width=8}
 set.seed(10)
 random_LHS <- lhs::randomLHS(n=15, k=4)
-twoD_projections(random_LHS,n_columns=3,grid = TRUE)
+pair_plots(random_LHS,n_columns=3,grid = TRUE)
 ```
 
 Below is an example of a maximin Latin hypercube design with red color points and no grid (default setting)
 
 ```{r,fig.height=6,fig.width=8}
 maximin_LHS <- lhs::maximinLHS(n=15, k=4)
-twoD_projections(maximin_LHS,n_columns=3,point_color = 'red')
+pair_plots(maximin_LHS,n_columns=3,point_color = 'red')
 ```
 
 

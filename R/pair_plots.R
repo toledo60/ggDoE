@@ -15,13 +15,13 @@
 #' @examples
 #' set.seed(10)
 #' X <- lhs::randomLHS(n=15,k=4)
-#' twoD_projections(X,n_columns = 3,grid = TRUE)
-#' twoD_projections(X,n_columns = 2,point_color='red')
-twoD_projections <- function(design,
-                             point_color="#21908CFF",
-                             grid=FALSE,
-                             point_size = 1.5,
-                             n_columns=2){
+#' pair_plots(X,n_columns = 3,grid = TRUE)
+#' pair_plots(X,n_columns = 2,point_color='red')
+pair_plots <- function(design,
+                       point_color="#21908CFF",
+                       grid=FALSE,
+                       point_size = 1.5,
+                       n_columns=2){
   check_LHD <- function(design)
   {
     # This function was taken from the following stackexchange question:

@@ -257,7 +257,7 @@ This function will output all two dimensional projections from a Latin hypercube
 ```{r}
 set.seed(10)
 X <- lhs::randomLHS(n=10, k=4)
-twoD_projections(X,n_columns=3,grid = TRUE)
+pair_plots(X,n_columns=3,grid = TRUE)
 ```
 
 ![](man/figures/twoD_projections.png)
@@ -271,8 +271,7 @@ Lastly, the following datasets/designs are included in ggDoE as tibbles:
 *"Experiments: Planning, Analysis, and Optimization, 2nd Edition"*
 
 - **aliased_design**: D-efficient minimal aliasing design obtained from the article  <br>
-*"Efficient Designs With Minimal Aliasing by Bradley Jones and Christopher J. Nachtsheim"* <br>
-*Source:* <https://www.tandfonline.com/doi/abs/10.1198/TECH.2010.09113>
+*"Efficient Designs With Minimal Aliasing by Bradley Jones and Christopher J. Nachtsheim"* 
 
 ## Citation
 

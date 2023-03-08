@@ -219,7 +219,7 @@ hypercube design
 ``` r
 set.seed(10)
 X <- lhs::randomLHS(n=10, k=4)
-twoD_projections(X,n_columns=3,grid = TRUE)
+pair_plots(X,n_columns=3,grid = TRUE)
 ```
 
 ![](man/figures/twoD_projections.png)
@@ -236,8 +236,7 @@ Lastly, the following datasets/designs are included in ggDoE as tibbles:
 
 - **aliased_design**: D-efficient minimal aliasing design obtained from
   the article <br> *“Efficient Designs With Minimal Aliasing by Bradley
-  Jones and Christopher J. Nachtsheim”* <br> *Source:*
-  <https://www.tandfonline.com/doi/abs/10.1198/TECH.2010.09113>
+  Jones and Christopher J. Nachtsheim”*
 
 ## Citation
 
@@ -251,10 +250,13 @@ citation('ggDoE')
     Warning in citation("ggDoE"): no date field in DESCRIPTION file of package
     'ggDoE'
 
+    Warning in citation("ggDoE"): could not determine year for 'ggDoE' from package
+    DESCRIPTION file
+
 
     To cite package 'ggDoE' in publications use:
 
-      Toledo Luna J (2022). _ggDoE: Modern Graphs for Design of Experiments
+      Toledo Luna J (????). _ggDoE: Modern Graphs for Design of Experiments
       with 'ggplot2'_. R package version 0.7.9,
       <https://ggdoe.netlify.app>.
 
@@ -263,7 +265,6 @@ citation('ggDoE')
       @Manual{,
         title = {ggDoE: Modern Graphs for Design of Experiments with 'ggplot2'},
         author = {Jose {Toledo Luna}},
-        year = {2022},
         note = {R package version 0.7.9},
         url = {https://ggdoe.netlify.app},
       }
