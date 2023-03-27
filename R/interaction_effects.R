@@ -14,7 +14,7 @@
 #' @importFrom ggplot2 aes geom_line geom_point theme labs element_rect scale_linetype_manual sym
 #' @importFrom ggplot2 scale_color_manual theme_bw ylim element_blank
 #' @importFrom utils combn
-#' @importFrom data.table data.table .SD
+#' @importFrom stats aggregate
 #' @examples
 #' interaction_effects(adapted_epitaxial,response = 'ybar',exclude_vars = c('s2','lns2'))
 interaction_effects <- function(design,response,
@@ -25,28 +25,20 @@ interaction_effects <- function(design,response,
                                 showplot=TRUE){
   insight::check_if_installed('patchwork')
 
-  design <- data.table(design)
   factor_names <- setdiff(names(design),c(response,exclude_vars))
+  design[,factor_names] <- lapply(design[,factor_names], as.factor)
 
-  group_mean <- function(DT, response_var, group_by){
-    return(DT[,.(mean_response=mean(.SD[[1]])),
-              by= group_by, .SDcols = response_var
-    ])
-  }
-  convert_to_factors <- function(DT, cols) {
-    return(DT[,(cols) := lapply(.SD, 'as.factor'), .SDcols = cols])
-  }
   interactions <- t(combn(factor_names,2))
   n_iteractions <- nrow(interactions)
-
   dat_list <- vector('list',length = n_iteractions)
-  convert_to_factors(design,cols = factor_names)
 
   for (i in 1:n_iteractions) {
-    dat_list[[i]] <- group_mean(DT=design,
-                                group_by = c(interactions[i,1],
-                                             interactions[i,2]),
-                                response_var=response)
+    dat_list[[i]] <- aggregate(design[response],
+                               by = list(design[[interactions[i,1]]],
+                                         design[[interactions[i,2]]]),
+                               FUN = mean)
+    colnames(dat_list[[i]]) <- c(interactions[i,1],interactions[i,2],
+                                 'mean_response')
   }
 
   if(!showplot){
@@ -54,7 +46,6 @@ interaction_effects <- function(design,response,
   }
   else{
     vals <- c()
-
     for(i in 1:n_iteractions){
       vals <- c(vals,dat_list[[i]][[3]])
     }
@@ -91,6 +82,5 @@ interaction_effects <- function(design,response,
                                  ncol = n_columns))
   }
 }
-
 
 

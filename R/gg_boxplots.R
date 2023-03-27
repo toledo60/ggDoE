@@ -22,8 +22,7 @@
 #' gg_boxplots(data,y = "len",x= "dose",group_var = "supp",
 #' alpha=0.6,color_palette = 'viridis',jitter_points=TRUE)
 #' @importFrom ggplot2 aes geom_boxplot guides stat_summary coord_flip sym
-#' @importFrom ggplot2  facet_wrap scale_color_manual geom_jitter position_jitterdodge
-#' @importFrom data.table data.table .SD
+#' @importFrom ggplot2 facet_wrap scale_color_manual geom_jitter position_jitterdodge
 gg_boxplots <- function(data,x,y,
                         group_var = NULL,
                         jitter_points = FALSE,
@@ -34,13 +33,8 @@ gg_boxplots <- function(data,x,y,
                         direction=1,
                         show_mean=FALSE){
 
-  dat <- data.table(data)
-
-  select_columns <- function(DT,cols){
-    return(DT[,.SD, .SDcols = cols])
-  }
-
-  factor_vec <- select_columns(dat,x)
+  dat <- data.frame(data)
+  factor_vec <- dat[, x, drop = FALSE]
 
   if(!is.na(color_palette)){
 
@@ -69,8 +63,7 @@ gg_boxplots <- function(data,x,y,
     return(p)
   }
   else{
-    dat[, group_var := group_var]
+    dat[,group_var] <- factor(dat[,group_var])
     return(p+ facet_wrap(group_var))
   }
 }
-

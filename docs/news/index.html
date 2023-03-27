@@ -21,12 +21,6 @@
       <ul class="navbar-nav me-auto"><li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
-<li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/Overview_of_ggDoE.html">Overview of ggDoE</a>
-  </div>
-</li>
 <li class="active nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
@@ -58,9 +52,12 @@
 <li>renamed <code><a href="../reference/gg_boxplots.html">gg_boxplots()</a></code> arguments <code>factor</code>,<code>response</code> to <code>x</code>,<code>y</code>, respectively.</li>
 <li>renamed <code>twoD_projections()</code> to <code><a href="../reference/pair_plots.html">pair_plots()</a></code>
 </li>
+</ul><p>CHANGES</p>
+<ul><li>removed <code>data.table</code> as a dependency. Now there are only two imports <code>ggplot2</code> and <code>insight</code>
+</li>
 </ul><p>MINOR CHANGES</p>
 <ul><li>switched <code>gridExtra</code> to <code>patchwork</code>. No functionality change.</li>
-<li>removed all <code><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string()</a></code> usage from the package, in favor of <code><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes()</a></code>. <code><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string()</a></code> was deprecated as of ggplot2 version 3.4.0. No functionality change</li>
+<li>removed all usage of deprecated functions <code><a href="https://ggplot2.tidyverse.org/reference/aes_.html" class="external-link">aes_string()</a></code> and <code>size</code> arguments from the package. These were deprecated as of ggplot2 version 3.4.0. No functionality change</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.7.8" id="ggdoe-078">ggDoE 0.7.8<a class="anchor" aria-label="anchor" href="#ggdoe-078"></a></h2><p class="text-muted">CRAN release: 2022-08-23</p>

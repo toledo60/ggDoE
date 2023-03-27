@@ -18,7 +18,6 @@ URL: https://ggdoe.netlify.app
 BugReports: https://github.com/toledo60/ggDoE/issues
 Imports: 
     ggplot2,
-    data.table,
     insight
 Suggests:
     knitr,
@@ -36,5 +35,4 @@ Suggests:
 RoxygenNote: 7.2.3
 Depends: 
     R (>= 3.3.0)
-VignetteBuilder: knitr
 Language: en-US

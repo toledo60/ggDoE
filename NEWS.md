@@ -6,10 +6,14 @@ BREAKING
 * renamed `gg_boxplots()` arguments `factor`,`response` to `x`,`y`, respectively.
 * renamed `twoD_projections()` to `pair_plots()`
 
+CHANGES
+
+* removed `data.table` as a dependency. Now there are only two imports `ggplot2` and `insight`
+
 MINOR CHANGES
 
 * switched `gridExtra` to `patchwork`. No functionality change.
-* removed all `aes_string()` usage from the package, in favor of `aes()`. `aes_string()` was deprecated as of ggplot2 version 3.4.0. No functionality change
+* removed all usage of deprecated functions `aes_string()` and `size` arguments  from the package. These were deprecated as of ggplot2 version 3.4.0. No functionality change
 
 # ggDoE 0.7.8
 

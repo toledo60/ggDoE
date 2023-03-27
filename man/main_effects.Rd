@@ -30,7 +30,7 @@ main_effects(
 
 \item{direction}{Sets the order of colors in the scale. If 1, the default, colors are ordered from darkest to lightest. If -1, the order of colors is reversed}
 
-\item{showplot}{logical indicating to show the main effect plots. If false, a list of tibbles is returned used to obtain the main effects for each factor. Default is TRUE}
+\item{showplot}{logical indicating to show the main effect plots. If false, a list of data.frames is returned used to obtain the main effects for each factor. Default is TRUE}
 }
 \value{
 Main effects plots, or a list of tibble with calculated main effects for each factors if showplot=FALSE.
