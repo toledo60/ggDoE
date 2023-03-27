@@ -7,7 +7,7 @@
 #' @param method Character value. Method to calculate PSE. Default is Lenth. Options include: Zahn, WZahn, Lenth, RMS, Dong, JuanPena, Daniel. See Details.
 #' @return A bar plot with ordered effects, margin of error (ME) and simultaneous margin of error (SME) cutoffs.
 #' @importFrom stats reorder coef
-#' @importFrom ggplot2 geom_hline geom_bar annotate labs coord_flip theme_classic aes_string scale_fill_discrete
+#' @importFrom ggplot2 geom_hline geom_bar annotate labs coord_flip theme_classic aes sym scale_fill_discrete
 #' @export
 #'
 #'
@@ -53,7 +53,6 @@
 #' m1 <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
 #' pareto_plot(m1)
 #' pareto_plot(m1,method='Zahn',alpha=0.1)
-#' pareto_plot(m1,margin_errors=FALSE)
 pareto_plot <- function(model,alpha=0.05,method='Lenth',
                         margin_errors=TRUE,showplot=TRUE){
   if (inherits(model, "lm")) {
@@ -76,9 +75,10 @@ pareto_plot <- function(model,alpha=0.05,method='Lenth',
 
   if(showplot){
     base_plot <- ggplot(sorted_dat,
-                        aes_string(x = paste0("reorder(",'effect_names',", abs_effects)"),
-                                   y = 'abs_effects',
-                                   fill = 'cols')) +
+                        aes(x = reorder(!!sym('effect_names'),
+                                        !!sym('abs_effects')),
+                            y = !!sym('abs_effects'),
+                            fill = !!sym('cols'))) +
       geom_bar(stat = "identity")+
       theme_classic()+
       coord_flip()+

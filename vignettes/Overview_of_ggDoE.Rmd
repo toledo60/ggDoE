@@ -24,13 +24,12 @@ The *ggDoE* package provides an easy approach to creating commonly used graphs i
 3. [Lambda Plot](#lambda-plot)
 4. [Boxplots](#boxplots)
 5. [Regression Diagnostic Plots](#regression-diagnostic-plots)
-6. [GLM Diagnostic Plots](#glm-diagnostic-plots)
-7. [Half-Normal Plot](#half-normal-plot)
-8. [Interaction Effects Plot for a Factorial Design](#interaction-effects-plot-for-a-factorial-design)
-9. [Main Effects Plot for a Factorial Design](#main-effects-plot-for-a-factorial-design)
-10. [Contour Plots for Response Surface Methodology](#contour-plots-for-response-surface-methodology)
-11. [Pareto Plot](#pareto-plot)
-12. [Two Dimensional Projections of a Latin Hypercube Design](#two-dimensional-projections)
+6. [Half-Normal Plot](#half-normal-plot)
+7. [Interaction Effects Plot for a Factorial Design](#interaction-effects-plot-for-a-factorial-design)
+8. [Main Effects Plot for a Factorial Design](#main-effects-plot-for-a-factorial-design)
+9. [Contour Plots for Response Surface Methodology](#contour-plots-for-response-surface-methodology)
+10. [Pareto Plot](#pareto-plot)
+11. [Two Dimensional Projections of a Latin Hypercube Design](#two-dimensional-projections)
 
 
 The following datasets/designs are included in *ggDoE* as tibbles:

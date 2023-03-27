@@ -57,7 +57,6 @@ with weights decreasing linearly from m - .5 to .5, but bounded above by .65m}
 m1 <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
 pareto_plot(m1)
 pareto_plot(m1,method='Zahn',alpha=0.1)
-pareto_plot(m1,margin_errors=FALSE)
 }
 \references{
 Daniel, C (1959) Use of Half-Normal Plots in Interpreting Factorial Two-Level Experiments. Technometrics, 1(4), 311-341 \cr \cr

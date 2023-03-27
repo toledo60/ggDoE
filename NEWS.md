@@ -9,6 +9,7 @@ BREAKING
 MINOR CHANGES
 
 * switched `gridExtra` to `patchwork`. No functionality change.
+* removed all `aes_string()` usage from the package, in favor of `aes()`. `aes_string()` was deprecated as of ggplot2 version 3.4.0. No functionality change
 
 # ggDoE 0.7.8
 

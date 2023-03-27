@@ -54,8 +54,8 @@ where \eqn{R_j^2} is the coefficient of determination of a regression of predict
 A general rule of thumb is that VIFs exceeding 4 warrant further investigation, while VIFs exceeding 10 indicates a multicollinearity problem \cr \cr
 }
 \examples{
-model <- lm(mpg ~ wt + am + gear + vs * cyl, data = mtcars)
-gg_lm(model,which_plots=1:6)
+model <- lm(mpg ~ wt + am + gear, data = mtcars)
+gg_lm(model)
 }
 \references{
 Belsley, D. A., Kuh, E., and Welsch, R. E. (1980). Regression Diagnostics: Identifying Influential Data and Sources of Collinearity. New York: John Wiley & Sons.\cr

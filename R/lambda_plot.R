@@ -14,7 +14,7 @@
 #' @importFrom stats lm as.formula
 #' @importFrom utils stack
 #' @importFrom data.table data.table first last
-#' @importFrom ggplot2 aes_string scale_color_manual theme_bw element_blank labs
+#' @importFrom ggplot2 aes scale_color_manual theme_bw element_blank labs
 #' @examples
 #' mod <- lm(s2 ~ (A+B+C)^2,data=original_epitaxial)
 #' lambda_plot(mod)
@@ -96,9 +96,9 @@ lambda_plot <- function(model, lambda = seq(-2, 2, by = 0.1),
                                       alpha = alpha)
     }
 
-    plt <- ggplot(melted_t, aes_string(x='lambda', y="values",
-                                       colour="ind",
-                                       group="ind"))+
+    plt <- ggplot(melted_t, aes(x=!!sym('lambda'), y=!!sym("values"),
+                                       colour=!!sym("ind"),
+                                       group=!!sym("ind")))+
       geom_line()+
       ggrepel::geom_label_repel(data = label_left_main,aes(label=ind),
                                 max.overlaps = 15)+

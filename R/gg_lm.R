@@ -9,7 +9,7 @@
 #' @param theme_color Change color of the geom_smooth line and text labels for the respective diagnostic plot
 #' @param n_columns number of columns for grid layout. Default is 2
 #' @return Regression diagnostic plots
-#' @importFrom ggplot2 geom_smooth stat_qq geom_abline ylim aes_string geom_linerange geom_hline
+#' @importFrom ggplot2 geom_smooth stat_qq geom_abline ylim aes sym geom_linerange geom_hline
 #' @importFrom stats quantile lm.influence cooks.distance rstandard as.formula model.matrix
 #' @export
 #'
@@ -37,8 +37,8 @@
 #' Sheather, S. (2009). A modern approach to regression with R. Springer Science & Business Media.
 #'
 #' @examples
-#' model <- lm(mpg ~ wt + am + gear + vs * cyl, data = mtcars)
-#' gg_lm(model,which_plots=1:6)
+#' model <- lm(mpg ~ wt + am + gear, data = mtcars)
+#' gg_lm(model)
 gg_lm <- function(model,which_plots = 1:4,
                   cooksD_type = 1,
                   standard_errors=FALSE,
@@ -50,38 +50,39 @@ gg_lm <- function(model,which_plots = 1:4,
   }else{
     insight::check_if_installed(c('patchwork','ggrepel'))
     df <- model$model
-    df$.fitted <- model$fitted.values
-    df$.resid <- model$residuals
-    df$.hat <- lm.influence(model)$hat
-    df$.sigma <- lm.influence(model)$sigma
-    df$.cooksd <- cooks.distance(model)
     df$.std.resid <- rstandard(model)
 
     if(sum(is.na(df$.std.resid)) > 0){
       stop("Insufficient degrees of freedom, check your model. Can't obtain diagnostic plots")
     }
 
+    df$.fitted <- model$fitted.values
+    df$.resid <- model$residuals
+    df$.hat <- lm.influence(model)$hat
+    df$.sigma <- lm.influence(model)$sigma
+    df$.cooksd <- cooks.distance(model)
+
     p <- length(coef(model))
     n <- nrow(df)
+    row_names_df <- rownames(df)
 
-    res <-  df$.resid
     df$sqrt_abs_stdres <- sqrt(abs(df$.std.resid))
-    df$leverage <- ifelse(df$.hat  > 2 * p / n,rownames(df),NA)
-    df$outlier <- ifelse(abs(df$.std.resid) > 3,rownames(df),NA)
+    df$leverage <- ifelse(df$.hat  > 2 * p / n,row_names_df,NA)
+    df$outlier <- ifelse(abs(df$.std.resid) > 3,row_names_df,NA)
 
     plot_list <- vector(mode='list',length = 6)
 
     # Residuals vs fitted -----------------------------------------------------
 
-    limit <- max(abs(res))
+    limit <- max(abs(df$.resid))
     margin_factor <- 5
     margin <- round(limit / margin_factor)
 
     res_fitted_base <- ggplot(data = df,
-                              aes_string(y = '.resid', x = '.fitted')) +
+                              aes(y = !!sym('.resid'), x = !!sym('.fitted'))) +
       geom_point(size=point_size,shape=1) +
       geom_smooth(fill="#d9d9d9",se=standard_errors,
-                  color = theme_color,size=1.1,
+                  color = theme_color,linewidth=1.1,
                   method = 'loess',formula = 'y ~ x')+
       geom_hline(yintercept = 0,linetype='dashed')+
       labs(y = "Residuals", x = "Fitted Values",
@@ -98,7 +99,7 @@ gg_lm <- function(model,which_plots = 1:4,
         geom_point(size=point_size,shape=1,
                    color= ifelse(abs(df$.std.resid) > 3,
                                  theme_color,"black")) +
-        ggrepel::geom_label_repel(data = df,aes_string(label='outlier'),
+        ggrepel::geom_label_repel(data = df,aes(label=!!sym('outlier')),
                                   na.rm = TRUE,
                                   max.overlaps = 20,
                                   color="#21908CFF")
@@ -107,26 +108,26 @@ gg_lm <- function(model,which_plots = 1:4,
 
     # QQ-plot -----------------------------------------------------------------
 
-    slope <- (quantile(res, .75) - quantile(res, .25)) / (qnorm(.75) - qnorm(.25))
-    intercept <- quantile(res,.25) - slope*qnorm(.25)
+    slope <- (quantile(df$.resid, .75) - quantile(df$.resid, .25)) / (qnorm(.75) - qnorm(.25))
+    intercept <- quantile(df$.resid,.25) - slope*qnorm(.25)
     qq_line <- data.frame(intercept = intercept, slope = slope)
 
     qq_plot <- ggplot(data = model) +
-      stat_qq(aes_string(sample = 'res'), size=point_size,shape=1) +
+      stat_qq(aes(sample = df$.resid), size=point_size,shape=1) +
       labs(x = "Theoretical Quantile", y = "Standardized Residual",
            title = "Normal-QQ Plot") +
       geom_abline(data = qq_line ,aes(intercept = intercept ,slope = slope),
-                  color = theme_color, size = 1.1)+
+                  color = theme_color, linewidth = 1.1)+
       theme_bw_nogrid()
 
 
     # Scale-Location ----------------------------------------------------------
 
-    stdres_fitted <- ggplot(data = df, aes_string(y = 'sqrt_abs_stdres',
-                                                  x = '.fitted')) +
+    stdres_fitted <- ggplot(data = df, aes(y = !!sym('sqrt_abs_stdres'),
+                                           x = !!sym('.fitted'))) +
       geom_point(size = point_size,shape=1) +
       geom_smooth(method = 'loess',se=standard_errors,
-                  size = 1.1, color = theme_color,
+                  linewidth = 1.1, color = theme_color,
                   fill="#d9d9d9",formula = 'y ~ x') +
       labs(y=expression(sqrt("|Standardized Residuals|")),
            x = "Fitted Values",
@@ -135,31 +136,27 @@ gg_lm <- function(model,which_plots = 1:4,
 
     # Cooks Distance ----------------------------------------------------------
 
-    cooksd <- cooks.distance(model)
-
     h <- switch(cooksD_type,
                 '1' = 4/n,
                 '2' = 4 / (n - p - 1),
                 '3' = 1 / (n - p - 1),
-                '4' = 3 * mean(cooksd))
+                '4' = 3 * mean(df$.cooksd))
 
-    df$cooksD <- ifelse(cooksd > h,rownames(df),
-                        NA)
+    df$cooksD <- ifelse(df$.cooksd > h,row_names_df,NA)
 
-    limit <- max(cooksd, na.rm = T)
-    margin_factor <- 5
+    limit <- max(df$.cooksd, na.rm = T)
     margin <- round(limit / margin_factor)
     max_cook <- limit + margin
 
     .cooksd <- NULL
 
     cooksD_plot <- ggplot(data = df, aes(x=1:n,.cooksd, ymin = 0,
-                                         ymax = cooksd)) +
+                                         ymax = df$.cooksd)) +
       geom_point(size=point_size,shape=1) +
       geom_hline(yintercept = h,
                  color= theme_color,linetype=2)+
       geom_linerange(color='#bfbfbf') +
-      ggrepel::geom_label_repel(data = df,aes_string(label='cooksD'),
+      ggrepel::geom_label_repel(data = df,aes(label=!!sym('cooksD')),
                                 na.rm = TRUE,
                                 max.overlaps = 20,
                                 color=theme_color)+
@@ -178,10 +175,8 @@ gg_lm <- function(model,which_plots = 1:4,
       tolerane <- c()
 
       regress_i <- function(vars, data, i) {
-
         fm <- as.formula(paste0("`", vars[i], "` ", "~ ."))
         R2 <- summary(lm(fm, data = data))$r.squared
-
         return(1 - R2)
       }
 
@@ -210,7 +205,7 @@ gg_lm <- function(model,which_plots = 1:4,
         geom_hline(yintercept = 10,
                    color= theme_color,linetype=2)+
         ggrepel::geom_label_repel(data = results,
-                                  aes_string(label='high_VIF'),
+                                  aes(label=!!sym('high_VIF')),
                                   na.rm = TRUE,
                                   max.overlaps = 20,
                                   color=theme_color)+
@@ -225,12 +220,12 @@ gg_lm <- function(model,which_plots = 1:4,
 
     if( length(unique(round(df$.hat,4)))!=1 ){
 
-      stdres_leverage_base <- ggplot(data = df, aes_string(x = '.hat',
-                                                           y = '.std.resid')) +
+      stdres_leverage_base <- ggplot(data = df, aes(x = !!sym('.hat'),
+                                                    y = !!sym('.std.resid'))) +
         geom_point(size = point_size,shape=1) +
         geom_smooth(method = 'loess',se=standard_errors,
                     color = theme_color ,fill="#d9d9d9",
-                    size = 1.1,formula = 'y ~ x') +
+                    linewidth = 1.1,formula = 'y ~ x') +
         labs(y = "Standardized Residuals", x = "Leverage",
              title = 'Residual vs. Leverage')+
         theme_bw_nogrid()
@@ -242,7 +237,7 @@ gg_lm <- function(model,which_plots = 1:4,
         stdres_leverage <- stdres_leverage_base+
           geom_point(size=point_size,shape=1,
                      color= ifelse(df$.hat  > 2 * p / n,theme_color,"black"))+
-          ggrepel::geom_label_repel(data = df,aes_string(label='leverage'),
+          ggrepel::geom_label_repel(data = df,aes(label= !!sym('leverage')),
                                     na.rm = TRUE,
                                     max.iter = 20,
                                     color=theme_color)

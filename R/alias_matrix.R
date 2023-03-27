@@ -7,7 +7,7 @@
 #' @param alpha The alpha transparency, a number in [0,1]
 #' @param direction Sets the order of colors in the scale. If 1, the default, colors are ordered from darkest to lightest. If -1, the order of colors is reversed
 #' @param showplot logical indicating to show the correlation plot. If false, the correlation/alias matrix is returned. Default is TRUE
-#' @importFrom ggplot2 scale_fill_gradient2 geom_tile element_blank aes_string theme_minimal theme
+#' @importFrom ggplot2 scale_fill_gradient2 geom_tile element_blank aes theme_minimal theme
 #' @importFrom stats model.matrix cor
 #' @return correlation matrix between main effects and interaction effects from the model.matrix. Alias matrix is also returned
 #' @export
@@ -31,18 +31,20 @@ alias_matrix <- function(design,midpoint=0.5,
   A <- solve(t(linear_terms) %*% linear_terms) %*% t(linear_terms)%*%(bilinear_terms)
   Alias_mat <- round(A,digits = digits)[-1,]
 
-  if(showplot){
-
+  if(!showplot){
+    return(Alias_mat)
+  }
+  else{
     dat <- abs(cor(M[,-1]))
-    melted_cormat <- cbind(expand.grid(colnames(dat),rownames(dat)),
-                           'value'= as.vector(dat))
+    melted_cormat <- cbind.data.frame(expand.grid(colnames(dat),rownames(dat)),
+                                      'value'= as.vector(dat))
 
     colors <- viridisPalette(3,
                              color_palette = color_palette,
                              direction = direction,
                              alpha = alpha)
-
-    plt <- ggplot(data = melted_cormat, aes_string('Var1', 'Var2', fill = 'value'))+
+    plt <- ggplot(data = melted_cormat,
+                  aes(!!melted_cormat$Var1, !!melted_cormat$Var2, fill = !!melted_cormat$value))+
       geom_tile(color = "#001526")+
       scale_fill_gradient2(low = colors[1], mid = colors[2],high = colors[3],
                            midpoint = midpoint, limit = c(0,1), space = "Lab",
@@ -54,7 +56,5 @@ alias_matrix <- function(design,midpoint=0.5,
             panel.grid.minor = element_blank())
 
     return(plt)
-  }else{
-    return(Alias_mat)
   }
 }

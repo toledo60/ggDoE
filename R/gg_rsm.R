@@ -14,7 +14,7 @@
 #' @export
 #'
 #' @importFrom graphics contour
-#' @importFrom ggplot2 aes_string theme_bw theme_minimal labs element_blank element_text geom_contour geom_contour_filled
+#' @importFrom ggplot2 aes theme_bw theme_minimal labs element_blank element_text geom_contour geom_contour_filled
 
 #' @examples
 #' heli.rsm <- rsm::rsm(ave ~ SO(x1, x2, x3, x4),
@@ -57,7 +57,7 @@ gg_rsm <- function(rsm_model,
     for(i in 1:length(xvec)){
       df_list[[i]] <- cbind(expand.grid(xvec[[i]],yvec[[i]]),"z"=zvec[[i]])
 
-      cplots[[i]] <- ggplot(df_list[[i]], aes_string(x='Var1', y='Var2')) +
+      cplots[[i]] <- ggplot(df_list[[i]], aes(x=!!sym('Var1'), y=!!sym('Var2'))) +
         metR::geom_contour2(aes(z = z, label = ..level..))+
         theme_bw()+
         labs(caption=rsm_contour[[i]][[4]],
@@ -75,10 +75,10 @@ gg_rsm <- function(rsm_model,
       df_list[[i]] <- cbind(expand.grid(xvec[[i]],yvec[[i]]),"z"=zvec[[i]])
 
       cplots[[i]] <- ggplot(df_list[[i]],
-                            aes_string(x='Var1', y='Var2',z='z')) +
+                            aes(x=!!sym('Var1'), y=!!sym('Var2'),z=!!sym('z'))) +
         geom_contour_filled()+
         geom_contour(color = "black", size = 0.1)+
-        metR::geom_text_contour(aes_string(z = 'z'),
+        metR::geom_text_contour(aes(z = !!sym('z')),
                                 stroke = stroke,
                                 size=size)+
         theme_minimal()+

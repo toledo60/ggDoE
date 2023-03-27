@@ -21,7 +21,7 @@
 #' gg_boxplots(data,y= "len",x= "dose",alpha=0.6)
 #' gg_boxplots(data,y = "len",x= "dose",group_var = "supp",
 #' alpha=0.6,color_palette = 'viridis',jitter_points=TRUE)
-#' @importFrom ggplot2 aes geom_boxplot guides stat_summary coord_flip
+#' @importFrom ggplot2 aes geom_boxplot guides stat_summary coord_flip sym
 #' @importFrom ggplot2  facet_wrap scale_color_manual geom_jitter position_jitterdodge
 #' @importFrom data.table data.table .SD
 gg_boxplots <- function(data,x,y,
@@ -54,8 +54,7 @@ gg_boxplots <- function(data,x,y,
 
     factor_levels$colors <- color_choice
   }
-  p <- ggplot(dat, aes_string(x=x,y=y,
-                              color = x)) +
+  p <- ggplot(dat, aes(x=!!sym(x),y=!!sym(y),color = !!sym(x))) +
     geom_boxplot(alpha = alpha,
                  outlier.shape = NA) +
     {if(jitter_points)geom_jitter(alpha=0.4,size=3,

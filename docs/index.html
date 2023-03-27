@@ -82,7 +82,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header">
-<img src="logo.png" class="logo" alt=""><h1 id="ggdoe-">{ggDoE} 
+<img src="logo.png" class="logo" alt=""><h1 id="ggdoe-">ggDoE 
 <a class="anchor" aria-label="anchor" href="#ggdoe-"></a>
 </h1>
 </div>
@@ -220,13 +220,13 @@
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu">lhs</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lhs/man/randomLHS.html" class="external-link">randomLHS</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">10</span>, k<span class="op">=</span><span class="fl">4</span><span class="op">)</span></span>
-<span><span class="fu">twoD_projections</span><span class="op">(</span><span class="va">X</span>,n_columns<span class="op">=</span><span class="fl">3</span>,grid <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/pair_plots.html">pair_plots</a></span><span class="op">(</span><span class="va">X</span>,n_columns<span class="op">=</span><span class="fl">3</span>,grid <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/twoD_projections.png"></p>
 <p>Lastly, the following datasets/designs are included in ggDoE as tibbles:</p>
 <ul>
 <li><p><strong>adapted_epitaxial</strong>: Adapted epitaxial layer experiment obtain from the book <br><em>“Experiments: Planning, Analysis, and Optimization, 2nd Edition”</em></p></li>
 <li><p><strong>original_epitaxial</strong>: Original epitaxial layer experiment obtain from the book <br><em>“Experiments: Planning, Analysis, and Optimization, 2nd Edition”</em></p></li>
-<li><p><strong>aliased_design</strong>: D-efficient minimal aliasing design obtained from the article <br><em>“Efficient Designs With Minimal Aliasing by Bradley Jones and Christopher J. Nachtsheim”</em> <br><em>Source:</em> <a href="https://www.tandfonline.com/doi/abs/10.1198/TECH.2010.09113" class="external-link uri">https://www.tandfonline.com/doi/abs/10.1198/TECH.2010.09113</a></p></li>
+<li><p><strong>aliased_design</strong>: D-efficient minimal aliasing design obtained from the article <br><em>“Efficient Designs With Minimal Aliasing by Bradley Jones and Christopher J. Nachtsheim”</em></p></li>
 </ul>
 </div>
 <div class="section level2">
@@ -241,7 +241,7 @@
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>To cite package <span class="st">'ggDoE'</span> <span class="cf">in</span> publications use<span class="sc">:</span></span>
 <span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  Toledo Luna <span class="fu">J</span> (<span class="dv">2022</span>). _ggDoE<span class="sc">:</span> Modern Graphs <span class="cf">for</span> Design of Experiments</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  Toledo Luna <span class="fu">J</span> (<span class="dv">2023</span>). _ggDoE<span class="sc">:</span> Modern Graphs <span class="cf">for</span> Design of Experiments</span>
 <span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  with <span class="st">'ggplot2'</span>_. R package version <span class="dv">0</span>.<span class="fl">7.9</span>,</span>
 <span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>https<span class="sc">:</span><span class="er">//</span>ggdoe.netlify.app<span class="sc">&gt;</span>.</span>
 <span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
@@ -250,7 +250,7 @@
 <span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  <span class="sc">@</span>Manual{,</span>
 <span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>    title <span class="ot">=</span> {ggDoE<span class="sc">:</span> Modern Graphs <span class="cf">for</span> Design of Experiments with <span class="st">'ggplot2'</span>},</span>
 <span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    author <span class="ot">=</span> {Jose {Toledo Luna}},</span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    year <span class="ot">=</span> {<span class="dv">2022</span>},</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    year <span class="ot">=</span> {<span class="dv">2023</span>},</span>
 <span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>    note <span class="ot">=</span> {R package version <span class="dv">0</span>.<span class="fl">7.9</span>},</span>
 <span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>    url <span class="ot">=</span> {https<span class="sc">:</span><span class="er">//</span>ggdoe.netlify.app},</span>
 <span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div>

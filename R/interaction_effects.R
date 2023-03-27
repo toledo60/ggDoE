@@ -11,7 +11,7 @@
 #' @return interaction effects plot between two factors
 #' @export
 #'
-#' @importFrom ggplot2 aes_string geom_line geom_point theme labs element_rect scale_linetype_manual
+#' @importFrom ggplot2 aes geom_line geom_point theme labs element_rect scale_linetype_manual sym
 #' @importFrom ggplot2 scale_color_manual theme_bw ylim element_blank
 #' @importFrom utils combn
 #' @importFrom data.table data.table .SD
@@ -46,10 +46,13 @@ interaction_effects <- function(design,response,
     dat_list[[i]] <- group_mean(DT=design,
                                 group_by = c(interactions[i,1],
                                              interactions[i,2]),
-                                response_var=response )
+                                response_var=response)
   }
 
-  if(showplot){
+  if(!showplot){
+    return(dat_list)
+  }
+  else{
     vals <- c()
 
     for(i in 1:n_iteractions){
@@ -60,15 +63,14 @@ interaction_effects <- function(design,response,
     maxval <- max(vals)
 
     plot_list <- vector('list',length = n_iteractions)
-
     for(i in 1:n_iteractions){
       plot_list[[i]] <- ggplot(dat_list[[i]],
-                               aes_string(x = interactions[i,1],
-                                          y = 'mean_response',
-                                          group=interactions[i,2],
-                                          colour=interactions[i,2],
-                                          shape=interactions[i,2],
-                                          linetype=interactions[i,2]))+
+                               aes(x = !!sym(interactions[i,1]),
+                                   y = !!sym('mean_response'),
+                                   group=!!sym(interactions[i,2]),
+                                   colour=!!sym(interactions[i,2]),
+                                   shape=!!sym(interactions[i,2]),
+                                   linetype=!!sym(interactions[i,2])))+
         geom_line()+
         geom_point()+
         scale_linetype_manual(values=linetypes)+
@@ -87,9 +89,6 @@ interaction_effects <- function(design,response,
     }
     return(patchwork::wrap_plots(plot_list,
                                  ncol = n_columns))
-  }
-  else{
-    return(dat_list)
   }
 }
 
