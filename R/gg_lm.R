@@ -45,8 +45,8 @@ gg_lm <- function(model,which_plots = 1:4,
                   point_size=1.5,
                   theme_color = "#21908CFF",
                   n_columns=2){
-  if (!inherits(model, "lm")) {
-    stop("model should be of class lm")
+  if(!insight::is_regression_model(model)){
+    stop("model should be a regression model of class 'lm'")
   }else{
     insight::check_if_installed(c('patchwork','ggrepel'))
     df <- model$model

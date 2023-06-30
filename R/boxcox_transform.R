@@ -16,8 +16,12 @@
 #' boxcox_transform(model,lambda = seq(-5,5,0.2))
 #' boxcox_transform(model,lambda = seq(-5,5,0.2),showplot=FALSE)
 boxcox_transform <- function(model,lambda= seq(-2,2,1/10),
-                             showlambda = TRUE, lambdaSF = 3,showplot=TRUE){
+                             showlambda = TRUE, lambdaSF = 3,
+                             showplot=TRUE){
 
+  if(!insight::is_regression_model(model)){
+    stop("model should be a regression model of class 'lm'")
+  }
   boxcox_object <- MASS::boxcox(model, plotit = FALSE,interp=TRUE,lambda=lambda)
 
   # create new dataframe to hold all x and y points

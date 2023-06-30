@@ -7,7 +7,7 @@
 #' @param point_size Change size of points in plots
 #' @param n_columns number of columns for grid layout. Default is 2
 #'
-#' @importFrom ggplot2 xlim ylim aes geom_hline geom_vline labs geom_point
+#' @importFrom ggplot2 aes geom_hline geom_vline labs geom_point
 #' @importFrom graphics hist
 #' @return A grid of scatter plots from all two dimensional projections of a Latin hypercube design.
 #' @export
@@ -15,13 +15,12 @@
 #' @examples
 #' set.seed(10)
 #' X <- lhs::randomLHS(n=15,k=4)
-#' pair_plots(X,n_columns = 3,grid = TRUE)
-#' pair_plots(X,n_columns = 2,point_color='red')
+#' pair_plots(X,n_columns = 3)
 pair_plots <- function(design,
-                       point_color="#21908CFF",
-                       grid=FALSE,
-                       point_size = 1.5,
-                       n_columns=2){
+                        point_color="#21908CFF",
+                        grid=FALSE,
+                        point_size = 1.5,
+                        n_columns=2){
   check_LHD <- function(design)
   {
     # This function was taken from the following stackexchange question:
@@ -55,57 +54,33 @@ pair_plots <- function(design,
     insight::check_if_installed('patchwork')
     dat <- as.data.frame(design)
     two_combns <- t(combn(ncol(dat),2))
-    two_combns_names <-t(combn(colnames(dat),2))
+    two_combns_names <- t(combn(colnames(dat),2))
     n_rows <- nrow(dat)
 
     iters <- nrow(two_combns)
-    plot_list <- vector("list", iters)
 
-    if(grid){
-      for(i in 1:iters) {
+    plot_list <- lapply(1:iters, function(i) {
+      p1 <- ggplot(dat[, two_combns[i, ]],
+                   aes(x = dat[, two_combns_names[i, 1]],
+                       y = dat[, two_combns_names[i, 2]])) +
+        geom_point(shape = "circle",
+                   colour = point_color,
+                   size = point_size) +
+        labs(x = two_combns_names[i, 1],
+             y = two_combns_names[i, 2])
 
-        plot_list[[i]] <- local({
-          i <- i
-          p1 <-ggplot(dat[,two_combns[i,]],
-                      aes(x = dat[,two_combns_names[i,1]],
-                          y = dat[,two_combns_names[i,2]])) +
-            geom_point(shape = "circle",
-                       colour = point_color,
-                       size = point_size) +
-            geom_hline(yintercept = seq(0,1,length=n_rows+1),
-                       color='grey',linetype=2,alpha=0.6)+
-            geom_vline(xintercept = seq(0,1,length=n_rows+1),
-                       color='grey',linetype=2,alpha=0.6)+
-            labs(x=two_combns_names[i,1],
-                 y=two_combns_names[i,2])+
-            xlim(c(0,1))+
-            ylim(c(0,1))+
-            theme_bw_nogrid()
-        })
-      }
+      return(p1)
+    })
 
-    }
-    else{
-      for(i in 1:iters) {
-        plot_list[[i]] <- local({
-          i <- i
-          p1 <-ggplot(dat[,two_combns[i,]],
-                      aes(x = dat[,two_combns_names[i,1]],
-                          y = dat[,two_combns_names[i,2]])) +
-            geom_point(shape = "circle",
-                       colour = point_color,
-                       size = point_size) +
-            labs(x=two_combns_names[i,1],
-                 y=two_combns_names[i,2])+
-            xlim(c(0,1))+
-            ylim(c(0,1))+
-            theme_bw_nogrid()
-        })
-      }
+    final_plot <- patchwork::wrap_plots(plot_list,
+                                        ncol = n_columns) & theme_bw_nogrid() &
+      {if(grid) geom_hline(yintercept = seq(0, 1, length = n_rows + 1),
+                           color = 'grey',linetype = 2, alpha = 0.6)} &
+      {if(grid) geom_vline(xintercept = seq(0, 1, length = n_rows + 1),
+                           color = 'grey', linetype = 2, alpha = 0.6)}
 
-    }
-    return(patchwork::wrap_plots(plot_list,
-                                 ncol = n_columns))
+    return(final_plot)
   }
-
 }
+
+

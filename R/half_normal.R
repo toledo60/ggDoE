@@ -63,8 +63,8 @@ half_normal <- function(model,method='Lenth',
                         margin_errors = FALSE,
                         point_color="#21908CFF",
                         showplot=TRUE){
-  if (!inherits(model, "lm")) {
-    stop("model should be of class lm or glm")
+  if(!insight::is_regression_model(model)){
+    stop("model should be a regression model of class 'lm'")
   }else{
     insight::check_if_installed(c('unrepx','ggrepel'))
 

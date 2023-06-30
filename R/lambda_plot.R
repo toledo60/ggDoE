@@ -24,6 +24,9 @@ lambda_plot <- function(model, lambda = seq(-2, 2, by = 0.1),
                         alpha=1,
                         direction =1,
                         showplot=TRUE){
+  if(!insight::is_regression_model(model)){
+    stop("model should be a regression model of class 'lm'")
+  }
   insight::check_if_installed('ggrepel')
 
   y <- model$model[, 1]

@@ -55,13 +55,15 @@
 #' pareto_plot(m1,method='Zahn',alpha=0.1)
 pareto_plot <- function(model,alpha=0.05,method='Lenth',
                         margin_errors=TRUE,showplot=TRUE){
-  if (inherits(model, "lm")) {
-    i <- pmatch("(Intercept)", names(coef(model)))
-    if (!is.na(i))
-      effects <- coef(model)[-pmatch("(Intercept)", names(coef(model)))]
-    estimates <- 2 * effects
+
+  if(!insight::is_regression_model(model)){
+    stop("model should be a regression model of class 'lm'")
   }
   insight::check_if_installed('unrepx')
+
+  effects <- coef(model)[-pmatch("(Intercept)", names(coef(model)))]
+  estimates <- 2 * effects
+
   PSE <- unrepx::PSE(estimates,method = method)
   ME <- unrepx::ME(estimates,method = method,alpha = alpha)[1]
   SME <- unrepx::ME(estimates,method = method,alpha = alpha)[2]

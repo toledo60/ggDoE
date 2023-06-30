@@ -33,6 +33,5 @@ Two Dimensional Projections of Latin Hypercube Designs
 \examples{
 set.seed(10)
 X <- lhs::randomLHS(n=15,k=4)
-pair_plots(X,n_columns = 3,grid = TRUE)
-pair_plots(X,n_columns = 2,point_color='red')
+pair_plots(X,n_columns = 3)
 }

@@ -17,7 +17,7 @@ LazyData: true
 URL: https://ggdoe.netlify.app
 BugReports: https://github.com/toledo60/ggDoE/issues
 Imports: 
-    ggplot2,
+    ggplot2 (>= 3.4.0),
     insight
 Suggests:
     knitr,
