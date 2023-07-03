@@ -24,7 +24,9 @@ reference:
   contents:
   - adapted_epitaxial
   - aliased_design
+  - girder_experiment
   - original_epitaxial
+  - pulp_experiment
 
 - title: Utilities
   contents:

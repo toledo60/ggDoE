@@ -2,18 +2,26 @@
 
 BREAKING
 
+* The minimum needed R version has been bumped to 3.6
 * renamed `diagnostic_plots()` to `gg_lm()`
 * renamed `gg_boxplots()` arguments `factor`,`response` to `x`,`y`, respectively.
 * renamed `twoD_projections()` to `pair_plots()`
+* renamed `form` argument to `formula` in `gg_rsm()`
 
-CHANGES
+NEW DATA
+
+* Added `pulp_experiment` data from *"Experiments:  Planning, Analysis, and Optimization, CFJ Wu, MS Hamada - Second edition"*
+* Added `girder_experimet` data from *"Experiments:  Planning, Analysis, and Optimization, CFJ Wu, MS Hamada - Second edition"*
+
+
+
+DEPENDENCIES
 
 * removed `data.table` as a dependency. Now there are only two imports `ggplot2` and `insight`
-
-MINOR CHANGES
-
 * switched `gridExtra` to `patchwork`. No functionality change.
-* removed all usage of deprecated functions `aes_string()` and `size` arguments  from the package. These were deprecated as of ggplot2 version 3.4.0. No functionality change
+
+
+---
 
 # ggDoE 0.7.8
 

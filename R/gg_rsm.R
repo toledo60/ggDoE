@@ -1,7 +1,7 @@
 #' Contour plot(s) of a fitted linear model in ggplot2
 #'
 #' @param rsm_model Model of class "rsm"
-#' @param form A formula, or a list of formulas
+#' @param formula A formula, or a list of formulas
 #' @param filled Determine if the surface plots should be filled by viridis color palette. Default is FALSE
 #' @param decode This has an effect only if x is an rsm object or other model object that supports coded.data.
 #' In such cases, if decode is TRUE, the coordinate axes are transformed to their decoded values.
@@ -15,15 +15,17 @@
 #'
 #' @importFrom graphics contour
 #' @importFrom ggplot2 aes theme_bw theme_minimal labs element_blank element_text geom_contour geom_contour_filled
+#' @importFrom ggplot2 after_stat
 
 #' @examples
-#' heli.rsm <- rsm::rsm(ave ~ SO(x1, x2, x3, x4),
-#'                      data = rsm::heli)
+#' heli.rsm <- rsm::rsm(ave ~ SO(x1, x2, x3),data = rsm::heli)
 #'
-#' gg_rsm(heli.rsm,form = ~x1+x3+x4,at = rsm::xs(heli.rsm),n_columns=3)
-#' gg_rsm(heli.rsm,form = ~x2+x3+x4,at = rsm::xs(heli.rsm),n_columns=3,filled = TRUE)
+#' gg_rsm(heli.rsm,formula = ~x1+x2+x3,at = rsm::xs(heli.rsm),n_columns=3)
+#'
+#' gg_rsm(heli.rsm,formula = ~x1+x2+x3,at = rsm::xs(heli.rsm),
+#'        n_columns=3,filled = TRUE)
 gg_rsm <- function(rsm_model,
-                   form,
+                   formula,
                    filled=FALSE,
                    decode=FALSE,
                    n_columns=2,
@@ -35,9 +37,8 @@ gg_rsm <- function(rsm_model,
   }
   insight::check_if_installed(c('metR','patchwork'))
 
-  rsm_contour <- contour(rsm_model, form, plot=FALSE,
-                         decode=decode,
-                         ...)
+  rsm_contour <- contour(rsm_model, formula, plot=FALSE,
+                         decode=decode,...)
 
   xy_labels <- names(rsm_contour)
   splits <- strsplit(xy_labels,split = " ")
@@ -58,7 +59,7 @@ gg_rsm <- function(rsm_model,
       df_list[[i]] <- cbind(expand.grid(xvec[[i]],yvec[[i]]),"z"=zvec[[i]])
 
       cplots[[i]] <- ggplot(df_list[[i]], aes(x=!!sym('Var1'), y=!!sym('Var2'))) +
-        metR::geom_contour2(aes(z = z, label = ..level..))+
+        metR::geom_contour2(aes(z = z, label = after_stat(level)))+
         theme_bw()+
         labs(caption=rsm_contour[[i]][[4]],
              x="",
@@ -77,7 +78,7 @@ gg_rsm <- function(rsm_model,
       cplots[[i]] <- ggplot(df_list[[i]],
                             aes(x=!!sym('Var1'), y=!!sym('Var2'),z=!!sym('z'))) +
         geom_contour_filled()+
-        geom_contour(color = "black", size = 0.1)+
+        geom_contour(color = "black", linewidth = 0.1)+
         metR::geom_text_contour(aes(z = !!sym('z')),
                                 stroke = stroke,
                                 size=size)+
@@ -93,6 +94,5 @@ gg_rsm <- function(rsm_model,
         )
     }
   }
-  return(patchwork::wrap_plots(cplots,
-                               ncol = n_columns))
+  return(patchwork::wrap_plots(cplots, ncol = n_columns))
 }

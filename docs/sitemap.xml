@@ -55,6 +55,9 @@
     <loc>/reference/gg_rsm.html</loc>
   </url>
   <url>
+    <loc>/reference/girder_experiment.html</loc>
+  </url>
+  <url>
     <loc>/reference/glm_diagnostic_plots.html</loc>
   </url>
   <url>
@@ -80,6 +83,9 @@
   </url>
   <url>
     <loc>/reference/pareto_plot.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pulp_experiment.html</loc>
   </url>
   <url>
     <loc>/reference/theme_bw_nogrid.html</loc>

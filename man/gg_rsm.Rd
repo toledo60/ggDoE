@@ -6,7 +6,7 @@
 \usage{
 gg_rsm(
   rsm_model,
-  form,
+  formula,
   filled = FALSE,
   decode = FALSE,
   n_columns = 2,
@@ -18,7 +18,7 @@ gg_rsm(
 \arguments{
 \item{rsm_model}{Model of class "rsm"}
 
-\item{form}{A formula, or a list of formulas}
+\item{formula}{A formula, or a list of formulas}
 
 \item{filled}{Determine if the surface plots should be filled by viridis color palette. Default is FALSE}
 
@@ -40,9 +40,10 @@ A grid of contour plot(s) of a fitted linear model in 'ggplot2'
 Contour plot(s) of a fitted linear model in ggplot2
 }
 \examples{
-heli.rsm <- rsm::rsm(ave ~ SO(x1, x2, x3, x4),
-                     data = rsm::heli)
+heli.rsm <- rsm::rsm(ave ~ SO(x1, x2, x3),data = rsm::heli)
 
-gg_rsm(heli.rsm,form = ~x1+x3+x4,at = rsm::xs(heli.rsm),n_columns=3)
-gg_rsm(heli.rsm,form = ~x2+x3+x4,at = rsm::xs(heli.rsm),n_columns=3,filled = TRUE)
+gg_rsm(heli.rsm,formula = ~x1+x2+x3,at = rsm::xs(heli.rsm),n_columns=3)
+
+gg_rsm(heli.rsm,formula = ~x1+x2+x3,at = rsm::xs(heli.rsm),
+       n_columns=3,filled = TRUE)
 }
