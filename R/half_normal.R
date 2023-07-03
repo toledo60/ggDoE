@@ -52,7 +52,8 @@
 
 #' Zahn, D (1975) Modifications of and Revised Critical Values for the Half-Normal Plot. Technometrics 17(2), 189-200
 
-#' @examples model <- lm(ybar ~ (A+B+C+D)^4,data=adapted_epitaxial)
+#' @examples
+#' model <- lm(ybar ~ (A+B+C+D)^4,data=adapted_epitaxial)
 #' half_normal(model)
 #' half_normal(model,method='Zahn',alpha=0.1,ref_line=TRUE,
 #'             label_active=TRUE,margin_errors=TRUE)
@@ -105,8 +106,7 @@ half_normal <- function(model,method='Lenth',
                                  min.segment.length = Inf,
                                  nudge_y = 0.001*max(dat$half_normal_quantiles),
                                  nudge_x = 0.001*max(dat$absolute_effects),
-                                 na.rm = TRUE
-        )+
+                                 na.rm = TRUE) +
         theme_bw_nogrid()+
         labs(x="absolute effects",y="half-normal quantiles")
 

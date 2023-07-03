@@ -16,8 +16,8 @@
 #' boxcox_transform(model,lambda = seq(-5,5,0.2))
 #' boxcox_transform(model,lambda = seq(-5,5,0.2),showplot=FALSE)
 boxcox_transform <- function(model,lambda= seq(-2,2,1/10),
-                             showlambda = TRUE, lambdaSF = 3,
-                             showplot=TRUE){
+                              showlambda = TRUE, lambdaSF = 3,
+                              showplot=TRUE){
 
   if(!insight::is_regression_model(model)){
     stop("model should be a regression model of class 'lm'")
@@ -46,40 +46,48 @@ boxcox_transform <- function(model,lambda= seq(-2,2,1/10),
   conf_lo <- round(min(accept_range), lambdaSF)
   conf_hi <- round(max(accept_range), lambdaSF)
 
-  if(showplot){
-    plot <- ggplot(data = boxcox_unlist) +
-      geom_segment(aes(x = xstart, y = ystart, xend = xend, yend = yend),
-                   size=1.3,color="#21908CFF") +
-      labs(x = "Lambda", y = "Log-likelihood",title = "Boxcox Transformation",
-           subtitle = paste0("95% CI for Lambda:",' (',conf_lo,', ',conf_hi,')')) +
-      geom_vline(xintercept = best_lambda, linetype = "dotted",
-                 color = '#2dab03',size=1.1) +
-      geom_vline(xintercept = conf_lo, linetype = "dotted",
-                 color = "indianred3",size=1.1) +
-      geom_vline(xintercept = conf_hi, linetype = "dotted",
-                 color = "indianred3",size=1.1) +
-      geom_hline(yintercept = y[min(accept_inds)],
-                 linetype = "dashed")+
-      theme_bw_nogrid()
-
-    # add label if show lambda range
-    if (showlambda) {
-      return(plot +
-               geom_text(aes(x = best_lambda-0.1,
-                             label = as.character(rounded_lambda), y = min_y),
-                         color='#2dab03') +
-               geom_text(aes(x = conf_lo-0.1,
-                             label = as.character(conf_lo), y = min_y),
-                         color = "indianred3") +
-               geom_text(aes(x = conf_hi-0.1,
-                             label = as.character(conf_hi), y = min_y),
-                         color = "indianred3"))
-    }else {
-      return (plot)
-    }
-  }else{
+  if(!showplot){
     return(tibble::tibble("best_lambda" = best_lambda,
                           "lambda_low"=conf_lo,
                           "lambda_high"=conf_hi))
   }
+  else{
+
+    plt <- ggplot(data = boxcox_unlist) +
+      geom_segment(aes(x = xstart, y = ystart, xend = xend, yend = yend),
+                   linewidth=1.2,color="#21908CFF") +
+      labs(x = "Lambda", y = "Log-likelihood",title = "Boxcox Transformation",
+           subtitle = paste0("95% CI for Lambda:",' (',conf_lo,', ',conf_hi,')')) +
+      geom_vline(xintercept = best_lambda, linetype = "dotted",
+                 color = '#2dab03',linewidth=1.1) +
+      geom_vline(xintercept = conf_lo, linetype = "dotted",
+                 color = "indianred3",linewidth=1.1) +
+      geom_vline(xintercept = conf_hi, linetype = "dotted",
+                 color = "indianred3",linewidth=1.1) +
+      geom_hline(yintercept = y[min(accept_inds)],
+                 linetype = "dashed")+
+      theme_bw_nogrid() +
+      if(showlambda){
+        list(geom_text(aes(x = best_lambda-0.1,
+                           label = as.character(rounded_lambda), y = min_y),
+                       color='#2dab03'),
+             geom_text(aes(x = conf_lo-0.1,
+                           label = as.character(conf_lo), y = min_y),
+                       color = "indianred3"),
+             geom_text(aes(x = conf_hi-0.1,
+                           label = as.character(conf_hi), y = min_y),
+                       color = "indianred3"))
+      }
+
+    return(plt)
+  }
 }
+
+
+
+
+
+
+
+
+

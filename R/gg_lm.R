@@ -48,6 +48,7 @@ gg_lm <- function(model,which_plots = 1:4,
   if(!insight::is_regression_model(model)){
     stop("model should be a regression model of class 'lm'")
   }else{
+
     insight::check_if_installed(c('patchwork','ggrepel'))
     df <- model$model
     df$.std.resid <- rstandard(model)

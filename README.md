@@ -58,6 +58,13 @@ The following datasets/designs are included in ggDoE as tibbles:
   from the book <br> *“Experiments: Planning, Analysis, and
   Optimization, 2nd Edition”*
 
+- **pulp_experiment**: Reflectance Data, Pulp Experiment obtain from the
+  book <br> *“Experiments: Planning, Analysis, and Optimization, 2nd
+  Edition”*
+
+- **girder_experiment**: Girder experiment obtain from the book <br>
+  *“Experiments: Planning, Analysis, and Optimization, 2nd Edition”*
+
 - **aliased_design**: D-efficient minimal aliasing design obtained from
   the article <br> *“Efficient Designs With Minimal Aliasing by Bradley
   Jones and Christopher J. Nachtsheim”*
@@ -74,13 +81,10 @@ citation('ggDoE')
     Warning in citation("ggDoE"): no date field in DESCRIPTION file of package
     'ggDoE'
 
-    Warning in citation("ggDoE"): could not determine year for 'ggDoE' from package
-    DESCRIPTION file
-
 
     To cite package 'ggDoE' in publications use:
 
-      Toledo Luna J (????). _ggDoE: Modern Graphs for Design of Experiments
+      Toledo Luna J (2023). _ggDoE: Modern Graphs for Design of Experiments
       with 'ggplot2'_. R package version 0.7.9,
       <https://ggdoe.netlify.app>.
 
@@ -89,6 +93,7 @@ citation('ggDoE')
       @Manual{,
         title = {ggDoE: Modern Graphs for Design of Experiments with 'ggplot2'},
         author = {Jose {Toledo Luna}},
+        year = {2023},
         note = {R package version 0.7.9},
         url = {https://ggdoe.netlify.app},
       }
@@ -247,14 +252,14 @@ heli.rsm <- rsm::rsm(ave ~ SO(x1, x2, x3, x4),
 ```
 
 ``` r
-gg_rsm(heli.rsm,form = ~x1+x2+x3+x4,
+gg_rsm(heli.rsm,formula = ~x1+x2+x3+x4,
        at = rsm::xs(heli.rsm))
 ```
 
 ![](man/figures/contour1.png)
 
 ``` r
-gg_rsm(heli.rsm,form = ~x1+x2+x3+x4,
+gg_rsm(heli.rsm,formula = ~x1+x2+x3+x4,
        at = rsm::xs(heli.rsm),
        filled = TRUE)
 ```

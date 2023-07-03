@@ -8,7 +8,7 @@
 A tibble with 5 rows, and 4 variables (A,B,C,D)
 }
 \source{
-Experiments:  Planning, Analysis, and Optimization, CFJ Wu, MS Hamada - Second edition.
+Wu, CF Jeff, and Michael S. Hamada. Experiments: planning, analysis, and optimization. John Wiley & Sons, 2011
 }
 \usage{
 pulp_experiment

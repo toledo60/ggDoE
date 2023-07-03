@@ -61,6 +61,12 @@ The following datasets/designs are included in ggDoE as tibbles:
 - **original_epitaxial**: Original epitaxial layer experiment obtain from the book <br>
 *"Experiments: Planning, Analysis, and Optimization, 2nd Edition"*
 
+- **pulp_experiment**: Reflectance Data, Pulp Experiment obtain from the book <br>
+*"Experiments: Planning, Analysis, and Optimization, 2nd Edition"*
+
+- **girder_experiment**: Girder experiment obtain from the book <br>
+*"Experiments: Planning, Analysis, and Optimization, 2nd Edition"*
+
 - **aliased_design**: D-efficient minimal aliasing design obtained from the article  <br>
 *"Efficient Designs With Minimal Aliasing by Bradley Jones and Christopher J. Nachtsheim"* 
 
@@ -247,7 +253,7 @@ heli.rsm <- rsm::rsm(ave ~ SO(x1, x2, x3, x4),
 
 
 ```{r}
-gg_rsm(heli.rsm,form = ~x1+x2+x3+x4,
+gg_rsm(heli.rsm,formula = ~x1+x2+x3+x4,
        at = rsm::xs(heli.rsm))
 ```
 
@@ -256,7 +262,7 @@ gg_rsm(heli.rsm,form = ~x1+x2+x3+x4,
 
 
 ```{r}
-gg_rsm(heli.rsm,form = ~x1+x2+x3+x4,
+gg_rsm(heli.rsm,formula = ~x1+x2+x3+x4,
        at = rsm::xs(heli.rsm),
        filled = TRUE)
 ```

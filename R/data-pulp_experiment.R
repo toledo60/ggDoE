@@ -5,6 +5,6 @@
 #' Reflectance was read for each of the handsheets using a brightness tester
 #'
 #' @format A tibble with 5 rows, and 4 variables (A,B,C,D)
-#' @source Experiments:  Planning, Analysis, and Optimization, CFJ Wu, MS Hamada - Second edition.
+#' @source Wu, CF Jeff, and Michael S. Hamada. Experiments: planning, analysis, and optimization. John Wiley & Sons, 2011
 #'
 "pulp_experiment"

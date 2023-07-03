@@ -13,7 +13,7 @@ A tibble with 36 rows and 3 variables
 }
 }
 \source{
-Experiments:  Planning, Analysis, and Optimization, CFJ Wu, MS Hamada - Second edition.
+Wu, CF Jeff, and Michael S. Hamada. Experiments: planning, analysis, and optimization. John Wiley & Sons, 2011
 }
 \usage{
 girder_experiment

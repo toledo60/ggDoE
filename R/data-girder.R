@@ -10,7 +10,7 @@
 #' \item{method}{A factor denoting one of the four methods for predicting the shear strength for steel plate girders: Aarau, Karlsruhe,Lehigh, Cardiff}
 #' \item{response}{The shear strength for steel plate girders}
 #' }
-#' @source Experiments:  Planning, Analysis, and Optimization, CFJ Wu, MS Hamada - Second edition.
+#' @source Wu, CF Jeff, and Michael S. Hamada. Experiments: planning, analysis, and optimization. John Wiley & Sons, 2011
 #'
 #'@examples
 #' lm(response ~ method + girders, data = girder_experiment) |>

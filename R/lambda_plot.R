@@ -33,8 +33,7 @@ lambda_plot <- function(model, lambda = seq(-2, 2, by = 0.1),
   response <- model$terms[[2]]
   variables <- attr(model$terms,'term.labels')
 
-  var_formula <- paste(variables,
-                       collapse = '+')
+  var_formula <- paste(variables,collapse = '+')
   data_name <- model$call[[3]]
 
   org_fit <- lm(as.formula(paste(response,"~",var_formula)), qr = TRUE,

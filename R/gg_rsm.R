@@ -90,8 +90,7 @@ gg_rsm <- function(rsm_model,
               panel.grid.minor = element_blank(),
               panel.background = element_blank(),
               plot.caption = element_text(hjust = 0.5),
-              legend.position = 'none'
-        )
+              legend.position = 'none')
     }
   }
   return(patchwork::wrap_plots(cplots, ncol = n_columns))

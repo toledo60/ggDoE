@@ -75,7 +75,11 @@ pareto_plot <- function(model,alpha=0.05,method='Lenth',
 
   sorted_dat <- dat[order(dat$abs_effects),]
 
-  if(showplot){
+  if(!showplot){
+    return(list(errors = tibble::tibble(alpha,PSE,ME,SME),
+                dat = sorted_dat[,c(1,2,3)]))
+  }
+  else{
     base_plot <- ggplot(sorted_dat,
                         aes(x = reorder(!!sym('effect_names'),
                                         !!sym('abs_effects')),
@@ -87,7 +91,7 @@ pareto_plot <- function(model,alpha=0.05,method='Lenth',
       theme(legend.position = "top")+
       scale_fill_discrete(name = "Sign of Effect", labels = c("Negative", "Positive"))
     if(margin_errors){
-      plot <- base_plot +
+      plt <- base_plot +
         geom_hline(yintercept = ME,linetype=2)+
         annotate("text",x=-Inf,y=ME,hjust=-0.2,vjust=-0.5,
                  label="ME",fontface="italic",size=2.8)+
@@ -98,12 +102,8 @@ pareto_plot <- function(model,alpha=0.05,method='Lenth',
              caption = paste0(method," ME=",round(ME,2),","," SME=",round(SME,2)))
     }
     else{
-      plot <- base_plot + labs(x="",y='absolute effects')
+      plt <- base_plot + labs(x="",y='absolute effects')
     }
-
-    return(plot)
-  }else{
-    return(list(errors = tibble::tibble(alpha,PSE,ME,SME),
-                dat = sorted_dat[,c(1,2,3)]))
+    return(plt)
   }
 }
