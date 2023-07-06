@@ -19,7 +19,7 @@ You can install:
 
 * the latest release from CRAN with 
 
-```{r}
+```{r,eval=FALSE}
 install.packages('ggDoE')
 ```
 

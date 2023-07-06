@@ -18,12 +18,14 @@
 #' @importFrom ggplot2 after_stat
 
 #' @examples
+#' \dontrun{
 #' heli.rsm <- rsm::rsm(ave ~ SO(x1, x2, x3),data = rsm::heli)
 #'
 #' gg_rsm(heli.rsm,formula = ~x1+x2+x3,at = rsm::xs(heli.rsm),n_columns=3)
 #'
 #' gg_rsm(heli.rsm,formula = ~x1+x2+x3,at = rsm::xs(heli.rsm),
 #'        n_columns=3,filled = TRUE)
+#'}
 gg_rsm <- function(rsm_model,
                    formula,
                    filled=FALSE,
@@ -54,6 +56,13 @@ gg_rsm <- function(rsm_model,
   df_list <- list()
   cplots <- list()
 
+  round_labs <- function(x) {
+    pat <- "(-)?[[:digit:]]+\\.[[:digit:]]*"
+    m <- gregexpr(pat, x)
+    regmatches(x,m) <- lapply(regmatches(x,m), function(X) round(as.numeric(X),3))
+    return(x)
+  }
+
   if(!filled){
     for(i in 1:length(xvec)){
       df_list[[i]] <- cbind(expand.grid(xvec[[i]],yvec[[i]]),"z"=zvec[[i]])
@@ -61,14 +70,13 @@ gg_rsm <- function(rsm_model,
       cplots[[i]] <- ggplot(df_list[[i]], aes(x=!!sym('Var1'), y=!!sym('Var2'))) +
         metR::geom_contour2(aes(z = z, label = after_stat(level)))+
         theme_bw()+
-        labs(caption=rsm_contour[[i]][[4]],
+        labs(caption= round_labs(rsm_contour[[i]][[4]]),
              x="",
              y=y_lab[i])+
         theme(panel.grid.major = element_blank(),
               panel.grid.minor = element_blank(),
               panel.background = element_blank(),
-              plot.caption = element_text(hjust = 0.5)
-        )
+              plot.caption = element_text(hjust = 0.5))
     }
   }
   else{
@@ -83,7 +91,7 @@ gg_rsm <- function(rsm_model,
                                 stroke = stroke,
                                 size=size)+
         theme_minimal()+
-        labs(caption=rsm_contour[[i]][[4]],
+        labs(caption=round_labs(rsm_contour[[i]][[4]]),
              x="",
              y=y_lab[i])+
         theme(panel.grid.major = element_blank(),

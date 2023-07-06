@@ -8,17 +8,23 @@ BREAKING
 * renamed `twoD_projections()` to `pair_plots()`
 * renamed `form` argument to `formula` in `gg_rsm()`
 
-NEW DATA
+
+NEW FEATURES
 
 * Added `pulp_experiment` data from *"Experiments:  Planning, Analysis, and Optimization, CFJ Wu, MS Hamada - Second edition"*
 * Added `girder_experimet` data from *"Experiments:  Planning, Analysis, and Optimization, CFJ Wu, MS Hamada - Second edition"*
-
+* Added new argument `effect_colors` to `pareto_plot()`. Default are `c('#d9a698','#9ecede')` for positive and negative efffects, respectively.
 
 
 DEPENDENCIES
 
 * removed `data.table` as a dependency. Now there are only two imports `ggplot2` and `insight`
 * switched `gridExtra` to `patchwork`. No functionality change.
+
+
+BUG FIXES
+
+* fixed labels in `gg_rsm` where numbers were not rounded and displayed over 10 digits. This resulted in labels in figures being cut off or stacked on top of each other
 
 
 ---

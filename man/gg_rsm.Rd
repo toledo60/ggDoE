@@ -40,10 +40,12 @@ A grid of contour plot(s) of a fitted linear model in 'ggplot2'
 Contour plot(s) of a fitted linear model in ggplot2
 }
 \examples{
+\dontrun{
 heli.rsm <- rsm::rsm(ave ~ SO(x1, x2, x3),data = rsm::heli)
 
 gg_rsm(heli.rsm,formula = ~x1+x2+x3,at = rsm::xs(heli.rsm),n_columns=3)
 
 gg_rsm(heli.rsm,formula = ~x1+x2+x3,at = rsm::xs(heli.rsm),
        n_columns=3,filled = TRUE)
+}
 }

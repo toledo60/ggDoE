@@ -33,7 +33,7 @@ In the epitaxial layer growth process, suppose that the four experimental factor
 susceptor rotation method, nozzle position, deposition temperature, and deposition time (labeled A, B, Cand D)
 are to be investigated at the two levels each.
 
-The purpose of this experiment si to find process conditions, that is, combinations of factor levels for A, B, C, and D,
+The purpose of this experiment is to find process conditions, that is, combinations of factor levels for A, B, C, and D,
 under which the average thickness is close to the target 14.5 micrometre with variation as small as possible.
 The most basic experimental design or plan is the full factorial design, which studies all possible combinations
 of factors at two levels.

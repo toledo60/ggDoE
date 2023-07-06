@@ -55,15 +55,18 @@
 </li>
 <li>renamed <code>form</code> argument to <code>formula</code> in <code><a href="../reference/gg_rsm.html">gg_rsm()</a></code>
 </li>
-</ul><p>NEW DATA</p>
+</ul><p>NEW FEATURES</p>
 <ul><li>Added <code>pulp_experiment</code> data from <em>“Experiments: Planning, Analysis, and Optimization, CFJ Wu, MS Hamada - Second edition”</em>
 </li>
 <li>Added <code>girder_experimet</code> data from <em>“Experiments: Planning, Analysis, and Optimization, CFJ Wu, MS Hamada - Second edition”</em>
 </li>
+<li>Added new argument <code>effect_colors</code> to <code><a href="../reference/pareto_plot.html">pareto_plot()</a></code>. Default are <code>c('#d9a698','#9ecede')</code> for positive and negative efffects, respectively.</li>
 </ul><p>DEPENDENCIES</p>
 <ul><li>removed <code>data.table</code> as a dependency. Now there are only two imports <code>ggplot2</code> and <code>insight</code>
 </li>
 <li>switched <code>gridExtra</code> to <code>patchwork</code>. No functionality change.</li>
+</ul><p>BUG FIXES</p>
+<ul><li>fixed labels in <code>gg_rsm</code> where numbers were not rounded and displayed over 10 digits. This resulted in labels in figures being cut off or stacked on top of each other</li>
 </ul><hr></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.7.8" id="ggdoe-078">ggDoE 0.7.8<a class="anchor" aria-label="anchor" href="#ggdoe-078"></a></h2><p class="text-muted">CRAN release: 2022-08-23</p>

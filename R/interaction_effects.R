@@ -18,12 +18,19 @@
 #' @examples
 #' interaction_effects(adapted_epitaxial,response = 'ybar',exclude_vars = c('s2','lns2'))
 interaction_effects <- function(design,response,
-                                exclude_vars=c(),
-                                linetypes = c('solid','dashed'),
-                                colors = c("#4260c9" ,"#d6443c"),
-                                n_columns=2,
-                                showplot=TRUE){
+                                 exclude_vars = c(),
+                                 linetypes = c('solid','dashed'),
+                                 colors = c("#4260c9" ,"#d6443c"),
+                                 n_columns = 2,
+                                 showplot = TRUE){
   insight::check_if_installed('patchwork')
+
+  if(length(colors) != 2 & !inherits(colors,'character') ){
+    stop('colors must a character vector of length 2')
+  }
+  if(length(linetypes) != 2 & !inherits(linetypes,'character') ){
+    stop('linetypes must a character vector of length 2')
+  }
 
   factor_names <- setdiff(names(design),c(response,exclude_vars))
   design[,factor_names] <- lapply(design[,factor_names], as.factor)
@@ -66,11 +73,7 @@ interaction_effects <- function(design,response,
         geom_point()+
         scale_linetype_manual(values=linetypes)+
         scale_color_manual(values=colors)+
-        theme_bw()+
         ylim(minval,maxval)+
-        theme(legend.background = element_rect(fill="gray96"),
-              panel.grid.major = element_blank(),
-              panel.grid.minor = element_blank())+
         labs(y=paste0("Mean of ",response),
              x= interactions[i,1],
              colour=interactions[i,2],
@@ -78,8 +81,12 @@ interaction_effects <- function(design,response,
              shape=interactions[i,2]
         )
     }
-    return(patchwork::wrap_plots(plot_list,
-                                 ncol = n_columns))
+    final_plot <- patchwork::wrap_plots(plot_list,ncol = n_columns) &
+      theme_bw() &
+      theme(legend.background = element_rect(fill="gray96"),
+            panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank())
+    return(final_plot)
   }
 }
 

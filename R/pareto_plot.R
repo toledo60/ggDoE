@@ -2,12 +2,13 @@
 #'
 #' @param model Model of class "lm"
 #' @param alpha specify the significance level to compute margin of errors. Numeric significance level, between 0 and 1. Default is alpha=0.05
+#' @param effect_colors Change colors of effects. Default are ('#F8766D','#00BFC4') for negative and positive effects, respectively.
 #' @param showplot Default is TRUE, if false plot will not be shown and a tibble is returned with data used to create the pareto plot
 #' @param margin_errors Default is TRUE, if false the cutoffs for margin of errors (ME) and simultaneous margin of error (SME) are not shown
 #' @param method Character value. Method to calculate PSE. Default is Lenth. Options include: Zahn, WZahn, Lenth, RMS, Dong, JuanPena, Daniel. See Details.
 #' @return A bar plot with ordered effects, margin of error (ME) and simultaneous margin of error (SME) cutoffs.
 #' @importFrom stats reorder coef
-#' @importFrom ggplot2 geom_hline geom_bar annotate labs coord_flip theme_classic aes sym scale_fill_discrete
+#' @importFrom ggplot2 geom_hline geom_bar annotate labs coord_flip theme_classic aes sym scale_fill_manual
 #' @export
 #'
 #'
@@ -53,13 +54,18 @@
 #' m1 <- lm(lns2 ~ (A+B+C+D)^4,data=original_epitaxial)
 #' pareto_plot(m1)
 #' pareto_plot(m1,method='Zahn',alpha=0.1)
-pareto_plot <- function(model,alpha=0.05,method='Lenth',
-                        margin_errors=TRUE,showplot=TRUE){
+pareto_plot <- function(model,alpha = 0.05,method = 'Lenth',
+                        effect_colors = c('#F8766D','#00BFC4'),
+                        margin_errors = TRUE,showplot = TRUE){
 
   if(!insight::is_regression_model(model)){
     stop("model should be a regression model of class 'lm'")
   }
   insight::check_if_installed('unrepx')
+
+  if(length(effect_colors) != 2 & !inherits(effect_colors,'character') ){
+    stop('effect_colors must a character vector of length 2')
+  }
 
   effects <- coef(model)[-pmatch("(Intercept)", names(coef(model)))]
   estimates <- 2 * effects
@@ -68,10 +74,12 @@ pareto_plot <- function(model,alpha=0.05,method='Lenth',
   ME <- unrepx::ME(estimates,method = method,alpha = alpha)[1]
   SME <- unrepx::ME(estimates,method = method,alpha = alpha)[2]
 
+
   dat <- tibble::tibble("effect_names" = factor(names(estimates)),
                         "effects" = estimates,
                         'abs_effects' = abs(estimates),
-                        "cols" = ifelse(effects >0,'#d9a698','#9ecede'))
+                        "cols" = ifelse(effects >0,effect_colors[1],
+                                        effect_colors[2]))
 
   sorted_dat <- dat[order(dat$abs_effects),]
 
@@ -84,12 +92,14 @@ pareto_plot <- function(model,alpha=0.05,method='Lenth',
                         aes(x = reorder(!!sym('effect_names'),
                                         !!sym('abs_effects')),
                             y = !!sym('abs_effects'),
-                            fill = !!sym('cols'))) +
+                            fill= !!sym('cols'))) +
       geom_bar(stat = "identity")+
       theme_classic()+
       coord_flip()+
       theme(legend.position = "top")+
-      scale_fill_discrete(name = "Sign of Effect", labels = c("Negative", "Positive"))
+      scale_fill_manual(values=effect_colors,
+                        name = "Sign of Effect",
+                        labels = c("Negative","Positive"))
     if(margin_errors){
       plt <- base_plot +
         geom_hline(yintercept = ME,linetype=2)+
