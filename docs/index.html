@@ -18,7 +18,7 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="deps/Fira_Code-0.4.6/font.css" rel="stylesheet">
+<script src="deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="deps/Fira_Code-0.4.7/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Modern Graphs for Design of Experiments with ggplot2">
@@ -40,7 +40,7 @@
     
     <a class="navbar-brand me-2" href="index.html">ggDoE</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.9</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,7 +95,7 @@
 </ul>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://remotes.r-lib.org" class="external-link">"remotes"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"toledo60/ggDoE"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"toledo60/ggDoE"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
@@ -132,27 +132,21 @@
 <p>If you want to cite this package in a scientific journal or in any other context, run the following code in your <code>R</code> console</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">'ggDoE'</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>Warning <span class="cf">in</span> <span class="fu">citation</span>(<span class="st">"ggDoE"</span>)<span class="sc">:</span> no date field <span class="cf">in</span> DESCRIPTION file of package</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="st">'ggDoE'</span></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>Warning <span class="cf">in</span> <span class="fu">citation</span>(<span class="st">"ggDoE"</span>)<span class="sc">:</span> could not determine year <span class="cf">for</span> <span class="st">'ggDoE'</span> from package</span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>DESCRIPTION file</span>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>To cite package <span class="st">'ggDoE'</span> <span class="cf">in</span> publications use<span class="sc">:</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  Toledo Luna <span class="fu">J</span> (<span class="dv">2023</span>). _ggDoE<span class="sc">:</span> Modern Graphs <span class="cf">for</span> Design of Experiments</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  with <span class="st">'ggplot2'</span>_. R package version <span class="dv">0</span>.<span class="fl">7.9</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>  <span class="sc">&lt;</span>https<span class="sc">:</span><span class="er">//</span>CRAN.R<span class="sc">-</span>project.org<span class="sc">/</span>package<span class="ot">=</span>ggDoE<span class="sc">&gt;</span>.</span>
 <span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>To cite package <span class="st">'ggDoE'</span> <span class="cf">in</span> publications use<span class="sc">:</span></span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>  Toledo Luna <span class="fu">J</span> (????). _ggDoE<span class="sc">:</span> Modern Graphs <span class="cf">for</span> Design of Experiments</span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>  with <span class="st">'ggplot2'</span>_. R package version <span class="dv">0</span>.<span class="fl">7.9</span>,</span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>  <span class="sc">&lt;</span>https<span class="sc">:</span><span class="er">//</span>ggdoe.netlify.app<span class="sc">&gt;</span>.</span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a></span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>A BibTeX entry <span class="cf">for</span> LaTeX users is</span>
-<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a></span>
-<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>  <span class="sc">@</span>Manual{,</span>
-<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>    title <span class="ot">=</span> {ggDoE<span class="sc">:</span> Modern Graphs <span class="cf">for</span> Design of Experiments with <span class="st">'ggplot2'</span>},</span>
-<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>    author <span class="ot">=</span> {Jose {Toledo Luna}},</span>
-<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a>    note <span class="ot">=</span> {R package version <span class="dv">0</span>.<span class="fl">7.9</span>},</span>
-<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a>    url <span class="ot">=</span> {https<span class="sc">:</span><span class="er">//</span>ggdoe.netlify.app},</span>
-<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a>  }</span></code></pre></div>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>A BibTeX entry <span class="cf">for</span> LaTeX users is</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>  <span class="sc">@</span>Manual{,</span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>    title <span class="ot">=</span> {ggDoE<span class="sc">:</span> Modern Graphs <span class="cf">for</span> Design of Experiments with <span class="st">'ggplot2'</span>},</span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>    author <span class="ot">=</span> {Jose {Toledo Luna}},</span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>    year <span class="ot">=</span> {<span class="dv">2023</span>},</span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>    note <span class="ot">=</span> {R package version <span class="dv">0</span>.<span class="fl">7.9</span>},</span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>    url <span class="ot">=</span> {https<span class="sc">:</span><span class="er">//</span>CRAN.R<span class="sc">-</span>project.org<span class="sc">/</span>package<span class="ot">=</span>ggDoE},</span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>  }</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="contributing-to-the-package">Contributing to the package<a class="anchor" aria-label="anchor" href="#contributing-to-the-package"></a>
@@ -279,21 +273,16 @@
 <code class="sourceCode R"><span><span class="fu"><a href="reference/gg_rsm.html">gg_rsm</a></span><span class="op">(</span><span class="va">heli.rsm</span>,formula <span class="op">=</span> <span class="op">~</span><span class="va">x1</span><span class="op">+</span><span class="va">x2</span><span class="op">+</span><span class="va">x3</span><span class="op">+</span><span class="va">x4</span>,</span>
 <span>       at <span class="op">=</span> <span class="fu">rsm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rsm/man/rsm.html" class="external-link">xs</a></span><span class="op">(</span><span class="va">heli.rsm</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/contour1.png"></p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/gg_rsm.html">gg_rsm</a></span><span class="op">(</span><span class="va">heli.rsm</span>,formula <span class="op">=</span> <span class="op">~</span><span class="va">x1</span><span class="op">+</span><span class="va">x2</span><span class="op">+</span><span class="va">x3</span><span class="op">+</span><span class="va">x4</span>,</span>
-<span>       at <span class="op">=</span> <span class="fu">rsm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rsm/man/rsm.html" class="external-link">xs</a></span><span class="op">(</span><span class="va">heli.rsm</span><span class="op">)</span>,</span>
-<span>       filled <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/contour2.png"></p>
 </div>
 <div class="section level3">
 <h3 id="pareto-plot">Pareto Plot<a class="anchor" aria-label="anchor" href="#pareto-plot"></a>
 </h3>
 <p>Pareto plot of effects with cutoff values for the margin of error (ME) and simultaneous margin of error (SME)</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">lns2</span> <span class="op">~</span> <span class="op">(</span><span class="va">A</span><span class="op">+</span><span class="va">B</span><span class="op">+</span><span class="va">C</span><span class="op">+</span><span class="va">D</span><span class="op">)</span><span class="op">^</span><span class="fl">4</span>,data<span class="op">=</span><span class="va">original_epitaxial</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/pareto_plot.html">pareto_plot</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/pareto_plot1.png"></p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/pareto_plot.html">pareto_plot</a></span><span class="op">(</span><span class="va">model</span>,method<span class="op">=</span><span class="st">'Zahn'</span>,alpha<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/pareto_plot2.png"></p>
 </div>
@@ -301,11 +290,11 @@
 <h3 id="two-dimensional-projections">Two Dimensional Projections<a class="anchor" aria-label="anchor" href="#two-dimensional-projections"></a>
 </h3>
 <p>This function will output all two dimensional projections from a Latin hypercube design</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu">lhs</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lhs/man/randomLHS.html" class="external-link">randomLHS</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">10</span>, k<span class="op">=</span><span class="fl">4</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/pair_plots.html">pair_plots</a></span><span class="op">(</span><span class="va">X</span>,n_columns<span class="op">=</span><span class="fl">3</span>,grid <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/twoD_projections.png"></p>
+<p><img src="reference/figures/pair_plots.png"></p>
 </div>
 </div>
 </div>

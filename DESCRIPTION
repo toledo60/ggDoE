@@ -1,7 +1,7 @@
 Package: ggDoE
 Type: Package
 Title: Modern Graphs for Design of Experiments with 'ggplot2'
-Version: 0.7.9
+Version: 0.8
 Authors@R: c(person(given = "Jose",family = "Toledo Luna",
              role = c("aut", "cre"),
              email = "toledo60@protonmail.com",
@@ -29,7 +29,7 @@ Suggests:
     ggrepel,
     patchwork,
     unrepx,
-    metR,
+    geomtextpath,
     rsm,
     lhs
 RoxygenNote: 7.2.3

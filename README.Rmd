@@ -261,13 +261,10 @@ gg_rsm(heli.rsm,formula = ~x1+x2+x3+x4,
 ![](man/figures/contour1.png)
 
 
-```{r}
+```{r,echo=FALSE}
 gg_rsm(heli.rsm,formula = ~x1+x2+x3+x4,
-       at = rsm::xs(heli.rsm),
-       filled = TRUE)
+       at = rsm::xs(heli.rsm))
 ```
-
-![](man/figures/contour2.png)
 
 
 ### Pareto Plot
@@ -301,6 +298,6 @@ X <- lhs::randomLHS(n=10, k=4)
 pair_plots(X,n_columns=3,grid = TRUE)
 ```
 
-![](man/figures/twoD_projections.png)
+![](man/figures/pair_plots.png)
 
 

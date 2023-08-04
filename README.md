@@ -78,26 +78,20 @@ context, run the following code in your `R` console
 citation('ggDoE')
 ```
 
-    Warning in citation("ggDoE"): no date field in DESCRIPTION file of package
-    'ggDoE'
-
-    Warning in citation("ggDoE"): could not determine year for 'ggDoE' from package
-    DESCRIPTION file
-
-
     To cite package 'ggDoE' in publications use:
 
-      Toledo Luna J (????). _ggDoE: Modern Graphs for Design of Experiments
+      Toledo Luna J (2023). _ggDoE: Modern Graphs for Design of Experiments
       with 'ggplot2'_. R package version 0.7.9,
-      <https://ggdoe.netlify.app>.
+      <https://CRAN.R-project.org/package=ggDoE>.
 
     A BibTeX entry for LaTeX users is
 
       @Manual{,
         title = {ggDoE: Modern Graphs for Design of Experiments with 'ggplot2'},
         author = {Jose {Toledo Luna}},
+        year = {2023},
         note = {R package version 0.7.9},
-        url = {https://ggdoe.netlify.app},
+        url = {https://CRAN.R-project.org/package=ggDoE},
       }
 
 ## Contributing to the package
@@ -260,14 +254,6 @@ gg_rsm(heli.rsm,formula = ~x1+x2+x3+x4,
 
 ![](man/figures/contour1.png)
 
-``` r
-gg_rsm(heli.rsm,formula = ~x1+x2+x3+x4,
-       at = rsm::xs(heli.rsm),
-       filled = TRUE)
-```
-
-![](man/figures/contour2.png)
-
 ### Pareto Plot
 
 Pareto plot of effects with cutoff values for the margin of error (ME)
@@ -297,4 +283,4 @@ X <- lhs::randomLHS(n=10, k=4)
 pair_plots(X,n_columns=3,grid = TRUE)
 ```
 
-![](man/figures/twoD_projections.png)
+![](man/figures/pair_plots.png)

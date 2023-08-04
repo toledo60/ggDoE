@@ -2,20 +2,18 @@
 #'
 #' @param rsm_model Model of class "rsm"
 #' @param formula A formula, or a list of formulas
-#' @param filled Determine if the surface plots should be filled by viridis color palette. Default is FALSE
 #' @param decode This has an effect only if x is an rsm object or other model object that supports coded.data.
 #' In such cases, if decode is TRUE, the coordinate axes are transformed to their decoded values.
 #' @param n_columns number of columns for grid layout. Default is 2
-#' @param stroke width of stroke relative to the size of the text. Ignored if less than zero. Only applied if contour plots are filled
-#' @param size size of text for contour lines. Only applied if contour plots are filled
+#' @param text_size size of text for labelled contour lines. Default is 3
+#' @param bins Number of contour bins. Overridden by binwidth
 #' @param ... Other arguments passed on to contour(). For help with more arguments see ?rsm::contour.lm
-#'
+
 #' @return A grid of contour plot(s) of a fitted linear model in 'ggplot2'
 #' @export
 #'
 #' @importFrom graphics contour
-#' @importFrom ggplot2 aes theme_bw theme_minimal labs element_blank element_text geom_contour geom_contour_filled
-#' @importFrom ggplot2 after_stat
+#' @importFrom ggplot2 aes theme_bw theme_minimal labs element_blank element_text geom_contour_filled
 
 #' @examples
 #' \dontrun{
@@ -23,21 +21,18 @@
 #'
 #' gg_rsm(heli.rsm,formula = ~x1+x2+x3,at = rsm::xs(heli.rsm),n_columns=3)
 #'
-#' gg_rsm(heli.rsm,formula = ~x1+x2+x3,at = rsm::xs(heli.rsm),
-#'        n_columns=3,filled = TRUE)
 #'}
 gg_rsm <- function(rsm_model,
                    formula,
-                   filled=FALSE,
-                   decode=FALSE,
-                   n_columns=2,
-                   stroke = 0.15,
-                   size=4,
+                   decode = FALSE,
+                   n_columns = 2,
+                   text_size = 3,
+                   bins=6,
                    ...){
   if(!inherits(rsm_model,'rsm')){
     stop("rsm_obj should be of class rsm")
   }
-  insight::check_if_installed(c('metR','patchwork'))
+  insight::check_if_installed(c('geomtextpath','patchwork'))
 
   rsm_contour <- contour(rsm_model, formula, plot=FALSE,
                          decode=decode,...)
@@ -63,43 +58,28 @@ gg_rsm <- function(rsm_model,
     return(x)
   }
 
-  if(!filled){
-    for(i in 1:length(xvec)){
-      df_list[[i]] <- cbind(expand.grid(xvec[[i]],yvec[[i]]),"z"=zvec[[i]])
+  for(i in seq_along(xvec)){
+    df_list[[i]] <- cbind(expand.grid(xvec[[i]],yvec[[i]]),"z"=zvec[[i]])
 
-      cplots[[i]] <- ggplot(df_list[[i]], aes(x=!!sym('Var1'), y=!!sym('Var2'))) +
-        metR::geom_contour2(aes(z = z, label = after_stat(level)))+
-        theme_bw()+
-        labs(caption= round_labs(rsm_contour[[i]][[4]]),
-             x="",
-             y=y_lab[i])+
-        theme(panel.grid.major = element_blank(),
-              panel.grid.minor = element_blank(),
-              panel.background = element_blank(),
-              plot.caption = element_text(hjust = 0.5))
-    }
-  }
-  else{
-    for(i in 1:length(xvec)){
-      df_list[[i]] <- cbind(expand.grid(xvec[[i]],yvec[[i]]),"z"=zvec[[i]])
-
-      cplots[[i]] <- ggplot(df_list[[i]],
-                            aes(x=!!sym('Var1'), y=!!sym('Var2'),z=!!sym('z'))) +
-        geom_contour_filled()+
-        geom_contour(color = "black", linewidth = 0.1)+
-        metR::geom_text_contour(aes(z = !!sym('z')),
-                                stroke = stroke,
-                                size=size)+
-        theme_minimal()+
-        labs(caption=round_labs(rsm_contour[[i]][[4]]),
-             x="",
-             y=y_lab[i])+
-        theme(panel.grid.major = element_blank(),
-              panel.grid.minor = element_blank(),
-              panel.background = element_blank(),
-              plot.caption = element_text(hjust = 0.5),
-              legend.position = 'none')
-    }
+    cplots[[i]] <- ggplot(df_list[[i]],
+                          aes(x=!!sym('Var1'), y=!!sym('Var2'),z=!!sym('z'))) +
+      geom_contour_filled(bins=bins)+
+      geomtextpath::geom_textcontour(bins=bins,size=text_size) +
+      theme_minimal()+
+      labs(caption=round_labs(rsm_contour[[i]][[4]]),
+           x="",
+           y=y_lab[i])+
+      theme(panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank(),
+            panel.background = element_blank(),
+            plot.caption = element_text(hjust = 0.5),
+            legend.position = 'none')
   }
   return(patchwork::wrap_plots(cplots, ncol = n_columns))
 }
+
+
+
+
+
+

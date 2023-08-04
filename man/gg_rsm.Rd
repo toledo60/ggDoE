@@ -7,11 +7,10 @@
 gg_rsm(
   rsm_model,
   formula,
-  filled = FALSE,
   decode = FALSE,
   n_columns = 2,
-  stroke = 0.15,
-  size = 4,
+  text_size = 3,
+  bins = 6,
   ...
 )
 }
@@ -20,16 +19,14 @@ gg_rsm(
 
 \item{formula}{A formula, or a list of formulas}
 
-\item{filled}{Determine if the surface plots should be filled by viridis color palette. Default is FALSE}
-
 \item{decode}{This has an effect only if x is an rsm object or other model object that supports coded.data.
 In such cases, if decode is TRUE, the coordinate axes are transformed to their decoded values.}
 
 \item{n_columns}{number of columns for grid layout. Default is 2}
 
-\item{stroke}{width of stroke relative to the size of the text. Ignored if less than zero. Only applied if contour plots are filled}
+\item{text_size}{size of text for labelled contour lines. Default is 3}
 
-\item{size}{size of text for contour lines. Only applied if contour plots are filled}
+\item{bins}{Number of contour bins. Overridden by binwidth}
 
 \item{...}{Other arguments passed on to contour(). For help with more arguments see ?rsm::contour.lm}
 }
@@ -45,7 +42,5 @@ heli.rsm <- rsm::rsm(ave ~ SO(x1, x2, x3),data = rsm::heli)
 
 gg_rsm(heli.rsm,formula = ~x1+x2+x3,at = rsm::xs(heli.rsm),n_columns=3)
 
-gg_rsm(heli.rsm,formula = ~x1+x2+x3,at = rsm::xs(heli.rsm),
-       n_columns=3,filled = TRUE)
 }
 }
