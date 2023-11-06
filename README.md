@@ -1,5 +1,5 @@
 
-# ggDoE <a href='https://ggdoe.netlify.app'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# ggDoE <img src="man/figures/logo.png" align="right" height="139" alt="" />
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ggDoE)](https://cran.r-project.org/package=ggDoE)
