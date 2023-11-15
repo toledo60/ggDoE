@@ -5,8 +5,9 @@ output: github_document
 # ggDoE <img src="man/figures/logo.png" align="right" height="139" alt="" />
 
 [![CRAN status](https://www.r-pkg.org/badges/version/ggDoE)](https://cran.r-project.org/package=ggDoE)
-[![R-CMD-check](https://github.com/toledo60/ggDoE/workflows/R-CMD-check/badge.svg)](https://github.com/toledo60/ggDoE/actions)
 [![Documentation](https://img.shields.io/badge/Documentation-ggDoE-blue)](https://ggdoe.netlify.app/)
+[![R-CMD-check](https://github.com/toledo60/ggDoE/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/toledo60/ggDoE/actions/workflows/R-CMD-check.yaml)
+
 
 ```{r,echo=FALSE}
 knitr::opts_chunk$set(eval = FALSE, fig.width = 6,out.width = '100%')
@@ -26,8 +27,8 @@ install.packages('ggDoE')
 * the development version from GitHub with
 
 ```{r,eval=FALSE}
-if (!require("remotes")) install.packages("remotes")
-remotes::install_github("toledo60/ggDoE")
+if (!require("pak")) install.packages("pak")
+pak::pak("toledo60/ggDoE")
 ```
 
 ## Overview

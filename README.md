@@ -3,8 +3,8 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ggDoE)](https://cran.r-project.org/package=ggDoE)
-[![R-CMD-check](https://github.com/toledo60/ggDoE/workflows/R-CMD-check/badge.svg)](https://github.com/toledo60/ggDoE/actions)
 [![Documentation](https://img.shields.io/badge/Documentation-ggDoE-blue)](https://ggdoe.netlify.app/)
+[![R-CMD-check](https://github.com/toledo60/ggDoE/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/toledo60/ggDoE/actions/workflows/R-CMD-check.yaml)
 
 ## Installation
 
@@ -19,8 +19,8 @@ install.packages('ggDoE')
 - the development version from GitHub with
 
 ``` r
-if (!require("remotes")) install.packages("remotes")
-remotes::install_github("toledo60/ggDoE")
+if (!require("pak")) install.packages("pak")
+pak::pak("toledo60/ggDoE")
 ```
 
 ## Overview
@@ -81,8 +81,7 @@ citation('ggDoE')
     To cite package 'ggDoE' in publications use:
 
       Toledo Luna J (2023). _ggDoE: Modern Graphs for Design of Experiments
-      with 'ggplot2'_. R package version 0.7.9,
-      <https://CRAN.R-project.org/package=ggDoE>.
+      with 'ggplot2'_. R package version 0.8, <https://ggdoe.netlify.app>.
 
     A BibTeX entry for LaTeX users is
 
@@ -90,8 +89,8 @@ citation('ggDoE')
         title = {ggDoE: Modern Graphs for Design of Experiments with 'ggplot2'},
         author = {Jose {Toledo Luna}},
         year = {2023},
-        note = {R package version 0.7.9},
-        url = {https://CRAN.R-project.org/package=ggDoE},
+        note = {R package version 0.8},
+        url = {https://ggdoe.netlify.app},
       }
 
 ## Contributing to the package

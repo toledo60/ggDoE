@@ -76,11 +76,10 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header">
-<img src="logo.png" class="logo" alt=""><h1 id="ggdoe-">ggDoE 
-<a class="anchor" aria-label="anchor" href="#ggdoe-"></a>
+<img src="logo.png" class="logo" alt=""><h1 id="ggdoe-">ggDoE <a class="anchor" aria-label="anchor" href="#ggdoe-"></a>
 </h1>
 </div>
-<p><a href="https://cran.r-project.org/package=ggDoE" class="external-link"><img src="https://www.r-pkg.org/badges/version/ggDoE" alt="CRAN status"></a> <a href="https://github.com/toledo60/ggDoE/actions" class="external-link"><img src="https://github.com/toledo60/ggDoE/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a> <a href="https://ggdoe.netlify.app/" class="external-link"><img src="https://img.shields.io/badge/Documentation-ggDoE-blue" alt="Documentation"></a></p>
+<p><a href="https://cran.r-project.org/package=ggDoE" class="external-link"><img src="https://www.r-pkg.org/badges/version/ggDoE" alt="CRAN status"></a> <a href="https://ggdoe.netlify.app/" class="external-link"><img src="https://img.shields.io/badge/Documentation-ggDoE-blue" alt="Documentation"></a> <a href="https://github.com/toledo60/ggDoE/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/toledo60/ggDoE/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -94,8 +93,8 @@
 <li>the development version from GitHub with</li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://remotes.r-lib.org" class="external-link">"remotes"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"toledo60/ggDoE"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://pak.r-lib.org/" class="external-link">"pak"</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"toledo60/ggDoE"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
@@ -135,18 +134,17 @@
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>To cite package <span class="st">'ggDoE'</span> <span class="cf">in</span> publications use<span class="sc">:</span></span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  Toledo Luna <span class="fu">J</span> (<span class="dv">2023</span>). _ggDoE<span class="sc">:</span> Modern Graphs <span class="cf">for</span> Design of Experiments</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  with <span class="st">'ggplot2'</span>_. R package version <span class="dv">0</span>.<span class="fl">7.9</span>,</span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>  <span class="sc">&lt;</span>https<span class="sc">:</span><span class="er">//</span>CRAN.R<span class="sc">-</span>project.org<span class="sc">/</span>package<span class="ot">=</span>ggDoE<span class="sc">&gt;</span>.</span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>A BibTeX entry <span class="cf">for</span> LaTeX users is</span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>  <span class="sc">@</span>Manual{,</span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>    title <span class="ot">=</span> {ggDoE<span class="sc">:</span> Modern Graphs <span class="cf">for</span> Design of Experiments with <span class="st">'ggplot2'</span>},</span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>    author <span class="ot">=</span> {Jose {Toledo Luna}},</span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>    year <span class="ot">=</span> {<span class="dv">2023</span>},</span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>    note <span class="ot">=</span> {R package version <span class="dv">0</span>.<span class="fl">7.9</span>},</span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>    url <span class="ot">=</span> {https<span class="sc">:</span><span class="er">//</span>CRAN.R<span class="sc">-</span>project.org<span class="sc">/</span>package<span class="ot">=</span>ggDoE},</span>
-<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>  }</span></code></pre></div>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  with <span class="st">'ggplot2'</span>_. R package version <span class="fl">0.8</span>, <span class="sc">&lt;</span>https<span class="sc">:</span><span class="er">//</span>ggdoe.netlify.app<span class="sc">&gt;</span>.</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>A BibTeX entry <span class="cf">for</span> LaTeX users is</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>  <span class="sc">@</span>Manual{,</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>    title <span class="ot">=</span> {ggDoE<span class="sc">:</span> Modern Graphs <span class="cf">for</span> Design of Experiments with <span class="st">'ggplot2'</span>},</span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>    author <span class="ot">=</span> {Jose {Toledo Luna}},</span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>    year <span class="ot">=</span> {<span class="dv">2023</span>},</span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>    note <span class="ot">=</span> {R package version <span class="fl">0.8</span>},</span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>    url <span class="ot">=</span> {https<span class="sc">:</span><span class="er">//</span>ggdoe.netlify.app},</span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>  }</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="contributing-to-the-package">Contributing to the package<a class="anchor" aria-label="anchor" href="#contributing-to-the-package"></a>
