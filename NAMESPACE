@@ -2,6 +2,7 @@
 
 export(alias_matrix)
 export(boxcox_transform)
+export(design_to_tibble)
 export(gg_boxplots)
 export(gg_lm)
 export(gg_rsm)

@@ -18,10 +18,8 @@ URL: https://ggdoe.netlify.app
 BugReports: https://github.com/toledo60/ggDoE/issues
 Imports: 
     ggplot2 (>= 3.4.0),
-    insight
+    insight (>= 0.19.5)
 Suggests:
-    knitr,
-    rmarkdown,
     roxygen2,
     tibble,
     MASS,
@@ -31,8 +29,9 @@ Suggests:
     unrepx,
     geomtextpath,
     rsm,
-    lhs
+    lhs,
+    DoE.base
 RoxygenNote: 7.2.3
 Depends: 
-    R (>= 3.6.0)
+    R (>= 3.7.0)
 Language: en-US

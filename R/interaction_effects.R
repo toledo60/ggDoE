@@ -18,68 +18,68 @@
 #' @examples
 #' interaction_effects(adapted_epitaxial,response = 'ybar',exclude_vars = c('s2','lns2'))
 interaction_effects <- function(design,response,
-                                 exclude_vars = c(),
-                                 linetypes = c('solid','dashed'),
-                                 colors = c("#4260c9" ,"#d6443c"),
-                                 n_columns = 2,
-                                 showplot = TRUE){
-  insight::check_if_installed('patchwork')
-
+                                exclude_vars = c(),
+                                linetypes = c('solid','dashed'),
+                                colors = c("#4260c9" ,"#d6443c"),
+                                n_columns = 2,
+                                showplot = TRUE){
   if(length(colors) != 2 & !inherits(colors,'character') ){
     stop('colors must a character vector of length 2')
   }
   if(length(linetypes) != 2 & !inherits(linetypes,'character') ){
     stop('linetypes must a character vector of length 2')
   }
+  insight::check_if_installed('patchwork')
 
-  factor_names <- setdiff(names(design),c(response,exclude_vars))
+  if(inherits(design,'design')){
+    design <- design_to_tibble(design)
+  }
+
+  factor_names <- setdiff(names(design),c(response,exclude_vars,'Blocks'))
   design[,factor_names] <- lapply(design[,factor_names], as.factor)
 
   interactions <- t(combn(factor_names,2))
   n_iteractions <- nrow(interactions)
-  dat_list <- vector('list',length = n_iteractions)
 
-  for (i in 1:n_iteractions) {
-    dat_list[[i]] <- aggregate(design[response],
-                               by = list(design[[interactions[i,1]]],
-                                         design[[interactions[i,2]]]),
-                               FUN = mean)
-    colnames(dat_list[[i]]) <- c(interactions[i,1],interactions[i,2],
-                                 'mean_response')
-  }
+  dat_list <- lapply(seq_len(n_iteractions), function(i) {
+    aggregated_data <- aggregate(design[response],
+                                 by = list(design[[interactions[i, 1]]],
+                                           design[[interactions[i, 2]]]),
+                                 FUN = mean)
+    colnames(aggregated_data) <- c(interactions[i, 1], interactions[i, 2], 'mean_response')
+    return(aggregated_data)
+  })
 
   if(!showplot){
     return(dat_list)
   }
   else{
-    vals <- c()
-    for(i in 1:n_iteractions){
-      vals <- c(vals,dat_list[[i]][[3]])
-    }
+    vals <- sapply(dat_list, function(df) df[[3]])
+    minval <- min(vals, na.rm = TRUE)
+    maxval <- max(vals, na.rm = TRUE)
 
-    minval <- min(vals)
-    maxval <- max(vals)
+    plot_list <- lapply(seq_len(n_iteractions), function(i) {
+      ggplot(dat_list[[i]],
+             aes(x = !!sym(interactions[i, 1]),
+                 y = !!sym('mean_response'),
+                 group = !!sym(interactions[i, 2]),
+                 colour = !!sym(interactions[i, 2]),
+                 shape = !!sym(interactions[i, 2]),
+                 linetype = !!sym(interactions[i, 2]))) +
+        geom_line() +
+        geom_point() +
+        scale_linetype_manual(values = linetypes) +
+        scale_color_manual(values = colors) +
+        ylim(minval, maxval) +
+        labs(y = paste0("Mean of ", response),
+             x = interactions[i, 1],
+             colour = interactions[i, 2],
+             linetype = interactions[i, 2],
+             shape = interactions[i, 2])
+    })
 
-    plot_list <- vector('list',length = n_iteractions)
-    for(i in 1:n_iteractions){
-      plot_list[[i]] <- ggplot(dat_list[[i]],
-                               aes(x = !!sym(interactions[i,1]),
-                                   y = !!sym('mean_response'),
-                                   group=!!sym(interactions[i,2]),
-                                   colour=!!sym(interactions[i,2]),
-                                   shape=!!sym(interactions[i,2]),
-                                   linetype=!!sym(interactions[i,2])))+
-        geom_line()+
-        geom_point()+
-        scale_linetype_manual(values=linetypes)+
-        scale_color_manual(values=colors)+
-        ylim(minval,maxval)+
-        labs(y=paste0("Mean of ",response),
-             x= interactions[i,1],
-             colour=interactions[i,2],
-             linetype=interactions[i,2],
-             shape=interactions[i,2]
-        )
+    if(length(plot_list) == 1){
+      n_columns <- 1
     }
     final_plot <- patchwork::wrap_plots(plot_list,ncol = n_columns) &
       theme_bw() &
@@ -89,5 +89,3 @@ interaction_effects <- function(design,response,
     return(final_plot)
   }
 }
-
-

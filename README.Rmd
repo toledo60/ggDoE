@@ -219,15 +219,6 @@ interaction_effects(adapted_epitaxial,response = 'ybar',
 
 Main effect plots for each factor in a *factorial design*
 
-```{r}
-main_effects(original_epitaxial,
-             response='s2',
-             exclude_vars = c('ybar','lns2'))
-```
-
-
-![](man/figures/main_effects1.png)
-
 
 ```{r}
 main_effects(original_epitaxial,

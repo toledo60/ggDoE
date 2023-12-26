@@ -10,4 +10,4 @@
 ^CRAN-SUBMISSION$
 ^_pkgdown\.yml$
 ^pkgdown$
-^debug.R
+^debug$

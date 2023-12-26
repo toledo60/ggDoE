@@ -24,57 +24,49 @@ main_effects <- function(design,response,
                          color_palette = NA,
                          alpha=1,direction = 1,
                          showplot=TRUE){
+  if(inherits(design,'design')){
+    design <- design_to_tibble(design)
+  }
 
-  factor_names <- setdiff(names(design), c(response, exclude_vars))
+  factor_names <- setdiff(names(design), c(response, exclude_vars,'Blocks'))
   factors_total <- length(factor_names)
 
-  dat_list <- vector("list", length = factors_total)
-
-  for (i in seq_along(factor_names)) {
-    dat_list[[i]] <- aggregate(design[[response]],
-                               design[factor_names[i]], mean)
-    colnames(dat_list[[i]]) <- c(factor_names[i], response)
-  }
+  dat_list <- lapply(factor_names, function(factor_name) {
+    aggregated_data <- aggregate(design[[response]], list(design[[factor_name]]), mean)
+    colnames(aggregated_data) <- c(factor_name, response)
+    aggregated_data
+  })
   names(dat_list) <- factor_names
 
   if(!showplot){
     return(dat_list)
   }
   else{
-    vals <- c()
+    vals <- sapply(dat_list, function(df) df[[2]])
 
-    for (i in 1:factors_total) {
-      vals <- c(vals, dat_list[[i]][[2]])
-    }
-
-    minval <- min(vals)
-    maxval <- max(vals)
+    minval <- min(vals, na.rm = TRUE)
+    maxval <- max(vals, na.rm = TRUE)
 
     basic_rbindlist <- function(data) {
       all_names <- unique(unlist(lapply(data, names)))
-      filled_data <- vector("list", length = length(data))
-
-      for (i in seq_along(data)) {
-        this_names <- names(data[[i]])
-        missing_names <- setdiff(all_names, this_names)
-        # If any names are missing, add them to the data frame with NAs
+      filled_data <- lapply(data, function(df) {
+        missing_names <- setdiff(all_names, names(df))
         if (length(missing_names) > 0) {
-          missing_data <- setNames(rep(list(NA), length(missing_names)),
-                                   missing_names)
-          filled_data[[i]] <- cbind(data[[i]], missing_data)
+          missing_data <- setNames(rep(list(NA), length(missing_names)), missing_names)
+          cbind(df, missing_data)
         } else {
-          filled_data[[i]] <- data[[i]]
+          df
         }
-      }
+      })
       return(do.call(rbind, filled_data))
     }
 
     dat <- basic_rbindlist(dat_list)
 
-    dat[is.na(dat)] <- 88
+    dat[is.na(dat)] <- 888
     melt_dat <- stack(as.vector(dat))
 
-    melted_dat <- melt_dat[melt_dat$values != 88 & melt_dat$ind != response,]
+    melted_dat <- melt_dat[melt_dat$values != 888 & melt_dat$ind != response,]
     melted_dat$response_var <- as.vector(dat)[[response]]
     melted_dat$values <- as.factor(melted_dat$values)
 
@@ -92,14 +84,14 @@ main_effects <- function(design,response,
       aes(x = !!sym('values'), y = !!sym('response_var'),
           colour = !!sym('ind'), group=1) +
       geom_line(aes(group=1),linewidth =0.5) +
-      geom_point(size=1)+
+      geom_point(size=1.5)+
       theme_bw() +
       ylim(minval,maxval)+
       theme(legend.position = "none",
             panel.grid.major = element_blank(),
             panel.grid.minor = element_blank()) +
       scale_color_manual(values = factor_colors)+
-      facet_wrap(vars(ind),ncol = n_columns)+
+      facet_wrap(vars(ind),ncol = n_columns,scales = 'free_x')+
       labs(y=paste0("Mean of ",response),x='')
 
     return(p)

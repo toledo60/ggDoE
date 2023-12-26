@@ -78,9 +78,12 @@ context, run the following code in your `R` console
 citation('ggDoE')
 ```
 
+    Warning in citation("ggDoE"): could not determine year for 'ggDoE' from package
+    DESCRIPTION file
+
     To cite package 'ggDoE' in publications use:
 
-      Toledo Luna J (2023). _ggDoE: Modern Graphs for Design of Experiments
+      Toledo Luna J (????). _ggDoE: Modern Graphs for Design of Experiments
       with 'ggplot2'_. R package version 0.8, <https://ggdoe.netlify.app>.
 
     A BibTeX entry for LaTeX users is
@@ -88,7 +91,6 @@ citation('ggDoE')
       @Manual{,
         title = {ggDoE: Modern Graphs for Design of Experiments with 'ggplot2'},
         author = {Jose {Toledo Luna}},
-        year = {2023},
         note = {R package version 0.8},
         url = {https://ggdoe.netlify.app},
       }
@@ -217,14 +219,6 @@ interaction_effects(adapted_epitaxial,response = 'ybar',
 ### Main Effects Plots
 
 Main effect plots for each factor in a *factorial design*
-
-``` r
-main_effects(original_epitaxial,
-             response='s2',
-             exclude_vars = c('ybar','lns2'))
-```
-
-![](man/figures/main_effects1.png)
 
 ``` r
 main_effects(original_epitaxial,

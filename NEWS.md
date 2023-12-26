@@ -4,11 +4,20 @@ BREAKING
 
 * `gg_rsm()` arguments `filled, size, stroke` have been removed. They were used for `metR::geom_text_contour` which is no longer being used.
 
+* `pair_plots` no longer checks `design` is a proper Latin hypercube design
+
 
 NEW FEATURES
 
 * `gg_rsm()` has new argument `bins` to specify the number of contour bins. Default is 6
 * `gg_rsm()` has new argument `text_size` to specify size of text for labelled contour lines. Default is 3
+
+
+BUG FIXES
+
+* `main_effects` now has independent x-axis limits for each factor. Input `design` properly accepts class "design" generated from packages such as `DoE.base, FrF2`, same goes for `interaction_effects`. Speed improvements for both of these functions. 
+* `main_effects`: The `n_columns` input is automatically adjusted in the case where there is only one main effect to `n_columns =1`, i.e only one factor
+* `interaction_effects`: The `n_columns` input is automatically adjusted in the case where there is only one pair of interaction effects to `n_columns =1`, i.e only two factors
 
 
 DEPENDENCIES
