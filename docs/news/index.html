@@ -54,13 +54,14 @@
 <code><a href="../reference/gg_rsm.html">gg_rsm()</a></code> has new argument <code>bins</code> to specify the number of contour bins. Default is 6</li>
 <li>
 <code><a href="../reference/gg_rsm.html">gg_rsm()</a></code> has new argument <code>text_size</code> to specify size of text for labelled contour lines. Default is 3</li>
+<li>Added new function <code><a href="../reference/design_to_tibble.html">design_to_tibble()</a></code> to convert an object of class <code>design</code> to <code>tibble</code>. Designs generated from packages such as <code>DoE.base, FrF2</code>
+</li>
 </ul><p>BUG FIXES</p>
 <ul><li>
-<code>main_effects</code> now has independent x-axis limits for each factor. Input <code>design</code> properly accepts class “design” generated from packages such as <code>DoE.base, FrF2</code>, same goes for <code>interaction_effects</code>. Speed improvements for both of these functions.</li>
+<code>main_effects</code> now has independent x-axis limits for each factor. Input <code>design</code> properly accepts class “design” generated from packages such as <code>DoE.base, FrF2</code>, same goes for <code>interaction_effects</code>
+</li>
 <li>
-<code>main_effects</code>: The <code>n_columns</code> input is automatically adjusted in the case where there is only one main effect to <code>n_columns =1</code>, i.e only one factor</li>
-<li>
-<code>interaction_effects</code>: The <code>n_columns</code> input is automatically adjusted in the case where there is only one pair of interaction effects to <code>n_columns =1</code>, i.e only two factors</li>
+<code>n_columns</code> arguments is automatically adjusted to <code>n_columns=1</code> in <code>main_effects</code>,<code>interaction_effects</code>, <code>pair_plots</code> whenever there is only one factor or pair of factors</li>
 </ul><p>DEPENDENCIES</p>
 <ul><li>switched <code>metR</code> to <code>geomtextpath</code>. <code>geomtextpath</code> is a lighter package in terms of dependencies compared to <code>metR</code>. This only affects <code>gg_rsm</code> and is used to add text labels on contour lines</li>
 </ul><hr></div>

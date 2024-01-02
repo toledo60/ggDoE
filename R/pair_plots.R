@@ -43,6 +43,9 @@ pair_plots <- function(design,
     return(p1)
   })
 
+  if(iters == 1){
+    n_columns <- 1
+  }
   final_plot <- patchwork::wrap_plots(plot_list,
                                       ncol = n_columns) & theme_bw_nogrid() &
     {if(grid) geom_hline(yintercept = seq(0, 1, length = n_rows + 1),

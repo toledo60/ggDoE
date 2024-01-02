@@ -11,13 +11,13 @@ NEW FEATURES
 
 * `gg_rsm()` has new argument `bins` to specify the number of contour bins. Default is 6
 * `gg_rsm()` has new argument `text_size` to specify size of text for labelled contour lines. Default is 3
+* Added new function `design_to_tibble()` to convert an object of class `design` to `tibble`. Designs generated from packages such as `DoE.base, FrF2`
 
 
 BUG FIXES
 
-* `main_effects` now has independent x-axis limits for each factor. Input `design` properly accepts class "design" generated from packages such as `DoE.base, FrF2`, same goes for `interaction_effects`. Speed improvements for both of these functions. 
-* `main_effects`: The `n_columns` input is automatically adjusted in the case where there is only one main effect to `n_columns =1`, i.e only one factor
-* `interaction_effects`: The `n_columns` input is automatically adjusted in the case where there is only one pair of interaction effects to `n_columns =1`, i.e only two factors
+* `main_effects` now has independent x-axis limits for each factor. Input `design` properly accepts class "design" generated from packages such as `DoE.base, FrF2`, same goes for `interaction_effects`
+* `n_columns` arguments is automatically adjusted to `n_columns=1` in `main_effects`,`interaction_effects`, `pair_plots` whenever there is only one factor or pair of factors
 
 
 DEPENDENCIES
