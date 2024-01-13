@@ -49,13 +49,14 @@ gg_lm <- function(model,which_plots = 1:4,
     stop("model should be a regression model of class 'lm'")
   }else{
 
-    insight::check_if_installed(c('patchwork','ggrepel'))
     df <- model$model
     df$.std.resid <- rstandard(model)
 
     if(sum(is.na(df$.std.resid)) > 0){
       stop("Insufficient degrees of freedom, check your model. Can't obtain diagnostic plots")
     }
+
+    insight::check_if_installed(c('patchwork','ggrepel'))
 
     df$.fitted <- model$fitted.values
     df$.resid <- model$residuals
@@ -88,8 +89,7 @@ gg_lm <- function(model,which_plots = 1:4,
       geom_hline(yintercept = 0,linetype='dashed')+
       labs(y = "Residuals", x = "Fitted Values",
            title = "Residual vs. Fitted Value") +
-      ylim(-(limit + margin), limit + margin) +
-      theme_bw_nogrid()
+      ylim(-(limit + margin), limit + margin)
 
     if(sum(abs(df$.std.resid) > 3)==0){
       res_fitted <- res_fitted_base
@@ -104,7 +104,6 @@ gg_lm <- function(model,which_plots = 1:4,
                                   na.rm = TRUE,
                                   max.overlaps = 20,
                                   color="#21908CFF")
-
     }
 
     # QQ-plot -----------------------------------------------------------------
@@ -118,8 +117,7 @@ gg_lm <- function(model,which_plots = 1:4,
       labs(x = "Theoretical Quantile", y = "Standardized Residual",
            title = "Normal-QQ Plot") +
       geom_abline(data = qq_line ,aes(intercept = intercept ,slope = slope),
-                  color = theme_color, linewidth = 1.1)+
-      theme_bw_nogrid()
+                  color = theme_color, linewidth = 1.1)
 
 
     # Scale-Location ----------------------------------------------------------
@@ -132,8 +130,7 @@ gg_lm <- function(model,which_plots = 1:4,
                   fill="#d9d9d9",formula = 'y ~ x') +
       labs(y=expression(sqrt("|Standardized Residuals|")),
            x = "Fitted Values",
-           title = "Scale-Location Plot")+
-      theme_bw_nogrid()
+           title = "Scale-Location Plot")
 
     # Cooks Distance ----------------------------------------------------------
 
@@ -162,8 +159,7 @@ gg_lm <- function(model,which_plots = 1:4,
                                 max.overlaps = 20,
                                 color=theme_color)+
       labs(x= 'Observarion',y="Cook's Distance",
-           title="Cook's Distance Plot")+
-      theme_bw_nogrid()
+           title="Cook's Distance Plot")
 
 
     # Variance Inflation Factor -----------------------------------------------
@@ -211,8 +207,7 @@ gg_lm <- function(model,which_plots = 1:4,
                                   max.overlaps = 20,
                                   color=theme_color)+
         labs(x = "", y = "Variance Inflation Factor (VIF)",
-             title = "Collinearity")+
-        theme_bw_nogrid()
+             title = "Collinearity")
 
       return(plt)
     }
@@ -228,8 +223,7 @@ gg_lm <- function(model,which_plots = 1:4,
                     color = theme_color ,fill="#d9d9d9",
                     linewidth = 1.1,formula = 'y ~ x') +
         labs(y = "Standardized Residuals", x = "Leverage",
-             title = 'Residual vs. Leverage')+
-        theme_bw_nogrid()
+             title = 'Residual vs. Leverage')
 
       if(sum(df$.hat  > 2 * p / n) == 0){
         stdres_leverage <- stdres_leverage_base
@@ -243,7 +237,6 @@ gg_lm <- function(model,which_plots = 1:4,
                                     max.iter = 20,
                                     color=theme_color)
       }
-
       plot_list[[1]] <- res_fitted
       plot_list[[2]] <- qq_plot
       plot_list[[3]] <- stdres_fitted
@@ -252,22 +245,16 @@ gg_lm <- function(model,which_plots = 1:4,
       plot_list[[6]] <- vif_plot(model,point_size=point_size,
                                  theme_color = theme_color)
 
-
-      return(patchwork::wrap_plots(plot_list[which_plots],
-                                   ncol = n_columns))
-
     }
     else{
-
       plot_list[[1]] <- res_fitted + labs(title = "Residual vs.\nFitted Value")
       plot_list[[2]] <- qq_plot
       plot_list[[3]] <- stdres_fitted
       plot_list[[4]] <- cooksD_plot
       plot_list[[5]] <- vif_plot(model,point_size=point_size,
                                  theme_color = theme_color)
-
-      return(patchwork::wrap_plots(plot_list[which_plots],
-                                   ncol = n_columns))
     }
   }
+  return(patchwork::wrap_plots(plot_list[which_plots],
+                               ncol = n_columns) & theme_bw_nogrid())
 }
