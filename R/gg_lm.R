@@ -18,7 +18,7 @@
 #' \strong{Plot 5:} "Cook's Distance": A data point having a large Cook's distance indicates that the data point
 #' strongly influences the fitted values of the model. The default threshold used for detecting or classifying observations as outers is \eqn{4/n} (i.e cooksD_type=1)
 #' where \eqn{n} is the number of observations. The thresholds computed are as follows: \cr
-#' \itemize{
+#' \describe{
 #' \item{cooksD_type = 1: }{4/n}
 #' \item{cooksD_type = 2: }{4/(n-p-1)}
 #' \item{cooksD_type = 3: }{1/(n-p-1)}

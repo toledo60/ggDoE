@@ -31,7 +31,7 @@ Suggests:
     rsm,
     lhs,
     DoE.base
-RoxygenNote: 7.3.0
+RoxygenNote: 7.3.1
 Depends: 
     R (>= 3.7.0)
 Language: en-US

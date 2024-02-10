@@ -107,23 +107,39 @@
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The method argument is a simple wrapper for the function PSE() from the unrepx R package.
 For more details you can use ?unrepx::PSE(). The <em>method</em> arguement implements methods of estimating the standard error of
-effects estimates from unreplicatd designs. The methods include</p><ul><li><p>Daniel: The 68.3rd quantile of the absolute effects. See Daniel (1959)</p></li>
-<li><p>Dong: The RMS method, applied after excluding all
-effects that exceed 2.5 * PSE(effects, "SMedian") in absolute value. See Dong (1993)</p></li>
-<li><p>JuanPena: An iterated median method whereby we repeatedly calculate the
+effects estimates from unreplicatd designs. The methods include</p><dl><dt>Daniel: </dt>
+<dd><p>The 68.3rd quantile of the absolute effects. See Daniel (1959)</p></dd>
+
+<dt>Dong: </dt>
+<dd><p>The RMS method, applied after excluding all
+effects that exceed 2.5 * PSE(effects, "SMedian") in absolute value. See Dong (1993)</p></dd>
+
+<dt>JuanPena: </dt>
+<dd><p>An iterated median method whereby we repeatedly calculate the
 median of the absolute effects that don't exceed 3.5 times the previous median, until it stabilizes.
-The estimate is the final median, divided by .6578. See Juan and Pena (1992).</p></li>
-<li><p>Lenth (Default): The SMedian method, applied after excluding all effects that exceed 2.5 * PSE(effects, "SMedian")
-in absolute value. See Lenth (1989)</p></li>
-<li><p>RMS: Square root of the mean of the squared effects. This is not a good PSE in the presence of active effects,
-but it is provided for sake of comparisons</p></li>
-<li><p>SMedian: 1.5 times the median of the absolute effects</p></li>
-<li><p>Zahn, WZahn: The Zahn method is the slope of the least-squares line fitted to the first m points of unrepx::hnplot(effects, horiz = FALSE),
+The estimate is the final median, divided by .6578. See Juan and Pena (1992).</p></dd>
+
+<dt>Lenth (Default): </dt>
+<dd><p>The SMedian method, applied after excluding all effects that exceed 2.5 * PSE(effects, "SMedian")
+in absolute value. See Lenth (1989)</p></dd>
+
+<dt>RMS: </dt>
+<dd><p>Square root of the mean of the squared effects. This is not a good PSE in the presence of active effects,
+but it is provided for sake of comparisons</p></dd>
+
+<dt>SMedian: </dt>
+<dd><p>1.5 times the median of the absolute effects</p></dd>
+
+<dt>Zahn, WZahn: </dt>
+<dd><p>The Zahn method is the slope of the least-squares line fitted to the first m points of unrepx::hnplot(effects, horiz = FALSE),
 where m = floor(.683 * length(effects)). (This line is fitted through the origin.)
 The WZahn method is an experimental version of Zahn's method,
 based on weighted least-squares
-with weights decreasing linearly from m - .5 to .5, but bounded above by .65m</p></li>
-</ul></div>
+with weights decreasing linearly from m - .5 to .5, but bounded above by .65m</p></dd>
+
+
+
+</dl></div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>Daniel, C (1959) Use of Half-Normal Plots in Interpreting Factorial Two-Level Experiments. Technometrics, 1(4), 311-341 <br><br>

@@ -103,11 +103,20 @@
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p><strong>Plot 5:</strong> "Cook's Distance": A data point having a large Cook's distance indicates that the data point
 strongly influences the fitted values of the model. The default threshold used for detecting or classifying observations as outers is \(4/n\) (i.e cooksD_type=1)
-where \(n\) is the number of observations. The thresholds computed are as follows: <br></p><ul><li><p>cooksD_type = 1: 4/n</p></li>
-<li><p>cooksD_type = 2: 4/(n-p-1)</p></li>
-<li><p>cooksD_type = 3: 1/(n-p-1)</p></li>
-<li><p>cooksD_type = 4: 3* mean(cook's distance values)</p></li>
-</ul><p>where \(n\) is the number of observations and \(p\) is the number of predictors. <br></p>
+where \(n\) is the number of observations. The thresholds computed are as follows: <br></p><dl><dt>cooksD_type = 1: </dt>
+<dd><p>4/n</p></dd>
+
+<dt>cooksD_type = 2: </dt>
+<dd><p>4/(n-p-1)</p></dd>
+
+<dt>cooksD_type = 3: </dt>
+<dd><p>1/(n-p-1)</p></dd>
+
+<dt>cooksD_type = 4: </dt>
+<dd><p>3* mean(cook's distance values)</p></dd>
+
+
+</dl><p>where \(n\) is the number of observations and \(p\) is the number of predictors. <br></p>
 <p><strong>Plot 6:</strong> "Collinearity": Conisders the variance inflation factor (VIF) for multicollinearity: <br>
 Tolerance = \(1 - R_j^2\), VIF = (1/Tolerance)
 where \(R_j^2\) is the coefficient of determination of a regression of predictor \(j\) on all the other predictors.

@@ -16,7 +16,7 @@
 #' The method argument is a simple wrapper for the function PSE() from the unrepx R package.
 #' For more details you can use ?unrepx::PSE(). The \emph{method} arguement implements methods of estimating the standard error of
 #' effects estimates from unreplicatd designs. The methods include
-#' \itemize{
+#' \describe{
 #' \item{Daniel: }{The 68.3rd quantile of the absolute effects. See Daniel (1959) }
 #' \item{Dong: }{The RMS method, applied after excluding all
 #' effects that exceed 2.5 * PSE(effects, "SMedian") in absolute value. See Dong (1993)}
