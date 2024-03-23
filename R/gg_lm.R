@@ -11,6 +11,8 @@
 #' @return Regression diagnostic plots
 #' @importFrom ggplot2 geom_smooth stat_qq geom_abline ylim aes sym geom_linerange geom_hline
 #' @importFrom stats quantile lm.influence cooks.distance rstandard as.formula model.matrix
+#' @importFrom patchwork wrap_plots
+
 #' @export
 #'
 #' @details
@@ -255,6 +257,5 @@ gg_lm <- function(model,which_plots = 1:4,
                                  theme_color = theme_color)
     }
   }
-  return(patchwork::wrap_plots(plot_list[which_plots],
-                               ncol = n_columns) & theme_bw_nogrid())
+  return(wrap_plots(plot_list[which_plots], ncol = n_columns) & theme_bw_nogrid())
 }

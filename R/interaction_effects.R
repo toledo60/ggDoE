@@ -15,6 +15,8 @@
 #' @importFrom ggplot2 scale_color_manual theme_bw ylim element_blank
 #' @importFrom utils combn
 #' @importFrom stats aggregate
+#' @importFrom patchwork wrap_plots
+
 #' @examples
 #' interaction_effects(adapted_epitaxial,response = 'ybar',exclude_vars = c('s2','lns2'))
 interaction_effects <- function(design,response,
@@ -32,7 +34,7 @@ interaction_effects <- function(design,response,
   insight::check_if_installed('patchwork')
 
   if(inherits(design,'design')){
-    design <- design_to_tibble(design)
+    design <- design_to_tibble(design,factors_to_numeric = TRUE)
   }
 
   factor_names <- setdiff(names(design),c(response,exclude_vars,'Blocks'))
@@ -81,7 +83,7 @@ interaction_effects <- function(design,response,
     if(length(plot_list) == 1){
       n_columns <- 1
     }
-    final_plot <- patchwork::wrap_plots(plot_list,ncol = n_columns) &
+    final_plot <- wrap_plots(plot_list,ncol = n_columns) &
       theme_bw() &
       theme(legend.background = element_rect(fill="gray96"),
             panel.grid.major = element_blank(),

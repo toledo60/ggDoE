@@ -1,3 +1,21 @@
+
+# ggDoE 0.8.1
+
+BREAKING 
+
+* `pair_plots` argument `grid` now specifies dimensions to overlay a grid on to existing plots. For example, `grid = c(3,2)` will create a 3 by 2 grid on all pairs plot
+
+NEW FEATURES
+
+* `design_to_tibble()` has new argument `factors_to_numeric`. If factors are changed 
+to numeric the order of the levels in the design are preserved
+
+DEPENDENCIES
+
+* Switched `patchwork` to Imports instead of Suggests under Description file
+
+---
+
 # ggDoE 0.8
 
 BREAKING

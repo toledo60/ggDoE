@@ -25,7 +25,7 @@ main_effects <- function(design,response,
                          alpha=1,direction = 1,
                          showplot=TRUE){
   if(inherits(design,'design')){
-    design <- design_to_tibble(design)
+    design <- design_to_tibble(design,factors_to_numeric = TRUE)
   }
 
   factor_names <- setdiff(names(design), c(response, exclude_vars,'Blocks'))

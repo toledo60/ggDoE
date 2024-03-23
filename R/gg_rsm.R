@@ -14,6 +14,7 @@
 #'
 #' @importFrom graphics contour
 #' @importFrom ggplot2 aes theme_bw theme_minimal labs element_blank element_text geom_contour_filled
+#' @importFrom patchwork wrap_plots
 
 #' @examples
 #' \dontrun{
@@ -32,7 +33,7 @@ gg_rsm <- function(rsm_model,
   if(!inherits(rsm_model,'rsm')){
     stop("rsm_obj should be of class rsm")
   }
-  insight::check_if_installed(c('geomtextpath','patchwork'))
+  insight::check_if_installed('geomtextpath')
 
   rsm_contour <- contour(rsm_model, formula, plot=FALSE,
                          decode=decode,...)
@@ -75,7 +76,7 @@ gg_rsm <- function(rsm_model,
             plot.caption = element_text(hjust = 0.5),
             legend.position = 'none')
   }
-  return(patchwork::wrap_plots(cplots, ncol = n_columns))
+  return(wrap_plots(cplots, ncol = n_columns))
 }
 
 

@@ -4,10 +4,12 @@
 \alias{design_to_tibble}
 \title{Convert an object of class `design` to `tibble`}
 \usage{
-design_to_tibble(design)
+design_to_tibble(design, factors_to_numeric = FALSE)
 }
 \arguments{
 \item{design}{An object of class `design`}
+
+\item{factors_to_numeric}{If TRUE, convert all factors to numeric type. The default ordering of levels is preserved when converting to numeric}
 }
 \value{
 Converted design to tibble
@@ -23,4 +25,5 @@ Thk <- c(116.1, 106.7, 116.5, 123.2, 116.9, 107.5, 115.5, 125.1, 112.6, 105.9,
 design <- DoE.base::add.response(dat, Thk)
 design
 design_to_tibble(design)
+design_to_tibble(design, factors_to_numeric = TRUE)
 }

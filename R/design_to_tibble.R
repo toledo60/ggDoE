@@ -1,6 +1,7 @@
 #' Convert an object of class `design` to `tibble`
 #'
 #' @param design An object of class `design`
+#' @param factors_to_numeric If TRUE, convert all factors to numeric type. The default ordering of levels is preserved when converting to numeric
 #'
 #' @return Converted design to tibble
 #' @export
@@ -13,18 +14,24 @@
 #' design <- DoE.base::add.response(dat, Thk)
 #' design
 #' design_to_tibble(design)
-design_to_tibble <- function(design){
+#' design_to_tibble(design, factors_to_numeric = TRUE)
+design_to_tibble <- function(design,factors_to_numeric = FALSE){
   if(!inherits(design,'design')){
     stop("Design should be of class 'design'")
   }
+
+  if(!factors_to_numeric){
+    return(tibble::as_tibble(design))
+  }
+
   as_double_factor <- function(x) {as.numeric(levels(x))[x]}
 
-  dat <- lapply(design, function(column) {
+  design <- lapply(design, function(column) {
     if (is.factor(column)) {
       return(as_double_factor(column))
     } else {
       return(column)
     }
   })
-  return(tibble::as_tibble(dat))
+  return(tibble::as_tibble(design))
 }

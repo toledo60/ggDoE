@@ -7,8 +7,8 @@
 pair_plots(
   design,
   point_color = "#21908CFF",
-  grid = FALSE,
   point_size = 1.5,
+  grid = c(-1, -1),
   n_columns = 2
 )
 }
@@ -17,10 +17,9 @@ pair_plots(
 
 \item{point_color}{Change color of points in plots}
 
-\item{grid}{Logial argument. Specify if a grid should be added to each projection.
-The grid is constructed using seq(0,1,length=nrows(design)+1). Default is FALSE}
-
 \item{point_size}{Change size of points in plots}
+
+\item{grid}{A numeric vector specifying the dimensions of the grid to overlay.}
 
 \item{n_columns}{number of columns for grid layout. Default is 2}
 }
@@ -32,6 +31,7 @@ Two Dimensional Projections of Latin Hypercube Designs
 }
 \examples{
 set.seed(10)
-X <- lhs::randomLHS(n=15,k=4)
+X <- lhs::randomLHS(n=12,k=4)
 pair_plots(X,n_columns = 3)
+pair_plots(X,n_columns = 3, grid = c(3,2))
 }
