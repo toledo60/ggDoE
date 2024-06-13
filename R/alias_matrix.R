@@ -4,9 +4,8 @@
 #' @param midpoint A midpoint value between (0,1) to split the color scheme of three colors
 #' @param digits number of digits to round correlation values. Default is 3
 #' @param color_palette A character string indicating the color map option to use. Eight options are available: "viridis","cividis","magma","inferno","plasma","rocket","mako","turbo"
-#' @param alpha The alpha transparency, a number in [0,1]
-#' @param direction Sets the order of colors in the scale. If 1, the default, colors are ordered from darkest to lightest. If -1, the order of colors is reversed
 #' @param showplot logical indicating to show the correlation plot. If false, the correlation/alias matrix is returned. Default is TRUE
+#' @param ... additional parameters to be given to viridisPalette, such as alpha and direction
 #' @importFrom ggplot2 scale_fill_gradient2 geom_tile element_blank aes theme_minimal theme
 #' @importFrom stats model.matrix cor
 #' @return correlation matrix between main effects and interaction effects from the model.matrix. Alias matrix is also returned
@@ -19,8 +18,8 @@
 alias_matrix <- function(design,midpoint=0.5,
                          digits=3,
                          color_palette = "viridis",
-                         alpha=1,direction = 1,
-                         showplot=TRUE){
+                         showplot=TRUE,
+                         ...){
 
   k <- ncol(design)   # k is number of input factors
   M <- as.matrix(model.matrix(~ (.)^2, data = design))
@@ -41,8 +40,7 @@ alias_matrix <- function(design,midpoint=0.5,
 
     colors <- viridisPalette(3,
                              color_palette = color_palette,
-                             direction = direction,
-                             alpha = alpha)
+                             ...)
     plt <- ggplot(data = melted_cormat,
                   aes(!!melted_cormat$Var1, !!melted_cormat$Var2, fill = !!melted_cormat$value))+
       geom_tile(color = "#001526")+

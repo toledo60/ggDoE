@@ -12,10 +12,9 @@ gg_boxplots(
   jitter_points = FALSE,
   horizontal = FALSE,
   point_size = 1,
-  alpha = 1,
   color_palette = NA,
-  direction = 1,
-  show_mean = FALSE
+  show_mean = FALSE,
+  ...
 )
 }
 \arguments{
@@ -33,13 +32,11 @@ gg_boxplots(
 
 \item{point_size}{Change size of points (outliers) in boxplots}
 
-\item{alpha}{The alpha transparency, a number in [0,1]}
-
 \item{color_palette}{A character string indicating the color map option to use. Eight options are available: "viridis","cividis","magma","inferno","plasma","rocket","mako","turbo"}
 
-\item{direction}{Sets the order of colors in the scale. If 1, the default, colors are ordered from darkest to lightest. If -1, the order of colors is reversed}
-
 \item{show_mean}{Display the mean for each boxplot. Default is FALSE}
+
+\item{...}{additional parameters to be given to viridisPalette, such as alpha and direction}
 }
 \value{
 Boxplots created with ggplot2

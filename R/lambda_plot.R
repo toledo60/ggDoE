@@ -4,10 +4,8 @@
 #' @param lambda sequence of lambda values to consider for plot. Default is seq(-2,2,0.1)
 #' @param color_palette A character string indicating the color map option to use.
 #' Eight options are available: "viridis","cividis","magma","inferno","plasma","rocket","mako","turbo". Default is 'viridis'
-#' @param alpha The alpha transparency, a number in [0,1]
-#' @param direction Sets the order of colors in the scale. If 1, the default, colors are ordered from darkest to lightest. If -1, the order of colors is reversed
 #' @param showplot logical indicating to show the main effect plots. If false, a list of tibbles is returned used to obtain the main effects for each factor. Default is TRUE
-#'
+#' @param ... additional parameters to be given to viridisPalette, such as alpha and direction
 #' @return Lambda plot for tracing t-staitics across different values of lambda (in ggplot2)
 #' @export
 #'
@@ -21,9 +19,8 @@
 #' lambda_plot(mod,lambda = seq(0,2,0.1),showplot = FALSE)
 lambda_plot <- function(model, lambda = seq(-2, 2, by = 0.1),
                         color_palette = 'viridis',
-                        alpha=1,
-                        direction =1,
-                        showplot=TRUE){
+                        showplot=TRUE,
+                        ...){
   if(!insight::is_regression_model(model)){
     stop("model should be a regression model of class 'lm'")
   }
@@ -93,8 +90,7 @@ lambda_plot <- function(model, lambda = seq(-2, 2, by = 0.1),
     }else{
       factor_colors <- viridisPalette(factors_total,
                                       color_palette = color_palette,
-                                      direction = direction,
-                                      alpha = alpha)
+                                      ...)
     }
 
     plt <- ggplot(melted_t, aes(x=!!sym('lambda'), y=!!sym("values"),

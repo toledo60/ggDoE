@@ -16,8 +16,8 @@
 #' boxcox_transform(model,lambda = seq(-5,5,0.2))
 #' boxcox_transform(model,lambda = seq(-5,5,0.2),showplot=FALSE)
 boxcox_transform <- function(model,lambda= seq(-2,2,1/10),
-                              showlambda = TRUE, lambdaSF = 3,
-                              showplot=TRUE){
+                             showlambda = TRUE, lambdaSF = 3,
+                             showplot=TRUE){
 
   if(!insight::is_regression_model(model)){
     stop("model should be a regression model of class 'lm'")
@@ -66,19 +66,13 @@ boxcox_transform <- function(model,lambda= seq(-2,2,1/10),
                  color = "indianred3",linewidth=1.1) +
       geom_hline(yintercept = y[min(accept_inds)],
                  linetype = "dashed")+
-      theme_bw_nogrid() +
-      if(showlambda){
-        list(geom_text(aes(x = best_lambda-0.1,
-                           label = as.character(rounded_lambda), y = min_y),
-                       color='#2dab03'),
-             geom_text(aes(x = conf_lo-0.1,
-                           label = as.character(conf_lo), y = min_y),
-                       color = "indianred3"),
-             geom_text(aes(x = conf_hi-0.1,
-                           label = as.character(conf_hi), y = min_y),
-                       color = "indianred3"))
-      }
-
+      theme_bw_nogrid()
+    if (showlambda) {
+      plt <- plt +
+        annotate("text", x = best_lambda - 0.1, y = min_y, label = as.character(rounded_lambda), color = '#2dab03') +
+        annotate("text", x = conf_lo - 0.1, y = min_y, label = as.character(conf_lo), color = "indianred3") +
+        annotate("text", x = conf_hi - 0.1, y = min_y, label = as.character(conf_hi), color = "indianred3")
+    }
     return(plt)
   }
 }

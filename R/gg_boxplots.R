@@ -7,9 +7,8 @@
 #' @param jitter_points Overlay jittered points to boxplots. Default is FALSE.
 #' @param horizontal Determine whether to change the orientation of the plot. Default is FALSE
 #' @param point_size Change size of points (outliers) in boxplots
-#' @param alpha The alpha transparency, a number in [0,1]
 #' @param color_palette A character string indicating the color map option to use. Eight options are available: "viridis","cividis","magma","inferno","plasma","rocket","mako","turbo"
-#' @param direction Sets the order of colors in the scale. If 1, the default, colors are ordered from darkest to lightest. If -1, the order of colors is reversed
+#' @param ... additional parameters to be given to viridisPalette, such as alpha and direction
 #' @param show_mean Display the mean for each boxplot. Default is FALSE
 #'
 #' @return Boxplots created with ggplot2
@@ -28,10 +27,9 @@ gg_boxplots <- function(data,x,y,
                         jitter_points = FALSE,
                         horizontal = FALSE,
                         point_size=1,
-                        alpha=1,
                         color_palette = NA,
-                        direction=1,
-                        show_mean=FALSE){
+                        show_mean=FALSE,
+                        ...){
 
   dat <- data.frame(data)
   factor_vec <- dat[, x, drop = FALSE]
@@ -43,14 +41,12 @@ gg_boxplots <- function(data,x,y,
 
     color_choice <- viridisPalette(factors_total,
                                    color_palette = color_palette,
-                                   direction = direction,
-                                   alpha = alpha)
+                                   ...)
 
     factor_levels$colors <- color_choice
   }
   p <- ggplot(dat, aes(x=!!sym(x),y=!!sym(y),color = !!sym(x))) +
-    geom_boxplot(alpha = alpha,
-                 outlier.shape = NA) +
+    geom_boxplot(outlier.shape = NA) +
     {if(jitter_points)geom_jitter(alpha=0.4,size=3,
                                   position=position_jitterdodge())}+
     guides(fill = 'none', colour = "none") +

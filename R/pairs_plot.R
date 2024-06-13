@@ -15,9 +15,9 @@
 #' @examples
 #' set.seed(10)
 #' X <- lhs::randomLHS(n=12,k=4)
-#' pair_plots(X,n_columns = 3)
-#' pair_plots(X,n_columns = 3, grid = c(3,2))
-pair_plots <- function(design,
+#' pairs_plot(X,n_columns = 3)
+#' pairs_plot(X,n_columns = 3, grid = c(3,2))
+pairs_plot <- function(design,
                        point_color="#21908CFF",
                        point_size = 1.5,
                        grid = c(-1,-1),

@@ -84,14 +84,15 @@ citation('ggDoE')
     To cite package 'ggDoE' in publications use:
 
       Toledo Luna J (????). _ggDoE: Modern Graphs for Design of Experiments
-      with 'ggplot2'_. R package version 0.8, <https://ggdoe.netlify.app>.
+      with 'ggplot2'_. R package version 0.8.1,
+      <https://ggdoe.netlify.app>.
 
     A BibTeX entry for LaTeX users is
 
       @Manual{,
         title = {ggDoE: Modern Graphs for Design of Experiments with 'ggplot2'},
         author = {Jose {Toledo Luna}},
-        note = {R package version 0.8},
+        note = {R package version 0.8.1},
         url = {https://ggdoe.netlify.app},
       }
 
@@ -273,7 +274,7 @@ hypercube design
 ``` r
 set.seed(10)
 X <- lhs::randomLHS(n=10, k=4)
-pair_plots(X,n_columns=3,grid = TRUE)
+pairs_plot(X,n_columns=3,grid = c(3,2))
 ```
 
-![](man/figures/pair_plots.png)
+![](man/figures/pairs_plot.png)

@@ -1,6 +1,6 @@
 #' Theme for plots used in 'ggDoE'
 #'
-#' @importFrom ggplot2 %+replace% theme_bw element_blank
+#' @importFrom ggplot2 %+replace% theme_bw element_blank element_text margin
 #' @export
 #' @return A simple black and white theme without grid.major and grid.minor for ggplot objects.
 #'
@@ -14,10 +14,15 @@
 #'  geom_boxplot()+
 #'  theme_bw_nogrid()
 theme_bw_nogrid <- function(){
-  theme_bw() %+replace%    #replace elements we want to change
+
+  theme_bw(base_size = 11,base_family = "") %+replace%    #replace elements we want to change
     theme(
-      #grid elements
+      plot.title = element_text(
+        size = 13,
+        face = "plain",
+        margin = margin(0, 0, 10, 0)
+      ),
       panel.grid.major = element_blank(),
-      panel.grid.minor = element_blank()  #strip minor gridlines
+      panel.grid.minor = element_blank()
     )
 }

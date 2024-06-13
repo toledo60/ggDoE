@@ -8,9 +8,8 @@ lambda_plot(
   model,
   lambda = seq(-2, 2, by = 0.1),
   color_palette = "viridis",
-  alpha = 1,
-  direction = 1,
-  showplot = TRUE
+  showplot = TRUE,
+  ...
 )
 }
 \arguments{
@@ -21,11 +20,9 @@ lambda_plot(
 \item{color_palette}{A character string indicating the color map option to use.
 Eight options are available: "viridis","cividis","magma","inferno","plasma","rocket","mako","turbo". Default is 'viridis'}
 
-\item{alpha}{The alpha transparency, a number in [0,1]}
-
-\item{direction}{Sets the order of colors in the scale. If 1, the default, colors are ordered from darkest to lightest. If -1, the order of colors is reversed}
-
 \item{showplot}{logical indicating to show the main effect plots. If false, a list of tibbles is returned used to obtain the main effects for each factor. Default is TRUE}
+
+\item{...}{additional parameters to be given to viridisPalette, such as alpha and direction}
 }
 \value{
 Lambda plot for tracing t-staitics across different values of lambda (in ggplot2)

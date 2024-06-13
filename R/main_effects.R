@@ -5,10 +5,8 @@
 #' @param n_columns number of columns for facet grid. Default is 2
 #' @param exclude_vars A vector containing variables to exclude
 #' @param color_palette A character string indicating the color map option to use. Eight options are available: "viridis","cividis","magma","inferno","plasma","rocket","mako","turbo"
-#' @param alpha The alpha transparency, a number in [0,1]
-#' @param direction Sets the order of colors in the scale. If 1, the default, colors are ordered from darkest to lightest. If -1, the order of colors is reversed
 #' @param showplot logical indicating to show the main effect plots. If false, a list of data.frames is returned used to obtain the main effects for each factor. Default is TRUE
-#'
+#' @param ... additional parameters to be given to viridisPalette, such as alpha and direction
 #' @return Main effects plots, or a list of tibble with calculated main effects for each factors if showplot=FALSE.
 #' @export
 #' @importFrom ggplot2 aes sym geom_point geom_line theme_bw labs facet_wrap scale_color_manual vars ylim element_blank
@@ -22,8 +20,8 @@ main_effects <- function(design,response,
                          exclude_vars=c(),
                          n_columns=2,
                          color_palette = NA,
-                         alpha=1,direction = 1,
-                         showplot=TRUE){
+                         showplot=TRUE,
+                         ...){
   if(inherits(design,'design')){
     design <- design_to_tibble(design,factors_to_numeric = TRUE)
   }
@@ -76,8 +74,7 @@ main_effects <- function(design,response,
     else{
       factor_colors <- viridisPalette(factors_total,
                                       color_palette = color_palette,
-                                      direction = direction,
-                                      alpha = alpha)
+                                      ...)
     }
 
     p <- ggplot(melted_dat) +

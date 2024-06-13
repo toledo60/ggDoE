@@ -9,9 +9,8 @@ alias_matrix(
   midpoint = 0.5,
   digits = 3,
   color_palette = "viridis",
-  alpha = 1,
-  direction = 1,
-  showplot = TRUE
+  showplot = TRUE,
+  ...
 )
 }
 \arguments{
@@ -23,11 +22,9 @@ alias_matrix(
 
 \item{color_palette}{A character string indicating the color map option to use. Eight options are available: "viridis","cividis","magma","inferno","plasma","rocket","mako","turbo"}
 
-\item{alpha}{The alpha transparency, a number in [0,1]}
-
-\item{direction}{Sets the order of colors in the scale. If 1, the default, colors are ordered from darkest to lightest. If -1, the order of colors is reversed}
-
 \item{showplot}{logical indicating to show the correlation plot. If false, the correlation/alias matrix is returned. Default is TRUE}
+
+\item{...}{additional parameters to be given to viridisPalette, such as alpha and direction}
 }
 \value{
 correlation matrix between main effects and interaction effects from the model.matrix. Alias matrix is also returned

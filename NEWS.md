@@ -3,7 +3,11 @@
 
 BREAKING 
 
-* `pair_plots` argument `grid` now specifies dimensions to overlay a grid on to existing plots. For example, `grid = c(3,2)` will create a 3 by 2 grid on all pairs plot
+* `pair_plots` renamed to `pairs_plot`
+
+* `pairs_plot` argument `grid` now specifies dimensions to overlay a grid on to existing plots. For example, `grid = c(3,2)` will create a 3 by 2 grid on all pairs plot
+
+* removed `alpha` and `direction` arguments from all plots, optionally can be passed as additional arguments through `...`
 
 NEW FEATURES
 

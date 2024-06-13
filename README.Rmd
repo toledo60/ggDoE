@@ -287,9 +287,9 @@ This function will output all two dimensional projections from a Latin hypercube
 ```{r}
 set.seed(10)
 X <- lhs::randomLHS(n=10, k=4)
-pair_plots(X,n_columns=3,grid = TRUE)
+pairs_plot(X,n_columns=3,grid = c(3,2))
 ```
 
-![](man/figures/pair_plots.png)
+![](man/figures/pairs_plot.png)
 
 
